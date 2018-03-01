@@ -10,7 +10,7 @@ class GraphicsView : public QGraphicsView
 public:
     GraphicsView()
     {
-        setWindowTitle(tr("Boxes"));
+        setWindowTitle(tr("LMICE"));
         setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
         //setRenderHints(QPainter::SmoothPixmapTransform);
         QMenuBar *bar= new QMenuBar(0);
