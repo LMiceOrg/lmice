@@ -3,53 +3,9 @@
 #include <QtWidgets>
 #include <QGLWidget>
 
-//#include "mainwindow.h"
+#include "graphicsview.h"
+#include "twosidedgraphicswidget.h"
 
-class GraphicsView : public QGraphicsView
-{
-public:
-    GraphicsView()
-    {
-        setWindowTitle(tr("LMICE"));
-        setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
-        //setRenderHints(QPainter::SmoothPixmapTransform);
-        QMenuBar *bar= new QMenuBar(0);
-
-        QMenu* file = bar->addMenu("File");
-        QAction* about = new QAction("about");
-        file->addAction(about);
-        QAction* config = new QAction("config");
-        file->addAction(config);
-        QObject::connect(config, &QAction::triggered, [&]()
-        {
-            QMessageBox box;
-            box.setText("config it");
-            box.exec();
-        });
-        QAction* exit = new QAction("exit");
-        file->addAction(exit);
-        QObject::connect(exit, &QAction::triggered, [&]()
-        {
-            qApp->exit(0);
-        });
-
-        QAction* open = new QAction("Open");
-        file->addAction(open);
-        QObject::connect(open, &QAction::triggered, [&]()
-        {
-            QMessageBox box;
-            box.setText("open it");
-            box.exec();
-        });
-    }
-
-protected:
-    void resizeEvent(QResizeEvent *event) override {
-        if (scene())
-            scene()->setSceneRect(QRect(QPoint(0, 0), event->size()));
-        QGraphicsView::resizeEvent(event);
-    }
-};
 
 int main(int argc, char* argv[])
 {
@@ -74,7 +30,7 @@ int main(int argc, char* argv[])
     {
 
 
-        QGLWidget *widget = new QGLWidget(QGLFormat(QGL::SampleBuffers));
+        QGLWidget *widget = new QGLWidget(QGLFormat(QGL::SampleBuffers|QGL::DoubleBuffer));
         widget->makeCurrent();
 
         QGraphicsScene scene;
@@ -83,6 +39,18 @@ int main(int argc, char* argv[])
         view.setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
         view.setScene(&scene);
         view.show();
+
+        TwoSidedGraphicsWidget *twoSided = new TwoSidedGraphicsWidget(&scene);
+        QLabel *w1= new QLabel("hello 1");
+        QLabel *w2= new QLabel("hello 2");
+        QPixmap *p2 = new QPixmap("/Users/hehao/Documents/002.jpg");
+
+        w2->setPixmap(p2->scaledToWidth(800));
+        twoSided->setWidget(0, w1);
+        twoSided->setWidget(1, w2);
+
+
+
         return app.exec();
     }
     else

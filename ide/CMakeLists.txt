@@ -10,7 +10,11 @@ set(EXECUTABLE_OUTPUT_PATH  "${CMAKE_BINARY_DIR}")
 #qt5_wrap_cpp(moc_files mainwindow.cpp)
 #qt5_add_resources(qrc_files drawable.qrc)
 
-LIST(APPEND ide_files main.cpp ${ui_files} ${moc_files})
+LIST(APPEND ide_files main.cpp
+    graphicsview.cpp graphicsview.h
+    graphicswidget.cpp graphicswidget.h
+    twosidedgraphicswidget.cpp twosidedgraphicswidget.h
+    ${ui_files} ${moc_files})
 add_executable(lmice ${ide_files})
 qt5_use_modules(lmice Core Widgets Network Gui OpenGL)
 

@@ -24,9 +24,9 @@ ENDIF()
 IF (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     #shared lib suffix
     set(dll_ext ".so")
-ELSE(MATCHES "Darwin")
+ELSEIF (MATCHES "Darwin")
     set(dll_ext ".dylib")
-ELSE(MATCHES "Windows")
+ELSEIF (MATCHES "Windows")
     set(dll_ext ".dll")
 ENDIF()
 
@@ -52,7 +52,7 @@ IF (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
         LINK_DIRECTORIES(${OpenCL_DIR}/lib64)
     endif()
 
-ELSE(MATCHES "Darwin")
+ELSEIF(MATCHES "Darwin")
     #OpenCL
     find_package(OpenCL)
     if(OPENCL_FOUND)
@@ -62,7 +62,7 @@ ELSE(MATCHES "Darwin")
         WARNING("Not found OpenCL !")
     endif()
 
-ELSE(MATCHES "Windows")
+ELSEIF(MATCHES "Windows")
 
 ENDIF()
 
