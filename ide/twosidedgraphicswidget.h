@@ -17,6 +17,7 @@ protected:
      bool eventFilter(QObject *obj, QEvent *event);
 private:
      TwoSidedGraphicsWidget* m_parent;
+     QPoint m_offset;
  };
 
 
@@ -27,6 +28,8 @@ public:
     TwoSidedGraphicsWidget(QGraphicsScene *scene);
     void setWidget(int index, QWidget *widget);
     QWidget *widget(int index);
+    QObject* filter();
+    QWidget * currentWidget();
     virtual ~TwoSidedGraphicsWidget();
 public slots:
     void flip();

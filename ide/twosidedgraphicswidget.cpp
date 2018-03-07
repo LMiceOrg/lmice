@@ -30,6 +30,10 @@ void TwoSidedGraphicsWidget::setWidget(int index, QWidget *widget)
     }
 
     widget->installEventFilter(m_filter);
+    foreach(auto child, widget->children())
+    {
+        child->installEventFilter(m_filter);
+    }
 
     GraphicsWidget *proxy = new GraphicsWidget;
     proxy->setWidget(widget);
@@ -38,6 +42,7 @@ void TwoSidedGraphicsWidget::setWidget(int index, QWidget *widget)
     {
         m_proxyWidgets[index]->removeEventFilter(m_filter);
         delete m_proxyWidgets[index];
+        m_proxyWidgets[index]=0;
     }
     m_proxyWidgets[index] = proxy;
 
@@ -58,6 +63,16 @@ QWidget *TwoSidedGraphicsWidget::widget(int index)
         return 0;
     }
     return m_proxyWidgets[index]->widget();
+}
+
+QObject *TwoSidedGraphicsWidget::filter()
+{
+    return m_filter;
+}
+
+QWidget *TwoSidedGraphicsWidget::currentWidget()
+{
+    return m_proxyWidgets[m_current]->widget();
 }
 
 void TwoSidedGraphicsWidget::flip()
@@ -85,6 +100,11 @@ void TwoSidedGraphicsWidget::animateFlip()
 
     if ((m_current == 0 && m_angle > 0) || (m_current == 1 && m_angle < 180))
         QTimer::singleShot(25, this, SLOT(animateFlip()));
+
+    if( (m_current == 1 && m_angle >= 180) || (m_current==0 && m_angle <= 0))
+    {
+        m_proxyWidgets[m_current]->setActive(true);
+    }
 }
 
 
@@ -100,6 +120,28 @@ bool DoublePressFilter::eventFilter(QObject *obj, QEvent *event)
 
         m_parent->flip();
         return true;
+    }
+    else if(event->type() == QEvent::MouseMove)
+    {
+        QMouseEvent *evt = static_cast<QMouseEvent*>(event);
+        if(evt->buttons() == Qt::LeftButton)
+        {
+            QWidget* widget = m_parent->currentWidget();
+            QPoint step = widget->mapToParent(evt->pos() - m_offset);
+            if(step.x() > 5 || step.y()>5)
+                widget->move( step );
+            //qDebug()<<"move "<<evt->pos();
+        }
+
+    }
+    else if(event->type() == QEvent::MouseButtonPress)
+    {
+        QMouseEvent *evt = static_cast<QMouseEvent*>(event);
+        if(evt->buttons() == Qt::LeftButton)
+        {
+            m_offset = evt->pos();
+            qDebug()<<"press "<<m_offset;
+        }
     }
 
     return QObject::eventFilter(obj, event);

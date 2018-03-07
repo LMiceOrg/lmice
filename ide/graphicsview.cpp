@@ -1,14 +1,24 @@
 #include "graphicsview.h"
 
+#include "candlestickchart.h"
 GraphicsView::GraphicsView()
 {
 
     setWindowTitle(tr("LMICE"));
     setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
     //setRenderHints(QPainter::SmoothPixmapTransform);
-    QMenuBar *bar= new QMenuBar(0);
+    QMenuBar *bar= new QMenuBar(this);
+    qDebug()<<bar;
+    bar->setVisible(true);
 
     QMenu* file = bar->addMenu("File");
+    QAction *act = new QAction(tr("New Candle chart"));
+    file->addAction(act);
+    QObject::connect(act, &QAction::triggered, [=]()
+    {
+        new CandleStickChart(scene());
+    });
+
     QAction* about = new QAction("about");
     file->addAction(about);
     QAction* config = new QAction("config");
