@@ -1,21 +1,21 @@
 # C/C++ settings
 IF( ${CMAKE_CXX_COMPILER} MATCHES  "[cg][+][+]")
     MESSAGE("G++ ")
-    set(CMAKE_CXX_FLAGS "-Wall -std=c++11")
+    set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic -std=c++11")
     set(CMAKE_CXX_FLAGS_DEBUG "-g3")
     set(CMAKE_CXX_FLAGS_RELEASE "-O3")
     # -malign-double
-    set(CMAKE_CXX_FLAGS "-march=native -mtune=native")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -mtune=native")
 
-    set(CMAKE_C_FLAGS "-Wall  -std=gnu99")
+    set(CMAKE_C_FLAGS "-Wall -Wextra -Wpedantic -std=gnu99")
     set(CMAKE_C_FLAGS_DEBUG "-g3")
     set(CMAKE_C_FLAGS_RELEASE "-O3")
     # -malign-double
-    set(CMAKE_C_FLAGS "-march=native -mtune=native")
+    set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS}  -march=native -mtune=native")
 
-    add_definitions(-D_BSD_SOURCE)
-    add_definitions(-D__USE_POSIX199309)
-
+    #add_definitions(-D_BSD_SOURCE)
+    #add_definitions(-D__USE_POSIX199309)
+add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-std=c++11> $<$<COMPILE_LANGUAGE:C>:-std=gnu99>)
 ELSE()
 
 ENDIF()

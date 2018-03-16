@@ -1,4 +1,5 @@
 #include "twosidedgraphicswidget.h"
+#include <QtWidgets>
 
 TwoSidedGraphicsWidget::TwoSidedGraphicsWidget(QGraphicsScene *scene)
     : QObject(scene)
@@ -15,10 +16,7 @@ TwoSidedGraphicsWidget::TwoSidedGraphicsWidget(QGraphicsScene *scene)
 
 TwoSidedGraphicsWidget::~TwoSidedGraphicsWidget()
 {
-    for (int i = 0; i < 2; ++i)
-    {
-        m_proxyWidgets[i] = 0;
-    }
+
 }
 
 void TwoSidedGraphicsWidget::setWidget(int index, QWidget *widget)
@@ -29,6 +27,7 @@ void TwoSidedGraphicsWidget::setWidget(int index, QWidget *widget)
         return;
     }
 
+
     widget->installEventFilter(m_filter);
     foreach(auto child, widget->children())
     {
@@ -37,9 +36,11 @@ void TwoSidedGraphicsWidget::setWidget(int index, QWidget *widget)
 
     GraphicsWidget *proxy = new GraphicsWidget;
     proxy->setWidget(widget);
+    proxy->setWindowFlags(Qt::FramelessWindowHint);
 
     if (m_proxyWidgets[index])
     {
+        qobject_cast<QGraphicsScene *>(parent())->removeItem(m_proxyWidgets[index]);
         m_proxyWidgets[index]->removeEventFilter(m_filter);
         delete m_proxyWidgets[index];
         m_proxyWidgets[index]=0;
@@ -75,10 +76,31 @@ QWidget *TwoSidedGraphicsWidget::currentWidget()
     return m_proxyWidgets[m_current]->widget();
 }
 
+QList<GraphicsWidget *> TwoSidedGraphicsWidget::proxyWidget() const
+{
+    QList<GraphicsWidget*> list;
+    list<<m_proxyWidgets[0]<<m_proxyWidgets[1];
+    return list;
+}
+
 void TwoSidedGraphicsWidget::flip()
 {
     m_delta = (m_current == 0 ? 9 : -9);
     animateFlip();
+}
+
+void TwoSidedGraphicsWidget::clear()
+{
+    for (int i = 0; i < 2; ++i)
+    {
+        if (m_proxyWidgets[i])
+        {
+            qobject_cast<QGraphicsScene *>(parent())->removeItem(m_proxyWidgets[i]);
+            m_proxyWidgets[i]->removeEventFilter(m_filter);
+            delete m_proxyWidgets[i];
+            m_proxyWidgets[i]=0;
+        }
+    }
 }
 
 void TwoSidedGraphicsWidget::animateFlip()
@@ -124,25 +146,43 @@ bool DoublePressFilter::eventFilter(QObject *obj, QEvent *event)
     else if(event->type() == QEvent::MouseMove)
     {
         QMouseEvent *evt = static_cast<QMouseEvent*>(event);
-        if(evt->buttons() == Qt::LeftButton)
+        QWidget* widget = m_parent->currentWidget();
+        QPoint pnt = evt->pos() - m_offset;
+
+        if(evt->buttons() == Qt::RightButton )
         {
-            QWidget* widget = m_parent->currentWidget();
-            QPoint step = widget->mapToParent(evt->pos() - m_offset);
-            if(step.x() > 5 || step.y()>5)
-                widget->move( step );
-            //qDebug()<<"move "<<evt->pos();
+
+            if(abs(pnt.x()) > 5 || abs(pnt.y()) > 5)
+                widget->resize((m_size.width() + pnt.x())/5*5, (m_size.height()+pnt.y())/5*5);
+        }
+        else if(evt->buttons() == Qt::LeftButton)
+        {
+            QPoint step = widget->mapToParent(pnt);
+            if(abs(step.x()) > 5 || abs(step.y()) > 5)
+                widget->move( step.x()/5*5, step.y()/5*5);
+
         }
 
     }
     else if(event->type() == QEvent::MouseButtonPress)
     {
         QMouseEvent *evt = static_cast<QMouseEvent*>(event);
+
         if(evt->buttons() == Qt::LeftButton)
         {
+            QWidget* widget = m_parent->currentWidget();
             m_offset = evt->pos();
-            qDebug()<<"press "<<m_offset;
+            m_size = widget->size();
+            //qDebug()<<"press "<<m_offset;
+        }
+        else if(evt->buttons() == Qt::RightButton)
+        {
+            QWidget* widget = m_parent->currentWidget();
+            m_offset = evt->pos();
+            m_size = widget->size();
         }
     }
+
 
     return QObject::eventFilter(obj, event);
 }

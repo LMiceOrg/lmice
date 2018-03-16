@@ -1,12 +1,18 @@
 #include "candlesticksetting.h"
 #include "ui_candlesticksetting.h"
 
+
 #include <QTextDocumentFragment>
 #include <QKeyEvent>
 #include <QMouseEvent>
 #include <QFileDialog>
 #include <QDebug>
 #include <QToolTip>
+
+#include <Python.h>
+#include "pythonembed.h"
+#include "pythonhelper.h"
+#include "lmice_trace.h"
 
 CandleStickSetting::CandleStickSetting(QWidget *parent) :
     QWidget(parent),
@@ -22,6 +28,7 @@ CandleStickSetting::CandleStickSetting(QWidget *parent) :
     ui->textEdit->viewport()->installEventFilter(m_filter);
     m_highlighter = new Highlighter(ui->textEdit->document());
 
+    ui->textEdit->setContextMenuPolicy(Qt::NoContextMenu);
     ui->textEdit->setFocus();
 
     QObject::connect(ui->textEdit,&QTextEdit::cursorPositionChanged, [=]()
@@ -43,14 +50,20 @@ CandleStickSetting::CandleStickSetting(QWidget *parent) :
            ui->textEdit->setExtraSelections(extraSelections);
     });
 
+    //Margin
+    setContentsMargins(1,1,1,1);
+
     connect(m_filter, SIGNAL(loadFileEvent(QString,int,int)), this, SLOT(getOpenFile(QString,int,int)));
+    connect(m_filter, SIGNAL(updateSettingEvent()), this, SLOT(updateSetting()));
+
+    m_helper = new PythonHelper(this, this);
+    qDebug()<<"init python helper:"<<(qlonglong)(ui->textEdit);
 
 
 }
 
 CandleStickSetting::~CandleStickSetting()
 {
-    delete ui;
 }
 
 void CandleStickSetting::getOpenFile(const QString &type, int begin, int end)
@@ -68,6 +81,28 @@ void CandleStickSetting::getOpenFile(const QString &type, int begin, int end)
 
     //qDebug()<<begin<<end;
 
+}
+
+void CandleStickSetting::updateSetting()
+{
+    //lmice_info_print("updating setting\n");
+    QString code = ui->textEdit->toPlainText();
+    m_helper->exec(code.toUtf8().data(), m_helper->MULTI_LINE);
+
+//    //PyRun_SimpleString(code.toUtf8().data());
+//    PyObject* mod = PyImport_ImportModule("__main__");
+//    PyObject* globals = PyModule_GetDict(mod);
+//    PyObject *sSource = PyString_FromString("source");
+//    PyObject* level1 = PyDict_GetItem(globals, sSource);
+
+//    if(level1 && PyType_IsSubtype(Py_TYPE(level1), &ChinaL1Source_Type) )
+//    {
+//       LS_ChinaL1Source* msg = (LS_ChinaL1Source*)level1;
+//        emit updateChinaLevel1Msg(msg->m_list, msg->m_fsize);
+//    }
+//    lmice_info_print("updated setting\n");
+    fflush(stdout);
+    fflush(stderr);
 }
 
 EditPressFilter::EditPressFilter(QTextEdit *parent)
@@ -108,18 +143,13 @@ bool EditPressFilter::eventFilter(QObject *obj, QEvent *event)
 
             return true;
         }
-//        else if(evt->modifiers() == Qt::ControlModifier &&
-//                evt->key() == Qt::Key_R)
-//        {
-//            QMouseEvent new_event(QEvent::MouseButtonDblClick
-//                                  ,QPointF(0,0)
-//                                ,Qt::LeftButton
-//                                  ,Qt::LeftButton
-//                                  ,Qt::NoModifier);
+        else if(evt->modifiers() == Qt::ControlModifier &&
+                evt->key() == Qt::Key_R)
+        {
 
-//            qApp->sendEvent(m_edit->parent(), &new_event);
-//            return true;
-//        }
+            emit updateSettingEvent();
+            return true;
+        }
         else if(evt->modifiers() == Qt::ControlModifier &&
                 evt->key() == Qt::Key_O)
         {
@@ -164,11 +194,6 @@ bool EditPressFilter::eventFilter(QObject *obj, QEvent *event)
                     goto continueProcess;
 
 
-//                cursor.setPosition(block.position()+loadIndex+matchStart.capturedLength());
-//                cursor.setPosition(block.position()+endIndex, QTextCursor::KeepAnchor);
-//                cursor.removeSelectedText();
-//                cursor.insertText(name);
-
                 int begin = block.position()+loadIndex+matchStart.capturedLength();
                 int end = block.position()+endIndex;
                 emit loadFileEvent("guava2",begin, end );
@@ -181,54 +206,6 @@ bool EditPressFilter::eventFilter(QObject *obj, QEvent *event)
         qApp->sendEvent(m_edit->parent(), event);
         return true;
     }
-//    else if(event->type() == QEvent::MouseMove)
-//    {
-//        QMouseEvent *evt = static_cast<QMouseEvent*>(event);
-//        if(evt->buttons() == Qt::LeftButton)
-//        {
-//            QWidget* widget = static_cast<QWidget*>(m_edit->parent());
-//            widget->move( widget->mapToParent(evt->pos() - m_moveStart) );
-//        }
-
-//    }
-//    else if(event->type() == QEvent::MouseButtonPress)
-//    {
-//        QMouseEvent *evt = static_cast<QMouseEvent*>(event);
-//        if(evt->buttons() == Qt::LeftButton)
-//        {
-//            m_moveStart = evt->pos();
-//        }
-//    }
-//    {
-//        QMouseEvent *evt = static_cast<QMouseEvent*>(event);
-//        QTextCursor cursor = m_edit->cursorForPosition(evt->pos());
-//        cursor.select(QTextCursor::WordUnderCursor);
-//        if(cursor.selectedText() == "load")
-//        {
-//            QRegularExpression loadEndExp = QRegularExpression("\\b\\w+(?=\\.load)");
-//            QRegularExpressionMatch match = loadEndExp.match(cursor.block().text());
-//            QTextCursor cur(cursor.block());
-//            cur.setPosition(match.capturedStart());
-//            cur.setPosition(match.capturedStart()+match.capturedLength(), QTextCursor::KeepAnchor);
-//            qDebug()<<match.capturedStart()<<match.capturedLength()<<cur.selectedText()<<cursor.block().text();
-//            QString name = cur.selectedText();
-//            //QString name = cursor.block( match.capturedLength()
-//            //m_edit->setStatusTip(QString("double click to load \"%1\" file").arg(name) );
-//            QToolTip::showText(evt->pos(), QString("double click to load \"%1\" file").arg(name),
-//                    m_edit);
-
-//        }
-//        else
-//        {
-//            m_edit->setStatusTip("");
-//        }
-//    }
-//    else if(event->type() == QEvent::Resize)
-//    {
-//        QResizeEvent* evt = static_cast<QResizeEvent*>(event);
-//        m_edit->resize(evt->size());
-//        qDebug()<<"resize";
-//    }
 continueProcess:
 
     return QObject::eventFilter(obj, event);

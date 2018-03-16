@@ -6,10 +6,10 @@
 
 class GraphicsView : public QGraphicsView
 {
-
+    Q_OBJECT
 public:
     explicit GraphicsView();
-
+    virtual ~GraphicsView();
 signals:
 
 public slots:

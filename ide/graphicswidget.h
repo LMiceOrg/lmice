@@ -1,7 +1,9 @@
 #ifndef GRAPHICSWIDGET_H
 #define GRAPHICSWIDGET_H
 
-#include <QtWidgets>
+
+#include <QWidget>
+#include <QGraphicsProxyWidget>
 #include <QVariant>
 
 class GraphicsWidget : public QGraphicsProxyWidget

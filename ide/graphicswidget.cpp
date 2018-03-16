@@ -1,4 +1,5 @@
 #include "graphicswidget.h"
+#include <QtWidgets>
 
 GraphicsWidget::GraphicsWidget() : QGraphicsProxyWidget(0, Qt::Window)
 {

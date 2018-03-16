@@ -53,3 +53,9 @@ dkms.conf
 
 # Cmake files
 *.user
+*.autosave
+
+# Python files
+*.pyc
+*.pyo
+

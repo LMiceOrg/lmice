@@ -11,20 +11,22 @@ Highlighter::Highlighter(QTextDocument *parent)
     keywordFormat.setForeground(Qt::darkBlue);
     keywordFormat.setFontWeight(QFont::Bold);
     QStringList keywordPatterns;
-    keywordPatterns << "\\bchar\\b" << "\\bclass\\b" << "\\bconst\\b"
-                    << "\\bdouble\\b" << "\\benum\\b" << "\\bexplicit\\b"
-                    << "\\bfriend\\b" << "\\binline\\b" << "\\bint\\b"
-                    << "\\blong\\b" << "\\bnamespace\\b" << "\\boperator\\b"
-                    << "\\bprivate\\b" << "\\bprotected\\b" << "\\bpublic\\b"
-                    << "\\bshort\\b" << "\\bsignals\\b" << "\\bsigned\\b"
-                    << "\\bslots\\b" << "\\bstatic\\b" << "\\bstruct\\b"
-                    << "\\btemplate\\b" << "\\btypedef\\b" << "\\btypename\\b"
-                    << "\\bunion\\b" << "\\bunsigned\\b" << "\\bvirtual\\b"
-                    << "\\bvoid\\b" << "\\bvolatile\\b" << "\\bbool\\b"
-                       //python
-                    <<"\\bdef\\b"<<"\\bsys\\b"<<"\\bmath\\b"<<"\\bos\\b"
-                   <<"\\bre\\b"<<"\\bprint\\b"<<"\\breturn\\b"<<"\\bimport\\b"<<"\\bfor\\b"
-                  <<"\\bin\\b"<<"\\b__name__\\b"<<"\\bif\\b"<<"\\bwhile\\b";
+    keywordPatterns //! C++
+            << "\\bchar\\b" << "\\bclass\\b" << "\\bconst\\b"
+            << "\\bdouble\\b" << "\\benum\\b" << "\\bexplicit\\b"
+            << "\\bfriend\\b" << "\\binline\\b" << "\\bint\\b"
+            << "\\blong\\b" << "\\bnamespace\\b" << "\\boperator\\b"
+            << "\\bprivate\\b" << "\\bprotected\\b" << "\\bpublic\\b"
+            << "\\bshort\\b" << "\\bsignals\\b" << "\\bsigned\\b"
+            << "\\bslots\\b" << "\\bstatic\\b" << "\\bstruct\\b"
+            << "\\btemplate\\b" << "\\btypedef\\b" << "\\btypename\\b"
+            << "\\bunion\\b" << "\\bunsigned\\b" << "\\bvirtual\\b"
+            << "\\bvoid\\b" << "\\bvolatile\\b" << "\\bbool\\b"
+               //! python
+            << "\\bdef\\b" << "\\bsys\\b" << "\\bmath\\b"
+            << "\\bos\\b" << "\\bre\\b" << "\\bprint\\b"
+            << "\\breturn\\b" << "\\bimport\\b" << "\\bfor\\b"
+            << "\\bin\\b" << "\\b__name__\\b" << "\\bif\\b" << "\\bwhile\\b";
     foreach (const QString &pattern, keywordPatterns) {
         rule.pattern = QRegularExpression(pattern);
         rule.format = keywordFormat;
@@ -50,9 +52,9 @@ Highlighter::Highlighter(QTextDocument *parent)
     highlightingRules.append(rule);
 
     //! String format
-    rule.pattern = QRegularExpression("\".*\"");
+    rule.pattern = QRegularExpression("\"[^\"]*\"");
     highlightingRules.append(rule);
-    rule.pattern = QRegularExpression("\'.*\'");
+    rule.pattern = QRegularExpression("\'[^\']*\'");
     highlightingRules.append(rule);
 
     //! Call Function format
@@ -133,41 +135,41 @@ void Highlighter::highlightBlock(const QString &text)
         }
     }
 
-//    //! Package load
-//    QRegularExpression loadExp = QRegularExpression("^\\s*load_guava2_package\\(");
-//    QRegularExpression loadEndExp = QRegularExpression("\\)");
-//    int loadIndex = text.indexOf(loadExp);
-//    if(loadIndex >= 0)
-//    {
-//        QRegularExpressionMatch match = loadEndExp.match(text, loadIndex);
-//        int endIndex = match.capturedStart();
-//        int commentLength = 0;
-//        if(endIndex >= 0)
-//        {
-//            bool drawImage = true;
-//            QTextBlock b = currentBlock();
-//            QTextCharFormat format = b.begin().fragment().charFormat();
-//            bool isImage = format.isImageFormat();
-//            if(isImage)
-//            {
-//                drawImage = false;
-//            }
+    //    //! Package load
+    //    QRegularExpression loadExp = QRegularExpression("^\\s*load_guava2_package\\(");
+    //    QRegularExpression loadEndExp = QRegularExpression("\\)");
+    //    int loadIndex = text.indexOf(loadExp);
+    //    if(loadIndex >= 0)
+    //    {
+    //        QRegularExpressionMatch match = loadEndExp.match(text, loadIndex);
+    //        int endIndex = match.capturedStart();
+    //        int commentLength = 0;
+    //        if(endIndex >= 0)
+    //        {
+    //            bool drawImage = true;
+    //            QTextBlock b = currentBlock();
+    //            QTextCharFormat format = b.begin().fragment().charFormat();
+    //            bool isImage = format.isImageFormat();
+    //            if(isImage)
+    //            {
+    //                drawImage = false;
+    //            }
 
 
-//            if(drawImage) {
-//                QTextCursor cursor(b);
-//                //cursor.setPosition(commentLength);
-//                QImage img("/home/hehao/work/lmice/ide/qcharts.png");
-//                img = img.scaled(16,16);
-//                document()->addResource(QTextDocument::ImageResource, QUrl("myimage"), img);
+    //            if(drawImage) {
+    //                QTextCursor cursor(b);
+    //                //cursor.setPosition(commentLength);
+    //                QImage img("/home/hehao/work/lmice/ide/qcharts.png");
+    //                img = img.scaled(16,16);
+    //                document()->addResource(QTextDocument::ImageResource, QUrl("myimage"), img);
 
-//                cursor.insertImage("myimage");
-//                qDebug()<<"insert image:"<<b.text();
+    //                cursor.insertImage("myimage");
+    //                qDebug()<<"insert image:"<<b.text();
 
-//            }
+    //            }
 
-//        }
-//    }
+    //        }
+    //    }
 
     //! init state
     setCurrentBlockState(0);

@@ -2,7 +2,10 @@
 #define TWOSIDEDGRAPHICSWIDGET_H
 
 #include <QObject>
-#include <QtWidgets>
+#include <QList>
+
+#include <QWidget>
+
 
 #include "graphicswidget.h"
 
@@ -18,6 +21,7 @@ protected:
 private:
      TwoSidedGraphicsWidget* m_parent;
      QPoint m_offset;
+     QSize m_size;
  };
 
 
@@ -30,9 +34,13 @@ public:
     QWidget *widget(int index);
     QObject* filter();
     QWidget * currentWidget();
+
+    QList<GraphicsWidget*> proxyWidget() const;
+
     virtual ~TwoSidedGraphicsWidget();
 public slots:
     void flip();
+    void clear();
 protected slots:
     void animateFlip();
 private:
