@@ -1,5 +1,7 @@
-#ifndef CHINAL1MSG_H_
-#define CHINAL1MSG_H_
+/** Copyright 2018 He Hao<hehaoslj@sina.com> */
+
+#ifndef FUTUREMODEL_INCLUDE_CHINAL1MSG_H_
+#define FUTUREMODEL_INCLUDE_CHINAL1MSG_H_
 
 #include <stdint.h>
 #include <string.h>
@@ -10,7 +12,7 @@
 #define FEATURE_PRODUCT_ID_TYPE
 
 #ifdef __cplusplus
-namespace lmice {
+    namespace lmice {
 
 union product_id {
   int64_t i64;
@@ -21,10 +23,13 @@ union product_id {
       throw "product_id error, too long";
     }
     i64 = 0;
-    strcpy(s8, s);
+    snprintf(s8, sizeof(s8), s);
   }
   operator const char*() const { return s8; }
   operator int64_t() const { return i64; }
+  void operator=(const product_id&r2) {
+    i64 = r2.i64;
+  }
 } forcepack(8);
 
 forceinline void prod_copy(product_id& nid, const product_id& oid) {
@@ -46,6 +51,7 @@ forceinline bool prod_equal(const product_id& nid, const product_id& oid) {
   return nid.i64 == oid.i64;
 }
 
+
 forceinline bool operator==(const product_id& r1, const product_id& r2) {
   return r1.i64 == r2.i64;
 }
@@ -56,7 +62,7 @@ forceinline bool operator<(const product_id& r1, const product_id& r2) {
 }  // namespace lmice
 
 #else
-typedef char product_id[8];
+    typedef char product_id[8];
 forceinline void prod_copy(product_id nid, const product_id oid) {
   if (nid == oid) return;
   int64_t* n = reinterpret_cast<int64_t*>(nid);
@@ -85,7 +91,7 @@ forceinline int prod_equal(const product_id nid, const product_id oid) {
 }
 #endif
 
-//#ifdef __cplusplus
+// #ifdef __cplusplus
 
 // namespace lmice {
 // struct product_id {
@@ -117,9 +123,9 @@ forceinline int prod_equal(const product_id nid, const product_id oid) {
 //  int64_t n = nid;
 //  int64_t o = oid;
 //  return n == o;
-//}
-//}  // namespace lmice
-//#endif
+// }
+// }  // namespace lmice
+// #endif
 #endif
 
-#endif  // CHINAL1MSG_H_
+#endif  // FUTUREMODEL_INCLUDE_CHINAL1MSG_H_

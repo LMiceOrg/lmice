@@ -157,8 +157,8 @@ def schemegen(name, features):
     f.write('''/** Copyright 2018 He Hao<hehaoslj@sina.com> */
 
 
-#ifndef __SCHEME_H_
-#define __SCHEME_H_
+#ifndef FUTUREMODEL_INCLUDE_SCHEME_H_
+#define FUTUREMODEL_INCLUDE_SCHEME_H_
 
 
 typedef struct _product_alias {
@@ -195,7 +195,7 @@ typedef struct _product_alias {
                 inst_id = instlist[tune_index]
                 f.write('{"%s", "%s%s", "%s"}, ' % (sdate, product, ids[i], inst_id) )
             f.write('\n')
-    f.write('    {"", "", ""}\n};\n#endif /** __SCHEME_H_ */\n\n')
+    f.write('    {"", "", ""}\n};\n#endif // FUTUREMODEL_INCLUDE_SCHEME_H_\n\n')
     f.close()
 
 if __name__ == "__main__":

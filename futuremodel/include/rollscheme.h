@@ -1,13 +1,14 @@
 /** Copyright 2018 He Hao<hehaoslj@sina.com> */
 
-#ifndef SRC_ROLLSCHEME_H_
-#define SRC_ROLLSCHEME_H_
+#ifndef FUTUREMODEL_INCLUDE_ROLLSCHEME_H_
+#define FUTUREMODEL_INCLUDE_ROLLSCHEME_H_
 
 #include <time.h>
 
 #include <string>
 
-#include "chinal1msg.h"
+#include "include/chinal1msg.h"
+
 namespace lmice {
 class RollScheme {
  public:
@@ -25,4 +26,4 @@ struct product_item {
 };
 }  // namespace lmice
 
-#endif /* SRC_ROLLSCHEME_H_ */
+#endif  // FUTUREMODEL_INCLUDE_ROLLSCHEME_H_

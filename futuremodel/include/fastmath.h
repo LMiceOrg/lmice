@@ -1,10 +1,14 @@
-#ifndef FASTMATH_H
-#define FASTMATH_H
+/** Copyright 2018 He Hao<hehaoslj@sina.com> */
 
-#include "eal/lmice_eal_common.h"
+#ifndef FUTUREMODEL_INCLUDE_FASTMATH_H_
+#define FUTUREMODEL_INCLUDE_FASTMATH_H_
 
 #include <immintrin.h>
 #include <stdint.h>
+
+#include "eal/lmice_eal_common.h"
+
+
 
 forceinline double noexport fast_exp(double x) {
   double y = 1.0 + x / 256.0;
@@ -43,4 +47,4 @@ forceinline float noexport fast_sqrt(float n) {
   //  return result;
 }
 
-#endif  // FASTMATH_H
+#endif  // FUTUREMODEL_INCLUDE_FASTMATH_H_

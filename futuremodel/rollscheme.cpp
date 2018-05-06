@@ -1,14 +1,15 @@
 /** Copyright 2018 He Hao<hehaoslj@sina.com> */
 
+#include "include/rollscheme.h"
+
 #include <stdlib.h>
 #include <string.h>
+#include <immintrin.h>
 
 #include <algorithm>
 
-#include "rollscheme.h"
-#include "scheme.h"
 
-#include <immintrin.h>
+#include "include/scheme.h"
 
 forceinline bool operator==(const product_alias& pa1,
                             const product_alias& pa2) {
