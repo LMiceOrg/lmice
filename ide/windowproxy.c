@@ -1,6 +1,5 @@
 #include "pythonembed.h"
 #include "lmice_trace.h"    /*< trace/log helper */
-
 #include <stdio.h>
 
 /**! member definition */
@@ -28,6 +27,7 @@ LS_WindowProxy_dealloc(LS_WindowProxy* self)
 {
     PyObject_GC_UnTrack(self);
     LS_WindowProxy_clear(self);
+    Py_XDECREF(self->m_call);
     Py_TYPE(self)->tp_free((PyObject*)self);
 }
 
@@ -43,6 +43,34 @@ LS_WindowProxy_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
     return (PyObject *)self;
 }
 
+PyObject* Window_call(long long winid, const char* method, PyObject* args);
+
+
+/**! functions definition*/
+static PyObject* LS_WindowProxy_call(PyObject *ob, PyObject *args)
+{
+    int ret = 0;
+    //const char* method;
+
+    LS_WindowProxy * self = (LS_WindowProxy *)ob;
+
+    if( PyTuple_Check(args) )
+    {
+        lmice_critical_print("call %s ()\n", self->m_method);
+        return Window_call(self->m_window, self->m_method, args);
+    }
+
+    return PyInt_FromSsize_t(ret);
+
+}
+
+
+/**! function method */
+static PyMethodDef LS_WindowProxy_methods[] =
+{
+    { "call", (PyCFunction)LS_WindowProxy_call, METH_VARARGS, "Call window function" },
+    { NULL, NULL, 0, NULL },
+};
 
 static int
 LS_WindowProxy_init(LS_WindowProxy *self, PyObject *args, PyObject *kwds)
@@ -60,6 +88,9 @@ LS_WindowProxy_init(LS_WindowProxy *self, PyObject *args, PyObject *kwds)
 //    self->m_type = tp;
 //    self->m_stat = 0;
     self->m_window = tp;
+    memset(self->m_method, 0, sizeof(self->m_method) );
+
+    self->m_call = Py_FindMethod(LS_WindowProxy_methods, self, "call");
 
     //lmice_debug_print("call LS_RedirectIO_init %d\n" , tp);
 
@@ -75,37 +106,35 @@ LS_WindowProxy_traverse(LS_WindowProxy *self, visitproc visit, void *arg)
     return 0;
 }
 
-void Window_call(long long winid, const char* method);
 
-/**! functions definition*/
-static PyObject* LS_WindowProxy_call(PyObject *self, PyObject *args)
-{
-    (void)self;
-    int ret;
-    long winid;
-    const char* method;
 
-    ret = PyArg_ParseTuple(args, "s", &method);
-    if(ret)
-    {
-        Window_call(((LS_WindowProxy *)self)->m_window, method);
-    }
+ PyObject * LS_WindowProxy_getattro(PyObject * ob, PyObject * method)
+ {
+     PyObject* obj;
+     LS_WindowProxy *self = (LS_WindowProxy *)ob;
+     const char *name = NULL;
 
-    return PyInt_FromSsize_t(ret);
+     if (!PyString_Check(method))
+         goto generic;
 
-}
+     name = PyString_AS_STRING(method);
+     if(strcmp(name, "windowid") == 0)
+     {
+         return PyObject_GenericGetAttr(ob, method);
+     }
 
-static PyObject* LS_WindowProxy_prop(PyObject *self, PyObject *args)
-{
-}
+     memset(self->m_method, 0, sizeof(self->m_method));
+     memcpy(self->m_method, name, strlen(name) >sizeof(self->m_method)-1 ?
+            sizeof(self->m_method)-1 : strlen(name) );
 
-/**! function method */
-static PyMethodDef LS_WindowProxy_methods[] =
-{
-    { "call", (PyCFunction)LS_WindowProxy_call, METH_VARARGS, "Call window function" },
-    { "prop", (PyCFunction)LS_WindowProxy_prop, METH_VARARGS, "Get/Set props" },
-    { NULL, NULL, 0, NULL },
-};
+     Py_INCREF(self->m_call);
+     return self->m_call;
+
+     generic:
+     return PyObject_GenericGetAttr(ob, method);
+
+
+ }
 
 /**! object definition */
 PyTypeObject LS_WindowProxy_Type = {
@@ -125,7 +154,7 @@ PyTypeObject LS_WindowProxy_Type = {
         0,                         /* tp_hash */
         0,                         /* tp_call */
         0,                         /* tp_str */
-        0,                         /* tp_getattro */
+        LS_WindowProxy_getattro,                         /* tp_getattro */
         0,                         /* tp_setattro */
         0,                         /* tp_as_buffer */
         Py_TPFLAGS_DEFAULT |
@@ -138,7 +167,7 @@ PyTypeObject LS_WindowProxy_Type = {
         0,                         /* tp_weaklistoffset */
         0,                         /* tp_iter */
         0,                         /* tp_iternext */
-        LS_WindowProxy_methods,      /* tp_methods */
+        0,      /* tp_methods */
         LS_WindowProxy_members,      /* tp_members */
         LS_WindowProxy_getseters,    /* tp_getset */
         0,                         /* tp_base */

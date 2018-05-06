@@ -41,7 +41,7 @@ LS_RedirectIO_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
 
     self = (LS_RedirectIO *)type->tp_alloc(type, 0);
     if (self != NULL) {
-        self->m_type = lmice_trace_info;
+        self->m_type = LMICE_TRACE_INFO;
     }
 
     return (PyObject *)self;
@@ -102,6 +102,8 @@ LS_RedirectIO_write(LS_RedirectIO* self, PyObject *args)
         self->m_stat = 0;
     }
     fwrite(str, 1, len, stdout);
+
+    fflush(stdout);
 
 
     return PyLong_FromSsize_t(len);

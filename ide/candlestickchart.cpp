@@ -5,7 +5,7 @@
 #include <QtCharts/QChartView>
 #include <QtCharts/QCandlestickSet>
 #include <QtCharts/QLineSeries>
-
+#include <QtCharts/QDateTimeAxis>
 #include <QtWidgets>
 
 QT_CHARTS_USE_NAMESPACE
@@ -56,14 +56,34 @@ CandleStickChart::CandleStickChart(QGraphicsScene *scene)
     m_chart->legend()->setVisible(true);
     m_chart->legend()->setAlignment(Qt::AlignBottom);
 
+    m_setting= new CandleStickSetting();
+
 
     //! chart view
     m_view1 = new QChartView(m_chart);
     m_view1->setRenderHint(QPainter::Antialiasing);
 
-    m_widget->setWidget(0, m_view1);
-    m_setting= new CandleStickSetting();
+    //m_view1->viewport()->installEventFilter(m_widget->filter());
+
+    //! line edit
+    QLineEdit *m_edit = new QLineEdit();
+    QVBoxLayout *box = new QVBoxLayout();
+    box->setSpacing(0);
+    box->setMargin(0);
+    box->setGeometry(QRect(0,0,0,0));
+    box->addWidget(m_view1, 1);
+    box->addWidget(m_edit);
+    m_edit->setTextMargins(0, 0, 0, 0);
+    m_edit->setContextMenuPolicy(Qt::NoContextMenu);
+
+    QWidget* window = new QWidget;
+    window->setLayout(box);
+    window->setGeometry(0,-20,0,-20);
+    m_widget->setWidget(0, window);
     m_widget->setWidget(1, m_setting);
+
+//    m_widget->setWidget(0, m_view1);
+//    m_widget->setWidget(1, m_setting);
 
     m_chart->layout()->setContentsMargins(1,1,1,1);
     m_setting->setContentsMargins(1,1,1,1);
@@ -79,6 +99,21 @@ CandleStickChart::CandleStickChart(QGraphicsScene *scene)
     {
         setColor(c);
     });
+
+    QObject::connect(m_setting, &CandleStickSetting::removeAllSeries, [this]()
+    {
+        QList<QAbstractAxis*> axes=m_chart->axes();
+        foreach(auto ax, axes)
+            m_chart->removeAxis( ax);
+        m_chart->removeAllSeries();
+    });
+
+    QObject::connect(m_edit, &QLineEdit::returnPressed, [this, m_edit]()
+    {
+        m_setting->exec( m_edit->text() +"\n" );
+        m_chart->update();
+    });
+
 
 }
 
@@ -96,22 +131,37 @@ void CandleStickChart::setColor(const QColor & color)
 void CandleStickChart::updateSerials(const Dummy_ChinaL1Msg *msg, int size)
 {;
     QCandlestickSet* set;
-    m_chart->removeSeries(m_futures[0]);
-    m_chart->removeSeries(m_futures[1]);
-    m_chart->removeSeries(m_volumns[0]);
-    m_chart->removeSeries(m_volumns[1]);
+    QList<QAbstractSeries *> series = m_chart->series();
+    qDebug()<<"series "<<series.length();
 
-    m_futures[0]->clear();
-    m_futures[1]->clear();
-    m_volumns[0]->clear();
-    m_volumns[1]->clear();
+
+    qDebug()<<"clear futures";
+
+        m_futures[0] = new QLineSeries();
+        m_futures[0]->setName("Ask");
+        m_futures[0]->setColor(QColor(Qt::red));
+
+
+
+        m_futures[1] = new QLineSeries();
+        m_futures[1]->setName("Bid");
+        m_futures[1]->setColor(QColor(Qt::green));
+
+//    m_futures[1]->clear();
+//    m_volumns[0]->clear();
+//    m_volumns[1]->clear();
     //m_series->clear();
-    m_categories.clear();
+    //m_categories.clear();
     double ma=0,mi=0;
 
     if(size <= 0 || !msg)
         return;
 
+    qDebug()<<"call for";
+
+    m_chart->setTitle(tr("%1 Candle chart").arg(msg[0].m_inst) );
+
+    int64_t begin = msg[0].m_time;
     for(int i=0; i<size; ++i)
     {
 
@@ -120,8 +170,8 @@ void CandleStickChart::updateSerials(const Dummy_ChinaL1Msg *msg, int size)
 //                    msg[i].m_bid, msg[i].m_bid_quantity,
 //                    msg[i].m_time);
 //        m_series->append(set);
-        m_futures[0]->append(i, msg[i].m_bid);
-        m_futures[1]->append(i, msg[i].m_offer);
+        m_futures[0]->append( (msg[i].m_time - begin) / 500000LL, msg[i].m_bid);
+        m_futures[1]->append( (msg[i].m_time - begin) / 500000LL, msg[i].m_offer);
         if(ma < msg[i].m_bid)
             ma = msg[i].m_bid;
         if(ma < msg[i].m_offer)
@@ -131,30 +181,67 @@ void CandleStickChart::updateSerials(const Dummy_ChinaL1Msg *msg, int size)
         if(mi > msg[i].m_offer)
             mi = msg[i].m_offer;
         //m_categories<<tr("%1").arg(msg[i].m_time);
-        double mid = (msg[i].m_bid+msg[i].m_offer) /2;
-        m_volumns[0]->append(i, mid - msg[i].m_bid_quantity);
-        m_volumns[1]->append(i, mid + msg[i].m_offer_quantity);
+//        double mid = (msg[i].m_bid+msg[i].m_offer) /2;
+//        m_volumns[0]->append(i, mid - msg[i].m_bid_quantity);
+//        m_volumns[1]->append(i, mid + msg[i].m_offer_quantity);
 
 //        qDebug()<<msg[i].m_offer<<msg[i].m_offer_quantity
 //                <<msg[i].m_bid  <<msg[i].m_bid_quantity;
         //if(i>8) break;
     }
-    //qDebug()<<"size set: "<<m_categories;
-    QValueAxis *axisX = qobject_cast<QValueAxis *>(m_chart->axes(Qt::Horizontal).at(0));
-//    axisX->setCategories(m_categories);
-    m_chart->setTitle(tr("%1 Candle chart").arg(msg[0].m_inst) );
-    axisX->setTickCount(15);
-    axisX->setRange(0, size);
+    //qDebug()<<"size set: "<<m_categories;QDateTimeAxis
+    QValueAxis *axisX = NULL;
+    if(axisX== 0)
+    {
+    axisX = new QValueAxis;
+    axisX->setTickCount(10);
+    //axisX->setRange(0, size);
     axisX->setLabelFormat("%u");
-
     m_chart->addSeries(m_futures[0]);
-    m_chart->addSeries(m_futures[1]);
+    m_chart->setAxisX(axisX, m_futures[0]);
+    }
+
+
+
+        //m_chart->addSeries(m_futures[1]);
+
+//    QDateTimeAxis *axisX = NULL;
+//    if(m_chart->axes(Qt::Horizontal).length() > 0)
+//        axisX = qobject_cast<QDateTimeAxis *>(m_chart->axes(Qt::Horizontal).at(0));
+////    axisX->setCategories(m_categories);
+//    if(axisX== 0)
+//    {
+//       //m_chart->createDefaultAxes();
+
+//        axisX = new QDateTimeAxis;
+
+//    }
+
+//    axisX->setTickCount(15);
+//    //axisX->setRange(0, size);
+//    axisX->setFormat("HH:mm:ss.z");
+//    //axisX->setLabelFormat("%u");
+
+
+//    m_chart->addSeries(m_futures[0]);
+//    //m_chart->addSeries(m_futures[1]);
+//    m_chart->setAxisX(axisX, m_futures[0]);
+
+
 //    m_chart->addSeries(m_volumns[0]);
 //    m_chart->addSeries(m_volumns[1]);
-
-    QValueAxis *axisY = qobject_cast<QValueAxis *>(m_chart->axes(Qt::Vertical).at(0));
+    QValueAxis *axisY = NULL;
+    if( m_chart->axes(Qt::Vertical).length() > 0)
+    {
+        axisY = qobject_cast<QValueAxis *>(m_chart->axes(Qt::Vertical).at(0));
+    }
+    if(axisY == 0)
+    {
+        axisY = new QValueAxis;
+        m_chart->setAxisY(axisY);
+    }
     axisY->setMax(ma * 1.2);
-    axisY->setMin(mi * 0.8);
+    axisY->setMin(0);//mi * 0.8);
     qDebug()<<axisY->max()<<axisY->min();
 
     int i=size -1;

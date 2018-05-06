@@ -100,13 +100,18 @@ PyObject* stdio_redirect(PyObject* self, PyObject* args)
         g_py_stdout = PyObject_GetAttrString(mod, "stdout");
         g_py_stderr = PyObject_GetAttrString(mod, "stderr");
 
+        arg = PyTuple_New(1);
+
+        arg1 = PyInt_FromLong(LMICE_TRACE_INFO);
+        PyTuple_SET_ITEM(arg, 0, arg1);
 
         o = LS_RedirectIO_Type.tp_new(&LS_RedirectIO_Type, Py_None, Py_None);
-        LS_RedirectIO_Type.tp_init(o, Py_None, Py_None);
+        LS_RedirectIO_Type.tp_init(o, arg, Py_None);
 
-        arg = PyTuple_New(1);
-        arg1 = PyInt_FromLong(lmice_trace_error);
-        PyTuple_SetItem(arg, 0, arg1);
+        Py_XDECREF(arg1);
+        arg1 = PyInt_FromLong(LMICE_TRACE_ERROR);
+        PyTuple_SET_ITEM(arg, 0, arg1);
+
 
         oe = LS_RedirectIO_Type.tp_new(&LS_RedirectIO_Type, Py_None, Py_None);
         LS_RedirectIO_Type.tp_init(oe, arg, Py_None);

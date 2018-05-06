@@ -57,13 +57,46 @@ CandleStickSetting::CandleStickSetting(QWidget *parent) :
     connect(m_filter, SIGNAL(updateSettingEvent()), this, SLOT(updateSetting()));
 
     m_helper = new PythonHelper(this, this);
+    CandleStickSetting::callFunction func =static_cast<WindowCallable::callFunction>( &CandleStickSetting::call);
+    m_helper->registerClassCall(this, func);
     qDebug()<<"init python helper:"<<(qlonglong)(ui->textEdit);
+
 
 
 }
 
 CandleStickSetting::~CandleStickSetting()
 {
+}
+
+int CandleStickSetting::call(qlonglong wid, const char *method, QVariant *params, size_t size)
+{
+    QString str = QString(method);
+    qDebug()<<"call method "<<method<<size;
+    if(str.compare("SetColor", Qt::CaseInsensitive) == 0)
+    {
+        if(size == 1)
+        {
+            QColor c = (*params).value<QColor>();
+            emit changeColor(c);
+        }
+    }
+    else if(str.compare("Clear", Qt::CaseInsensitive) == 0)
+    {
+        emit removeAllSeries();
+    }
+    else if(str.compare("GetColor", Qt::CaseInsensitive) == 0)
+    {
+        throw "GetColor no implement!";
+    }
+    return 0;
+}
+
+void CandleStickSetting::exec(const QString &cmd)
+{
+    m_helper->exec(cmd.toUtf8().data());
+    QTextCursor cursor = ui->textEdit->textCursor();
+    cursor.insertText(cmd);
 }
 
 void CandleStickSetting::getOpenFile(const QString &type, int begin, int end)
@@ -86,7 +119,11 @@ void CandleStickSetting::getOpenFile(const QString &type, int begin, int end)
 void CandleStickSetting::updateSetting()
 {
     //lmice_info_print("updating setting\n");
-    QString code = ui->textEdit->toPlainText();
+    QString code;
+    QTextCursor cursor = ui->textEdit->textCursor();
+    code = cursor.selection().toPlainText();
+    if(code.isEmpty())
+        code = ui->textEdit->toPlainText();
     m_helper->exec(code.toUtf8().data(), m_helper->MULTI_LINE);
 
 //    //PyRun_SimpleString(code.toUtf8().data());
@@ -171,7 +208,13 @@ bool EditPressFilter::eventFilter(QObject *obj, QEvent *event)
     else if(event->type() == QEvent::MouseButtonDblClick)
     {
         QMouseEvent *evt = static_cast<QMouseEvent*>(event);
-        qDebug()<<"double clicked!";
+        if(evt->buttons() == Qt::RightButton)
+        {
+            qApp->sendEvent(m_edit->parent(), event);
+            return true;
+        }
+
+        //qDebug()<<"double clicked!";
         QTextCursor cursor = m_edit->cursorForPosition(evt->pos());
 
         cursor.select(QTextCursor::WordUnderCursor);
@@ -203,8 +246,7 @@ bool EditPressFilter::eventFilter(QObject *obj, QEvent *event)
 
         }
 
-        qApp->sendEvent(m_edit->parent(), event);
-        return true;
+
     }
 continueProcess:
 

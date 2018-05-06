@@ -105,8 +105,9 @@ extern PyTypeObject LS_WindowProxy_Type;
 typedef struct _LS_WindowProxy
 {
     PyObject_HEAD
-
+    char m_method[128];
     int64_t m_window;
+    PyObject* m_call;
 } LS_WindowProxy;
 
 struct pcap_pkghdr {

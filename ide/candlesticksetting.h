@@ -1,14 +1,15 @@
 #ifndef CANDLESTICKSETTING_H
 #define CANDLESTICKSETTING_H
 #include "pythonembed.h"
-
+#include "pythonhelper.h"
 #include "highlighter.h"
 #include <QWidget>
 #include <QTextEdit>
 #include <QSharedPointer>
+#include <QVariant>
 
 class PythonHelper;
-
+class WindowCallable;
 
 namespace Ui {
 class CandleStickSetting;
@@ -30,16 +31,22 @@ private:
      QPoint m_moveStart;
  };
 
-class CandleStickSetting : public QWidget
+class CandleStickSetting : public QWidget, public WindowCallable
 {
     Q_OBJECT
 
 signals:
     void updateChinaLevel1Msg(const Dummy_ChinaL1Msg* msg, int size);
     void changeColor(const QColor& color);
+    void removeAllSeries();
 public:
     explicit CandleStickSetting(QWidget *parent = 0);
     ~CandleStickSetting();
+
+    int call(qlonglong wid, const char* method, QVariant* params, size_t size);
+
+public slots:
+    void exec(const QString& cmd);
 
 protected slots:
     void getOpenFile(const QString&, int begin, int end);

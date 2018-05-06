@@ -32,6 +32,10 @@ void TwoSidedGraphicsWidget::setWidget(int index, QWidget *widget)
     foreach(auto child, widget->children())
     {
         child->installEventFilter(m_filter);
+        foreach(auto c, child->children())
+        {
+            c->installEventFilter(m_filter);
+        }
     }
 
     GraphicsWidget *proxy = new GraphicsWidget;
@@ -137,14 +141,18 @@ DoublePressFilter::DoublePressFilter(TwoSidedGraphicsWidget *parent)
 
 bool DoublePressFilter::eventFilter(QObject *obj, QEvent *event)
 {
+    QMouseEvent *evt = static_cast<QMouseEvent*>(event);
     if(event->type() == QEvent::MouseButtonDblClick)
     {
-
-        m_parent->flip();
-        return true;
+        if(evt->buttons() == Qt::RightButton)
+        {
+            m_parent->flip();
+            return true;
+        }
     }
     else if(event->type() == QEvent::MouseMove)
     {
+        //qDebug()<<"moving...";
         QMouseEvent *evt = static_cast<QMouseEvent*>(event);
         QWidget* widget = m_parent->currentWidget();
         QPoint pnt = evt->pos() - m_offset;
@@ -157,9 +165,11 @@ bool DoublePressFilter::eventFilter(QObject *obj, QEvent *event)
         }
         else if(evt->buttons() == Qt::LeftButton)
         {
+
             QPoint step = widget->mapToParent(pnt);
             if(abs(step.x()) > 5 || abs(step.y()) > 5)
                 widget->move( step.x()/5*5, step.y()/5*5);
+
 
         }
 
@@ -173,7 +183,7 @@ bool DoublePressFilter::eventFilter(QObject *obj, QEvent *event)
             QWidget* widget = m_parent->currentWidget();
             m_offset = evt->pos();
             m_size = widget->size();
-            //qDebug()<<"press "<<m_offset;
+            //qDebug()<<"press "<<m_offset<<widget;
         }
         else if(evt->buttons() == Qt::RightButton)
         {
