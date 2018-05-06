@@ -21,7 +21,7 @@ handleOtherMsg 更新了m_book, m_cur_other_xx 参数
 handleSelfMsg 基于上述参数计算m_signal
 
 如果信号顺序  ..., T0-OtherInstrument, T0-SelfInstrument, ... 则一切OK
-如果信号顺序  ..., T0-SelfInstrument, T1-OtherInstrument, ... 则计算结构无法解释
+如果信号顺序  ..., T0-SelfInstrument, T1-OtherInstrument, ... 则计算结果无法解释
 
 ## CMake command
 ### OSX clang

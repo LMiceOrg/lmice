@@ -50,6 +50,8 @@ INCLUDE_DIRECTORIES(${eal_header})
 
 add_subdirectory(ide)
 
+add_subdirectory(futuremodel)
+
 
 list(APPEND libforecaster_src
         ../lib/libforecaster/Feature.cpp
