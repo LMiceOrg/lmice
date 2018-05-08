@@ -4,6 +4,7 @@
 #define FUTUREMODEL_INCLUDE_CHINAL1MSG_H_
 
 #include <stdint.h>
+#include <stdio.h>
 #include <string.h>
 
 #include "eal/lmice_eal_common.h"
@@ -12,45 +13,43 @@
 #define FEATURE_PRODUCT_ID_TYPE
 
 #ifdef __cplusplus
-    namespace lmice {
+namespace lmice {
 
 union product_id {
   int64_t i64;
   char s8[8];
+  product_id() : i64(0) {}
   product_id(int64_t i) : i64(i) {}
   product_id(const char* s) {
     if (strlen(s) >= 8) {
-      throw "product_id error, too long";
+      throw "product_id ctor: too long";
     }
     i64 = 0;
-    snprintf(s8, sizeof(s8), s);
+    snprintf(s8, sizeof(s8), "%s", s);
   }
   operator const char*() const { return s8; }
   operator int64_t() const { return i64; }
-  void operator=(const product_id&r2) {
-    i64 = r2.i64;
-  }
+  void operator=(const product_id& r2) { i64 = r2.i64; }
 } forcepack(8);
 
-forceinline void prod_copy(product_id& nid, const product_id& oid) {
-  nid.i64 = oid.i64;
+forceinline void prod_copy(product_id* nid, const product_id& oid) {
+  nid->i64 = oid.i64;
 }
 
-forceinline void prod_string(product_id& nid, const char* oid) {
+forceinline void prod_string(product_id* nid, const char* oid) {
   size_t size = strlen(oid);
   if (size < sizeof(product_id)) {
-    nid.i64 = 0;
-    memcpy(nid.s8, oid, size);
+    nid->i64 = 0;
+    memcpy(nid->s8, oid, size);
   } else {
     const int64_t* o = reinterpret_cast<const int64_t*>(oid);
-    nid.i64 = *o;
+    nid->i64 = *o;
   }
 }
 
 forceinline bool prod_equal(const product_id& nid, const product_id& oid) {
   return nid.i64 == oid.i64;
 }
-
 
 forceinline bool operator==(const product_id& r1, const product_id& r2) {
   return r1.i64 == r2.i64;
@@ -59,10 +58,73 @@ forceinline bool operator<(const product_id& r1, const product_id& r2) {
   return r1.i64 < r2.i64;
 }
 
+template <class T, class float_type>
+struct china_l1msg_handler {
+  inline const product_id& get_inst() const {
+    const T* t = static_cast<const T*>(this);
+    return t->m_inst;
+  }
+  inline int64_t get_time() const {
+    const T* t = static_cast<const T*>(this);
+    return t->m_time_micro;
+  }
+  inline float_type get_bid() const {
+    const T* t = static_cast<const T*>(this);
+    return t->m_bid;
+  }
+  inline float_type get_offer() const {
+    const T* t = static_cast<const T*>(this);
+    return t->m_offer;
+  }
+  inline float_type get_bid_quantity() const {
+    const T* t = static_cast<const T*>(this);
+    return t->m_bid_quantity;
+  }
+  inline float_type get_offer_quantity() const {
+    const T* t = static_cast<const T*>(this);
+    return t->m_offer_quantity;
+  }
+  inline float_type get_volume() const {
+    const T* t = static_cast<const T*>(this);
+    return t->m_volume;
+  }
+  inline float_type get_notional() const {
+    const T* t = static_cast<const T*>(this);
+    return t->m_notional;
+  }
+  inline float_type get_limit_up() const {
+    const T* t = static_cast<const T*>(this);
+    return t->m_limit_up;
+  }
+  inline float_type get_limit_down() const {
+    const T* t = static_cast<const T*>(this);
+    return t->m_limit_down;
+  }
+};
+
+template <class float_type>
+struct china_l1msg_base {
+  product_id m_inst;
+  int64_t m_time_micro;  // time in epoch micro seconds
+  float_type m_bid;
+  float_type m_offer;
+  int32_t m_bid_quantity;
+  int32_t m_offer_quantity;
+  int32_t m_volume;
+  float_type m_notional;
+  float_type m_limit_up;
+  float_type m_limit_down;
+} forcepack(8);
+
+template <class float_type>
+struct china_l1msg
+    : public china_l1msg_base<float_type>,
+      public china_l1msg_handler<china_l1msg<float_type>, float_type> {};
+
 }  // namespace lmice
 
 #else
-    typedef char product_id[8];
+typedef char product_id[8];
 forceinline void prod_copy(product_id nid, const product_id oid) {
   if (nid == oid) return;
   int64_t* n = reinterpret_cast<int64_t*>(nid);

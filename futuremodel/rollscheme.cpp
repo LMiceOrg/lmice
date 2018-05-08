@@ -10,6 +10,8 @@
 
 
 #include "include/scheme.h"
+#include "include/featurebase.h"
+
 
 forceinline bool operator==(const product_alias& pa1,
                             const product_alias& pa2) {
@@ -69,7 +71,7 @@ static product_item product_list[] = {
     {"a", 1, 10},  {"m", 1, 10},       {"y", 2, 10},  {"p", 2, 10},
     {"l", 5, 5},   {"pp", 1, 5},       {"v", 5, 5},   {"", 0, 0}};
 
-double RollScheme::get_ticksize(const std::string& prod) {
+double roll_scheme::get_ticksize(const std::string& prod) {
   size_t i;
   for (i = 0; i < sizeof(product_list) / sizeof(product_item); ++i) {
     const product_item& item = product_list[i];
@@ -81,7 +83,7 @@ double RollScheme::get_ticksize(const std::string& prod) {
   throw "get_ticksize: unknown product id";
 }
 
-double RollScheme::get_constract_size(const std::string& prod) {
+double roll_scheme::get_constract_size(const std::string& prod) {
   size_t i;
   for (i = 0; i < sizeof(product_list) / sizeof(product_item); ++i) {
     const product_item& item = product_list[i];
@@ -93,7 +95,7 @@ double RollScheme::get_constract_size(const std::string& prod) {
   throw "get_constract_size: product is not defined";
 }
 
-std::string RollScheme::from_alias(const std::string& alias,
+std::string roll_scheme::from_alias(const std::string& alias,
                                    const struct tm& date) {
   int value;
   char sdata[10];
@@ -143,9 +145,10 @@ std::string RollScheme::from_alias(const std::string& alias,
   return pa->instrument_id;
 }
 
-void RollScheme::from_alias2(product_id& id, const std::string& alias,
+void roll_scheme::from_alias2(product_id* id, const std::string& alias,
                              const tm& date) {
   std::string prod_id = from_alias(alias, date);
   prod_string(id, prod_id.c_str());
+
 }
 }  // namespace lmice

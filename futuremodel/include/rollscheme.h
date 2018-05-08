@@ -10,10 +10,10 @@
 #include "include/chinal1msg.h"
 
 namespace lmice {
-class RollScheme {
+class roll_scheme {
  public:
   static std::string from_alias(const std::string &alias, const tm &date);
-  static void from_alias2(product_id &id, const std::string &alias,
+  static void from_alias2(product_id *id, const std::string &alias,
                           const tm &date);
   static double get_ticksize(const std::string &product);
   static double get_constract_size(const std::string &product);

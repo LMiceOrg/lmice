@@ -52,6 +52,8 @@ add_subdirectory(ide)
 
 add_subdirectory(futuremodel)
 
+add_subdirectory(test)
+
 
 list(APPEND libforecaster_src
         ../lib/libforecaster/Feature.cpp
