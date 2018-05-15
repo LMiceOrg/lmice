@@ -11,6 +11,8 @@ FIND_LIBRARY(jansson_libs NAMES jansson
 FIND_PATH(jansson_header jansson.h)
 INCLUDE_DIRECTORIES(${jansson_header})
 
+INCLUDE_DIRECTORIES(/Users/hehao/work/lib)
+
 # CMake settings
 set(CMAKE_VERBOSE_MAKEFILE on)
 

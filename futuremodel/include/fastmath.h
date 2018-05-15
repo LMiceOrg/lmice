@@ -6,7 +6,61 @@
 #include <immintrin.h>
 #include <stdint.h>
 
+#include "eal/lmice_eal_atomic.h"
 #include "eal/lmice_eal_common.h"
+
+forceinline int64_t noexport fast_totime(const char* stime) {
+  int64_t dhour = ((stime[0] & 0xf) * 10 + (stime[1] & 0xf)) * 3600000000LL;
+  int64_t dmin = ((stime[3] & 0xf) * 10 + (stime[4] & 0xf)) * 60000000LL;
+  int64_t dsec = ((stime[6] & 0xf) * 10 + (stime[7] & 0xf)) * 1000000LL;
+  int64_t dmsc = (stime[9] & 0xf) * 100000LL + (stime[10] & 0xf) * 10000LL +
+                 (stime[11] & 0xf) * 1000LL;
+  return dhour + dmin + dsec + dmsc;
+}
+
+forceinline int64_t noexport fast_totime(const char* sc_date,
+                                         const char* sc_time,
+                                         const char* bs_date, int64_t bs_time) {
+  int64_t result;
+  // convert to time
+  result = fast_totime(sc_time) + bs_time;
+  // adjust date
+  int64_t value;
+
+  //  // full version
+  //  value =
+  //      /*year*/
+  //      ((sdate[0] - base_date[0]) * 1000 + (sdate[1] - base_date[1]) * 100 +
+  //       (sdate[2] - base_date[2]) * 100 + (sdate[3] - base_date[3]) * 1) *
+  //          365 * 86400 * 1000000LL
+  //      /* month */
+  //      + ((sdate[4] - base_date[4]) * 10 + (sdate[5] - base_date[5]) * 1) *
+  //      30 *
+  //            86400 * 1000000LL
+  //      /* day */
+  //      + ((sdate[6] - base_date[6]) * 10 + (sdate[7] - base_date[7]) * 1) *
+  //            86400 * 1000000LL;
+
+  // only see month day
+  // Little-endian convert
+  int64_t cur_date = __builtin_bswap64(*(const int64_t*)sc_date);
+  int64_t base_date = __builtin_bswap64(*(const int64_t*)bs_date);
+
+  int base_month =
+      ((base_date & 0xff000000) >> 24) * 10 + ((base_date & 0xff0000) >> 16);
+  int base_day = ((base_date & 0xff00) >> 8) * 10 + ((base_date & 0xff) >> 0);
+  int cur_month =
+      ((cur_date & 0xff000000) >> 24) * 10 + ((cur_date & 0xff0000) >> 16);
+  int cur_day = ((cur_date & 0xff00) >> 8) * 10 + ((cur_date & 0xff) >> 0);
+
+  int month_diff = cur_month - base_month;
+  int day_diff = cur_day - base_day;
+
+  value = (month_diff * 30 + day_diff) * 86400LL * 1000000LL;
+
+  result += value;
+  return result;
+}
 
 forceinline double noexport fast_exp(double x) {
   double y = 1.0 + x / 256.0;
@@ -54,49 +108,40 @@ forceinline double noexport fast_sqrt(double n) {
 
 forceinline float noexport fast_sqrt(float n) {
   return _mm_cvtss_f32(_mm_sqrt_ss(_mm_set_ss(n)));
-  //  double result = 0;
-  //  __asm__(
-  //      "fldl %1\n\t"  // st(0)=>st(1), st(0)=lgth . FLDL means load double
-  //      float "fsqrt\n\t"    // st(0) = square root st(0) : "=&t"(result) :
-  //      "m"(n));
-  //  return result;
 }
 
+#include <cmath>
 namespace lmice {
 
 template <class float_type>
-class fm_ema {
+class fast_ema {
  public:
-  fm_ema() {}
-  explicit fm_ema(float_type decay)
-      : m_initialized(false), m_decay(decay), m_value(0), m_last_event(0) {}
+  fast_ema() : m_decay(0), m_value(0), m_last_event(0) {}
+
   inline void update(float_type value, float_type event) {
-    if (!m_initialized) {
-      m_value = value;
-      m_initialized = true;
-    } else {
-      float_type delta = event - m_last_event;
-      float_type u = fast_exp(-m_decay * delta);
-      m_value = m_value * u + value * (1 - u);
-    }
+    float_type delta = -m_decay * (event - m_last_event);
+    float_type u = fast_exp(delta);
+    m_value = m_value * u + value * (1 - u);
 
     m_last_event = event;
   }
   inline void init(float_type decay) {
     m_decay = decay;
-    m_initialized = false;
     m_value = 0;
     m_last_event = 0;
+  }
+  inline void init(float_type value, float_type event) {
+    m_value = value;
+    m_last_event = event;
   }
   inline void reset() {
-    m_initialized = false;
     m_value = 0;
     m_last_event = 0;
   }
+  inline float_type get_event() const { return m_last_event; }
   inline float_type get_value() const { return m_value; }
 
  private:
-  bool m_initialized;
   float_type m_decay;
   float_type m_value;
   float_type m_last_event;

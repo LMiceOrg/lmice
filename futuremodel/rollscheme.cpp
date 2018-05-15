@@ -2,16 +2,14 @@
 
 #include "include/rollscheme.h"
 
+#include <immintrin.h>
 #include <stdlib.h>
 #include <string.h>
-#include <immintrin.h>
 
 #include <algorithm>
 
-
-#include "include/scheme.h"
 #include "include/featurebase.h"
-
+#include "include/scheme.h"
 
 forceinline bool operator==(const product_alias& pa1,
                             const product_alias& pa2) {
@@ -80,7 +78,8 @@ double roll_scheme::get_ticksize(const std::string& prod) {
       return item.tick_size;
     }
   }
-  throw "get_ticksize: unknown product id";
+  printf("get_ticksize: unknown product id\n");
+  return 0;
 }
 
 double roll_scheme::get_constract_size(const std::string& prod) {
@@ -92,11 +91,12 @@ double roll_scheme::get_constract_size(const std::string& prod) {
       return item.constract_size;
     }
   }
-  throw "get_constract_size: product is not defined";
+  printf("get_constract_size: product is not defined\n");
+  return 0;
 }
 
 std::string roll_scheme::from_alias(const std::string& alias,
-                                   const struct tm& date) {
+                                    const struct tm& date) {
   int value;
   char sdata[10];
   memset(sdata, 0, sizeof(sdata));
@@ -126,18 +126,22 @@ std::string roll_scheme::from_alias(const std::string& alias,
   const product_alias* pa_begin = product_aliases;
   pa = std::find(pa_begin, pa_end, key);
   if (pa == pa_end) {
-    printf("not found item, try upper_bound\n");
+    // printf("not found item(%s), %s try upper_bound\n", key.alias, key.date);
 
-    pa = std::upper_bound(pa_begin, pa_end, key);
-    if (pa == pa_end) {
-      printf("not found upper_bound item try last one\n");
-      pa = pa_end - 2;
-      memcpy(key.date, pa->date, sizeof(key.date));
-      pa = std::find(pa_begin, pa_end, key);
+    const product_alias* last_pa = pa_end;
+    int64_t id2 = (*(const int64_t*)key.date);
+    id2 = __builtin_bswap64(id2);
+
+    for (pa = pa_begin; pa != pa_end; ++pa) {
+      int64_t id1 = (*(const int64_t*)pa->date);
+      id1 = __builtin_bswap64(id1);
+      if (id1 > id2) break;
+
+      if (strcmp(pa->alias, key.alias) == 0) last_pa = pa;
     }
-    if (pa == pa_end) throw "not found alias";
+    pa = last_pa;
+    if (pa == pa_end) throw "find alias failed.";
   }
-  if (strcmp(pa->alias, alias.c_str()) != 0) throw "find alias failed.";
 
   // printf("find alias = %s, date = %s, inst =%s\n", pa->alias, pa->date,
   //      pa->instrument_id);
@@ -146,9 +150,8 @@ std::string roll_scheme::from_alias(const std::string& alias,
 }
 
 void roll_scheme::from_alias2(product_id* id, const std::string& alias,
-                             const tm& date) {
+                              const tm& date) {
   std::string prod_id = from_alias(alias, date);
   prod_string(id, prod_id.c_str());
-
 }
 }  // namespace lmice

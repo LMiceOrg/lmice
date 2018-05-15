@@ -4,7 +4,7 @@ IF( ${CMAKE_CXX_COMPILER} MATCHES  "[cg][+][+]")
     # -Wno-unused-parameter -Wno-unused-local-typedef -fheinous-gnu-extensions
     set(COMMON_FLAGS " -Wno-unused-parameter")
     set(OpenMP_FLAGS, " -fopenmp -fopenmp-simd -ftree-vectorizer-verbose=1 -ftree-vectorize")
-    set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic -std=c++11 ")
+    set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic -std=c++11 -g3")
     set(CMAKE_CXX_FLAGS_DEBUG "-g3")
     set(CMAKE_CXX_FLAGS_RELEASE "-O3")
     # -malign-double

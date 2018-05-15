@@ -152,6 +152,7 @@ int32 --> alias count
             f.write(item)
     f.close()
 
+
 def schemegen(name, features):
     f=open(name, "w")
     f.write('''/** Copyright 2018 He Hao<hehaoslj@sina.com> */
@@ -209,7 +210,7 @@ if __name__ == "__main__":
                 sub_name = os.path.join(name, n)
                 if os.path.isdir(n):
                     continue
-                elif n[0] in ('~', '.'):
+                elif n[0] in ('~', '.', '$'):
                     continue
                 elif n[-4:] in ('.xls', '.csv'):
                     name_list.append( sub_name )
@@ -220,4 +221,3 @@ if __name__ == "__main__":
 
     schemegen("scheme.h", features)
     schemebinarygen('scheme.bin', features)
-

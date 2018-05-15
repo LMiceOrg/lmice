@@ -2,110 +2,87 @@
 #ifndef FUTUREMODEL_INCLUDE_DISCRETE_SELF_TRADE_IMBALANCE_V2_H_
 #define FUTUREMODEL_INCLUDE_DISCRETE_SELF_TRADE_IMBALANCE_V2_H_
 
-#include <string>
-
 #include "eal/lmice_eal_common.h"
 
+#include "include/chinal1msg.h"
 #include "include/featurebase.h"
-#include "include/rollscheme.h"
+#include "include/openfeature.h"
 
+#undef self_template
+#define self_template fm_discrete_self_trade_imbalance_v2<feature_type>
 namespace lmice {
-template <class tp>
+
+template <class feature_type>
 class fm_discrete_self_trade_imbalance_v2
-    : public fm_feature_base<fm_discrete_self_trade_imbalance_v2<tp>>,
-      public fm_discrete_self_feature<fm_discrete_self_trade_imbalance_v2<tp>> {
+    : public fm_self_feature<self_template>,
+      public fm_open_feature<feature_type> {
  public:
-  typedef tp float_type;
-  typedef china_l1msg<float_type> china_l1msg;
-  typedef fm_ema<float_type> fast_ema;
-  typedef fm_discrete_self_trade_imbalance_v2<tp> this_type;
-  typedef fm_discrete_self_feature<fm_discrete_self_trade_imbalance_v2>
-      self_type;
-  typedef fm_feature_base<fm_discrete_self_trade_imbalance_v2> base_type;
+  enum {
+    m_quote_size = fm_type_traits<feature_type>::m_quote_size,
+    m_quote_depth = fm_type_traits<feature_type>::m_quote_depth
+  };
+  typedef typename fm_type_traits<feature_type>::float_type float_type;
+  typedef fast_ema<float_type> fast_ema;
+  typedef fm_discrete_self_trade_imbalance_v2<feature_type> this_type;
+  typedef fm_self_feature<this_type> base_type;
+  typedef fm_feature_chinal1_handler<fm_open_feature<feature_type>,
+                                     feature_type>
+      msg_type;
+
+  // friend msg_type;
+  USING_FEATURE_METHODS()
+
+  USING_FEATURE_DATA(fm_feature_data<feature_type>)
 
   fm_discrete_self_trade_imbalance_v2() {}
 
-  fm_discrete_self_trade_imbalance_v2(const std::string& feature_name,
-
-                                      const std::string& trading_alias,
-                                      const struct tm& date,
-                                      float_type book_decay)
-      : fm_feature_base<this_type>(feature_name),
-        fm_discrete_self_feature<this_type>(
-            roll_scheme::from_alias(trading_alias, date)),
-
-        m_contract_size(roll_scheme::get_constract_size(trading_alias)),
-        m_tick_size(roll_scheme::get_ticksize(trading_alias)),
-        m_book(1.0 / book_decay) {
-    reset();
-  }
-
-  inline void init(const std::string& feature_name,
-                   const std::string& trading_alias, const struct tm& date,
+  inline void init(int trading_fd, int contract_size, int tick_size,
                    float_type book_decay) {
-    /** trading alias to trading id */
-    product_id tid;
-    std::string sid = roll_scheme::from_alias(trading_alias, date);
-    prod_string(&tid, sid.c_str());
-
-    /** init base */
-    base_type* base = static_cast<base_type*>(this);
-    base->init(feature_name);
-
-    /** init self */
-    self_type* self = static_cast<self_type*>(this);
-    self->init(tid);
+    /** init self quote fd */
+    set_self_quote(trading_fd);
 
     /** init private members */
-    m_contract_size = roll_scheme::get_constract_size(trading_alias);
-    m_tick_size = roll_scheme::get_ticksize(trading_alias);
+    m_contract_size = contract_size;
+    m_tick_size = tick_size;
     m_book.init(1.0 / book_decay);
+    //    printf("init self tib2 %lf   %lf %lf\n", book_decay, m_tick_size,
+    //           m_contract_size);
     reset();
   }
 
-  inline void init_other_msg(const china_l1msg* cur_other_msg,
-                             const china_l1msg* prev_other_msg) {
-    lmice_unreferenced_param2(cur_other_msg, prev_other_msg);
-  }
-  inline void init_self_msg(const china_l1msg* cur_msg,
-                            const china_l1msg* prev_msg) {
-    lmice_unreferenced_param2(cur_msg, prev_msg);
+  inline bool prepare() {
+    float_type bid = get_cur_bid();
+    float_type prev_bid = get_prev_bid();
+    float_type time_micro = get_cur_time_micro();
+    if (bid > 0 && prev_bid > 0 && time_micro > 0) {
+      float_type value = get_cur_bid_quantity() + get_cur_offer_quantity();
+      m_book.init(value, time_micro);
+      return true;
+    }
+    return false;
   }
 
   void reset() {
-    base_type* feature = static_cast<base_type*>(this);
-    feature->m_signal = 0;
+    // base_type* feature = static_cast<base_type*>(this);
     m_book.reset();
   }
-  void handle_self_msg(const china_l1msg& cur_msg, const china_l1msg& pre_msg) {
-    base_type* feature = static_cast<base_type*>(this);
-
+  void handle_self_msg() {
     // sanity check the quotes
-    m_book.update(cur_msg.get_bid_quantity() + cur_msg.get_offer_quantity(),
-                  cur_msg.get_time());
-    double bid = cur_msg.get_bid();
-    //  if (msg.get_bid_quantity() <= 0) {
-    //    bid = 0;
-    //  }
+    m_book.update(get_cur_bid_quantity() + get_cur_offer_quantity(),
+                  get_cur_time_micro());
 
-    double offer = cur_msg.get_offer();
-    //  if (msg.get_offer_quantity() <= 0) {
-    //    offer = 0;
-    //  }
+    double bid = get_cur_bid();
+    double offer = get_cur_offer();
+    double volume = get_cur_volume();
+    double notional = get_cur_notional();
 
-    double volume = cur_msg.get_volume();
-    double notional = cur_msg.get_notional();
-
-    double prev_bid = pre_msg.get_bid();
-    double prev_offer = pre_msg.get_offer();
-    double prev_volume = pre_msg.get_volume();
-    double prev_notional = pre_msg.get_notional();
+    double prev_bid = get_prev_bid();
+    double prev_offer = get_prev_offer();
+    double prev_volume = get_prev_volume();
+    double prev_notional = get_prev_notional();
     // double time = msg.get_time();
 
-    /*  if (prev_bid <= 0 || prev_offer <= prev_bid || bid <= 0 || offer <= bid)
-      { m_signal = 0; } else */
     if (volume <= prev_volume) {
-      feature->m_signal = 0;
     } else {
       double vwap =
           (notional - prev_notional) / (volume - prev_volume) / m_contract_size;
@@ -130,19 +107,13 @@ class fm_discrete_self_trade_imbalance_v2
       }
 
       if (vwap_minus_mid * trade_imbalance > 0) {
-        feature->m_signal = fast_abs(vwap_minus_mid) / mid * trade_imbalance;
-
-      } else {
-        feature->m_signal = 0;
+        float_type signal = fast_abs(vwap_minus_mid) / mid * trade_imbalance;
+        set_signal(signal);
       }
     }
   }
 
- private:
-  float_type m_contract_size;
-  float_type m_tick_size;
-  fast_ema m_book;
-};
+};  // namespace lmice
 
 }  // namespace lmice
 
