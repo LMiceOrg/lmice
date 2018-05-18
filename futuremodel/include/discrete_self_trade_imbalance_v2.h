@@ -66,7 +66,7 @@ class fm_discrete_self_trade_imbalance_v2
     // base_type* feature = static_cast<base_type*>(this);
     m_book.reset();
   }
-  void handle_self_msg() {
+  inline void handle_self_msg() {
     // sanity check the quotes
     m_book.update(get_cur_bid_quantity() + get_cur_offer_quantity(),
                   get_cur_time_micro());

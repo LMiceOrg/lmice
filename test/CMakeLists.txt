@@ -44,5 +44,5 @@ add_executable(testfcnew testfuture2.cpp)
 TARGET_LINK_LIBRARIES(testfcnew  libfuturemodel eal_static ${jansson_libs})
 
 
-add_executable(tescmodel testcmodel.cpp)
-TARGET_LINK_LIBRARIES(tescmodel  libc_futuremodel eal_static ${jansson_libs})
+add_executable(testcmodel testcmodel.cpp)
+TARGET_LINK_LIBRARIES(testcmodel  libc_futuremodel eal_static ${jansson_libs})

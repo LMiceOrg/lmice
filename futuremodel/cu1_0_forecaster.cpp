@@ -1,3 +1,5 @@
+#include "iaca/iacaMarks.h"
+
 #include "include/portfolio.h"
 
 #include "include/forecasterimpl.h"
@@ -63,11 +65,144 @@ typedef lmice::fm_portfolio<cu1_0_forecaster::float_type, m_quote_size,
                             m_quote_depth, m_contract_size, m_feature_size>
     pf_type;
 
+// 投资组合
+typedef cu1_0_forecaster::float_type float_type;
+
+typedef typename lmice::fm_open_feature_type<float_type, m_quote_size,
+                                             m_quote_depth, m_contract_size,
+                                             m_feature_size>::type open_type;
+typedef lmice::fm_open_feature<open_type> open_feature_type;
+
+typedef lmice::fm_discrete_other_best_since<open_type> obs_type;
+typedef lmice::fm_discrete_other_book_imbalance<open_type> obi_type;
+typedef lmice::fm_discrete_other_decaying_return<open_type> odr_type;
+typedef lmice::fm_discrete_other_trade_imbalance<open_type> oti_type;
+typedef lmice::fm_discrete_other_trade_imbalance_v2<open_type> oti2_type;
+
+typedef lmice::fm_discrete_self_book_imbalance<open_type> sbi_type;
+typedef lmice::fm_discrete_self_decaying_return<open_type> sdr_type;
+typedef lmice::fm_discrete_self_orderflow_imbalance<open_type> soi_type;
+typedef lmice::fm_discrete_self_trade_imbalance<open_type> sti_type;
+typedef lmice::fm_discrete_self_trade_imbalance_v2<open_type> sti2_type;
+
+template <class this_type>
+inline void handle_self_msg(open_feature_type* self) {
+  this_type* pthis = static_cast<this_type*>(self);
+  pthis->handle_self_msg();
+}
+template <class this_type>
+inline void handle_other_msg(open_feature_type* self) {
+  this_type* pthis = static_cast<this_type*>(self);
+  pthis->handle_other_msg();
+}
+template <class this_type>
+inline void prepare(open_feature_type* self) {
+  this_type* pthis = static_cast<this_type*>(self);
+  pthis->prepare();
+}
+
 typedef lmice::fast_ema<cu1_0_forecaster::float_type> fast_ema;
 
 fast_ema g_forecast_ema;
 int64_t g_time_micro;
 bool g_ema_inited = false;
+
+// pf_type* g_portfolio;
+
+void handle_self_msg_st(pf_type* g_portfolio) {
+  using namespace lmice;
+
+  // for (int i = 0; i < 100; ++i) {
+  // IACA_START
+  handle_self_msg<sbi_type>(&(g_portfolio->get_feature(0)));
+  handle_self_msg<sti2_type>(&(g_portfolio->get_feature(1)));
+  handle_self_msg<sdr_type>(&(g_portfolio->get_feature(2)));
+  handle_self_msg<sdr_type>(&(g_portfolio->get_feature(3)));
+  handle_self_msg<sdr_type>(&(g_portfolio->get_feature(4)));
+
+  // other ni01
+  handle_self_msg<obs_type>(&(g_portfolio->get_feature(5)));
+  handle_self_msg<obs_type>(&(g_portfolio->get_feature(10)));
+  handle_self_msg<obs_type>(&(g_portfolio->get_feature(15)));
+  handle_self_msg<obs_type>(&(g_portfolio->get_feature(20)));
+  handle_self_msg<obs_type>(&(g_portfolio->get_feature(25)));
+
+  handle_self_msg<odr_type>(&(g_portfolio->get_feature(6)));
+  handle_self_msg<odr_type>(&(g_portfolio->get_feature(7)));
+  handle_self_msg<odr_type>(&(g_portfolio->get_feature(8)));
+  handle_self_msg<oti_type>(&(g_portfolio->get_feature(9)));
+
+  // other zn01
+
+  handle_self_msg<odr_type>(&(g_portfolio->get_feature(11)));
+  handle_self_msg<odr_type>(&(g_portfolio->get_feature(12)));
+  handle_self_msg<odr_type>(&(g_portfolio->get_feature(13)));
+  handle_self_msg<oti_type>(&(g_portfolio->get_feature(14)));
+
+  // other al01
+
+  handle_self_msg<odr_type>(&(g_portfolio->get_feature(16)));
+  handle_self_msg<odr_type>(&(g_portfolio->get_feature(17)));
+  handle_self_msg<odr_type>(&(g_portfolio->get_feature(18)));
+  handle_self_msg<oti_type>(&(g_portfolio->get_feature(19)));
+
+  // other pb01
+
+  handle_self_msg<odr_type>(&(g_portfolio->get_feature(21)));
+  handle_self_msg<odr_type>(&(g_portfolio->get_feature(22)));
+  handle_self_msg<odr_type>(&(g_portfolio->get_feature(23)));
+  handle_self_msg<oti_type>(&(g_portfolio->get_feature(24)));
+
+  // other sn01
+
+  handle_self_msg<odr_type>(&(g_portfolio->get_feature(26)));
+  handle_self_msg<odr_type>(&(g_portfolio->get_feature(27)));
+  handle_self_msg<odr_type>(&(g_portfolio->get_feature(28)));
+  handle_self_msg<oti_type>(&(g_portfolio->get_feature(29)));
+  //}
+  // IACA_END
+}
+
+void handle_other_msg_ni01(pf_type* g_portfolio) {
+  // other ni01
+  handle_other_msg<obs_type>(&(g_portfolio->get_feature(5)));
+  handle_other_msg<odr_type>(&(g_portfolio->get_feature(6)));
+  handle_other_msg<odr_type>(&(g_portfolio->get_feature(7)));
+  handle_other_msg<odr_type>(&(g_portfolio->get_feature(8)));
+  handle_other_msg<oti_type>(&(g_portfolio->get_feature(9)));
+}
+void handle_other_msg_zn01(pf_type* g_portfolio) {
+  // other zn01
+  handle_other_msg<obs_type>(&(g_portfolio->get_feature(10)));
+  handle_other_msg<odr_type>(&(g_portfolio->get_feature(11)));
+  handle_other_msg<odr_type>(&(g_portfolio->get_feature(12)));
+  handle_other_msg<odr_type>(&(g_portfolio->get_feature(13)));
+  handle_other_msg<oti_type>(&(g_portfolio->get_feature(14)));
+}
+void handle_other_msg_al01(pf_type* g_portfolio) {
+  // other ni01
+  handle_other_msg<obs_type>(&(g_portfolio->get_feature(15)));
+  handle_other_msg<odr_type>(&(g_portfolio->get_feature(16)));
+  handle_other_msg<odr_type>(&(g_portfolio->get_feature(17)));
+  handle_other_msg<odr_type>(&(g_portfolio->get_feature(18)));
+  handle_other_msg<oti_type>(&(g_portfolio->get_feature(19)));
+}
+void handle_other_msg_pb01(pf_type* g_portfolio) {
+  // other ni01
+  handle_other_msg<obs_type>(&(g_portfolio->get_feature(20)));
+  handle_other_msg<odr_type>(&(g_portfolio->get_feature(21)));
+  handle_other_msg<odr_type>(&(g_portfolio->get_feature(22)));
+  handle_other_msg<odr_type>(&(g_portfolio->get_feature(23)));
+  handle_other_msg<oti_type>(&(g_portfolio->get_feature(24)));
+}
+void handle_other_msg_sn01(pf_type* g_portfolio) {
+  // other ni01
+  handle_other_msg<obs_type>(&(g_portfolio->get_feature(25)));
+  handle_other_msg<odr_type>(&(g_portfolio->get_feature(26)));
+  handle_other_msg<odr_type>(&(g_portfolio->get_feature(27)));
+  handle_other_msg<odr_type>(&(g_portfolio->get_feature(28)));
+  handle_other_msg<oti_type>(&(g_portfolio->get_feature(29)));
+}
 
 std::string cu1_0_forecaster::get_trading_instrument() const {
   pf_type* m_po = (pf_type*)m_pimpl;
@@ -91,7 +226,7 @@ int cu1_0_forecaster::pre_proc_msg(const ChinaL1Msg& msg_dep) {
 void cu1_0_forecaster::update(const ChinaL1Msg& msg_dep) {
   pf_type* m_po = (pf_type*)m_pimpl;
   m_po->update(msg_dep);
-  g_time_micro = msg_dep.get_time();
+  // g_time_micro = msg_dep.get_time();
 }
 cu1_0_forecaster::float_type cu1_0_forecaster::get_forecast() {
   pf_type* m_po = (pf_type*)m_pimpl;
@@ -133,6 +268,8 @@ void cu1_0_forecaster::get_all_weight(const float** sigs, int* size) const {
 }
 cu1_0_forecaster::cu1_0_forecaster() {
   m_pimpl = new pf_type;
+  // g_portfolio = new pf_type;
+  // m_pimpl = g_portfolio;
   m_buffer = malloc(sizeof(float) * 1024);
   g_forecast_ema.init(1.0 / 500000);
 }
@@ -286,6 +423,81 @@ void cu1_0_forecaster::init(struct tm date) {
   for (feature_fd = 0; feature_fd < m_feature_size; ++feature_fd) {
     po.get_feature(feature_fd).init_portfolio(&po, feature_fd);
   }
+#if 1
+  /*! init function pointer for quoted feature */
+  po.m_quote_features.m_handle_self_msg[0] = handle_self_msg_st;
+
+  int reference_fd = po.get_quote_fd("ni01");
+
+  /*! handle other msg */
+
+  po.m_quote_features.m_handle_other_msg[reference_fd][0] =
+      handle_other_msg_ni01;
+
+  reference_fd = po.get_quote_fd("zn01");
+
+  /*! handle other msg */
+  //  struct handle_other_msg_zn01 {
+  //    void operator()() {
+  //      // other zn01
+  //      handle_other_msg<obs_type>(&(g_portfolio->get_feature(10)));
+  //      handle_other_msg<odr_type>(&(g_portfolio->get_feature(11)));
+  //      handle_other_msg<odr_type>(&(g_portfolio->get_feature(12)));
+  //      handle_other_msg<odr_type>(&(g_portfolio->get_feature(13)));
+  //      handle_other_msg<oti_type>(&(g_portfolio->get_feature(14)));
+  //    }
+  //  };
+  po.m_quote_features.m_handle_other_msg[reference_fd][0] =
+      handle_other_msg_zn01;
+
+  reference_fd = po.get_quote_fd("al01");
+
+  /*! handle other msg */
+  //  struct handle_other_msg_al01 {
+  //    void operator()() {
+  //      // other al01
+  //      handle_other_msg<obs_type>(&(g_portfolio->get_feature(15)));
+  //      handle_other_msg<odr_type>(&(g_portfolio->get_feature(16)));
+  //      handle_other_msg<odr_type>(&(g_portfolio->get_feature(17)));
+  //      handle_other_msg<odr_type>(&(g_portfolio->get_feature(18)));
+  //      handle_other_msg<oti_type>(&(g_portfolio->get_feature(19)));
+  //    }
+  //  };
+  po.m_quote_features.m_handle_other_msg[reference_fd][0] =
+      handle_other_msg_al01;
+
+  reference_fd = po.get_quote_fd("pb01");
+
+  /*! handle other msg */
+  //  struct handle_other_msg_pb01 {
+  //    void operator()() {
+  //      // other pb01
+  //      handle_other_msg<obs_type>(&(g_portfolio->get_feature(20)));
+  //      handle_other_msg<odr_type>(&(g_portfolio->get_feature(21)));
+  //      handle_other_msg<odr_type>(&(g_portfolio->get_feature(22)));
+  //      handle_other_msg<odr_type>(&(g_portfolio->get_feature(23)));
+  //      handle_other_msg<oti_type>(&(g_portfolio->get_feature(24)));
+  //    }
+  //  };
+  po.m_quote_features.m_handle_other_msg[reference_fd][0] =
+      handle_other_msg_pb01;
+
+  reference_fd = po.get_quote_fd("sn01");
+
+  /*! handle other msg */
+  //  struct handle_other_msg_sn01 {
+  //    void operator()() {
+  //      // other sn01
+  //      handle_other_msg<obs_type>(&(g_portfolio->get_feature(25)));
+  //      handle_other_msg<odr_type>(&(g_portfolio->get_feature(26)));
+  //      handle_other_msg<odr_type>(&(g_portfolio->get_feature(27)));
+  //      handle_other_msg<odr_type>(&(g_portfolio->get_feature(28)));
+  //      handle_other_msg<oti_type>(&(g_portfolio->get_feature(29)));
+  //    }
+  //  };
+  po.m_quote_features.m_handle_other_msg[reference_fd][0] =
+      handle_other_msg_sn01;
+#endif
 
   // contract's feature range end
   contract.m_feature_range.m_feature_end = feature_fd;

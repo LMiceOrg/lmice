@@ -50,7 +50,7 @@ class fm_discrete_self_book_imbalance : public fm_self_feature<self_template>,
     return false;
   }
 
-  void handle_self_msg() {
+  inline void handle_self_msg() {
     float_type bid = get_cur_bid();
     float_type bid_quantity = get_cur_bid_quantity();
 

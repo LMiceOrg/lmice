@@ -354,10 +354,9 @@ struct fm_discrete_other_translation_feature
     //    value[1] = (other_mid - mid);
     //    value[0] = (other_mid / mid);
     //    return value[i];
-    //        return m_corr_negative()
-    //                   ? (m_use_diff() ? (mid + other_mid) : (mid *
-    //                   other_mid)) : (m_use_diff() ? (other_mid - mid) :
-    //                   (other_mid / mid));
+    //    return m_corr_negative()
+    //               ? (m_use_diff() ? (mid + other_mid) : (mid * other_mid))
+    //               : (m_use_diff() ? (other_mid - mid) : (other_mid / mid));
   }
 
   template <class U = float_type>
@@ -381,7 +380,42 @@ struct fm_discrete_other_translation_feature
     //               ? (m_use_diff() ? (mid + other_mid) : (mid * other_mid))
     //               : (m_use_diff() ? (other_mid - mid) : (other_mid / mid));
   }
-  float_type translatedPrice(float_type other_price) const {
+  template <class U = float_type>
+  float_type translatedPrice(
+      float_type other_price,
+      typename std::enable_if<std::is_same<U, float>::value, U>::type* =
+          0) const {
+    int i = ((m_corr_negative()) << 1) + (m_use_diff());
+    __m128 value;
+    value = _mm_set_ps((m_ema().get_value() - other_price),
+                       (m_ema().get_value() / other_price),
+                       (other_price - m_ema().get_value()),
+                       (other_price / m_ema().get_value()));
+    float_type* dv = (float_type*)&value;
+    return dv[i];
+    //    return m_corr_negative()
+    //               ? (m_use_diff() ? (m_ema().get_value() - other_price)
+    //                               : (m_ema().get_value() / other_price))
+    //               : (m_use_diff() ? (other_price - m_ema().get_value())
+    //                               : (other_price / m_ema().get_value()));
+  }
+  template <class U = float_type>
+  float_type translatedPrice(
+      float_type other_price,
+      typename std::enable_if<std::is_same<U, double>::value, U>::type* =
+          0) const {
+    //    int i = ((m_corr_negative()) << 1) + (m_use_diff());
+    //    float_type a = (m_ema().get_value() - other_price);
+    //    float_type b = (m_ema().get_value() / other_price);
+    //    float_type vec[4] = {-b, -a, b, a};
+    //    return vec[i];
+    //    __m256 value;
+    //    value = _mm256_set_pd((m_ema().get_value() - other_price),
+    //                          (m_ema().get_value() / other_price),
+    //                          (other_price - m_ema().get_value()),
+    //                          (other_price / m_ema().get_value()));
+    //    float_type* dv = (float_type*)&value;
+    //    return dv[i];
     return m_corr_negative()
                ? (m_use_diff() ? (m_ema().get_value() - other_price)
                                : (m_ema().get_value() / other_price))
@@ -389,24 +423,58 @@ struct fm_discrete_other_translation_feature
                                : (other_price / m_ema().get_value()));
   }
 
-  float_type translatedDelta(float_type other_delta,
-                             float_type other_mid) const {
+  template <class U = float_type>
+  float_type translatedDelta(
+      float_type other_delta, float_type other_mid,
+      typename std::enable_if<std::is_same<U, double>::value, U>::type* =
+          0) const {
+    //    int i = ((m_corr_negative()) << 1) + (m_use_diff());
+    //    __m256 value;
+    //    // 3  other_delta  2  other_delta * m_ema().get_value() /
+    //    //                                          other_mid / other_mid
+    //    // other_delta 0 other_delta / m_ema().get_value()
+    //    value = _mm256_set_pd(
+    //        other_delta, other_delta * m_ema().get_value() / other_mid /
+    //        other_mid, other_delta, other_delta / m_ema().get_value());
+    //    float_type* dv = (float_type*)&value;
+    //    return dv[i];
     return m_use_diff()
                ? other_delta
                : (m_corr_negative() ? other_delta * m_ema().get_value() /
                                           other_mid / other_mid
                                     : other_delta / m_ema().get_value());
   }
+  template <class U>
+  float_type translatedDelta(
+      float_type other_delta, float_type other_mid,
+      typename std::enable_if<std::is_same<U, float>::value, U>::type* =
+          nullptr) const {
+    int i = ((m_corr_negative()) << 1) + (m_use_diff());
+    __m128 value;
+    // 3  other_delta  2  other_delta * m_ema().get_value() /
+    //                                          other_mid / other_mid
+    // other_delta 0 other_delta / m_ema().get_value()
+    value = _mm_set_ps(
+        other_delta, other_delta * m_ema().get_value() / other_mid / other_mid,
+        other_delta, other_delta / m_ema().get_value());
+    float_type* dv = (float_type*)&value;
+    return dv[i];
+    //    return m_use_diff()
+    //               ? other_delta
+    //               : (m_corr_negative() ? other_delta * m_ema().get_value() /
+    //                                          other_mid / other_mid
+    //                                    : other_delta / m_ema().get_value());
+  }
 
   float_type translatedBid(float_type other_bid, float_type other_offer) const {
-    return m_corr_negative() ? translatedPrice(other_offer)
-                             : translatedPrice(other_bid);
+    return m_corr_negative() ? translatedPrice<float_type>(other_offer)
+                             : translatedPrice<float_type>(other_bid);
   }
 
   float_type translatedOffer(float_type other_bid,
                              float_type other_offer) const {
-    return m_corr_negative() ? translatedPrice(other_bid)
-                             : translatedPrice(other_offer);
+    return m_corr_negative() ? translatedPrice<float_type>(other_bid)
+                             : translatedPrice<float_type>(other_offer);
   }
 
   float_type signedSignal(float_type signal) const {

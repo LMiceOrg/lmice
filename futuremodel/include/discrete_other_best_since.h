@@ -31,6 +31,7 @@ struct fm_discrete_other_best_since
   typedef fm_feature_chinal1_handler<fm_open_feature<feature_type>,
                                      feature_type>
       msg_type;
+  typedef fm_open_feature<feature_type> open_feature_type;
 
   // using msg_type::get_inst;
   USING_FEATURE_METHODS()
@@ -77,7 +78,8 @@ struct fm_discrete_other_best_since
     return false;
   }
 
-  void handle_self_msg() {
+  inline void handle_self_msg() {
+    // printf("call o best\n");
     float_type bid = get_cur_bid();
     float_type offer = get_cur_offer();
     int64_t time_micro = get_cur_time_micro();
@@ -100,7 +102,7 @@ struct fm_discrete_other_best_since
 
     set_signal((best_bid_since - best_offer_since) / mid);
   }
-  void handle_other_msg() {
+  inline void handle_other_msg() {
     //    unsigned high[2], low[2];
     //    eal_atomic_cycle_warmup(high, low);
     //    eal_atomic_cycle_begin(high, low);

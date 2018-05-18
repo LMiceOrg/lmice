@@ -46,7 +46,7 @@ struct fm_portfolio_handler {
       open_type;
   typedef fm_open_feature<open_type> open_feature_type;
   typedef std::array<msg_type, m_quote_depth> quote_msg_type;
-  typedef fm_quote_feature<float_type, m_quote_size> quote_feature_type;
+  typedef fm_quote_feature<open_type> quote_feature_type;
 
  public:
   feature_range& get_next_ref_range(int quote_fd) {
@@ -422,12 +422,15 @@ struct fm_portfolio_handler {
     memset(&signals[self_range.m_feature_begin], 0,
            sizeof(float_type) *
                (self_range.m_feature_end - self_range.m_feature_begin));
+
     // calculate self signal
-    for (int feature_fd = self_range.m_feature_begin;
-         feature_fd < self_range.m_feature_end; ++feature_fd) {
-      open_feature_type& feature = sub->m_features[feature_fd];
-      feature.handle_self_msg();
-    }
+    if (quoted_feature.m_handle_self_msg[quote_fd] != nullptr)
+      quoted_feature.m_handle_self_msg[quote_fd](sub);
+    //    for (int feature_fd = self_range.m_feature_begin;
+    //         feature_fd < self_range.m_feature_end; ++feature_fd) {
+    //      open_feature_type& feature = sub->m_features[feature_fd];
+    //      feature.handle_self_msg();
+    //    }
 
     // contract
     if (quote_fd < m_contract_size) {
@@ -446,12 +449,15 @@ struct fm_portfolio_handler {
     // handle ref msg
     auto ref_range = quoted_feature.m_ref_range[quote_fd];
     for (size_t i = 0; i < ref_range.size(); ++i) {
-      const feature_range& range = ref_range[i];
-      for (int feature_fd = range.m_feature_begin;
-           feature_fd < range.m_feature_end; ++feature_fd) {
-        open_feature_type& feature = sub->m_features[feature_fd];
-        feature.handle_other_msg();
-      }
+      if (quoted_feature.m_handle_other_msg[quote_fd][i] != nullptr)
+        quoted_feature.m_handle_other_msg[quote_fd][i](sub);
+      //      const feature_range& range = ref_range[i];
+
+      //      for (int feature_fd = range.m_feature_begin;
+      //           feature_fd < range.m_feature_end; ++feature_fd) {
+      //        open_feature_type& feature = sub->m_features[feature_fd];
+      //        feature.handle_other_msg();
+      //      }
     }
   }
 
@@ -495,7 +501,7 @@ struct fm_portfolio_data {
   std::array<fm_open_feature<open_type>, m_feature_size> m_features;
 
   //行情对应的子信号
-  fm_quote_feature<float_type, m_quote_size> m_quote_features;
+  fm_quote_feature<open_type> m_quote_features;
 
   // 子信号权重
   std::array<float_type, m_feature_size> m_weights forcepack(32);
@@ -630,7 +636,7 @@ struct fm_portfolio : public fm_portfolio_handler<portfolio_type>,
                       public fm_portfolio_data<portfolio_type>,
                       public fm_portfolio_contract_handler<portfolio_type> {
   static_assert(feature_size % 4 == 0, "feature size must be 4x");
-} forcepack(64);
+} forcepack(128);
 }  // namespace lmice
 
 #endif  // FUTUREMODEL_INCLUDE_PORTFOLIO_H_

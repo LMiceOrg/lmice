@@ -62,3 +62,4 @@ dkms.conf
 # Ignore dist folder
 dist/*
 clang_dist/*
+.vscode/*

@@ -66,7 +66,7 @@ class fm_discrete_other_decaying_return
     return false;
   }
 
-  void handle_self_msg() {
+  inline void handle_self_msg() {
     float_type other_bid = get_cur_other_bid();
     float_type other_offer = get_cur_other_offer();
 
@@ -76,7 +76,7 @@ class fm_discrete_other_decaying_return
     float_type signal = (other_mid - m_ema.get_value()) / other_mid;
     set_signal(signal);
   }
-  void handle_other_msg() {
+  inline void handle_other_msg() {
     float_type other_bid = get_cur_other_bid();
     float_type other_offer = get_cur_other_offer();
     int64_t other_time_micro = get_cur_other_time_micro();

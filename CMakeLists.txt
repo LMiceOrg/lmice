@@ -49,6 +49,7 @@ SET_TARGET_PROPERTIES(eal_static PROPERTIES CLEAN_DIRECT_OUTPUT 1)
 
 INCLUDE_DIRECTORIES(${eal_header})
 
+add_subdirectory(trader)
 
 add_subdirectory(ide)
 

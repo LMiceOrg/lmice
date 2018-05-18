@@ -92,7 +92,7 @@ class fm_discrete_other_trade_imbalance_v2
     return true;
   }
 
-  void handle_self_msg() {
+  inline void handle_self_msg() {
     float_type bid = get_cur_bid();
     float_type offer = get_cur_offer();
     int64_t time_micro = get_cur_time_micro();
@@ -157,7 +157,7 @@ class fm_discrete_other_trade_imbalance_v2
       set_signal(signal);
     }
   }
-  void handle_other_msg() {
+  inline void handle_other_msg() {
     int other_bid_quantity = get_cur_other_bid_quantity();
     int other_offer_quantity = get_cur_other_offer_quantity();
     int64_t other_time_micro = get_cur_other_time_micro();

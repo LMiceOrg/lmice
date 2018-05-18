@@ -73,7 +73,8 @@ class fm_discrete_other_book_imbalance
     return false;
   }
 
-  void handle_self_msg() {
+  inline void handle_self_msg() {
+    // printf("call o bi \n");
     float_type bid = get_cur_bid();
     float_type offer = get_cur_offer();
     int64_t time_micro = get_cur_time_micro();
@@ -118,7 +119,7 @@ class fm_discrete_other_book_imbalance
     //      set_signal(signal);
     //    }
   }
-  void handle_other_msg() {
+  inline void handle_other_msg() {
     float_type prev_bid = get_prev_bid();
     float_type prev_offer = get_prev_offer();
 
