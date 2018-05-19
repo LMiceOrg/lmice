@@ -4,63 +4,16 @@
 
 #include "include/trader_shm_worker.h"
 
+#include "include/trader_xone_data.h"
 #include "include/trader_xone_spi.h"
 
 namespace lmice {
 
-struct ft_trader_xone_api_data {
-  enum {
-    Type_CX1FtdcReqUserLoginField = (1 << 0),
-    Type_CX1FtdcReqUserLogoutField = (1 << 1),
-    Type_CX1FtdcReqResetPasswordField = (1 << 2),
-    Type_CX1FtdcInsertOrderField = (1 << 3),
-    Type_CX1FtdcCancelOrderField = (1 << 4),
-    Type_CX1FtdcQryPositionField = (1 << 5),
-    Type_CX1FtdcQryCapitalField = (1 << 6),
-    Type_CX1FtdcQryExchangeInstrumentField = (1 << 7),
-    Type_CX1FtdcQryOrderField = (1 << 8),
-    Type_CX1FtdcQryMatchField = (1 << 9),
-    Type_CX1FtdcQrySpecificInstrumentField = (1 << 10),
-    Type_CX1FtdcQryPositionDetailField = (1 << 11),
-    Type_CX1FtdcQryExchangeStatusField = (1 << 12),
-    Type_CX1FtdcAbiInstrumentField = (1 << 13),
-    Type_CX1FtdcQuoteInsertField = (1 << 14),
-    Type_CX1FtdcCancelAllOrderField = (1 << 15),
-    Type_CX1FtdcForQuoteField = (1 << 16),
-    Type_CX1FtdcQryForQuoteField = (1 << 17),
-    Type_CX1FtdcQuoteOrderField = (1 << 18),
-    Type_CX1FtdcQryQuoteNoticeField = (1 << 19),
-    Type_CX1FtdcArbitrageCombineDetailField = (1 << 20)
-  };
-  uint64_t m_type;
-  CX1FtdcReqUserLoginField m_req_user_login;
-  CX1FtdcReqUserLogoutField m_req_user_logout;
-  CX1FtdcReqResetPasswordField m_req_reset_password;
-  CX1FtdcInsertOrderField m_insert_order;
-  CX1FtdcCancelOrderField m_cancel_order;
-  CX1FtdcQryPositionField m_qry_position;
-  CX1FtdcQryCapitalField m_qry_capital;
-  CX1FtdcQryExchangeInstrumentField m_qry_exchange_instrument;
-  CX1FtdcQryOrderField m_qry_order;
-  CX1FtdcQryMatchField m_qry_match;
-  CX1FtdcQrySpecificInstrumentField m_qry_specific_instrument;
-  CX1FtdcQryPositionDetailField m_qry_position_detail;
-  CX1FtdcQryExchangeStatusField m_qry_exchange_status;
-  CX1FtdcAbiInstrumentField m_abi_instrument;
-  CX1FtdcQuoteInsertField m_quote_insert;
-  CX1FtdcCancelAllOrderField m_cancel_all_order;
-  CX1FtdcForQuoteField m_for_quote;
-  CX1FtdcQryForQuoteField m_qry_for_quote;
-  CX1FtdcQuoteOrderField m_quote_order;
-  CX1FtdcQryQuoteNoticeField m_qry_quote_notice;
-  CX1FtdcArbitrageCombineDetailField m_arbitrage_combine;
-};
-
 class ft_trader_xone_emulator : public x1ftdcapi::CX1FtdcTraderApi {
  private:
   enum { LM_WORKER_STOPPED = 0, LM_SPI_WORKER = 0 };
-  lmice_shm_t m_shm_board;
-  ft_worker_board<1> *m_board;
+  typedef ft_worker_board<1> board_type;
+  board_type *m_board;
 
   void create_worker(int);
   void proc_work(void);
@@ -73,13 +26,16 @@ class ft_trader_xone_emulator : public x1ftdcapi::CX1FtdcTraderApi {
   int m_spi_core;
   char m_version[8];
 
-  ft_trader_xone_api_data m_api_data;
-  ft_trader_xone_spi_data m_spi_data;
+  ft_trader_xone_api_data *m_api_data;
+  ft_trader_xone_spi_data *m_spi_data;
 
   x1ftdcapi::CX1FtdcTraderSpi *m_spi;
   enum { TRADER_TCP = 1, TRADER_UDP, TRADER_MCAST };
 
  public:
+  inline void set_spi_data(ft_trader_xone_spi_data *data) { m_spi_data = data; }
+  inline void set_api_data(ft_trader_xone_api_data *data) { m_api_data = data; }
+  inline void set_board(board_type *board) { m_board = board; }
   ft_trader_xone_emulator();
   virtual ~ft_trader_xone_emulator();
 

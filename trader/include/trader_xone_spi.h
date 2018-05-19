@@ -1,48 +1,42 @@
 #ifndef TRADER_XONE_SPI_H
 #define TRADER_XONE_SPI_H
-#include "xone/include/X1FtdcTraderApi.h"
+#include <signal.h>
+#include <sys/types.h>
 
+#include <stdio.h>
+#include <string.h>
+
+#include "include/trader_xone_data.h"
+#include "xone/include/X1FtdcTraderApi.h"
 namespace lmice {
-struct ft_trader_xone_spi_data {
-  CX1FtdcRspErrorField m_rsp_error;
-  CX1FtdcRspUserLoginField m_rsp_user_login;
-  CX1FtdcRspUserLogoutInfoField m_rsp_user_logout_info;
-  CX1FtdcRspOperOrderField m_rsp_oper_order;
-  CX1FtdcRspPriMatchInfoField m_rsp_pri_match_info;
-  CX1FtdcRspPriOrderField m_rsp_pri_order;
-  CX1FtdcRspPriCancelOrderField m_rsp_pri_cancel_order;
-  CX1FtdcRspOrderField m_rsp_order;
-  CX1FtdcRspMatchField m_rsp_match;
-  CX1FtdcRspPositionField m_rsp_position;
-  CX1FtdcRspCapitalField m_rsp_capital;
-  CX1FtdcRspExchangeInstrumentField m_rsp_exchange_instrument;
-  CX1FtdcRspSpecificInstrumentField m_rsp_specific_instrument;
-  CX1FtdcRspPositionDetailField m_rsp_position_detail;
-  CX1FtdcRspExchangeStatusField m_rsp_exchange_status;
-  CX1FtdcExchangeStatusRtnField m_exchange_status_rtn;
-  //// 做市商
-  CX1FtdcQuoteRspField m_quote_rsp;
-  CX1FtdcQuoteRtnField m_quote_rtn;
-  CX1FtdcQuoteCanceledRtnField m_quote_canceled_rtn;
-  CX1FtdcQuoteMatchRtnField m_quote_match_rtn;
-  CX1FtdcCancelAllOrderRspField m_cancel_all_order_rsp;
-  CX1FtdcForQuoteRspField m_for_quote_rsp;
-  CX1FtdcForQuoteRtnField m_for_quote_rtn;
-  CX1FtdcQryForQuoteRtnField m_qry_for_quote_rtn;
-  CX1FtdcQuoteOrderRtnField m_quote_order_rtn;
-  CX1FtdcQryQuoteNoticeRtnField m_qry_quote_notice_rtn;
-  CX1FtdcAbiInstrumentRtnField m_abi_instrument_rtn;
-  CX1FtdcQuoteSubscribeRtnField m_quote_subscribe_rtn;
-  CX1FtdcExchangeConnectionStatusRtnField m_exchange_connection_status_rtn;
-  CX1FtdcRspResetPasswordField m_rsp_reset_password;
-  CX1FtdcArbitrageCombineDetailRtnField m_arbitrage_combine_detail_rtn;
-};
 
 class ft_trader_xone_spi : public x1ftdcapi::CX1FtdcTraderSpi {
  private:
-  ft_trader_xone_spi_data m_spi_data;
+  int* m_board_signal;
+  pid_t* m_board_pid;
+  ft_trader_xone_spi_data* m_spi_data;
+  ft_trader_xone_api_data* m_api_data;
+
+  bool is_error_occur(CX1FtdcRspErrorField* err_info,
+                      const char* func_name = "");
+
+  inline void ReqUserLogin(void) {
+    snprintf(m_api_data->m_req_user_login.AccountID,
+             sizeof(m_api_data->m_req_user_login.AccountID), "hehao");
+    *m_board_signal = Type_CX1FtdcReqUserLoginField;
+    kill(*m_board_pid, SIGUSR1);
+  }
 
  public:
+  inline void set_spi_data(ft_trader_xone_spi_data* spi_data,
+                           ft_trader_xone_api_data* api_data, pid_t* board_pid,
+                           int* board_signal) {
+    m_spi_data = spi_data;
+    m_api_data = api_data;
+    m_board_pid = board_pid;
+    m_board_signal = board_signal;
+  }
+  virtual ~ft_trader_xone_spi();
   /**
    * @brief    网络连接正常响应
    * @details
@@ -73,7 +67,7 @@ class ft_trader_xone_spi : public x1ftdcapi::CX1FtdcTraderSpi {
    *           </ul>
    *
    */
-  virtual void OnFrontDisconnected(int nReason){};
+  virtual void OnFrontDisconnected(int nReason);
   /**
    * @brief   登陆请求响应
    * @details
@@ -83,7 +77,7 @@ class ft_trader_xone_spi : public x1ftdcapi::CX1FtdcTraderSpi {
    */
   virtual void OnRspUserLogin(
       struct CX1FtdcRspUserLoginField* pUserLoginInfoRtn,
-      struct CX1FtdcRspErrorField* pErrorInfo){};
+      struct CX1FtdcRspErrorField* pErrorInfo);
 
   /**
    * @brief   登出请求响应:
@@ -95,7 +89,7 @@ class ft_trader_xone_spi : public x1ftdcapi::CX1FtdcTraderSpi {
    */
   virtual void OnRspUserLogout(
       struct CX1FtdcRspUserLogoutInfoField* pUserLogoutInfoRtn,
-      struct CX1FtdcRspErrorField* pErrorInfo){};
+      struct CX1FtdcRspErrorField* pErrorInfo);
 
   /**
    * @brief   期货委托报单响应
@@ -105,7 +99,7 @@ class ft_trader_xone_spi : public x1ftdcapi::CX1FtdcTraderSpi {
    * @param pErrorInfo 若报单失败，返回错误信息地址，该结构含有错误信息。
    */
   virtual void OnRspInsertOrder(struct CX1FtdcRspOperOrderField* pOrderRtn,
-                                struct CX1FtdcRspErrorField* pErrorInfo){};
+                                struct CX1FtdcRspErrorField* pErrorInfo);
 
   /**
    * @brief   期货委托撤单响应
@@ -117,7 +111,7 @@ class ft_trader_xone_spi : public x1ftdcapi::CX1FtdcTraderSpi {
    */
   virtual void OnRspCancelOrder(
       struct CX1FtdcRspOperOrderField* pOrderCanceledRtn,
-      struct CX1FtdcRspErrorField* pErrorInfo){};
+      struct CX1FtdcRspErrorField* pErrorInfo);
 
   /**
    * @brief   错误回报
@@ -126,7 +120,7 @@ class ft_trader_xone_spi : public x1ftdcapi::CX1FtdcTraderSpi {
    *           柜台内存错误：包含交易所API内部抛出异常，柜台内部数据异常，系统资源申请异常等。
    * @param pErrorInfo 错误信息的结构地址。
    */
-  virtual void OnRtnErrorMsg(struct CX1FtdcRspErrorField* pErrorInfo){};
+  virtual void OnRtnErrorMsg(struct CX1FtdcRspErrorField* pErrorInfo);
 
   /**
    * @brief   成交回报
@@ -141,7 +135,7 @@ class ft_trader_xone_spi : public x1ftdcapi::CX1FtdcTraderSpi {
    * @details 当交易所收到委托请求并返回回报时，该方法会被调用
    * @param pRtnOrderData 指向委托回报地址的指针。
    */
-  virtual void OnRtnOrder(struct CX1FtdcRspPriOrderField* pRtnOrderData){};
+  virtual void OnRtnOrder(struct CX1FtdcRspPriOrderField* pRtnOrderData);
 
   /**
    * @brief  撤单回报
@@ -150,7 +144,7 @@ class ft_trader_xone_spi : public x1ftdcapi::CX1FtdcTraderSpi {
    * 指向撤单回报结构的地址，该结构体包含被撤单合约的相关信息。
    */
   virtual void OnRtnCancelOrder(
-      struct CX1FtdcRspPriCancelOrderField* pCancelOrderData){};
+      struct CX1FtdcRspPriCancelOrderField* pCancelOrderData);
 
   /**
    * @brief  查询当日委托响应
@@ -165,7 +159,7 @@ class ft_trader_xone_spi : public x1ftdcapi::CX1FtdcTraderSpi {
    */
   virtual void OnRspQryOrderInfo(struct CX1FtdcRspOrderField* pRtnOrderData,
                                  struct CX1FtdcRspErrorField* pErrorInfo,
-                                 bool bIsLast){};
+                                 bool bIsLast);
 
   /**
    * @brief  查询当日成交响应
@@ -180,7 +174,7 @@ class ft_trader_xone_spi : public x1ftdcapi::CX1FtdcTraderSpi {
    */
   virtual void OnRspQryMatchInfo(struct CX1FtdcRspMatchField* pRtnMatchData,
                                  struct CX1FtdcRspErrorField* pErrorInfo,
-                                 bool bIsLast){};
+                                 bool bIsLast);
 
   /**
    * @brief  持仓查询响应
@@ -195,7 +189,7 @@ class ft_trader_xone_spi : public x1ftdcapi::CX1FtdcTraderSpi {
    */
   virtual void OnRspQryPosition(
       struct CX1FtdcRspPositionField* pPositionInfoRtn,
-      struct CX1FtdcRspErrorField* pErrorInfo, bool bIsLast){};
+      struct CX1FtdcRspErrorField* pErrorInfo, bool bIsLast);
 
   /**
    * @brief  客户资金查询响应
@@ -210,7 +204,7 @@ class ft_trader_xone_spi : public x1ftdcapi::CX1FtdcTraderSpi {
    */
   virtual void OnRspCustomerCapital(
       struct CX1FtdcRspCapitalField* pCapitalInfoRtn,
-      struct CX1FtdcRspErrorField* pErrorInfo, bool bIsLast){};
+      struct CX1FtdcRspErrorField* pErrorInfo, bool bIsLast);
 
   /**
    * @brief  交易所合约查询响应
@@ -225,7 +219,7 @@ class ft_trader_xone_spi : public x1ftdcapi::CX1FtdcTraderSpi {
    */
   virtual void OnRspQryExchangeInstrument(
       struct CX1FtdcRspExchangeInstrumentField* pInstrumentData,
-      struct CX1FtdcRspErrorField* pErrorInfo, bool bIsLast){};
+      struct CX1FtdcRspErrorField* pErrorInfo, bool bIsLast);
 
   /**
    * @brief  查询指定合约响应
@@ -240,7 +234,7 @@ class ft_trader_xone_spi : public x1ftdcapi::CX1FtdcTraderSpi {
    */
   virtual void OnRspQrySpecifyInstrument(
       struct CX1FtdcRspSpecificInstrumentField* pInstrument,
-      struct CX1FtdcRspErrorField* pErrorInfo, bool bIsLast){};
+      struct CX1FtdcRspErrorField* pErrorInfo, bool bIsLast);
 
   /**
    * @brief  查询持仓明细响应
@@ -255,7 +249,7 @@ class ft_trader_xone_spi : public x1ftdcapi::CX1FtdcTraderSpi {
    */
   virtual void OnRspQryPositionDetail(
       struct CX1FtdcRspPositionDetailField* pPositionDetailRtn,
-      struct CX1FtdcRspErrorField* pErrorInfo, bool bIsLast){};
+      struct CX1FtdcRspErrorField* pErrorInfo, bool bIsLast);
 
   /**
    * @brief 交易所状态查询响应
@@ -265,14 +259,14 @@ class ft_trader_xone_spi : public x1ftdcapi::CX1FtdcTraderSpi {
    * Value=”YES”/>的选项
    */
   virtual void OnRspQryExchangeStatus(
-      struct CX1FtdcRspExchangeStatusField* pRspExchangeStatusData){};
+      struct CX1FtdcRspExchangeStatusField* pRspExchangeStatusData);
   /**
    * @brief 交易所状态通知
    * @details 支持交易所状态通知和品种状态通知，在x1柜台可配
    * @param pRtnExchangeStatusData 指向交易所状态通知地址的指针。
    */
   virtual void OnRtnExchangeStatus(
-      struct CX1FtdcExchangeStatusRtnField* pRtnExchangeStatusData){};
+      struct CX1FtdcExchangeStatusRtnField* pRtnExchangeStatusData);
 
   /**
    * @brief 做市商报单响应

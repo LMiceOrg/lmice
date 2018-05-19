@@ -29,7 +29,8 @@ FIND_LIBRARY(fm_libs NAMES futuremodel
 
 #set(fm_libs ${CMAKE_BINARY_DIR}/libfuturemodel.a)
 
-INCLUDE_DIRECTORIES(. ${eal_header} ../futuremodel)
+INCLUDE_DIRECTORIES(. ${eal_header} ../futuremodel
+    ../trader)
 
 add_executable(testfm ${testfuturemodel_src})
 
@@ -46,3 +47,7 @@ TARGET_LINK_LIBRARIES(testfcnew  libfuturemodel eal_static ${jansson_libs})
 
 add_executable(testcmodel testcmodel.cpp)
 TARGET_LINK_LIBRARIES(testcmodel  libc_futuremodel eal_static ${jansson_libs})
+
+#add_executable(test_xone_emulator testxoneemulator.cpp)
+#TARGET_LINK_LIBRARIES(test_xone_emulator eal_static ${jansson_libs} lib_trader_xone_emulator)
+
