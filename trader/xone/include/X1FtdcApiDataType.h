@@ -1,916 +1,909 @@
 /**
- * Copyright (C) 2015-2017, ´óÁ¬·É´´ĞÅÏ¢¼¼ÊõÓĞÏŞ¹«Ë¾
+ * Copyright (C) 2015-2017, å¤§è¿é£åˆ›ä¿¡æ¯æŠ€æœ¯æœ‰é™å…¬å¸
  * @file <X1FtdcApiDataType.h>
- * @brief <¶¨Òå½Ó¿ÚËùĞèµÄÊı¾İÀàĞÍ>
+ * @brief <å®šä¹‰æ¥å£æ‰€éœ€çš„æ•°æ®ç±»å‹>
  * @version <1.5.1.2>
- * @author <X1ÏîÄ¿×é>
- * @date <2017Äê8ÔÂ16ÈÕ>
+ * @author <X1é¡¹ç›®ç»„>
+ * @date <2017å¹´8æœˆ16æ—¥>
  */
 
 #ifndef X1FTDCAPIDATATYPE_H
 #define X1FTDCAPIDATATYPE_H
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcUserIDType:ÓÃ»§IDÊı¾İÀàĞÍ
+// TX1FtdcUserIDType:ç”¨æˆ·IDæ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcUserIDType[41];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcAccountIDType:×Ê½ğÕË»§Êı¾İÀàĞÍ
+// TX1FtdcAccountIDType:èµ„é‡‘è´¦æˆ·æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcAccountIDType[13];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcExecStateType:Ö´ĞĞ×´Ì¬Êı¾İÀàĞÍ
-/////////////////////////////////////////////////////////////////////////          
+// TX1FtdcExecStateType:æ‰§è¡ŒçŠ¶æ€æ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcExecStateType;
-// ³É¹¦          
-#define X1_FTDC_ERR_CODE_SUCCESS            0     
-// Ê§°Ü
-#define X1_FTDC_ERR_CODE_FAIL              -1  
-// ÎŞĞ§   
-#define X1_FTDC_ERR_CODE_INVALID           -2
+// æˆåŠŸ
+#define X1_FTDC_ERR_CODE_SUCCESS 0
+// å¤±è´¥
+#define X1_FTDC_ERR_CODE_FAIL -1
+// æ— æ•ˆ
+#define X1_FTDC_ERR_CODE_INVALID -2
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcClientIDType:½»Ò×±àÂëÊı¾İÀàĞÍ
-/////////////////////////////////////////////////////////////////////////   
+// TX1FtdcClientIDType:äº¤æ˜“ç¼–ç æ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcClientIDType[13];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcClientStatusType:½»Ò×±àÂë×´Ì¬Êı¾İÀàĞÍ
-/////////////////////////////////////////////////////////////////////////           
+// TX1FtdcClientStatusType:äº¤æ˜“ç¼–ç çŠ¶æ€æ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcClientStatusType;
-// ½ûÖ¹¿ªĞÂ²Ö
-#define X1_FTDC_PROHIBIT_OPEN               4    
-// ÔÊĞí¿ªĞÂ²Ö 
-#define X1_FTDC_ALLOW_OPEN                  5     
+// ç¦æ­¢å¼€æ–°ä»“
+#define X1_FTDC_PROHIBIT_OPEN 4
+// å…è®¸å¼€æ–°ä»“
+#define X1_FTDC_ALLOW_OPEN 5
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcInstrumentIDType:ºÏÔ¼´úÂëÊı¾İÀàĞÍ
-///////////////////////////////////////////////////////////////////////// 
+// TX1FtdcInstrumentIDType:åˆçº¦ä»£ç æ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcInstrumentIDType[64];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcInstrumentPrefixType:Æ·ÖÖÃû³ÆÊı¾İÀàĞÍ
-/////////////////////////////////////////////////////////////////////////   
+// TX1FtdcInstrumentPrefixType:å“ç§åç§°æ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcInstrumentPrefixType[31];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcVarietyNameType:Æ·ÖÖÃû³ÆÊı¾İÀàĞÍ
+// TX1FtdcVarietyNameType:å“ç§åç§°æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcVarietyNameType[31];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcInstrumentNameType:ºÏÔ¼Ãû³ÆÊı¾İÀàĞÍ
+// TX1FtdcInstrumentNameType:åˆçº¦åç§°æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcInstrumentNameType[64];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcActiveContractType:ÓĞĞ§ºÏÔ¼Êı¾İÀàĞÍ
+// TX1FtdcActiveContractType:æœ‰æ•ˆåˆçº¦æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcActiveContractType[1024];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcLocalOrderIDType:±¾µØÎ¯ÍĞºÅÊı¾İÀàĞÍ
+// TX1FtdcLocalOrderIDType:æœ¬åœ°å§”æ‰˜å·æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef long TX1FtdcLocalOrderIDType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcPriceType:¼Û¸ñÊı¾İÀàĞÍ
+// TX1FtdcPriceType:ä»·æ ¼æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef double TX1FtdcPriceType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcAmountType:Î¯ÍĞÊıÁ¿Êı¾İÀàĞÍ
+// TX1FtdcAmountType:å§”æ‰˜æ•°é‡æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef long TX1FtdcAmountType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcBuySellTypeType:ÂòÂôÊı¾İÀàĞÍ
+// TX1FtdcBuySellTypeType:ä¹°å–æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef short TX1FtdcBuySellTypeType;
-// Âò
-#define X1_FTDC_SPD_BUY                     1 
-// Âô    
-#define X1_FTDC_SPD_SELL                    2     
+// ä¹°
+#define X1_FTDC_SPD_BUY 1
+// å–
+#define X1_FTDC_SPD_SELL 2
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcOpenCloseTypeType:¿ªÆ½±êÖ¾Êı¾İÀàĞÍ
+// TX1FtdcOpenCloseTypeType:å¼€å¹³æ ‡å¿—æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcOpenCloseTypeType;
-// ¿ª²Ö
-#define X1_FTDC_SPD_OPEN                    1  
-// Æ½²Ö   
-#define X1_FTDC_SPD_CLOSE                   2   
-// Æ½½ñ  
-#define X1_FTDC_SPD_CLOSETODAY              4     
-// ÆÚÈ¨Ö´ĞĞ
-#define X1_FTDC_SPD_EXECUTE                 6  
-// ÆÚÈ¨·ÅÆú×Ô¶¯Ö´ĞĞ   
-#define X1_FTDC_SPD_GIVEUP                  7     
-// ÆÚÈ¨ÂÄÔ¼
-#define X1_FTDC_SPD_PERFORM                 8     
+// å¼€ä»“
+#define X1_FTDC_SPD_OPEN 1
+// å¹³ä»“
+#define X1_FTDC_SPD_CLOSE 2
+// å¹³ä»Š
+#define X1_FTDC_SPD_CLOSETODAY 4
+// æœŸæƒæ‰§è¡Œ
+#define X1_FTDC_SPD_EXECUTE 6
+// æœŸæƒæ”¾å¼ƒè‡ªåŠ¨æ‰§è¡Œ
+#define X1_FTDC_SPD_GIVEUP 7
+// æœŸæƒå±¥çº¦
+#define X1_FTDC_SPD_PERFORM 8
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcSpeculationValueType:Í¶»ú±£ÖµÊı¾İÀàĞÍ
+// TX1FtdcSpeculationValueType:æŠ•æœºä¿å€¼æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef short TX1FtdcSpeculationValueType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcExchangeIDType:½»Ò×Ëù±àÂëÊı¾İÀàĞÍ
+// TX1FtdcExchangeIDType:äº¤æ˜“æ‰€ç¼–ç æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcExchangeIDType[8];
-// ´óÉÌËù
-#define X1_FTDC_EXCHANGE_DCE              "DCE"   
-// Ö£ÉÌËù
-#define X1_FTDC_EXCHANGE_CZCE             "CZCE"  
-// ÉÏÆÚËù
-#define X1_FTDC_EXCHANGE_SHFE             "SHFE"  
-// ÖĞ½ğËù
-#define X1_FTDC_EXCHANGE_CFFEX            "CFFEX" 
-// ÉÏÄÜËù
-#define X1_FTDC_EXCHANGE_INE              "INE"   
+// å¤§å•†æ‰€
+#define X1_FTDC_EXCHANGE_DCE "DCE"
+// éƒ‘å•†æ‰€
+#define X1_FTDC_EXCHANGE_CZCE "CZCE"
+// ä¸ŠæœŸæ‰€
+#define X1_FTDC_EXCHANGE_SHFE "SHFE"
+// ä¸­é‡‘æ‰€
+#define X1_FTDC_EXCHANGE_CFFEX "CFFEX"
+// ä¸Šèƒ½æ‰€
+#define X1_FTDC_EXCHANGE_INE "INE"
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcFrontAddrType:Ç°ÖÃ»úµØÖ·Êı¾İÀàĞÍ
+// TX1FtdcFrontAddrType:å‰ç½®æœºåœ°å€æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcFrontAddrType[32];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcCompanyIDType:¿ª·¢ÉÌ´úÂëÊı¾İÀàĞÍ
+// TX1FtdcCompanyIDType:å¼€å‘å•†ä»£ç æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef short TX1FtdcCompanyIDType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcPasswdType:ÓÃ»§ÃÜÂëÊı¾İÀàĞÍ
+// TX1FtdcPasswdType:ç”¨æˆ·å¯†ç æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcPasswdType[41];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcPasswordType:ÓÃ»§ÃÜÂëÊı¾İÀàĞÍ
+// TX1FtdcPasswordType:ç”¨æˆ·å¯†ç æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcPasswordType[41];
-// ÃÜÂë³¤¶È
+// å¯†ç é•¿åº¦
 #define X1FTDC_PASSWORD_LEN 41
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcX1OrderIDType:¹ñÌ¨Î¯ÍĞºÅÊı¾İÀàĞÍ
+// TX1FtdcX1OrderIDType:æŸœå°å§”æ‰˜å·æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef long TX1FtdcX1OrderIDType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcOrderSysIDType:±¨µ¥±àºÅÊı¾İÀàĞÍ
+// TX1FtdcOrderSysIDType:æŠ¥å•ç¼–å·æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcOrderSysIDType[64];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcOrderTypeType:±¨µ¥ÀàĞÍ
+// TX1FtdcOrderTypeType:æŠ¥å•ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcOrderTypeType;
-// ÏŞ¼ÛÎ¯ÍĞ
-#define X1_FTDC_LIMITORDER                  1  
-// ÊĞ¼ÛÎ¯ÍĞ   
-#define X1_FTDC_MKORDER                     2
-// Ì×ÀûÎ¯ÍĞ    
-#define X1_FTDC_ARBITRAGE                   4  
-// Õ¹ÆÚ»¥»»Î¯ÍĞ   
-#define X1_FTDC_EXTENSION                   8  
-// ÏŞ¼ÛÖ¹Ó¯Î¯ÍĞ   
-#define X1_FTDC_PROFIT_LIMITORDER           32    
-// ÊĞ¼ÛÖ¹Ó¯Î¯ÍĞ
-#define X1_FTDC_PROFIT_MKORDER              34  
-// ÏŞ¼ÛÖ¹ËğÎ¯ÍĞ  
-#define X1_FTDC_LOSS_LIMITORDER             48    
-// ÊĞ¼ÛÖ¹ËğÎ¯ÍĞ
-#define X1_FTDC_LOSS_MKORDER                50    
+// é™ä»·å§”æ‰˜
+#define X1_FTDC_LIMITORDER 1
+// å¸‚ä»·å§”æ‰˜
+#define X1_FTDC_MKORDER 2
+// å¥—åˆ©å§”æ‰˜
+#define X1_FTDC_ARBITRAGE 4
+// å±•æœŸäº’æ¢å§”æ‰˜
+#define X1_FTDC_EXTENSION 8
+// é™ä»·æ­¢ç›ˆå§”æ‰˜
+#define X1_FTDC_PROFIT_LIMITORDER 32
+// å¸‚ä»·æ­¢ç›ˆå§”æ‰˜
+#define X1_FTDC_PROFIT_MKORDER 34
+// é™ä»·æ­¢æŸå§”æ‰˜
+#define X1_FTDC_LOSS_LIMITORDER 48
+// å¸‚ä»·æ­¢æŸå§”æ‰˜
+#define X1_FTDC_LOSS_MKORDER 50
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcOrderAnswerStatusType:Î¯ÍĞ»Ø±¨ÀàĞÍ
+// TX1FtdcOrderAnswerStatusType:å§”æ‰˜å›æŠ¥ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef short TX1FtdcOrderAnswerStatusType;
-// È«²¿³·µ¥
-#define X1_FTDC_SPD_CANCELED                1     
-// È«²¿³É½»
-#define X1_FTDC_SPD_FILLED                  2     
-// Î´³É½»»¹ÔÚ¶ÓÁĞÖĞ
-#define X1_FTDC_SPD_IN_QUEUE                3     
-// ²¿·Ö³É½»»¹ÔÚ¶ÓÁĞÖĞ
-#define X1_FTDC_SPD_PARTIAL                 4     
-// ²¿³É²¿³·
-#define X1_FTDC_SPD_PARTIAL_CANCELED        5     
-// ³·µ¥ÖĞ
-#define X1_FTDC_SPD_IN_CANCELING            6     
-// ´íÎó(·Ïµ¥´íÎó)
-#define X1_FTDC_SPD_ERROR                   7     
-// Î´³É½»²»ÔÚ¶ÓÁĞÖĞ
-#define X1_FTDC_SPD_PLACED                  8     
-// ¹ñÌ¨ÒÑ½ÓÊÕ£¬µ«ÉĞÎ´µ½½»Ò×Ëù
-#define X1_FTDC_SPD_TRIGGERED               10    
-// ¹ñÌ¨ÒÑ½ÓÊÕ£¬¹ñÌ¨ÄÚ²¿Ö±½Ó³·µ¥
-#define X1_FTDC_SPD_IN_CANCELED             11    
-// Î´´¥·¢   -- Ô¤Áô
-#define X1_FTDC_EXT_UNTRIGGER               13    
-// ²¿·Ö´¥·¢ -- Ô¤Áô
-#define X1_FTDC_EXT_PART_TRIGGER            14  
-// È«²¿´¥·¢ -- Ô¤Áô
-#define X1_FTDC_EXT_ALL_TRIGGER             15    
-// ÒÑ¾­³·µ¥ -- Ô¤Áô
-#define X1_FTDC_EXT_CANCELLED               16    
-// ±¨µ¥Ê§°Ü -- Ô¤Áô
-#define X1_FTDC_EXT_FAILED                  17    
-
+// å…¨éƒ¨æ’¤å•
+#define X1_FTDC_SPD_CANCELED 1
+// å…¨éƒ¨æˆäº¤
+#define X1_FTDC_SPD_FILLED 2
+// æœªæˆäº¤è¿˜åœ¨é˜Ÿåˆ—ä¸­
+#define X1_FTDC_SPD_IN_QUEUE 3
+// éƒ¨åˆ†æˆäº¤è¿˜åœ¨é˜Ÿåˆ—ä¸­
+#define X1_FTDC_SPD_PARTIAL 4
+// éƒ¨æˆéƒ¨æ’¤
+#define X1_FTDC_SPD_PARTIAL_CANCELED 5
+// æ’¤å•ä¸­
+#define X1_FTDC_SPD_IN_CANCELING 6
+// é”™è¯¯(åºŸå•é”™è¯¯)
+#define X1_FTDC_SPD_ERROR 7
+// æœªæˆäº¤ä¸åœ¨é˜Ÿåˆ—ä¸­
+#define X1_FTDC_SPD_PLACED 8
+// æŸœå°å·²æ¥æ”¶ï¼Œä½†å°šæœªåˆ°äº¤æ˜“æ‰€
+#define X1_FTDC_SPD_TRIGGERED 10
+// æŸœå°å·²æ¥æ”¶ï¼ŒæŸœå°å†…éƒ¨ç›´æ¥æ’¤å•
+#define X1_FTDC_SPD_IN_CANCELED 11
+// æœªè§¦å‘   -- é¢„ç•™
+#define X1_FTDC_EXT_UNTRIGGER 13
+// éƒ¨åˆ†è§¦å‘ -- é¢„ç•™
+#define X1_FTDC_EXT_PART_TRIGGER 14
+// å…¨éƒ¨è§¦å‘ -- é¢„ç•™
+#define X1_FTDC_EXT_ALL_TRIGGER 15
+// å·²ç»æ’¤å• -- é¢„ç•™
+#define X1_FTDC_EXT_CANCELLED 16
+// æŠ¥å•å¤±è´¥ -- é¢„ç•™
+#define X1_FTDC_EXT_FAILED 17
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcMatchIDType:³É½»±àºÅÊı¾İÀàĞÍ
+// TX1FtdcMatchIDType:æˆäº¤ç¼–å·æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcMatchIDType[32];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcDateType:Ê±¼äÊı¾İÀàĞÍ
+// TX1FtdcDateType:æ—¶é—´æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcDateType[13];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcMatchType:³É½»ÀàĞÍÊı¾İÀàĞÍ
-/////////////////////////////////////////////////////////////////////////  
+// TX1FtdcMatchType:æˆäº¤ç±»å‹æ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef long TX1FtdcMatchType;
-// ÆÕÍ¨³É½»
-#define X1_FTDC_BASIC_TRADE                 0     
+// æ™®é€šæˆäº¤
+#define X1_FTDC_BASIC_TRADE 0
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcSpeculatorType:Í¶±£ÀàĞÍ
-/////////////////////////////////////////////////////////////////////////  
+// TX1FtdcSpeculatorType:æŠ•ä¿ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcSpeculatorType;
-// Í¶»ú
-#define X1_FTDC_SPD_SPECULATOR              0 
-// Ì×±£    
-#define X1_FTDC_SPD_HEDGE                   1  
-// Ì×Àû   
-#define X1_FTDC_SPD_ARBITRAGE               2     
+// æŠ•æœº
+#define X1_FTDC_SPD_SPECULATOR 0
+// å¥—ä¿
+#define X1_FTDC_SPD_HEDGE 1
+// å¥—åˆ©
+#define X1_FTDC_SPD_ARBITRAGE 2
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcFeeType:ÊÖĞø·ÑÊı¾İÀàĞÍ
-/////////////////////////////////////////////////////////////////////////  
+// TX1FtdcFeeType:æ‰‹ç»­è´¹æ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef double TX1FtdcFeeType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcErrorIDType:´íÎóÊı¾İÀàĞÍ
-/////////////////////////////////////////////////////////////////////////  
+// TX1FtdcErrorIDType:é”™è¯¯æ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcErrorIDType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcErrorMsgInfoType:´íÎóĞÅÏ¢Êı¾İÀàĞÍ
-/////////////////////////////////////////////////////////////////////////    
+// TX1FtdcErrorMsgInfoType:é”™è¯¯ä¿¡æ¯æ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcErrorMsgInfoType[256];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcMsgInfoType:ÏûÏ¢ĞÅÏ¢Êı¾İÀàĞÍ
-///////////////////////////////////////////////////////////////////////// 
+// TX1FtdcMsgInfoType:æ¶ˆæ¯ä¿¡æ¯æ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcMsgInfoType[1024];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcEquityType:È¨ÒæÊı¾İÀàĞÍ
+// TX1FtdcEquityType:æƒç›Šæ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef double TX1FtdcEquityType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcProfitLossType:Ó¯¿÷Êı¾İÀàĞÍ
-/////////////////////////////////////////////////////////////////////////  
+// TX1FtdcProfitLossType:ç›ˆäºæ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef double TX1FtdcProfitLossType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcAccountLoginResultType:×Ê½ğÕË»§µÇÂ¼½á¹û
-/////////////////////////////////////////////////////////////////////////  
+// TX1FtdcAccountLoginResultType:èµ„é‡‘è´¦æˆ·ç™»å½•ç»“æœ
+/////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcAccountLoginResultType;
-// µÇÂ¼³É¹¦
-#define X1_FTDC_LOGIN_SUCCESS               0     
-// µÇÂ¼Ê§°Ü
-#define X1_FTDC_LOGIN_FAILED                1    
-// ÒÑÍË³ö 
-#define X1_FTDC_LOGIN_QUIT                  2     
-// Î´²Ù×÷
-#define X1_FTDC_LOGIN_NOT_OPERATE           9     
+// ç™»å½•æˆåŠŸ
+#define X1_FTDC_LOGIN_SUCCESS 0
+// ç™»å½•å¤±è´¥
+#define X1_FTDC_LOGIN_FAILED 1
+// å·²é€€å‡º
+#define X1_FTDC_LOGIN_QUIT 2
+// æœªæ“ä½œ
+#define X1_FTDC_LOGIN_NOT_OPERATE 9
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcSessionIDType:SessionIDÊı¾İÀàĞÍ
-/////////////////////////////////////////////////////////////////////////  
+// TX1FtdcSessionIDType:SessionIDæ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef long TX1FtdcSessionIDType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcAccountLogoutResultType:×Ê½ğÕÊºÅµÇ³ö½á¹û
-/////////////////////////////////////////////////////////////////////////  
+// TX1FtdcAccountLogoutResultType:èµ„é‡‘å¸å·ç™»å‡ºç»“æœ
+/////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcAccountLogoutResultType;
-// µÇ³ö³É¹¦
-#define X1_FTDC_LOGOUT_SUCCESS              0    
-// µÇ³öÊ§°Ü 
-#define X1_FTDC_LOGOUT_FAILED               1     
+// ç™»å‡ºæˆåŠŸ
+#define X1_FTDC_LOGOUT_SUCCESS 0
+// ç™»å‡ºå¤±è´¥
+#define X1_FTDC_LOGOUT_FAILED 1
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcResetPasswordType:ĞŞ¸ÄÃÜÂë½á¹ûÀàĞÍ
-/////////////////////////////////////////////////////////////////////////  
+// TX1FtdcResetPasswordType:ä¿®æ”¹å¯†ç ç»“æœç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcResetPasswordType;
-// ĞŞ¸ÄÃÜÂë³É¹¦
-#define X1_FTDC_RESET_PASSWORD_SUCCESS      0     
-// ĞŞ¸ÄÃÜÂëÊ§°Ü
-#define X1_FTDC_RESET_PASSWORD_FAILED       1     
+// ä¿®æ”¹å¯†ç æˆåŠŸ
+#define X1_FTDC_RESET_PASSWORD_SUCCESS 0
+// ä¿®æ”¹å¯†ç å¤±è´¥
+#define X1_FTDC_RESET_PASSWORD_FAILED 1
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcUserTypeType:ÓÃ»§ÀàĞÍ
-///////////////////////////////////////////////////////////////////////// 
+// TX1FtdcUserTypeType:ç”¨æˆ·ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcUserTypeType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcCounterIDType:¹ñÌ¨±àºÅÊı¾İÀàĞÍ
-///////////////////////////////////////////////////////////////////////// 
+// TX1FtdcCounterIDType:æŸœå°ç¼–å·æ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcCounterIDType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcRiskDegreeType:·çÏÕ¶ÈÊı¾İÀàĞÍ
-/////////////////////////////////////////////////////////////////////////     
+// TX1FtdcRiskDegreeType:é£é™©åº¦æ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef double TX1FtdcRiskDegreeType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcMilliSecType:Î¢ÃëÊı¾İÀàĞÍ
-/////////////////////////////////////////////////////////////////////////  
+// TX1FtdcMilliSecType:å¾®ç§’æ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcMilliSecType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcDeltaType:ĞéÊµ¶ÈÊı¾İÀàĞÍ
-///////////////////////////////////////////////////////////////////////// 
+// TX1FtdcDeltaType:è™šå®åº¦æ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef double TX1FtdcDeltaType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcVolumeType:ÊıÁ¿Êı¾İÀàĞÍ
-///////////////////////////////////////////////////////////////////////// 
+// TX1FtdcVolumeType:æ•°é‡æ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcVolumeType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcFrontIDType:Ç°ÖÃ»ú±àºÅÊı¾İÀàĞÍ
-/////////////////////////////////////////////////////////////////////////  
+// TX1FtdcFrontIDType:å‰ç½®æœºç¼–å·æ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcFrontIDType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcOfferPriceLimitType:±¨¼ÛÊı¾İÉÏÏŞÊı¾İÀàĞÍ
-/////////////////////////////////////////////////////////////////////////  
+// TX1FtdcOfferPriceLimitType:æŠ¥ä»·æ•°æ®ä¸Šé™æ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcOfferPriceLimitType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcOrderNumType:Î¯ÍĞºÅÊı¾İÀàĞÍ
+// TX1FtdcOrderNumType:å§”æ‰˜å·æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef short TX1FtdcOrderNumType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcRatioType:±ÈÂÊÊı¾İÀàĞÍ
-///////////////////////////////////////////////////////////////////////// 
+// TX1FtdcRatioType:æ¯”ç‡æ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef double TX1FtdcRatioType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcPremiumType:È¨Àû½ğ
+// TX1FtdcPremiumType:æƒåˆ©é‡‘
 /////////////////////////////////////////////////////////////////////////
 typedef double TX1FtdcPremiumType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcMarketValueType:ÆÚÈ¨ÊĞÖµ
+// TX1FtdcMarketValueType:æœŸæƒå¸‚å€¼
 /////////////////////////////////////////////////////////////////////////
 typedef double TX1FtdcMarketValueType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcTimeType:½»Ò×ËùÊ±¼ä
+// TX1FtdcTimeType:äº¤æ˜“æ‰€æ—¶é—´
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcTimeType[256];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcAbiPolicyCodeType:Ì×Àû²ßÂÔ´úÂëÊı¾İÀàĞÍ
-///////////////////////////////////////////////////////////////////////// 
+// TX1FtdcAbiPolicyCodeType:å¥—åˆ©ç­–ç•¥ä»£ç æ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcAbiPolicyCodeType[8];
-// ¿çÆÚÌ×Àû
-#define X1_FTDC_SP                        "SP"    
-// Á½ÍÈ¿çÆ·ÖÖÌ×Àû
-#define X1_FTDC_SP_SPC                    "SPC"   
-// Ñ¹Õ¥Ì×Àû
-#define X1_FTDC_SP_SPX                    "SPX"   
+// è·¨æœŸå¥—åˆ©
+#define X1_FTDC_SP "SP"
+// ä¸¤è…¿è·¨å“ç§å¥—åˆ©
+#define X1_FTDC_SP_SPC "SPC"
+// å‹æ¦¨å¥—åˆ©
+#define X1_FTDC_SP_SPX "SPX"
 // Call Spread
-#define X1_FTDC_SP_CALL                   "CSPR"  
+#define X1_FTDC_SP_CALL "CSPR"
 // Put Spread
-#define X1_FTDC_SP_PUT                    "PSPR"  
+#define X1_FTDC_SP_PUT "PSPR"
 // Combo
-#define X1_FTDC_SP_COMBO                  "COMBO" 
+#define X1_FTDC_SP_COMBO "COMBO"
 // Straddle
-#define X1_FTDC_SP_STRADDLE               "STD"   
+#define X1_FTDC_SP_STRADDLE "STD"
 // Strangle
-#define X1_FTDC_SP_STRANGLE               "STG"   
+#define X1_FTDC_SP_STRANGLE "STG"
 // Guts
-#define X1_FTDC_SP_GUTS                   "GUTS"  
+#define X1_FTDC_SP_GUTS "GUTS"
 // Synthetic Underlying
-#define X1_FTDC_SP_SYNUND                 "SYN"   
+#define X1_FTDC_SP_SYNUND "SYN"
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcOrderPropertyType:¶©µ¥ÊôĞÔ
-///////////////////////////////////////////////////////////////////////// 
+// TX1FtdcOrderPropertyType:è®¢å•å±æ€§
+/////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcOrderPropertyType;
-// ÎŞ¶©µ¥ÊôĞÔ
-#define X1_FTDC_SP_NON                     '0'    
-// FAKÉèÖÃ
-#define X1_FTDC_SP_FAK                     '1'    
-// FOKÉèÖÃ
-#define X1_FTDC_SP_FOK                     '2'    
-// ÊĞ¼ÛÈÎÒâ¼Û
-#define X1_FTDC_SP_ANYPRICE                '3'    
-// ÊĞ¼ÛÈÎÒâ¼Û×ªÏŞ¼Û
-#define X1_FTDC_SP_ANYPRICE_TO_MKORDER     '4'    
-// ÎåµµÊĞ¼Û
-#define X1_FTDC_SP_FIVELEVELPRICE          '5'    
-// ÎåµµÊĞ¼Û×ªÏŞ¼Û
-#define X1_FTDC_SP_FIVELEVELPRICE_TO_LIMIT '6'    
-// ×îÓÅ¼Û
-#define X1_FTDC_SP_BESTPRICE               '7'    
-// ×îÓÅ¼Û×ªÏŞ¼Û
-#define X1_FTDC_SP_BESTPRICE_TO_LIMIT      '8'    
+// æ— è®¢å•å±æ€§
+#define X1_FTDC_SP_NON '0'
+// FAKè®¾ç½®
+#define X1_FTDC_SP_FAK '1'
+// FOKè®¾ç½®
+#define X1_FTDC_SP_FOK '2'
+// å¸‚ä»·ä»»æ„ä»·
+#define X1_FTDC_SP_ANYPRICE '3'
+// å¸‚ä»·ä»»æ„ä»·è½¬é™ä»·
+#define X1_FTDC_SP_ANYPRICE_TO_MKORDER '4'
+// äº”æ¡£å¸‚ä»·
+#define X1_FTDC_SP_FIVELEVELPRICE '5'
+// äº”æ¡£å¸‚ä»·è½¬é™ä»·
+#define X1_FTDC_SP_FIVELEVELPRICE_TO_LIMIT '6'
+// æœ€ä¼˜ä»·
+#define X1_FTDC_SP_BESTPRICE '7'
+// æœ€ä¼˜ä»·è½¬é™ä»·
+#define X1_FTDC_SP_BESTPRICE_TO_LIMIT '8'
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcInsertType:Î¯ÍĞÀà±ğ
+// TX1FtdcInsertType:å§”æ‰˜ç±»åˆ«
 /////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcInsertType;
-// ÆÕÍ¨Î¯ÍĞµ¥  
-#define X1_FTDC_BASIC_ORDER               0x0001  
-// ×Ô¶¯µ¥
-#define X1_FTDC_AUTO_ORDER                0x0002  
+// æ™®é€šå§”æ‰˜å•
+#define X1_FTDC_BASIC_ORDER 0x0001
+// è‡ªåŠ¨å•
+#define X1_FTDC_AUTO_ORDER 0x0002
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcOptionTypeType:ÆÚÈ¨Àà±ğÊı¾İÀàĞÍ
+// TX1FtdcOptionTypeType:æœŸæƒç±»åˆ«æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcOptionTypeType;
-// ¿´ÕÇ
-#define X1_FTDC_OPT_CALL                   1   
-// ¿´µø   
-#define X1_FTDC_OPT_PUT                    2      
+// çœ‹æ¶¨
+#define X1_FTDC_OPT_CALL 1
+// çœ‹è·Œ
+#define X1_FTDC_OPT_PUT 2
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcInstrumentTypeType:ºÏÔ¼ÀàĞÍÊı¾İÀàĞÍ
+// TX1FtdcInstrumentTypeType:åˆçº¦ç±»å‹æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcInstrumentTypeType;
-// ÆÚ»õ
-#define X1FTDC_INSTRUMENT_TYPE_COMM        0 
-// ÆÚÈ¨     
-#define X1FTDC_INSTRUMENT_TYPE_OPT         1      
+// æœŸè´§
+#define X1FTDC_INSTRUMENT_TYPE_COMM 0
+// æœŸæƒ
+#define X1FTDC_INSTRUMENT_TYPE_OPT 1
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcCancelTypeType:³·Ïú±êÖ¾Êı¾İÀàĞÍ
+// TX1FtdcCancelTypeType:æ’¤é”€æ ‡å¿—æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcCancelTypeType;
-// ¶©µ¥
-#define X1_FTDC_ORDER_BOOK                'O'     
-// ³·Ïú
-#define X1_FTDC_ORDER_CANCEL              'W'     
+// è®¢å•
+#define X1_FTDC_ORDER_BOOK 'O'
+// æ’¤é”€
+#define X1_FTDC_ORDER_CANCEL 'W'
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcContentType:ÏûÏ¢ÕıÎÄÊı¾İÀàĞÍ
+// TX1FtdcContentType:æ¶ˆæ¯æ­£æ–‡æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcContentType[501];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcInstrumentStatusType:ºÏÔ¼½»Ò××´Ì¬Êı¾İÀàĞÍ
+// TX1FtdcInstrumentStatusType:åˆçº¦äº¤æ˜“çŠ¶æ€æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcInstrumentStatusType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcInstStatusEnterReasonType:½øÈë±¾×´Ì¬Ô­ÒòÊı¾İÀàĞÍ
-/////////////////////////////////////////////////////////////////////////   
+// TX1FtdcInstStatusEnterReasonType:è¿›å…¥æœ¬çŠ¶æ€åŸå› æ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef short TX1FtdcInstStatusEnterReasonType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcCurrencyType:±ÒÖÖÊı¾İÀàĞÍ
-/////////////////////////////////////////////////////////////////////////  
+// TX1FtdcCurrencyType:å¸ç§æ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcCurrencyType[4];
 
 typedef double TX1FtdcCurrencyUnitType;
 typedef double TX1FtdcExchangeRateType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcConfirmMarkType:È·ÈÏ±êÖ¾Êı¾İÀàĞÍ
-///////////////////////////////////////////////////////////////////////// 
+// TX1FtdcConfirmMarkType:ç¡®è®¤æ ‡å¿—æ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcConfirmMarkType;
-// È·ÈÏ
-#define X1_FTDC_CON_CONFIRM                2      
+// ç¡®è®¤
+#define X1_FTDC_CON_CONFIRM 2
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcStanAddrType:±¸ÓÃµØÖ·Êı¾İÀàĞÍ
-///////////////////////////////////////////////////////////////////////// 
+// TX1FtdcStanAddrType:å¤‡ç”¨åœ°å€æ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcStanAddrType[16];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcCapControlModeType:×Ê½ğ¿ØÖÆ·½Ê½Êı¾İÀàĞÍ
-///////////////////////////////////////////////////////////////////////// 
+// TX1FtdcCapControlModeType:èµ„é‡‘æ§åˆ¶æ–¹å¼æ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef long TX1FtdcCapControlModeType;
-// ¶¢ÊĞÓ¯¿÷¿ÉÓÃ 
-#define X1_FTDC_PPL_USABLE                 2   
-// Æ½²Ö×Ê½ğT+1¿ÉÓÃ   
-#define  X1_FTDC_OF_USABLEFUND             4       
-// Æ½²Ö±£Ö¤½ğ¿ÉÈ¡
-#define  X1_FTDC_OF_FETCHABLEMARGIN        8       
-// ±¾ÈÕÓ¯¿÷¿ÉÈ¡ 
-#define  X1_FTDC_AG_FETCHBLETODAY          16     
-// È¡ºóÈ¨Òæ´óÓÚ±¾ÈÕ×ÜÈë½ğ
-#define  X1_FTDC_INTEREST_                 32      
-// Æ½²ÖÓ¯¿÷¿ÉÈ¡
-#define  X1_FTDC_OF_FETCHABLE              128     
-// È¨Àû½ğÊÕÈë¿ÉÈ¡
-#define  X1_FTDC_PREMIUMOPTION_FETCHBLE    256     
+// ç›¯å¸‚ç›ˆäºå¯ç”¨
+#define X1_FTDC_PPL_USABLE 2
+// å¹³ä»“èµ„é‡‘T+1å¯ç”¨
+#define X1_FTDC_OF_USABLEFUND 4
+// å¹³ä»“ä¿è¯é‡‘å¯å–
+#define X1_FTDC_OF_FETCHABLEMARGIN 8
+// æœ¬æ—¥ç›ˆäºå¯å–
+#define X1_FTDC_AG_FETCHBLETODAY 16
+// å–åæƒç›Šå¤§äºæœ¬æ—¥æ€»å…¥é‡‘
+#define X1_FTDC_INTEREST_ 32
+// å¹³ä»“ç›ˆäºå¯å–
+#define X1_FTDC_OF_FETCHABLE 128
+// æƒåˆ©é‡‘æ”¶å…¥å¯å–
+#define X1_FTDC_PREMIUMOPTION_FETCHBLE 256
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcArchRatioType:×ª´æ±ÈÀıÊı¾İÀàĞÍ
+// TX1FtdcArchRatioType:è½¬å­˜æ¯”ä¾‹æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef double TX1FtdcArchRatioType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcSettlementBillTradeType:»ã×Ü±êÖ¾Êı¾İÀàĞÍ
+// TX1FtdcSettlementBillTradeType:æ±‡æ€»æ ‡å¿—æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcSettlementBillTradeType;
-// »ã×Ü³É½»Ã÷Ï¸
-#define X1_FTDC_MATCHDETAIL                2    
-// »ã×Ü³Ö²ÖÓ¯¿÷  
-#define X1_FTDC_OPGAL                      4      
-// »ã×ÜÆ½²ÖÓ¯¿÷
-#define X1_FTDC_OFGAL                      8      
+// æ±‡æ€»æˆäº¤æ˜ç»†
+#define X1_FTDC_MATCHDETAIL 2
+// æ±‡æ€»æŒä»“ç›ˆäº
+#define X1_FTDC_OPGAL 4
+// æ±‡æ€»å¹³ä»“ç›ˆäº
+#define X1_FTDC_OFGAL 8
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcFilesFlagType:µµ°¸ÀàĞÍÊı¾İÀàĞÍ
+// TX1FtdcFilesFlagType:æ¡£æ¡ˆç±»å‹æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcFilesFlagType;
-// ³É½»Ã÷Ï¸´òÓ¡
-#define X1_FTDC_PRINT_MATCHDETAIL          4     
-// ³Ö²ÖÓ¯¿÷´òÓ¡ 
-#define X1_FTDC_PRINT_OPGAL                8       
-// Æ½²ÖÓ¯¿÷´òÓ¡
-#define X1_FTDC_PRINT_OFGAL                16      
-// ×Ê½ğ³öÈë´òÓ¡
-#define X1_FTDC_PRINT_ACCESSFUNDS          32     
-// ×·±£ÉùÃ÷´òÓ¡
-#define X1_FTDC_PRINT_ADDMARGIN            64     
+// æˆäº¤æ˜ç»†æ‰“å°
+#define X1_FTDC_PRINT_MATCHDETAIL 4
+// æŒä»“ç›ˆäºæ‰“å°
+#define X1_FTDC_PRINT_OPGAL 8
+// å¹³ä»“ç›ˆäºæ‰“å°
+#define X1_FTDC_PRINT_OFGAL 16
+// èµ„é‡‘å‡ºå…¥æ‰“å°
+#define X1_FTDC_PRINT_ACCESSFUNDS 32
+// è¿½ä¿å£°æ˜æ‰“å°
+#define X1_FTDC_PRINT_ADDMARGIN 64
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcSoftwareVendorIDType:Èí¼ş¹©Ó¦ÉÌ±àºÅÊı¾İÀàĞÍ
+// TX1FtdcSoftwareVendorIDType:è½¯ä»¶ä¾›åº”å•†ç¼–å·æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcSoftwareVendorIDType[33];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcProductOnlineCountType:²úÆ·ÔÚÏßÊıÁ¿Êı¾İÀàĞÍ
+// TX1FtdcProductOnlineCountType:äº§å“åœ¨çº¿æ•°é‡æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef long TX1FtdcProductOnlineCountType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcBrokerInfoType:ÆÚ»õ¹«Ë¾Ãû³ÆÊı¾İÀàĞÍ
+// TX1FtdcBrokerInfoType:æœŸè´§å…¬å¸åç§°æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcBrokerInfoType[20];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcProductIDType:²úÆ·±àºÅÊı¾İÀàĞÍ
+// TX1FtdcProductIDType:äº§å“ç¼–å·æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcProductIDType[33];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcRequestIDType:ÇëÇóIDÊı¾İÀàĞÍ
+// TX1FtdcRequestIDType:è¯·æ±‚IDæ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef long TX1FtdcRequestIDType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcCustomCategoryType:×Ô¶¨ÒåÀà±ğÊı¾İÀàĞÍ
+// TX1FtdcCustomCategoryType:è‡ªå®šä¹‰ç±»åˆ«æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcCustomCategoryType[32];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcReservedType:Ô¤Áô×Ö¶ÎÊı¾İÀàĞÍ
+// TX1FtdcReservedType:é¢„ç•™å­—æ®µæ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
-typedef int  TX1FtdcReservedType;
+typedef int TX1FtdcReservedType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcNoticeType:ÏûÏ¢Êı¾İÀàĞÍ
+// TX1FtdcNoticeType:æ¶ˆæ¯æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef short TX1FtdcNoticeType;
-// ÏµÍ³¹ã²¥
-#define X1_FTDC_SYS_BROADCAST_MSG          1
-// Ö¸¶¨¿Í»§     
-#define X1_FTDC_ACCOUNT_ID_MSG             2      
+// ç³»ç»Ÿå¹¿æ’­
+#define X1_FTDC_SYS_BROADCAST_MSG 1
+// æŒ‡å®šå®¢æˆ·
+#define X1_FTDC_ACCOUNT_ID_MSG 2
 
-///////////////////////////////////////////////////////////////////////// 
-// TX1FtdcTradingSegmentSNType:½»Ò×½×¶Î±àºÅÊı¾İÀàĞÍ
-///////////////////////////////////////////////////////////////////////// 
+/////////////////////////////////////////////////////////////////////////
+// TX1FtdcTradingSegmentSNType:äº¤æ˜“é˜¶æ®µç¼–å·æ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcTradingSegmentSNType;
 
-
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcExtOrderType:Ëã·¨µ¥ÀàĞÍÊı¾İÀàĞÍ
+// TX1FtdcExtOrderType:ç®—æ³•å•ç±»å‹æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcExtOrderType;
-// ĞĞÇé´¥·¢µ¥
-#define X1_FTDC_PRICESTRIGGER              1
-// ³É½»´¥·¢µ¥
-#define X1_FTDC_MATCHTRIGGER               2
-// Ö¹ËğÖ¹Ó¯µ¥
-#define X1_FTDC_PROFITLOSS                 3
-// Ì×Àû´¥·¢
-#define X1_FTDC_ARBITRAGE                  4
-// ĞĞÇé´¥·¢ĞŞ¸Ä
-#define X1_FTDC_PRICESTRIGGER_MODIFY       6
-// ³É½»´¥·¢ĞŞ¸Ä
-#define X1_FTDC_MATCHTRIGGER_MODIFY        7
-// Ö¹ËğÖ¹Ó¯´¥·¢ĞŞ¸Ä
-#define X1_FTDC_PROFITLOSS_MODIFY          8
-// ×éºÏ´¥·¢ĞŞ¸Ä
-#define X1_FTDC_ARBITRAGE_MODIFY           9
-// Ô¤Âñµ¥
-#define X1_FTDC_YMORDER                    1
-// Ìõ¼şµ¥
-#define X1_FTDC_TJORDER                    2
-// ¿çÆÚÌ×Àû¶©µ¥
-#define X1_FTDC_KQTLDD                     3
-// ¿çÆ·ÖÖÌ×Àû¶©µ¥
-#define X1_FTDC_KPZTLDD                    4
-// µûÊ½Ì×Àû¶©µ¥
-#define X1_FTDC_DSTLDD                     5
-// ×Ô¶¨ÒåÌ×Àû¶©µ¥(Ôİ²»Ö§³Ö)
-#define X1_FTDC_ZDYTLDD                    6
+// è¡Œæƒ…è§¦å‘å•
+#define X1_FTDC_PRICESTRIGGER 1
+// æˆäº¤è§¦å‘å•
+#define X1_FTDC_MATCHTRIGGER 2
+// æ­¢æŸæ­¢ç›ˆå•
+#define X1_FTDC_PROFITLOSS 3
+// å¥—åˆ©è§¦å‘
+#define X1_FTDC_ARBITRAGE 4
+// è¡Œæƒ…è§¦å‘ä¿®æ”¹
+#define X1_FTDC_PRICESTRIGGER_MODIFY 6
+// æˆäº¤è§¦å‘ä¿®æ”¹
+#define X1_FTDC_MATCHTRIGGER_MODIFY 7
+// æ­¢æŸæ­¢ç›ˆè§¦å‘ä¿®æ”¹
+#define X1_FTDC_PROFITLOSS_MODIFY 8
+// ç»„åˆè§¦å‘ä¿®æ”¹
+#define X1_FTDC_ARBITRAGE_MODIFY 9
+// é¢„åŸ‹å•
+#define X1_FTDC_YMORDER 1
+// æ¡ä»¶å•
+#define X1_FTDC_TJORDER 2
+// è·¨æœŸå¥—åˆ©è®¢å•
+#define X1_FTDC_KQTLDD 3
+// è·¨å“ç§å¥—åˆ©è®¢å•
+#define X1_FTDC_KPZTLDD 4
+// è¶å¼å¥—åˆ©è®¢å•
+#define X1_FTDC_DSTLDD 5
+// è‡ªå®šä¹‰å¥—åˆ©è®¢å•(æš‚ä¸æ”¯æŒ)
+#define X1_FTDC_ZDYTLDD 6
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcTriggerTime:´¥·¢Ê±¼äÊı¾İÀàĞÍ
+// TX1FtdcTriggerTime:è§¦å‘æ—¶é—´æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcTriggerTime[10];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcPriceReference:¼Û¸ñ²ÎÕÕÊı¾İÀàĞÍ
+// TX1FtdcPriceReference:ä»·æ ¼å‚ç…§æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcPriceReference;
-// ²ÎÕÕ×îĞÂ¼Û
-#define X1_FTDC_REF_LASTPRICE             0
-// ²ÎÕÕÂòÒ»¼Û
-#define X1_FTDC_REF_BIDPRICE              1
-// ²ÎÕÕÂô³ö¼Û
-#define X1_FTDC_REF_ASKPRICE              2
+// å‚ç…§æœ€æ–°ä»·
+#define X1_FTDC_REF_LASTPRICE 0
+// å‚ç…§ä¹°ä¸€ä»·
+#define X1_FTDC_REF_BIDPRICE 1
+// å‚ç…§å–å‡ºä»·
+#define X1_FTDC_REF_ASKPRICE 2
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcCompareFlag:±È½Ï±êÖ¾Êı¾İÀàĞÍ
+// TX1FtdcCompareFlag:æ¯”è¾ƒæ ‡å¿—æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcCompareFlag;
-// ´óÓÚ
-#define X1_FTDC_CF_GREATER                0
-// ´óÓÚµÈÓÚ
-#define X1_FTDC_CF_NOTLESS                1
-// Ğ¡ÓÚ
-#define X1_FTDC_CF_LESS                   2
-// Ğ¡ÓÚµÈÓÚ
-#define X1_FTDC_CF_NOTGREATER             3
+// å¤§äº
+#define X1_FTDC_CF_GREATER 0
+// å¤§äºç­‰äº
+#define X1_FTDC_CF_NOTLESS 1
+// å°äº
+#define X1_FTDC_CF_LESS 2
+// å°äºç­‰äº
+#define X1_FTDC_CF_NOTGREATER 3
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcOvernightFlag:¸ôÒ¹±êÖ¾Êı¾İÀàĞÍ
+// TX1FtdcOvernightFlag:éš”å¤œæ ‡å¿—æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcOvernightFlag;
-// ¸ôÒ¹
-#define X1_FTDC_OVERNIGHT                 1
-// ²»¸ôÒ¹
-#define X1_FTDC_NOT_OVERNIGHT             2
+// éš”å¤œ
+#define X1_FTDC_OVERNIGHT 1
+// ä¸éš”å¤œ
+#define X1_FTDC_NOT_OVERNIGHT 2
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcArbitragePrice:Ì×Àû¼Û¸ñÊı¾İÀàĞÍ
+// TX1FtdcArbitragePrice:å¥—åˆ©ä»·æ ¼æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef double TX1FtdcArbitragePrice;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcExtTriggerCond:´¥·¢Ìõ¼şÊı¾İÀàĞÍ
+// TX1FtdcExtTriggerCond:è§¦å‘æ¡ä»¶æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcExtTriggerCond;
-// ¼Û¸ñ´¥·¢
-#define X1_FTDC_TRIGGER_PRICE             0
-// Ê±¼ä´¥·¢
-#define X1_FTDC_TRIGGER_TIME              1
+// ä»·æ ¼è§¦å‘
+#define X1_FTDC_TRIGGER_PRICE 0
+// æ—¶é—´è§¦å‘
+#define X1_FTDC_TRIGGER_TIME 1
 
-///////////////////////////////////////////////////////////////////////// 
-// TX1FtdcInstrumentMaturityType:ºÏÔ¼×îºó½»Ò×ÈÕ
-///////////////////////////////////////////////////////////////////////// 
+/////////////////////////////////////////////////////////////////////////
+// TX1FtdcInstrumentMaturityType:åˆçº¦æœ€åäº¤æ˜“æ—¥
+/////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcInstrumentMaturityType[12];
 
-///////////////////////////////////////////////////////////////////////// 
-// TX1FtdcInstrumenExpirationDateType:ºÏÔ¼µ½ÆÚÈÕ
-///////////////////////////////////////////////////////////////////////// 
+/////////////////////////////////////////////////////////////////////////
+// TX1FtdcInstrumenExpirationDateType:åˆçº¦åˆ°æœŸæ—¥
+/////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcInstrumenExpirationDateType[12];
 
-///////////////////////////////////////////////////////////////////////// 
-// TX1FtdcAdjustmentInfoType:×éºÏ»ò¶ÔËøµÄ±£Ö¤½ğµ÷ÕûĞÅÏ¢
-// ¸ñÊ½:[ºÏÔ¼´úÂë,ÂòÂô±êÖ¾,Í¶×ÊÀà±ğ,µ÷Õû½ğ¶î;]
-///////////////////////////////////////////////////////////////////////// 
+/////////////////////////////////////////////////////////////////////////
+// TX1FtdcAdjustmentInfoType:ç»„åˆæˆ–å¯¹é”çš„ä¿è¯é‡‘è°ƒæ•´ä¿¡æ¯
+// æ ¼å¼:[åˆçº¦ä»£ç ,ä¹°å–æ ‡å¿—,æŠ•èµ„ç±»åˆ«,è°ƒæ•´é‡‘é¢;]
+/////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcAdjustmentInfoType[64];
 
-///////////////////////////////////////////////////////////////////////// 
-// TX1FtdcQuoteIDType:Ñ¯¼Û±àºÅ
-///////////////////////////////////////////////////////////////////////// 
+/////////////////////////////////////////////////////////////////////////
+// TX1FtdcQuoteIDType:è¯¢ä»·ç¼–å·
+/////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcQuoteIDType[33];
 
-///////////////////////////////////////////////////////////////////////// 
-// TX1FtdcSourceType:À´Ô´
-///////////////////////////////////////////////////////////////////////// 
+/////////////////////////////////////////////////////////////////////////
+// TX1FtdcSourceType:æ¥æº
+/////////////////////////////////////////////////////////////////////////
 typedef short TX1FtdcSourceType;
-// »áÔ±
-#define X1_FTDC_SOURCE_MEMBER             0
-// ½»Ò×Ëù
-#define X1_FTDC_SOURCE_EXCHANGE           1
+// ä¼šå‘˜
+#define X1_FTDC_SOURCE_MEMBER 0
+// äº¤æ˜“æ‰€
+#define X1_FTDC_SOURCE_EXCHANGE 1
 
-///////////////////////////////////////////////////////////////////////// 
-// TX1FtdcSeatCodeType:Ï¯Î»´úÂë
-///////////////////////////////////////////////////////////////////////// 
+/////////////////////////////////////////////////////////////////////////
+// TX1FtdcSeatCodeType:å¸­ä½ä»£ç 
+/////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcSeatCodeType[33];
 
-///////////////////////////////////////////////////////////////////////// 
-// TX1FtdcCloseIDType:Æ½²ÖÖ´ĞĞµ¥ºÅ
-///////////////////////////////////////////////////////////////////////// 
+/////////////////////////////////////////////////////////////////////////
+// TX1FtdcCloseIDType:å¹³ä»“æ‰§è¡Œå•å·
+/////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcCloseIDType[33];
 
-///////////////////////////////////////////////////////////////////////// 
-// TX1FtdcEntrusTellerType:Î¯ÍĞ¹ñÔ±
-///////////////////////////////////////////////////////////////////////// 
+/////////////////////////////////////////////////////////////////////////
+// TX1FtdcEntrusTellerType:å§”æ‰˜æŸœå‘˜
+/////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcEntrusTellerType[41];
 
-///////////////////////////////////////////////////////////////////////// 
-// TX1FtdcStayTimeType£ºÍ£ÁôÊ±¼äÊı¾İÀàĞÍ
-///////////////////////////////////////////////////////////////////////// 
+/////////////////////////////////////////////////////////////////////////
+// TX1FtdcStayTimeTypeï¼šåœç•™æ—¶é—´æ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcStayTimeType;
 
-///////////////////////////////////////////////////////////////////////// 
-// TX1FtdcComputeModeType£º¼ÆËã·½Ê½Êı¾İÀàĞÍ
-///////////////////////////////////////////////////////////////////////// 
+/////////////////////////////////////////////////////////////////////////
+// TX1FtdcComputeModeTypeï¼šè®¡ç®—æ–¹å¼æ•°æ®ç±»å‹
+/////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcComputeModeType;
-// ¾ø¶ÔÊıÖµ¼ÆËã
-#define X1_FTDC_ABSOLUTE_VALUE_COMPUTE        0
-// ½»Ò×Ëù±£Ö¤½ğ±ê×¼»ù´¡ÉÏ¸¡¶¯
-#define X1_FTDC_EXCHANGE_MARGIN_BASIS_FLOAT   1 
-// ½»Ò×Ëù±£Ö¤½ğ½á¹û»ù´¡ÉÏ¸¡¶¯
-#define X1_FTDC_EXCHANGE_MARGIN_RESULT_FLOAT  2
-// ÆÚ»õ±£Ö¤½ğ±ê×¼»ù´¡ÉÏ¸¡¶¯
-#define X1_FTDC_FUTURES_MARGIN_BASIS_FLOAT    3
+// ç»å¯¹æ•°å€¼è®¡ç®—
+#define X1_FTDC_ABSOLUTE_VALUE_COMPUTE 0
+// äº¤æ˜“æ‰€ä¿è¯é‡‘æ ‡å‡†åŸºç¡€ä¸Šæµ®åŠ¨
+#define X1_FTDC_EXCHANGE_MARGIN_BASIS_FLOAT 1
+// äº¤æ˜“æ‰€ä¿è¯é‡‘ç»“æœåŸºç¡€ä¸Šæµ®åŠ¨
+#define X1_FTDC_EXCHANGE_MARGIN_RESULT_FLOAT 2
+// æœŸè´§ä¿è¯é‡‘æ ‡å‡†åŸºç¡€ä¸Šæµ®åŠ¨
+#define X1_FTDC_FUTURES_MARGIN_BASIS_FLOAT 3
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcPriceNoteType:ÆÚÈ¨±£Ö¤½ğ¼ÆËã·½Ê½
+// TX1FtdcPriceNoteType:æœŸæƒä¿è¯é‡‘è®¡ç®—æ–¹å¼
 /////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcPriceNoteType;
-// °´ÕÕ×ò½áËã¼Û¼ÆËã
-#define X1_FTDC_CALC_BY_PRESETTLEMENT        1
-// °´ÕÕ×îĞÂ¼Û¼ÆËã
-#define X1_FTDC_CALC_BY_LASTPRICE            2
+// æŒ‰ç…§æ˜¨ç»“ç®—ä»·è®¡ç®—
+#define X1_FTDC_CALC_BY_PRESETTLEMENT 1
+// æŒ‰ç…§æœ€æ–°ä»·è®¡ç®—
+#define X1_FTDC_CALC_BY_LASTPRICE 2
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcLargeMarginDirectType:´ó±ß±£Ö¤½ğ·½ÏòÊı¾İÀàĞÍ
+// TX1FtdcLargeMarginDirectType:å¤§è¾¹ä¿è¯é‡‘æ–¹å‘æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcLargeMarginDirectType[128];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcBankIDType:ÒøĞĞ´úÂëÀàĞÍ
+// TX1FtdcBankIDType:é“¶è¡Œä»£ç ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcBankIDType[8];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcBankNameType:ÒøĞĞÃû³ÆÀàĞÍ
+// TX1FtdcBankNameType:é“¶è¡Œåç§°ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcBankNameType[101];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcBankSerialType:ÒøĞĞÁ÷Ë®ºÅÀàĞÍ
+// TX1FtdcBankSerialType:é“¶è¡Œæµæ°´å·ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcBankSerialType[13];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcSerialType:Á÷Ë®ºÅÀàĞÍ
+// TX1FtdcSerialType:æµæ°´å·ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcSerialType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcBankAccountType:ÒøĞĞÕË»§ÀàĞÍ
+// TX1FtdcBankAccountType:é“¶è¡Œè´¦æˆ·ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcBankAccountType[41];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcFutureSerialType:ÆÚ»õ¹«Ë¾Á÷Ë®ºÅÀàĞÍ
+// TX1FtdcFutureSerialType:æœŸè´§å…¬å¸æµæ°´å·ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcFutureSerialType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcDigestType:ÕªÒªÀàĞÍ
+// TX1FtdcDigestType:æ‘˜è¦ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcDigestType[36];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcBankAccTypeTypeÊÇÒ»¸öÒøĞĞÕÊºÅÀàĞÍÀàĞÍ
+// TX1FtdcBankAccTypeTypeæ˜¯ä¸€ä¸ªé“¶è¡Œå¸å·ç±»å‹ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcBankAccTypeType;
-// ÒøĞĞ´æÕÛ
-#define X1_FTDC_BAT_BankBook               '1'
-// ´¢Ğî¿¨
-#define X1_FTDC_BAT_SavingCard             '2'
-// ĞÅÓÃ¿¨
-#define X1_FTDC_BAT_CreditCard             '3'
-
+// é“¶è¡Œå­˜æŠ˜
+#define X1_FTDC_BAT_BankBook '1'
+// å‚¨è“„å¡
+#define X1_FTDC_BAT_SavingCard '2'
+// ä¿¡ç”¨å¡
+#define X1_FTDC_BAT_CreditCard '3'
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcTransferStatusType:×ªÕË½»Ò××´Ì¬ÀàĞÍ
+// TX1FtdcTransferStatusType:è½¬è´¦äº¤æ˜“çŠ¶æ€ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcTransferStatusType;
-// Õı³£
-#define X1_FTDC_TRFS_Normal                '0'
-// ±»³åÕı
-#define X1_FTDC_TRFS_Repealed              '1'
-
+// æ­£å¸¸
+#define X1_FTDC_TRFS_Normal '0'
+// è¢«å†²æ­£
+#define X1_FTDC_TRFS_Repealed '1'
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcTransferType:ÒøÆÚ×ªÕËÒµÎñÀàĞÍ
+// TX1FtdcTransferType:é“¶æœŸè½¬è´¦ä¸šåŠ¡ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcTransferType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcTransferType:ÒøÆÚ×ªÕË´¦Àí½á¹ûÀàĞÍ
+// TX1FtdcTransferType:é“¶æœŸè½¬è´¦å¤„ç†ç»“æœç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcProcResultType;
-// ³É¹¦
-#define X1_FTDC_PROC_SUCCESS               0
-// Ê§°Ü
-#define X1_FTDC_PROC_FAIL                  1
-// µÈ´ı»ØÖ´
-#define X1_FTDC_PROC_WAIT_RTN              2
-
+// æˆåŠŸ
+#define X1_FTDC_PROC_SUCCESS 0
+// å¤±è´¥
+#define X1_FTDC_PROC_FAIL 1
+// ç­‰å¾…å›æ‰§
+#define X1_FTDC_PROC_WAIT_RTN 2
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcApplyNumberType:ÒøÆÚ×ªÕËÉêÇëºÅÀàĞÍ
+// TX1FtdcApplyNumberType:é“¶æœŸè½¬è´¦ç”³è¯·å·ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcApplyNumberType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcImpliedVolatilityType:Òşº¬²¨¶¯ÂÊÀàĞÍ
+// TX1FtdcImpliedVolatilityType:éšå«æ³¢åŠ¨ç‡ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef double TX1FtdcImpliedVolatilityType;
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcOptionComputationType:ÆÚÈ¨¼ÆËãÊı¾İÀàĞÍ
+// TX1FtdcOptionComputationType:æœŸæƒè®¡ç®—æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef double TX1FtdcOptionComputationType;
 
-///////////////////////////////////////////////////////////////////////// 
-// TX1FtdcFunctionIDType:ĞĞÇéÀ©Õ¹¹¦ÄÜºÅ
-///////////////////////////////////////////////////////////////////////// 
+/////////////////////////////////////////////////////////////////////////
+// TX1FtdcFunctionIDType:è¡Œæƒ…æ‰©å±•åŠŸèƒ½å·
+/////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcFunctionIDType[16];
 
-///////////////////////////////////////////////////////////////////////// 
-// TX1FtdcExtMarketDataType:ĞĞÇéÀ©Õ¹¹¦ÄÜºÅ
-///////////////////////////////////////////////////////////////////////// 
+/////////////////////////////////////////////////////////////////////////
+// TX1FtdcExtMarketDataType:è¡Œæƒ…æ‰©å±•åŠŸèƒ½å·
+/////////////////////////////////////////////////////////////////////////
 typedef char TX1FtdcExtMarketDataType[128];
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcExchangeStatusType:½»Ò×Ëù×´Ì¬Êı¾İÀàĞÍ
+// TX1FtdcExchangeStatusType:äº¤æ˜“æ‰€çŠ¶æ€æ•°æ®ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcExchangeStatusType;
-// ¿ªÅÌÇ°
-#define X1_FTDC_IS_BEFORETRADING           0
-// ·Ç½»Ò×
-#define X1_FTDC_IS_NOTRADING               1
-// Á¬Ğø½»Ò×
-#define X1_FTDC_IS_CONTINOUS               2
-// ¼¯ºÏ¾º¼Û±¨µ¥
-#define X1_FTDC_IS_AUCTIONORDERING         3
-// ¼¯ºÏ¾º¼Û¼Û¸ñÆ½ºâ
-#define X1_FTDC_IS_AUCTIONBALANCE          4
-// ¼¯ºÏ¾º¼Û´éºÏ
-#define X1_FTDC_IS_AUCTIONMATCH            5
-// ÊÕÅÌ
-#define X1_FTDC_IS_CLOSED                  6
-
+// å¼€ç›˜å‰
+#define X1_FTDC_IS_BEFORETRADING 0
+// éäº¤æ˜“
+#define X1_FTDC_IS_NOTRADING 1
+// è¿ç»­äº¤æ˜“
+#define X1_FTDC_IS_CONTINOUS 2
+// é›†åˆç«ä»·æŠ¥å•
+#define X1_FTDC_IS_AUCTIONORDERING 3
+// é›†åˆç«ä»·ä»·æ ¼å¹³è¡¡
+#define X1_FTDC_IS_AUCTIONBALANCE 4
+// é›†åˆç«ä»·æ’®åˆ
+#define X1_FTDC_IS_AUCTIONMATCH 5
+// æ”¶ç›˜
+#define X1_FTDC_IS_CLOSED 6
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcPositionDateType:³Ö²ÖÈÕÆÚÀàĞÍ
+// TX1FtdcPositionDateType:æŒä»“æ—¥æœŸç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcPositionDateType;
-//½ñ²Ö
-#define X1_FTDC_PSD_TODAY                  1
-//ÀúÊ·²Ö
-#define X1_FTDC_PSD_HISTORY                2
-
+//ä»Šä»“
+#define X1_FTDC_PSD_TODAY 1
+//å†å²ä»“
+#define X1_FTDC_PSD_HISTORY 2
 
 /////////////////////////////////////////////////////////////////////////
-// TX1FtdcX1PriFlowIDType:Ë½ÓĞÁ÷±àºÅÀàĞÍ
+// TX1FtdcX1PriFlowIDType:ç§æœ‰æµç¼–å·ç±»å‹
 /////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcX1PriFlowIDType;
-// Ö»´«ËÍµÇÂ¼ºóË½ÓĞÁ÷µÄÄÚÈİ
-#define X1_PrivateFlow_Req_Quick          0    
-// ´Ó±¾½»Ò×ÈÕ¿ªÊ¼ÖØ´«
-#define X1_PrivateFlow_Req_Restart        1    
-// ´ÓÉÏ´ÎÊÕµ½µÄĞø´«
-#define X1_PrivateFlow_Req_Resume         2
-// ´ÓÖ¸¶¨±àºÅ¿ªÊ¼Ğø´«    
-#define X1_PrivateFlow_Req_Specify        3    
+// åªä¼ é€ç™»å½•åç§æœ‰æµçš„å†…å®¹
+#define X1_PrivateFlow_Req_Quick 0
+// ä»æœ¬äº¤æ˜“æ—¥å¼€å§‹é‡ä¼ 
+#define X1_PrivateFlow_Req_Restart 1
+// ä»ä¸Šæ¬¡æ”¶åˆ°çš„ç»­ä¼ 
+#define X1_PrivateFlow_Req_Resume 2
+// ä»æŒ‡å®šç¼–å·å¼€å§‹ç»­ä¼ 
+#define X1_PrivateFlow_Req_Specify 3
 
-///////////////////////////////////////////////////////////////////////// 
-// DFITCCalculateMode:¶³½á×Ê½ğ¼ÆËã·½Ê½
-///////////////////////////////////////////////////////////////////////// 
+/////////////////////////////////////////////////////////////////////////
+// DFITCCalculateMode:å†»ç»“èµ„é‡‘è®¡ç®—æ–¹å¼
+/////////////////////////////////////////////////////////////////////////
 typedef int TX1FtdcCalculateMode;
-// ÕÇÍ£°å¼Û¸ñ
-#define X1_CAlCULATEMODE_UPPPERLIMITPRICE 1 
-// µøÍ£°å¼Û¸ñ   
-#define X1_CAlCULATEMODE_LOWERLIMITPRICE  2 
-// Ö¸¶¨¼Û¸ñ   
-#define X1_CAlCULATEMODE_SPECIFIEDPRICE   3    
+// æ¶¨åœæ¿ä»·æ ¼
+#define X1_CAlCULATEMODE_UPPPERLIMITPRICE 1
+// è·Œåœæ¿ä»·æ ¼
+#define X1_CAlCULATEMODE_LOWERLIMITPRICE 2
+// æŒ‡å®šä»·æ ¼
+#define X1_CAlCULATEMODE_SPECIFIEDPRICE 3
 
-#endif//X1FTDCAPIDATATYPE_H
+#endif  // X1FTDCAPIDATATYPE_H

@@ -1,0 +1,20 @@
+
+import lmice
+
+
+import time
+t1=time.time()
+
+
+s=lmice.ChinaL1Source()
+s.inst_filter.m_inst = "cu1706"
+s.load("/Users/hehao/work/shif/package_2017-05-23__13-20-01_guava2.cap")
+
+
+t2=time.time()
+
+
+print "total size:", s.msg_size, "total time=", t2-t1
+
+window.Clear()
+window.DrawSeries(s, 100)

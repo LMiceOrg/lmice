@@ -1,11 +1,12 @@
+
 /**
-* Copyright (C) 2015-2017, ´óÁ¬·É´´ĞÅÏ¢¼¼ÊõÓĞÏŞ¹«Ë¾
-* @file <X1FtdcApiStruct.h>
-* @brief <¶¨Òå½Ó¿ÚËùĞèµÄÊı¾İ½Ó¿Ú>
-* @version <1.5.1.2>
-* @author <X1ÏîÄ¿×é>
-* @date <2017Äê8ÔÂ16ÈÕ>
-*/
+ * Copyright (C) 2015-2017, å¤§è¿é£åˆ›ä¿¡æ¯æŠ€æœ¯æœ‰é™å…¬å¸
+ * @file <X1FtdcApiStruct.h>
+ * @brief <å®šä¹‰æ¥å£æ‰€éœ€çš„æ•°æ®æ¥å£>
+ * @version <1.5.1.2>
+ * @author <X1é¡¹ç›®ç»„>
+ * @date <2017å¹´8æœˆ16æ—¥>
+ */
 
 #ifndef X1FTDCAPISTRUCT_H_
 #define X1FTDCAPISTRUCT_H_
@@ -14,914 +15,939 @@
 
 #define APISTRUCT
 
-///ĞÄÌø°ü
+///å¿ƒè·³åŒ…
 struct APISTRUCT CX1FtdcTimeOutField {
-    TX1FtdcRequestIDType                  lRequestID;                   // ÇëÇóID
+  TX1FtdcRequestIDType lRequestID;  // è¯·æ±‚ID
 };
 
 /**
-* <table border="3">
-*      <tr> <th>Ãû³Æ</th>                        <th>ÀàĞÍ</th>                     <th>ÃèÊö</th>                                      <th>ÊÇ·ñ±ØÌî</th>               <th>È¡Öµ·¶Î§ËµÃ÷</th></tr>
-*      <tr> <td>AccountID</td>                   <td>TX1FtdcAccountIDType</td>     <td>×Ê½ğÕË»§ID</td>                                <td>M</td>                      <td></td> </tr>
-*      <tr> <td>LocalOrderID</td>                <td>TX1FtdcLocalOrderIDType</td>  <td>±¾µØÎ¯ÍĞºÅ</td>                                <td>M</td>                      <td>ÓÉAPIÊ¹ÓÃÕßÎ¬»¤£¬ÔÚÍ¬Ò»¸ö»á»°ÖĞ²»ÄÜÖØ¸´£¬²¢ÇÒ±ØĞë±ÈÉÏÒ»´Î´ó</td></tr>
-*      <tr> <td>InstrumentID</td>                <td>TX1FtdcInstrumentIDType</td>  <td>ºÏÔ¼´úÂë</td>                                  <td>M</td>                      <td>Ö§³ÖÄ¿Ç°¹úÄÚ4¸öÆÚ»õ½»Ò×ËùµÄËùÓĞºÏÔ¼£¬°üÀ¨´óÉÌËù/Ö£ÉÌËùµÄÌ×ÀûºÏÔ¼</td> </tr>
-*      <tr> <td>InsertPrice</td>                 <td>TX1FtdcPriceType</td>         <td>±¨µ¥¼Û¸ñ</td>                                  <td>M</td>                      <td>µ±±¨µ¥ÀàĞÍÎªÊĞ¼ÛÊ±£¬¸Ã×Ö¶Î²»Æğ×÷ÓÃ</td></tr>
-*      <tr> <td>OrderAmount</td>                 <td>TX1FtdcAmountType</td>        <td>±¨µ¥ÊıÁ¿</td>                                  <td>M</td>                      <td>±ØĞë´óÓÚ0µÄÕûÊı</td></tr>
-*      <tr> <td>TX1FtdcBuySellTypeType</td>      <td>BuySellType</td>              <td>ÂòÂô±êÖ¾</td>                                  <td>M</td>                      <td>1Âò£»2Âô</td></tr>
-*      <tr> <td>TX1FtdcOpenCloseTypeType</td>    <td>OpenCloseType</td>            <td>¿ªÆ½±êÖ¾</td>                                  <td>M</td>                      <td>1¿ª²Ö£»2Æ½²Ö£»4Æ½½ñ</td></tr>
-*      <tr> <td>TX1FtdcSpeculatorType</td>       <td>Speculator</td>               <td>Í¶±£ÀàĞÍ</td>                                  <td>M</td>                      <td>Ö§³ÖÍ¶»ú¡¢Ì×Àû¡¢Ì×±£</td></tr>
-*      <tr> <td>TX1FtdcInsertType</td>           <td>InsertType</td>               <td>×Ô¶¯µ¥Àà±ğ</td>                                <td>M</td>                      <td>(Ä¬ÈÏÎªÆÕÍ¨¶©µ¥)(´Ë°æ±¾²»ÓÃ)</td></tr>
-*      <tr> <td>TX1FtdcOrderTypeType</td>        <td>OrderType</td>                <td>±¨µ¥ÀàĞÍ</td>                                  <td>M</td>                      <td>Ö§³ÖÏŞ¼Û ¡¢ÊĞ¼Û£»ÉÏÆÚËùºÏÔ¼²»Ö§³ÖÊĞ¼Û£¬¾ù°´ÏŞ¼Û½øĞĞ´¦Àí</td></tr>
-*      <tr> <td>TX1FtdcOrderPropertyType</td>    <td>OrderProperty</td>            <td>±¨µ¥¸½¼ÓÊôĞÔ</td>                              <td>M</td>                      <td>Ö§³ÖNone¡¢FAK¡¢FOK</td></tr>
-*      <tr> <td>TX1FtdcInstrumentTypeType</td>   <td>InstrumentType</td>           <td>ºÏÔ¼ÀàĞÍ</td>                                  <td>M</td>                      <td>¿ÉÑ¡Öµ£ºÆÚ»õ¡¢ÆÚÈ¨</td></tr>
-*      <tr> <td>TX1FtdcAmountType</td>           <td>MinMatchAmount</td>           <td>×îĞ¡³É½»Á¿</td>                                <td>M</td>                      <td></td></tr>
-*      <tr> <td>TX1FtdcReservedType</td>         <td>ReservedType2</td>            <td>Ô¤Áô×Ö¶Î2</td>                                 <td>NM</td>                     <td></td></tr>
-*      <tr> <td>TX1FtdcCustomCategoryType</td>   <td>CustomCategory</td>           <td bgcolor="gray">×Ô¶¨ÒåÀà±ğ(´Ë°æ±¾²»ÓÃ)</td>     <td>BLK</td>                    <td>×Ô¶¨ÒåÀà±ğ(´Ë°æ±¾²»ÓÃ)</td></tr>
-*      <tr> <td>TX1FtdcPriceType</td>            <td>ProfitLossPrice</td>          <td bgcolor="gray">Ö¹Ó¯Ö¹Ëğ¼Û¸ñ(´Ë°æ±¾²»ÓÃ)</td>   <td>NM</td>                     <td>Ö¹Ó¯Ö¹Ëğ¼Û¸ñ(´Ë°æ±¾²»ÓÃ)</td></tr>
-* </table>
-*/
-///ÇëÇó±¨µ¥Êı¾İÀàĞÍ(»ù±¾±¨µ¥)
+ * <table border="3">
+ *      <tr> <th>åç§°</th>                        <th>ç±»å‹</th> <th>æè¿°</th>
+ * <th>æ˜¯å¦å¿…å¡«</th>               <th>å–å€¼èŒƒå›´è¯´æ˜</th></tr> <tr>
+ * <td>AccountID</td>                   <td>TX1FtdcAccountIDType</td>
+ * <td>èµ„é‡‘è´¦æˆ·ID</td>                                <td>M</td> <td></td> </tr>
+ *      <tr> <td>LocalOrderID</td> <td>TX1FtdcLocalOrderIDType</td>
+ * <td>æœ¬åœ°å§”æ‰˜å·</td>                                <td>M</td>
+ * <td>ç”±APIä½¿ç”¨è€…ç»´æŠ¤ï¼Œåœ¨åŒä¸€ä¸ªä¼šè¯ä¸­ä¸èƒ½é‡å¤ï¼Œå¹¶ä¸”å¿…é¡»æ¯”ä¸Šä¸€æ¬¡å¤§</td></tr>
+ *      <tr> <td>InstrumentID</td> <td>TX1FtdcInstrumentIDType</td>
+ * <td>åˆçº¦ä»£ç </td>                                  <td>M</td>
+ * <td>æ”¯æŒç›®å‰å›½å†…4ä¸ªæœŸè´§äº¤æ˜“æ‰€çš„æ‰€æœ‰åˆçº¦ï¼ŒåŒ…æ‹¬å¤§å•†æ‰€/éƒ‘å•†æ‰€çš„å¥—åˆ©åˆçº¦</td>
+ * </tr> <tr> <td>InsertPrice</td>                 <td>TX1FtdcPriceType</td>
+ * <td>æŠ¥å•ä»·æ ¼</td>                                  <td>M</td>
+ * <td>å½“æŠ¥å•ç±»å‹ä¸ºå¸‚ä»·æ—¶ï¼Œè¯¥å­—æ®µä¸èµ·ä½œç”¨</td></tr> <tr> <td>OrderAmount</td>
+ * <td>TX1FtdcAmountType</td>        <td>æŠ¥å•æ•°é‡</td> <td>M</td>
+ * <td>å¿…é¡»å¤§äº0çš„æ•´æ•°</td></tr> <tr> <td>TX1FtdcBuySellTypeType</td>
+ * <td>BuySellType</td>              <td>ä¹°å–æ ‡å¿—</td> <td>M</td>
+ * <td>1ä¹°ï¼›2å–</td></tr> <tr> <td>TX1FtdcOpenCloseTypeType</td>
+ * <td>OpenCloseType</td>            <td>å¼€å¹³æ ‡å¿—</td> <td>M</td>
+ * <td>1å¼€ä»“ï¼›2å¹³ä»“ï¼›4å¹³ä»Š</td></tr> <tr> <td>TX1FtdcSpeculatorType</td>
+ * <td>Speculator</td>               <td>æŠ•ä¿ç±»å‹</td> <td>M</td>
+ * <td>æ”¯æŒæŠ•æœºã€å¥—åˆ©ã€å¥—ä¿</td></tr> <tr> <td>TX1FtdcInsertType</td>
+ * <td>InsertType</td>               <td>è‡ªåŠ¨å•ç±»åˆ«</td> <td>M</td>
+ * <td>(é»˜è®¤ä¸ºæ™®é€šè®¢å•)(æ­¤ç‰ˆæœ¬ä¸ç”¨)</td></tr> <tr> <td>TX1FtdcOrderTypeType</td>
+ * <td>OrderType</td>                <td>æŠ¥å•ç±»å‹</td> <td>M</td> <td>æ”¯æŒé™ä»·
+ * ã€å¸‚ä»·ï¼›ä¸ŠæœŸæ‰€åˆçº¦ä¸æ”¯æŒå¸‚ä»·ï¼Œå‡æŒ‰é™ä»·è¿›è¡Œå¤„ç†</td></tr> <tr>
+ * <td>TX1FtdcOrderPropertyType</td>    <td>OrderProperty</td>
+ * <td>æŠ¥å•é™„åŠ å±æ€§</td>                              <td>M</td>
+ * <td>æ”¯æŒNoneã€FAKã€FOK</td></tr> <tr> <td>TX1FtdcInstrumentTypeType</td>
+ * <td>InstrumentType</td>           <td>åˆçº¦ç±»å‹</td> <td>M</td>
+ * <td>å¯é€‰å€¼ï¼šæœŸè´§ã€æœŸæƒ</td></tr> <tr> <td>TX1FtdcAmountType</td>
+ * <td>MinMatchAmount</td>           <td>æœ€å°æˆäº¤é‡</td> <td>M</td>
+ * <td></td></tr> <tr> <td>TX1FtdcReservedType</td> <td>ReservedType2</td>
+ * <td>é¢„ç•™å­—æ®µ2</td>                                 <td>NM</td> <td></td></tr>
+ *      <tr> <td>TX1FtdcCustomCategoryType</td>   <td>CustomCategory</td> <td
+ * bgcolor="gray">è‡ªå®šä¹‰ç±»åˆ«(æ­¤ç‰ˆæœ¬ä¸ç”¨)</td>     <td>BLK</td>
+ * <td>è‡ªå®šä¹‰ç±»åˆ«(æ­¤ç‰ˆæœ¬ä¸ç”¨)</td></tr> <tr> <td>TX1FtdcPriceType</td>
+ * <td>ProfitLossPrice</td>          <td
+ * bgcolor="gray">æ­¢ç›ˆæ­¢æŸä»·æ ¼(æ­¤ç‰ˆæœ¬ä¸ç”¨)</td>   <td>NM</td>
+ * <td>æ­¢ç›ˆæ­¢æŸä»·æ ¼(æ­¤ç‰ˆæœ¬ä¸ç”¨)</td></tr>
+ * </table>
+ */
+///è¯·æ±‚æŠ¥å•æ•°æ®ç±»å‹(åŸºæœ¬æŠ¥å•)
 struct APISTRUCT CX1FtdcInsertOrderField {
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕË»§
-    TX1FtdcLocalOrderIDType               LocalOrderID;                 // ±¾µØÎ¯ÍĞºÅ, ÓÉAPIÊ¹ÓÃÕßÎ¬»¤£¬ÔÚÍ¬Ò»¸ö»á»°ÖĞ²»ÄÜÖØ¸´
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
-    TX1FtdcPriceType                      InsertPrice;                  // ±¨µ¥¼Û¸ñ, µ±±¨µ¥ÀàĞÍÎªÊĞ¼ÛÊ±£¬¸Ã×Ö¶Î²»Æğ×÷ÓÃ
-    TX1FtdcAmountType                     OrderAmount;                  // ±¨µ¥ÊıÁ¿
-    TX1FtdcBuySellTypeType                BuySellType;                  // ÂòÂô±êÖ¾
-    TX1FtdcOpenCloseTypeType              OpenCloseType;                // ¿ªÆ½±êÖ¾
-    TX1FtdcSpeculatorType                 Speculator;                   // Í¶±£ÀàĞÍ, Ö§³ÖÍ¶»ú¡¢Ì×Àû¡¢Ì×±£
-    TX1FtdcInsertType                     InsertType;                   // ×Ô¶¯µ¥Àà±ğ(Ä¬ÈÏÎªÆÕÍ¨¶©µ¥)
-    TX1FtdcOrderTypeType                  OrderType;                    // ±¨µ¥ÀàĞÍ, Ö§³ÖÏŞ¼Û ¡¢ÊĞ¼Û£»ÉÏÆÚËùºÏÔ¼²»Ö§³ÖÊĞ¼Û£¬¾ù°´ÏŞ¼Û½øĞĞ´¦Àí
-    TX1FtdcOrderPropertyType              OrderProperty;                // ±¨µ¥¸½¼ÓÊôĞÔ, Ö§³ÖNone¡¢FAK¡¢FOK
-    TX1FtdcInstrumentTypeType             InstrumentType;               // ºÏÔ¼ÀàĞÍ, ¿ÉÑ¡Öµ£ºÆÚ»õ¡¢ÆÚÈ¨
-    TX1FtdcAmountType                     MinMatchAmount;               // ×îĞ¡³É½»Á¿
-    TX1FtdcReservedType                   ReservedType2;                // Ô¤Áô×Ö¶Î2
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcCustomCategoryType             CustomCategory;               // ×Ô¶¨ÒåÀà±ğ
-    TX1FtdcPriceType                      ProfitLossPrice;              // Ö¹Ó¯Ö¹Ëğ¼Û¸ñ
+  TX1FtdcAccountIDType AccountID;  // èµ„é‡‘è´¦æˆ·
+  TX1FtdcLocalOrderIDType
+      LocalOrderID;  // æœ¬åœ°å§”æ‰˜å·, ç”±APIä½¿ç”¨è€…ç»´æŠ¤ï¼Œåœ¨åŒä¸€ä¸ªä¼šè¯ä¸­ä¸èƒ½é‡å¤
+  TX1FtdcInstrumentIDType InstrumentID;  // åˆçº¦ä»£ç 
+  TX1FtdcPriceType InsertPrice;  // æŠ¥å•ä»·æ ¼, å½“æŠ¥å•ç±»å‹ä¸ºå¸‚ä»·æ—¶ï¼Œè¯¥å­—æ®µä¸èµ·ä½œç”¨
+  TX1FtdcAmountType OrderAmount;           // æŠ¥å•æ•°é‡
+  TX1FtdcBuySellTypeType BuySellType;      // ä¹°å–æ ‡å¿—
+  TX1FtdcOpenCloseTypeType OpenCloseType;  // å¼€å¹³æ ‡å¿—
+  TX1FtdcSpeculatorType Speculator;  // æŠ•ä¿ç±»å‹, æ”¯æŒæŠ•æœºã€å¥—åˆ©ã€å¥—ä¿
+  TX1FtdcInsertType InsertType;      // è‡ªåŠ¨å•ç±»åˆ«(é»˜è®¤ä¸ºæ™®é€šè®¢å•)
+  TX1FtdcOrderTypeType
+      OrderType;  // æŠ¥å•ç±»å‹, æ”¯æŒé™ä»·
+                  // ã€å¸‚ä»·ï¼›ä¸ŠæœŸæ‰€åˆçº¦ä¸æ”¯æŒå¸‚ä»·ï¼Œå‡æŒ‰é™ä»·è¿›è¡Œå¤„ç†
+  TX1FtdcOrderPropertyType OrderProperty;  // æŠ¥å•é™„åŠ å±æ€§, æ”¯æŒNoneã€FAKã€FOK
+  TX1FtdcInstrumentTypeType InstrumentType;  // åˆçº¦ç±»å‹, å¯é€‰å€¼ï¼šæœŸè´§ã€æœŸæƒ
+  TX1FtdcAmountType MinMatchAmount;          // æœ€å°æˆäº¤é‡
+  TX1FtdcReservedType ReservedType2;         // é¢„ç•™å­—æ®µ2
+  TX1FtdcRequestIDType RequestID;            // è¯·æ±‚ID
+  TX1FtdcCustomCategoryType CustomCategory;  // è‡ªå®šä¹‰ç±»åˆ«
+  TX1FtdcPriceType ProfitLossPrice;          // æ­¢ç›ˆæ­¢æŸä»·æ ¼
 };
 
-
 /**
-* <table border="3">
-*      <tr> <th>Ãû³Æ</th>         <th>ÀàĞÍ</th>                     <th>ÃèÊö</th>                                   <th>ÊÇ·ñ±ØÌî</th>   <th>È¡Öµ·¶Î§ËµÃ÷</th></tr>
-*      <tr> <td>AccountID</td>    <td>TX1FtdcAccountIDType</td>     <td bgcolor="gray">×Ê½ğÕË»§ID (´Ë°æ±¾²»ÓÃ)</td> <td>NM</td>         <td></td> </tr>
-*      <tr> <td>X1OrderID</td>    <td>TX1FtdcX1OrderIDType</td>     <td>¹ñÌ¨Î¯ÍĞºÅ</td>                             <td>NM</td>         <td>1. X1OrderIDºÍLocalOrderIDÈÎÒâÊäÈëÆäÖĞÒ»¸öÖµ¼´¿É<br>2. Èç¹ûX1OrderIDºÍLocalOrderIDÁ½¸öÖµ¶¼ÊäÈëÁË£¬³ÌĞò½«ÓÅÏÈÊ¹ÓÃX1OrderID£¨Á½ÕßÍ¬Ê±Ğ¡ÓÚµÈÓÚ0Ê±£¬ÔòÎŞ·¨³·µ¥³É¹¦£©<br>3. µ±¹ñÌ¨ÖØÆôºó£¬ĞèÒªÊ¹ÓÃX1OrderID½øĞĞ³·µ¥</td> </tr>
-*      <tr> <td>LocalOrderID</td> <td>TX1FtdcLocalOrderIDType</td>  <td>±¾µØÎ¯ÍĞºÅ</td>                             <td>NM</td>         <td>µ±¿Í»§¶ËÊ¹ÓÃAPIµÇ³ö£¬ÔÙµÇÂ½µ½Ç°ÖÃºó£¬´ËÊ±ĞèÒªÓÃLocalOrderID ¼Ó SessionID½øĞĞ³·µ¥</td></tr>
-*      <tr> <td>InstrumentID</td> <td>TX1FtdcInstrumentIDType</td>  <td bgcolor="red">ºÏÔ¼´úÂë(´Ë°æ±¾²»ÓÃ)</td>     <td>NM</td>         <td></td></tr>
-*      <tr> <td>RequestID</td>    <td>TX1FtdcRequestIDType</td>     <td>ÇëÇóID</td>                                 <td>NM</td>         <td></td></tr>
-*      <tr> <td>SessionID</td>    <td>TX1FtdcSessionIDType</td>     <td>»á»°ID</td>                                 <td>NM</td>         <td></td></tr>
-* </table>
-*/
-///³·µ¥Êı¾İÀàĞÍ
+ * <table border="3">
+ *      <tr> <th>åç§°</th>         <th>ç±»å‹</th> <th>æè¿°</th> <th>æ˜¯å¦å¿…å¡«</th>
+ * <th>å–å€¼èŒƒå›´è¯´æ˜</th></tr> <tr> <td>AccountID</td>
+ * <td>TX1FtdcAccountIDType</td>     <td bgcolor="gray">èµ„é‡‘è´¦æˆ·ID
+ * (æ­¤ç‰ˆæœ¬ä¸ç”¨)</td> <td>NM</td>         <td></td> </tr> <tr> <td>X1OrderID</td>
+ * <td>TX1FtdcX1OrderIDType</td>     <td>æŸœå°å§”æ‰˜å·</td> <td>NM</td> <td>1.
+ * X1OrderIDå’ŒLocalOrderIDä»»æ„è¾“å…¥å…¶ä¸­ä¸€ä¸ªå€¼å³å¯<br>2.
+ * å¦‚æœX1OrderIDå’ŒLocalOrderIDä¸¤ä¸ªå€¼éƒ½è¾“å…¥äº†ï¼Œç¨‹åºå°†ä¼˜å…ˆä½¿ç”¨X1OrderIDï¼ˆä¸¤è€…åŒæ—¶å°äºç­‰äº0æ—¶ï¼Œåˆ™æ— æ³•æ’¤å•æˆåŠŸï¼‰<br>3.
+ * å½“æŸœå°é‡å¯åï¼Œéœ€è¦ä½¿ç”¨X1OrderIDè¿›è¡Œæ’¤å•</td> </tr> <tr> <td>LocalOrderID</td>
+ * <td>TX1FtdcLocalOrderIDType</td>  <td>æœ¬åœ°å§”æ‰˜å·</td> <td>NM</td>
+ * <td>å½“å®¢æˆ·ç«¯ä½¿ç”¨APIç™»å‡ºï¼Œå†ç™»é™†åˆ°å‰ç½®åï¼Œæ­¤æ—¶éœ€è¦ç”¨LocalOrderID åŠ 
+ * SessionIDè¿›è¡Œæ’¤å•</td></tr> <tr> <td>InstrumentID</td>
+ * <td>TX1FtdcInstrumentIDType</td>  <td bgcolor="red">åˆçº¦ä»£ç (æ­¤ç‰ˆæœ¬ä¸ç”¨)</td>
+ * <td>NM</td>         <td></td></tr> <tr> <td>RequestID</td>
+ * <td>TX1FtdcRequestIDType</td>     <td>è¯·æ±‚ID</td> <td>NM</td> <td></td></tr>
+ *      <tr> <td>SessionID</td>    <td>TX1FtdcSessionIDType</td> <td>ä¼šè¯ID</td>
+ * <td>NM</td>         <td></td></tr>
+ * </table>
+ */
+///æ’¤å•æ•°æ®ç±»å‹
 struct APISTRUCT CX1FtdcCancelOrderField {
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕË»§ID(´Ë°æ±¾²»ÓÃ)
-    TX1FtdcX1OrderIDType                  X1OrderID;                    // ¹ñÌ¨Î¯ÍĞºÅ
-    TX1FtdcLocalOrderIDType               LocalOrderID;                 // ±¾µØÎ¯ÍĞºÅ
-    TX1FtdcOrderSysIDType                 OrderSysID;                   // ¶©µ¥ÏµÍ³Î¯ÍĞºÅ(ÓÃÓÚË«±ß±¨¼Ûµ¥±ß³·µ¥)
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë(´Ë°æ±¾²»ÓÃ)
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcSessionIDType                  SessionID;                    // »á»°ID
+  TX1FtdcAccountIDType AccountID;        // èµ„é‡‘è´¦æˆ·ID(æ­¤ç‰ˆæœ¬ä¸ç”¨)
+  TX1FtdcX1OrderIDType X1OrderID;        // æŸœå°å§”æ‰˜å·
+  TX1FtdcLocalOrderIDType LocalOrderID;  // æœ¬åœ°å§”æ‰˜å·
+  TX1FtdcOrderSysIDType OrderSysID;  // è®¢å•ç³»ç»Ÿå§”æ‰˜å·(ç”¨äºåŒè¾¹æŠ¥ä»·å•è¾¹æ’¤å•)
+  TX1FtdcInstrumentIDType InstrumentID;  // åˆçº¦ä»£ç (æ­¤ç‰ˆæœ¬ä¸ç”¨)
+  TX1FtdcRequestIDType RequestID;        // è¯·æ±‚ID
+  TX1FtdcSessionIDType SessionID;        // ä¼šè¯ID
 };
 
-
-///Î¯ÍĞÏìÓ¦ÀàĞÍ
+///å§”æ‰˜å“åº”ç±»å‹
 struct APISTRUCT CX1FtdcRspOperOrderField {
-    TX1FtdcLocalOrderIDType               LocalOrderID;                 // ±¾µØÎ¯ÍĞºÅ
-    TX1FtdcX1OrderIDType                  X1OrderID;                    // ¹ñÌ¨Î¯ÍĞºÅ
-    TX1FtdcOrderAnswerStatusType          OrderStatus;                  // Î¯ÍĞ×´Ì¬
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcPriceType                      Fee;                          // ÊÖĞø·Ñ,¸Ã×Ö¶Î½ö¹©ÏÂµ¥Ê±Ê¹ÓÃ(´Ë°æ±¾²»ÓÃ)
-    TX1FtdcPriceType                      Margin;                       // ¶³½á±£Ö¤½ğ,¸Ã×Ö¶Î½ö¹©ÏÂµ¥Ê±Ê¹ÓÃ
-    TX1FtdcCustomCategoryType             CustomCategory;               // ×Ô¶¨ÒåÀà±ğ
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕË»§ID(´Ë°æ±¾²»ÓÃ)
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë(´Ë°æ±¾²»ÓÃ)
-    TX1FtdcSessionIDType                  SessionID;                    // »á»°ID  
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×Ëù(´Ë°æ±¾²»ÓÃ)
-    TX1FtdcBuySellTypeType                BuySellType;                  // ÂòÂô
-    TX1FtdcOpenCloseTypeType              OpenCloseType;                // ¿ªÆ½
-    TX1FtdcInstrumentTypeType             InstrumentType;               // ºÏÔ¼ÀàĞÍ
-    TX1FtdcSpeculatorType                 Speculator;                   // Í¶×ÊÀà±ğ
-    TX1FtdcPriceType                      InsertPrice;                  // Î¯ÍĞ¼Û
-    TX1FtdcPriceType                      ProfitLossPrice;              // Ö¹Ó¯Ö¹Ëğ¼Û¸ñ
-    TX1FtdcAmountType                     MinMatchAmount;               // ×îĞ¡³É½»Á¿
-    TX1FtdcAmountType                     OrderAmount;                  // Î¯ÍĞÊıÁ¿
-    TX1FtdcInsertType                     InsertType;                   // ×Ô¶¯µ¥Àà±ğ
-    TX1FtdcOrderTypeType                  OrderType;                    // ¶©µ¥ÀàĞÍ
-    TX1FtdcOrderPropertyType              OrderProperty;                // ¶©µ¥ÊôĞÔ
-    TX1FtdcClientIDType                   ClientID;                     // ½»Ò×±àÂë(´Ë°æ±¾²»ÓÃ)
+  TX1FtdcLocalOrderIDType LocalOrderID;      // æœ¬åœ°å§”æ‰˜å·
+  TX1FtdcX1OrderIDType X1OrderID;            // æŸœå°å§”æ‰˜å·
+  TX1FtdcOrderAnswerStatusType OrderStatus;  // å§”æ‰˜çŠ¶æ€
+  TX1FtdcRequestIDType RequestID;            // è¯·æ±‚ID
+  TX1FtdcPriceType Fee;  // æ‰‹ç»­è´¹,è¯¥å­—æ®µä»…ä¾›ä¸‹å•æ—¶ä½¿ç”¨(æ­¤ç‰ˆæœ¬ä¸ç”¨)
+  TX1FtdcPriceType Margin;  // å†»ç»“ä¿è¯é‡‘,è¯¥å­—æ®µä»…ä¾›ä¸‹å•æ—¶ä½¿ç”¨
+  TX1FtdcCustomCategoryType CustomCategory;  // è‡ªå®šä¹‰ç±»åˆ«
+  TX1FtdcAccountIDType AccountID;            // èµ„é‡‘è´¦æˆ·ID(æ­¤ç‰ˆæœ¬ä¸ç”¨)
+  TX1FtdcInstrumentIDType InstrumentID;      // åˆçº¦ä»£ç (æ­¤ç‰ˆæœ¬ä¸ç”¨)
+  TX1FtdcSessionIDType SessionID;            // ä¼šè¯ID
+  TX1FtdcExchangeIDType ExchangeID;          // äº¤æ˜“æ‰€(æ­¤ç‰ˆæœ¬ä¸ç”¨)
+  TX1FtdcBuySellTypeType BuySellType;        // ä¹°å–
+  TX1FtdcOpenCloseTypeType OpenCloseType;    // å¼€å¹³
+  TX1FtdcInstrumentTypeType InstrumentType;  // åˆçº¦ç±»å‹
+  TX1FtdcSpeculatorType Speculator;          // æŠ•èµ„ç±»åˆ«
+  TX1FtdcPriceType InsertPrice;              // å§”æ‰˜ä»·
+  TX1FtdcPriceType ProfitLossPrice;          // æ­¢ç›ˆæ­¢æŸä»·æ ¼
+  TX1FtdcAmountType MinMatchAmount;          // æœ€å°æˆäº¤é‡
+  TX1FtdcAmountType OrderAmount;             // å§”æ‰˜æ•°é‡
+  TX1FtdcInsertType InsertType;              // è‡ªåŠ¨å•ç±»åˆ«
+  TX1FtdcOrderTypeType OrderType;            // è®¢å•ç±»å‹
+  TX1FtdcOrderPropertyType OrderProperty;    // è®¢å•å±æ€§
+  TX1FtdcClientIDType ClientID;              // äº¤æ˜“ç¼–ç (æ­¤ç‰ˆæœ¬ä¸ç”¨)
 };
 
-
-
-///²éÑ¯×Ê½ğÊı¾İÀàĞÍ
+///æŸ¥è¯¢èµ„é‡‘æ•°æ®ç±»å‹
 struct APISTRUCT CX1FtdcQryCapitalField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕË»§ID
+  TX1FtdcRequestIDType RequestID;  // è¯·æ±‚ID
+  TX1FtdcAccountIDType AccountID;  // èµ„é‡‘è´¦æˆ·ID
 };
 
-
-///²éÑ¯³Ö²ÖÊı¾İÀàĞÍ
+///æŸ¥è¯¢æŒä»“æ•°æ®ç±»å‹
 struct APISTRUCT CX1FtdcQryPositionField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕË»§ID
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
-    TX1FtdcInstrumentTypeType             InstrumentType;               // ºÏÔ¼ÀàĞÍ
+  TX1FtdcRequestIDType RequestID;            // è¯·æ±‚ID
+  TX1FtdcAccountIDType AccountID;            // èµ„é‡‘è´¦æˆ·ID
+  TX1FtdcInstrumentIDType InstrumentID;      // åˆçº¦ä»£ç 
+  TX1FtdcInstrumentTypeType InstrumentType;  // åˆçº¦ç±»å‹
 };
 
-
-///½»Ò×ËùºÏÔ¼
+///äº¤æ˜“æ‰€åˆçº¦
 /**
-* @brief ½»Ò×ËùºÏÔ¼
-* @details µ±ExchangeIDÎª¿ÕÊ±£¬±íÊ¾²éÑ¯¸÷½»Ò×ËùµÄËùÓĞºÏÔ¼´úÂë£¬Ò²¿ÉÖ¸¶¨²éÑ¯Ä³½»Ò×ËùµÄËùÓĞºÏÔ¼´úÂëĞÅÏ¢£¬µ«¸Ã½Ó¿Ú²»ÄÜ²éÑ¯µ½Ì×ÀûºÏÔ¼´úÂë
-*
-*/
+ * @brief äº¤æ˜“æ‰€åˆçº¦
+ * @details
+ * å½“ExchangeIDä¸ºç©ºæ—¶ï¼Œè¡¨ç¤ºæŸ¥è¯¢å„äº¤æ˜“æ‰€çš„æ‰€æœ‰åˆçº¦ä»£ç ï¼Œä¹Ÿå¯æŒ‡å®šæŸ¥è¯¢æŸäº¤æ˜“æ‰€çš„æ‰€æœ‰åˆçº¦ä»£ç ä¿¡æ¯ï¼Œä½†è¯¥æ¥å£ä¸èƒ½æŸ¥è¯¢åˆ°å¥—åˆ©åˆçº¦ä»£ç 
+ *
+ */
 struct APISTRUCT CX1FtdcQryExchangeInstrumentField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕË»§ID
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×Ëù±àÂë
-    TX1FtdcInstrumentTypeType             InstrumentType;               // ºÏÔ¼ÀàĞÍ
+  TX1FtdcRequestIDType RequestID;            // è¯·æ±‚ID
+  TX1FtdcAccountIDType AccountID;            // èµ„é‡‘è´¦æˆ·ID
+  TX1FtdcExchangeIDType ExchangeID;          // äº¤æ˜“æ‰€ç¼–ç 
+  TX1FtdcInstrumentTypeType InstrumentType;  // åˆçº¦ç±»å‹
 };
 
-/// ÓÃ»§µÇÂ¼Êı¾İÀàĞÍ
+/// ç”¨æˆ·ç™»å½•æ•°æ®ç±»å‹
 struct APISTRUCT CX1FtdcReqUserLoginField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID [NM]
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕË»§ID [M]
-    TX1FtdcPasswordType                   Password;                     // ÃÜÂë [M]
-    TX1FtdcCompanyIDType                  CompanyID;                    // ³§ÉÌID(´Ë°æ±¾²»ÓÃ)[BLK]
+  TX1FtdcRequestIDType RequestID;  // è¯·æ±‚ID [NM]
+  TX1FtdcAccountIDType AccountID;  // èµ„é‡‘è´¦æˆ·ID [M]
+  TX1FtdcPasswordType Password;    // å¯†ç  [M]
+  TX1FtdcCompanyIDType CompanyID;  // å‚å•†ID(æ­¤ç‰ˆæœ¬ä¸ç”¨)[BLK]
 };
 
-/// ÓÃ»§µÇÂ¼·µ»ØĞÅÏ¢ 
+/// ç”¨æˆ·ç™»å½•è¿”å›ä¿¡æ¯
 struct APISTRUCT CX1FtdcRspUserLoginField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕÊºÅID
-    TX1FtdcAccountLoginResultType         LoginResult;                  // µÇÂ¼½á¹û
-    TX1FtdcLocalOrderIDType               InitLocalOrderID;             // ³õÊ¼±¾µØÎ¯ÍĞºÅ(´Ë°æ±¾²»ÓÃ)
-    TX1FtdcSessionIDType                  SessionID;                    // sessionID(»á»°ID)
-    TX1FtdcErrorIDType                    ErrorID;                      // ´íÎóID
-    TX1FtdcErrorMsgInfoType               ErrorMsg;                     // ´íÎóĞÅÏ¢
-    TX1FtdcTimeType                       DCEtime;                      // ´óÉÌËùÊ±¼ä
-    TX1FtdcTimeType                       SHFETime;                     // ÉÏÆÚËùÊ±¼ä
-    TX1FtdcTimeType                       CFFEXTime;                    // ÖĞ½ğËùÊ±¼ä
-    TX1FtdcTimeType                       CZCETime;                     // Ö£ÉÌËùÊ±¼ä
-    TX1FtdcTimeType                       INETime;                      // ÉÏÄÜËùÊ±¼ä
+  TX1FtdcRequestIDType RequestID;             // è¯·æ±‚ID
+  TX1FtdcAccountIDType AccountID;             // èµ„é‡‘å¸å·ID
+  TX1FtdcAccountLoginResultType LoginResult;  // ç™»å½•ç»“æœ
+  TX1FtdcLocalOrderIDType InitLocalOrderID;  // åˆå§‹æœ¬åœ°å§”æ‰˜å·(æ­¤ç‰ˆæœ¬ä¸ç”¨)
+  TX1FtdcSessionIDType SessionID;            // sessionID(ä¼šè¯ID)
+  TX1FtdcErrorIDType ErrorID;                // é”™è¯¯ID
+  TX1FtdcErrorMsgInfoType ErrorMsg;          // é”™è¯¯ä¿¡æ¯
+  TX1FtdcTimeType DCEtime;                   // å¤§å•†æ‰€æ—¶é—´
+  TX1FtdcTimeType SHFETime;                  // ä¸ŠæœŸæ‰€æ—¶é—´
+  TX1FtdcTimeType CFFEXTime;                 // ä¸­é‡‘æ‰€æ—¶é—´
+  TX1FtdcTimeType CZCETime;                  // éƒ‘å•†æ‰€æ—¶é—´
+  TX1FtdcTimeType INETime;                   // ä¸Šèƒ½æ‰€æ—¶é—´
 };
 
-///ÓÃ»§ÍË³öÀàĞÍ
+///ç”¨æˆ·é€€å‡ºç±»å‹
 struct APISTRUCT CX1FtdcReqUserLogoutField {
-
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕÊºÅID [NM] ÓÃ»§¿ÉÒÔ´«¿Õ»ò´«ÈëÕıÈ·µÄµÇÂ¼ºÅ
-    TX1FtdcSessionIDType                  SessionID;                    // »á»°ID(´Ë°æ±¾²»ÓÃ)[BLK]
+  TX1FtdcRequestIDType RequestID;  // è¯·æ±‚ID
+  TX1FtdcAccountIDType
+      AccountID;  // èµ„é‡‘å¸å·ID [NM] ç”¨æˆ·å¯ä»¥ä¼ ç©ºæˆ–ä¼ å…¥æ­£ç¡®çš„ç™»å½•å·
+  TX1FtdcSessionIDType SessionID;  // ä¼šè¯ID(æ­¤ç‰ˆæœ¬ä¸ç”¨)[BLK]
 };
 
-
-///Î¯ÍĞ»Ø±¨
+///å§”æ‰˜å›æŠ¥
 struct APISTRUCT CX1FtdcRspPriOrderField {
-    TX1FtdcLocalOrderIDType               LocalOrderID;                 // ±¾µØÎ¯ÍĞºÅ ÔÚÏµÍ³ÖØÆôºó£¬¾¡Á¿»Ö¸´£¬²»È·±£×¼È·
-    TX1FtdcX1OrderIDType                  X1OrderID;                    // ¹ñÌ¨Î¯ÍĞºÅ
-    TX1FtdcOrderSysIDType                 OrderSysID;                   // ±¨µ¥±àºÅ
-    TX1FtdcOrderAnswerStatusType          OrderStatus;                  // Î¯ÍĞ×´Ì¬  ÔÚFAK FOKÇé¿ö·µ»Ø½»Ò×ËùÒÑ¾­½ÓÊÜ£¬µ«ÉĞÎ´³É½»8£¬Ê§°Ü·µ»Ø7£¬ÆäËûÇé¿öÒ»ÂÉ·µ»ØÎ´³É½»3
-    TX1FtdcSessionIDType                  SessionID;                    // »á»°ID
-    TX1FtdcDateType                       SuspendTime;                  // ¹ÒÆğÊ±¼ä(´Ë°æ±¾²»ÓÃ)
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×Ëù 
-    TX1FtdcBuySellTypeType                BuySellType;                  // ÂòÂô
-    TX1FtdcOpenCloseTypeType              OpenCloseType;                // ¿ªÆ½
-    TX1FtdcInstrumentTypeType             InstrumentType;               // ºÏÔ¼ÀàĞÍ
-    TX1FtdcSpeculatorType                 Speculator;                   // Í¶×ÊÀà±ğ
-    TX1FtdcPriceType                      InsertPrice;                  // Î¯ÍĞ¼Û
-    TX1FtdcPriceType                      ProfitLossPrice;              // Ö¹Ó¯Ö¹Ëğ¼Û¸ñ
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕËºÅ(´Ë°æ±¾²»ÓÃ)
-    TX1FtdcAmountType                     CancelAmount;                 // ³·µ¥ÊıÁ¿
-    TX1FtdcAmountType                     OrderAmount;                  // Î¯ÍĞÊıÁ¿
-    TX1FtdcInsertType                     InsertType;                   // ×Ô¶¯µ¥Àà±ğ
-    TX1FtdcOrderTypeType                  OrderType;                    // ±¨µ¥ÀàĞÍ
-    TX1FtdcX1OrderIDType                  ExtX1OrderID;                 // Ëã·¨µ¥±àºÅ(´Ë°æ±¾²»ÓÃ)
-    TX1FtdcReservedType                   ReservedType2;                // Ô¤Áô×Ö¶Î2(´Ë°æ±¾²»ÓÃ)
-    TX1FtdcCustomCategoryType             CustomCategory;               // ×Ô¶¨ÒåÀà±ğ
-    TX1FtdcOrderPropertyType              OrderProperty;                // ¶©µ¥ÊôĞÔ
-    TX1FtdcAmountType                     MinMatchAmount;               // ×îĞ¡³É½»Á¿
-    TX1FtdcClientIDType                   ClientID;                     // ½»Ò×±àÂë
-    TX1FtdcErrorIDType                    ErrorID;                      // ´íÎóID
-    TX1FtdcErrorMsgInfoType               StatusMsg;                    // ×´Ì¬ĞÅÏ¢
-    TX1FtdcExtOrderType                   ExtOrderType;                 // Ìõ¼şµ¥ÀàĞÍ(´Ë°æ±¾²»ÓÃ)
-    TX1FtdcLocalOrderIDType               PriFlowNo;                    // Ë½ÓĞÁ÷±àºÅ
+  TX1FtdcLocalOrderIDType
+      LocalOrderID;  // æœ¬åœ°å§”æ‰˜å· åœ¨ç³»ç»Ÿé‡å¯åï¼Œå°½é‡æ¢å¤ï¼Œä¸ç¡®ä¿å‡†ç¡®
+  TX1FtdcX1OrderIDType X1OrderID;    // æŸœå°å§”æ‰˜å·
+  TX1FtdcOrderSysIDType OrderSysID;  // æŠ¥å•ç¼–å·
+  TX1FtdcOrderAnswerStatusType
+      OrderStatus;  // å§”æ‰˜çŠ¶æ€  åœ¨FAK
+                    // FOKæƒ…å†µè¿”å›äº¤æ˜“æ‰€å·²ç»æ¥å—ï¼Œä½†å°šæœªæˆäº¤8ï¼Œå¤±è´¥è¿”å›7ï¼Œå…¶ä»–æƒ…å†µä¸€å¾‹è¿”å›æœªæˆäº¤3
+  TX1FtdcSessionIDType SessionID;            // ä¼šè¯ID
+  TX1FtdcDateType SuspendTime;               // æŒ‚èµ·æ—¶é—´(æ­¤ç‰ˆæœ¬ä¸ç”¨)
+  TX1FtdcInstrumentIDType InstrumentID;      // åˆçº¦ä»£ç 
+  TX1FtdcExchangeIDType ExchangeID;          // äº¤æ˜“æ‰€
+  TX1FtdcBuySellTypeType BuySellType;        // ä¹°å–
+  TX1FtdcOpenCloseTypeType OpenCloseType;    // å¼€å¹³
+  TX1FtdcInstrumentTypeType InstrumentType;  // åˆçº¦ç±»å‹
+  TX1FtdcSpeculatorType Speculator;          // æŠ•èµ„ç±»åˆ«
+  TX1FtdcPriceType InsertPrice;              // å§”æ‰˜ä»·
+  TX1FtdcPriceType ProfitLossPrice;          // æ­¢ç›ˆæ­¢æŸä»·æ ¼
+  TX1FtdcAccountIDType AccountID;            // èµ„é‡‘è´¦å·(æ­¤ç‰ˆæœ¬ä¸ç”¨)
+  TX1FtdcAmountType CancelAmount;            // æ’¤å•æ•°é‡
+  TX1FtdcAmountType OrderAmount;             // å§”æ‰˜æ•°é‡
+  TX1FtdcInsertType InsertType;              // è‡ªåŠ¨å•ç±»åˆ«
+  TX1FtdcOrderTypeType OrderType;            // æŠ¥å•ç±»å‹
+  TX1FtdcX1OrderIDType ExtX1OrderID;         // ç®—æ³•å•ç¼–å·(æ­¤ç‰ˆæœ¬ä¸ç”¨)
+  TX1FtdcReservedType ReservedType2;         // é¢„ç•™å­—æ®µ2(æ­¤ç‰ˆæœ¬ä¸ç”¨)
+  TX1FtdcCustomCategoryType CustomCategory;  // è‡ªå®šä¹‰ç±»åˆ«
+  TX1FtdcOrderPropertyType OrderProperty;    // è®¢å•å±æ€§
+  TX1FtdcAmountType MinMatchAmount;          // æœ€å°æˆäº¤é‡
+  TX1FtdcClientIDType ClientID;              // äº¤æ˜“ç¼–ç 
+  TX1FtdcErrorIDType ErrorID;                // é”™è¯¯ID
+  TX1FtdcErrorMsgInfoType StatusMsg;         // çŠ¶æ€ä¿¡æ¯
+  TX1FtdcExtOrderType ExtOrderType;          // æ¡ä»¶å•ç±»å‹(æ­¤ç‰ˆæœ¬ä¸ç”¨)
+  TX1FtdcLocalOrderIDType PriFlowNo;         // ç§æœ‰æµç¼–å·
 };
 
-
-///³É½»»Ø±¨
+///æˆäº¤å›æŠ¥
 struct APISTRUCT CX1FtdcRspPriMatchInfoField {
-    TX1FtdcLocalOrderIDType               LocalOrderID;                 // ±¾µØÎ¯ÍĞºÅ
-    TX1FtdcOrderSysIDType                 OrderSysID;                   // ±¨µ¥±àºÅ(½»Ò×Ëù±¨µ¥±àºÅ)
-    TX1FtdcMatchIDType                    MatchID;                      // ³É½»±àºÅ
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
-    TX1FtdcBuySellTypeType                BuySellType;                  // ÂòÂô
-    TX1FtdcOpenCloseTypeType              OpenCloseType;                // ¿ªÆ½±êÖ¾
-    TX1FtdcPriceType                      MatchedPrice;                 // ³É½»¼Û¸ñ
-    TX1FtdcAmountType                     OrderAmount;                  // Î¯ÍĞÊıÁ¿
-    TX1FtdcAmountType                     MatchedAmount;                // ³É½»ÊıÁ¿
-    TX1FtdcDateType                       MatchedTime;                  // ³É½»Ê±¼ä
-    TX1FtdcPriceType                      InsertPrice;                  // ±¨¼Û
-    TX1FtdcX1OrderIDType                  X1OrderID;                    // ¹ñÌ¨Î¯ÍĞºÅ
-    TX1FtdcMatchType                      MatchType;                    // ³É½»ÀàĞÍ
-    TX1FtdcSpeculatorType                 Speculator;                   // Í¶±£
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×ËùID
-    TX1FtdcFeeType                        Fee;                          // ÊÖĞø·Ñ(´Ë°æ±¾²»ÓÃ)
-    TX1FtdcSessionIDType                  SessionID;                    // »á»°±êÊ¶
-    TX1FtdcInstrumentTypeType             InstrumentType;               // ºÏÔ¼ÀàĞÍ
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕËºÅ(´Ë°æ±¾²»ÓÃ)
-    TX1FtdcOrderAnswerStatusType          OrderStatus;                  // Éê±¨½á¹û
-    TX1FtdcPriceType                      Margin;                       // ¿ª²ÖÎª±£Ö¤½ğ,Æ½²ÖÎª½â¶³±£Ö¤½ğ(´Ë°æ±¾²»ÓÃ)
-    TX1FtdcPriceType                      FrozenCapita;                 // ³É½»½â¶³Î¯ÍĞ¶³½áµÄ×Ê½ğ(´Ë°æ±¾²»ÓÃ)
-    TX1FtdcAdjustmentInfoType             AdjustmentInfo;               // ×éºÏ»ò¶ÔËøµÄ±£Ö¤½ğµ÷ÕûĞÅÏ¢,¸ñÊ½:[ºÏÔ¼´úÂë,ÂòÂô±êÖ¾,Í¶×ÊÀà±ğ,µ÷Õû½ğ¶î;](´Ë°æ±¾²»ÓÃ) 
-    TX1FtdcCustomCategoryType             CustomCategory;               // ×Ô¶¨ÒåÀà±ğ
-    TX1FtdcPriceType                      Turnover;                     // ³É½»½ğ¶î(´Ë°æ±¾²»ÓÃ)
-    TX1FtdcOrderTypeType                  OrderType;                    // ±¨µ¥ÀàĞÍ
-    TX1FtdcInsertType                     InsertType;                   // ×Ô¶¯µ¥Àà±ğ
-    TX1FtdcClientIDType                   ClientID;                     // ½»Ò×±àÂë(´Ë°æ±¾²»ÓÃ)
-    TX1FtdcLocalOrderIDType               PriFlowNo;                    // Ë½ÓĞÁ÷±àºÅ
+  TX1FtdcLocalOrderIDType LocalOrderID;  // æœ¬åœ°å§”æ‰˜å·
+  TX1FtdcOrderSysIDType OrderSysID;      // æŠ¥å•ç¼–å·(äº¤æ˜“æ‰€æŠ¥å•ç¼–å·)
+  TX1FtdcMatchIDType MatchID;            // æˆäº¤ç¼–å·
+  TX1FtdcInstrumentIDType InstrumentID;  // åˆçº¦ä»£ç 
+  TX1FtdcBuySellTypeType BuySellType;    // ä¹°å–
+  TX1FtdcOpenCloseTypeType OpenCloseType;    // å¼€å¹³æ ‡å¿—
+  TX1FtdcPriceType MatchedPrice;             // æˆäº¤ä»·æ ¼
+  TX1FtdcAmountType OrderAmount;             // å§”æ‰˜æ•°é‡
+  TX1FtdcAmountType MatchedAmount;           // æˆäº¤æ•°é‡
+  TX1FtdcDateType MatchedTime;               // æˆäº¤æ—¶é—´
+  TX1FtdcPriceType InsertPrice;              // æŠ¥ä»·
+  TX1FtdcX1OrderIDType X1OrderID;            // æŸœå°å§”æ‰˜å·
+  TX1FtdcMatchType MatchType;                // æˆäº¤ç±»å‹
+  TX1FtdcSpeculatorType Speculator;          // æŠ•ä¿
+  TX1FtdcExchangeIDType ExchangeID;          // äº¤æ˜“æ‰€ID
+  TX1FtdcFeeType Fee;                        // æ‰‹ç»­è´¹(æ­¤ç‰ˆæœ¬ä¸ç”¨)
+  TX1FtdcSessionIDType SessionID;            // ä¼šè¯æ ‡è¯†
+  TX1FtdcInstrumentTypeType InstrumentType;  // åˆçº¦ç±»å‹
+  TX1FtdcAccountIDType AccountID;            // èµ„é‡‘è´¦å·(æ­¤ç‰ˆæœ¬ä¸ç”¨)
+  TX1FtdcOrderAnswerStatusType OrderStatus;  // ç”³æŠ¥ç»“æœ
+  TX1FtdcPriceType Margin;  // å¼€ä»“ä¸ºä¿è¯é‡‘,å¹³ä»“ä¸ºè§£å†»ä¿è¯é‡‘(æ­¤ç‰ˆæœ¬ä¸ç”¨)
+  TX1FtdcPriceType FrozenCapita;  // æˆäº¤è§£å†»å§”æ‰˜å†»ç»“çš„èµ„é‡‘(æ­¤ç‰ˆæœ¬ä¸ç”¨)
+  TX1FtdcAdjustmentInfoType
+      AdjustmentInfo;  // ç»„åˆæˆ–å¯¹é”çš„ä¿è¯é‡‘è°ƒæ•´ä¿¡æ¯,æ ¼å¼:[åˆçº¦ä»£ç ,ä¹°å–æ ‡å¿—,æŠ•èµ„ç±»åˆ«,è°ƒæ•´é‡‘é¢;](æ­¤ç‰ˆæœ¬ä¸ç”¨)
+  TX1FtdcCustomCategoryType CustomCategory;  // è‡ªå®šä¹‰ç±»åˆ«
+  TX1FtdcPriceType Turnover;                 // æˆäº¤é‡‘é¢(æ­¤ç‰ˆæœ¬ä¸ç”¨)
+  TX1FtdcOrderTypeType OrderType;            // æŠ¥å•ç±»å‹
+  TX1FtdcInsertType InsertType;              // è‡ªåŠ¨å•ç±»åˆ«
+  TX1FtdcClientIDType ClientID;              // äº¤æ˜“ç¼–ç (æ­¤ç‰ˆæœ¬ä¸ç”¨)
+  TX1FtdcLocalOrderIDType PriFlowNo;         // ç§æœ‰æµç¼–å·
 };
 
-
-///³·µ¥»Ø±¨
+///æ’¤å•å›æŠ¥
 struct APISTRUCT CX1FtdcRspPriCancelOrderField {
-    TX1FtdcLocalOrderIDType               LocalOrderID;                 // ±¾µØÎ¯ÍĞºÅ
-    TX1FtdcOrderSysIDType                 OrderSysID;                   // ±¨µ¥±àºÅ  
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë(´Ë°æ±¾²»ÓÃ)  
-    TX1FtdcPriceType                      InsertPrice;                  // ±¨µ¥¼Û¸ñ
-    TX1FtdcBuySellTypeType                BuySellType;                  // ÂòÂôÀàĞÍ
-    TX1FtdcOpenCloseTypeType              OpenCloseType;                // ¿ªÆ½±êÖ¾
-    TX1FtdcAmountType                     CancelAmount;                 // ³·µ¥ÊıÁ¿
-    TX1FtdcX1OrderIDType                  X1OrderID;                    // ¹ñÌ¨Î¯ÍĞºÅ
-    TX1FtdcSpeculatorType                 Speculator;                   // Í¶±£
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×ËùID
-    TX1FtdcDateType                       CanceledTime;                 // ³·µ¥Ê±¼ä
-    TX1FtdcSessionIDType                  SessionID;                    // »á»°±êÊ¶
-    TX1FtdcOrderAnswerStatusType          OrderStatus;                  // Éê±¨½á¹û
-    TX1FtdcInstrumentTypeType             InstrumentType;               // ºÏÔ¼ÀàĞÍ
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕËºÅ(´Ë°æ±¾²»ÓÃ)
-    TX1FtdcAmountType                     OrderAmount;                  // Î¯ÍĞÊıÁ¿
-    TX1FtdcPriceType                      Margin;                       // ±£Ö¤½ğ
-    TX1FtdcPriceType                      Fee;                          // ÊÖĞø·Ñ(´Ë°æ±¾²»ÓÃ)
-    TX1FtdcCustomCategoryType             CustomCategory;               // ×Ô¶¨ÒåÀà±ğ
-    TX1FtdcPriceType                      ProfitLossPrice;              // Ö¹Ó¯Ö¹Ëğ¼Û¸ñ
-    TX1FtdcAmountType                     MinMatchAmount;               // ×îĞ¡³É½»Á¿
-    TX1FtdcInsertType                     InsertType;                   // ×Ô¶¯µ¥Àà±ğ
-    TX1FtdcClientIDType                   ClientID;                     // ½»Ò×±àÂë(´Ë°æ±¾²»ÓÃ)
-    TX1FtdcErrorIDType                    ErrorID;                      // ´íÎóID  2ÔÂµ×Ö®Ç°Íê³É
-    TX1FtdcErrorMsgInfoType               StatusMsg;                    // ×´Ì¬ĞÅÏ¢
-    TX1FtdcOrderPropertyType              OrderProperty;                // ±¨µ¥¸½¼ÓÊôĞÔ
-    TX1FtdcLocalOrderIDType               PriFlowNo;                    // Ë½ÓĞÁ÷±àºÅ
+  TX1FtdcLocalOrderIDType LocalOrderID;      // æœ¬åœ°å§”æ‰˜å·
+  TX1FtdcOrderSysIDType OrderSysID;          // æŠ¥å•ç¼–å·
+  TX1FtdcInstrumentIDType InstrumentID;      // åˆçº¦ä»£ç (æ­¤ç‰ˆæœ¬ä¸ç”¨)
+  TX1FtdcPriceType InsertPrice;              // æŠ¥å•ä»·æ ¼
+  TX1FtdcBuySellTypeType BuySellType;        // ä¹°å–ç±»å‹
+  TX1FtdcOpenCloseTypeType OpenCloseType;    // å¼€å¹³æ ‡å¿—
+  TX1FtdcAmountType CancelAmount;            // æ’¤å•æ•°é‡
+  TX1FtdcX1OrderIDType X1OrderID;            // æŸœå°å§”æ‰˜å·
+  TX1FtdcSpeculatorType Speculator;          // æŠ•ä¿
+  TX1FtdcExchangeIDType ExchangeID;          // äº¤æ˜“æ‰€ID
+  TX1FtdcDateType CanceledTime;              // æ’¤å•æ—¶é—´
+  TX1FtdcSessionIDType SessionID;            // ä¼šè¯æ ‡è¯†
+  TX1FtdcOrderAnswerStatusType OrderStatus;  // ç”³æŠ¥ç»“æœ
+  TX1FtdcInstrumentTypeType InstrumentType;  // åˆçº¦ç±»å‹
+  TX1FtdcAccountIDType AccountID;            // èµ„é‡‘è´¦å·(æ­¤ç‰ˆæœ¬ä¸ç”¨)
+  TX1FtdcAmountType OrderAmount;             // å§”æ‰˜æ•°é‡
+  TX1FtdcPriceType Margin;                   // ä¿è¯é‡‘
+  TX1FtdcPriceType Fee;                      // æ‰‹ç»­è´¹(æ­¤ç‰ˆæœ¬ä¸ç”¨)
+  TX1FtdcCustomCategoryType CustomCategory;  // è‡ªå®šä¹‰ç±»åˆ«
+  TX1FtdcPriceType ProfitLossPrice;          // æ­¢ç›ˆæ­¢æŸä»·æ ¼
+  TX1FtdcAmountType MinMatchAmount;          // æœ€å°æˆäº¤é‡
+  TX1FtdcInsertType InsertType;              // è‡ªåŠ¨å•ç±»åˆ«
+  TX1FtdcClientIDType ClientID;              // äº¤æ˜“ç¼–ç (æ­¤ç‰ˆæœ¬ä¸ç”¨)
+  TX1FtdcErrorIDType ErrorID;                // é”™è¯¯ID  2æœˆåº•ä¹‹å‰å®Œæˆ
+  TX1FtdcErrorMsgInfoType StatusMsg;         // çŠ¶æ€ä¿¡æ¯
+  TX1FtdcOrderPropertyType OrderProperty;    // æŠ¥å•é™„åŠ å±æ€§
+  TX1FtdcLocalOrderIDType PriFlowNo;         // ç§æœ‰æµç¼–å·
 };
 
-
-///´íÎóĞÅÏ¢
+///é”™è¯¯ä¿¡æ¯
 struct APISTRUCT CX1FtdcRspErrorField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcSessionIDType                  SessionID;                    // »á»°±êÊ¶
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕËºÅ
-    TX1FtdcErrorIDType                    ErrorID;                      // ´íÎóID
-    TX1FtdcX1OrderIDType                  X1OrderID;                    // ¹ñÌ¨Î¯ÍĞºÅ
-    TX1FtdcLocalOrderIDType               LocalOrderID;                 // ±¾µØÎ¯ÍĞºÅ
-    TX1FtdcErrorMsgInfoType               ErrorMsg;                     // ´íÎóĞÅÏ¢
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
+  TX1FtdcRequestIDType RequestID;        // è¯·æ±‚ID
+  TX1FtdcSessionIDType SessionID;        // ä¼šè¯æ ‡è¯†
+  TX1FtdcAccountIDType AccountID;        // èµ„é‡‘è´¦å·
+  TX1FtdcErrorIDType ErrorID;            // é”™è¯¯ID
+  TX1FtdcX1OrderIDType X1OrderID;        // æŸœå°å§”æ‰˜å·
+  TX1FtdcLocalOrderIDType LocalOrderID;  // æœ¬åœ°å§”æ‰˜å·
+  TX1FtdcErrorMsgInfoType ErrorMsg;      // é”™è¯¯ä¿¡æ¯
+  TX1FtdcInstrumentIDType InstrumentID;  // åˆçº¦ä»£ç 
 };
 
-
-///·µ»Ø×Ê½ğĞÅÏ¢
+///è¿”å›èµ„é‡‘ä¿¡æ¯
 struct APISTRUCT CX1FtdcRspCapitalField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕÊºÅ
-    TX1FtdcEquityType                     PreEquity;                    // ÉÏÈÕÈ¨Òæ
-    TX1FtdcEquityType                     TodayEquity;                  // µ±ÈÕ¿Í»§È¨Òæ
-    TX1FtdcProfitLossType                 CloseProfitLoss;              // Æ½²ÖÓ¯¿÷
-    TX1FtdcProfitLossType                 PositionProfitLoss;           // ³Ö²ÖÓ¯¿÷
-    TX1FtdcProfitLossType                 FrozenMargin;                 // ¶³½á×Ê½ğ
-    TX1FtdcProfitLossType                 Margin;                       // ³Ö²Ö±£Ö¤½ğ
-    TX1FtdcProfitLossType                 Fee;                          // µ±ÈÕÊÖĞø·Ñ
-    TX1FtdcProfitLossType                 Available;                    // ¿ÉÓÃ×Ê½ğ
-    TX1FtdcProfitLossType                 Withdraw;                     // ¿ÉÈ¡×Ê½ğ
-    TX1FtdcRiskDegreeType                 RiskDegree;                   // ·çÏÕ¶È
-    TX1FtdcPremiumType                    TodayPremiumIncome;           // ±¾ÈÕÈ¨Àû½ğÊÕÈë
-    TX1FtdcPremiumType                    TodayPremiumPay;              // ±¾ÈÕÈ¨Àû½ğ¸¶³ö
-    TX1FtdcPremiumType                    YesterdayPremium;             // ×òÈ¨Àû½ğÊÕ¸¶
-    TX1FtdcMarketValueType                OptMarketValue;               // ÆÚÈ¨ÊĞÖµ
-    TX1FtdcProfitLossType                 ProfitLoss;                   // ¸¡¶¯Ó¯¿÷
-    TX1FtdcProfitLossType                 TotalFundOut;                 // ×Ü³ö½ğ
-    TX1FtdcProfitLossType                 TotalFundIn;                  // ×ÜÈë½ğ
-    TX1FtdcRatioType                      UpFloathingRatio;             // ¸¡¶¯±ÈÀıÉÏÏŞ
-    TX1FtdcRatioType                      DownFloathingRatio;           // ¸¡¶¯±ÈÀıÏÂÏŞ
-    TX1FtdcRatioType                      AllocateRatio;                // ·ÖÅä±ÈÀı
-    TX1FtdcCurrencyType                   CurrencyID;                   //±ÒÖÖ´úÂë
-	TX1FtdcProfitLossType                 Mortgage;                     //ÖÊÑº½ğ¶î(´Ë°æ±¾²»ÓÃ)
-	TX1FtdcProfitLossType                 FundMortgageIn;               //»õ±ÒÖÊÈë½ğ¶î
-	TX1FtdcProfitLossType                 FundMortgageOut;              //»õ±ÒÖÊ³ö½ğ¶î
-	TX1FtdcProfitLossType                 FundMortgageAvailable;        //»õ±ÒÖÊÑºÓà¶î
-	TX1FtdcProfitLossType                 YesterdayMargin;              //×ò±£Ö¤½ğ	
+  TX1FtdcRequestIDType RequestID;               // è¯·æ±‚ID
+  TX1FtdcAccountIDType AccountID;               // èµ„é‡‘å¸å·
+  TX1FtdcEquityType PreEquity;                  // ä¸Šæ—¥æƒç›Š
+  TX1FtdcEquityType TodayEquity;                // å½“æ—¥å®¢æˆ·æƒç›Š
+  TX1FtdcProfitLossType CloseProfitLoss;        // å¹³ä»“ç›ˆäº
+  TX1FtdcProfitLossType PositionProfitLoss;     // æŒä»“ç›ˆäº
+  TX1FtdcProfitLossType FrozenMargin;           // å†»ç»“èµ„é‡‘
+  TX1FtdcProfitLossType Margin;                 // æŒä»“ä¿è¯é‡‘
+  TX1FtdcProfitLossType Fee;                    // å½“æ—¥æ‰‹ç»­è´¹
+  TX1FtdcProfitLossType Available;              // å¯ç”¨èµ„é‡‘
+  TX1FtdcProfitLossType Withdraw;               // å¯å–èµ„é‡‘
+  TX1FtdcRiskDegreeType RiskDegree;             // é£é™©åº¦
+  TX1FtdcPremiumType TodayPremiumIncome;        // æœ¬æ—¥æƒåˆ©é‡‘æ”¶å…¥
+  TX1FtdcPremiumType TodayPremiumPay;           // æœ¬æ—¥æƒåˆ©é‡‘ä»˜å‡º
+  TX1FtdcPremiumType YesterdayPremium;          // æ˜¨æƒåˆ©é‡‘æ”¶ä»˜
+  TX1FtdcMarketValueType OptMarketValue;        // æœŸæƒå¸‚å€¼
+  TX1FtdcProfitLossType ProfitLoss;             // æµ®åŠ¨ç›ˆäº
+  TX1FtdcProfitLossType TotalFundOut;           // æ€»å‡ºé‡‘
+  TX1FtdcProfitLossType TotalFundIn;            // æ€»å…¥é‡‘
+  TX1FtdcRatioType UpFloathingRatio;            // æµ®åŠ¨æ¯”ä¾‹ä¸Šé™
+  TX1FtdcRatioType DownFloathingRatio;          // æµ®åŠ¨æ¯”ä¾‹ä¸‹é™
+  TX1FtdcRatioType AllocateRatio;               // åˆ†é…æ¯”ä¾‹
+  TX1FtdcCurrencyType CurrencyID;               //å¸ç§ä»£ç 
+  TX1FtdcProfitLossType Mortgage;               //è´¨æŠ¼é‡‘é¢(æ­¤ç‰ˆæœ¬ä¸ç”¨)
+  TX1FtdcProfitLossType FundMortgageIn;         //è´§å¸è´¨å…¥é‡‘é¢
+  TX1FtdcProfitLossType FundMortgageOut;        //è´§å¸è´¨å‡ºé‡‘é¢
+  TX1FtdcProfitLossType FundMortgageAvailable;  //è´§å¸è´¨æŠ¼ä½™é¢
+  TX1FtdcProfitLossType YesterdayMargin;        //æ˜¨ä¿è¯é‡‘
 };
 
-
-///·µ»Ø³Ö²ÖĞÅÏ¢
+///è¿”å›æŒä»“ä¿¡æ¯
 struct APISTRUCT CX1FtdcRspPositionField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕÊºÅID
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×Ëù´úÂë
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼ºÅ
-    TX1FtdcBuySellTypeType                BuySellType;                  // ÂòÂô
-    TX1FtdcPriceType                      OpenAvgPrice;                 // ¿ª²Ö¾ù¼Û
-    TX1FtdcPriceType                      PositionAvgPrice;             // ³Ö²Ö¾ù¼Û
-    TX1FtdcAmountType                     PositionAmount;               // ³Ö²ÖÁ¿
-    TX1FtdcAmountType                     TotalAvaiAmount;              // ×Ü¿ÉÓÃ
-    TX1FtdcAmountType                     TodayAvaiAmount;              // ½ñ¿ÉÓÃ
-    TX1FtdcAmountType                     LastAvaiAmount;               // ×ò¿ÉÓÃ
-    TX1FtdcAmountType                     TodayAmount;                  // ½ñ²Ö
-    TX1FtdcAmountType                     LastAmount;                   // ×ò²Ö
-    TX1FtdcAmountType                     TradingAmount;                // Æ½½ñ¹Òµ¥Á¿
-    TX1FtdcProfitLossType                 DatePositionProfitLoss;       // ¶¢ÊĞ³Ö²ÖÓ¯¿÷
-    TX1FtdcProfitLossType                 DateCloseProfitLoss;          // ¶¢ÊĞÆ½²ÖÓ¯¿÷
-    TX1FtdcProfitLossType                 Premium;                      // È¨Àû½ğ
-    TX1FtdcProfitLossType                 ProfitLoss;                   // ¸¡¶¯Ó¯¿÷
-    TX1FtdcProfitLossType                 Margin;                       // Õ¼ÓÃ±£Ö¤½ğ
-    TX1FtdcSpeculatorType                 Speculator;                   // Í¶±£Àà±ğ
-    TX1FtdcClientIDType                   ClientID;                     // ½»Ò×±àÂë
-    TX1FtdcPriceType                      PreSettlementPrice;           // ×ò½áËã¼Û
-    TX1FtdcInstrumentTypeType             InstrumentType;               // ºÏÔ¼ÀàĞÍ
-    TX1FtdcAmountType                     YesterdayTradingAmount;       // Æ½×ò¹Òµ¥Á¿
-    TX1FtdcProfitLossType                 OptionValue;                  // ÆÚÈ¨ÊĞÖµ
+  TX1FtdcRequestIDType RequestID;                // è¯·æ±‚ID
+  TX1FtdcAccountIDType AccountID;                // èµ„é‡‘å¸å·ID
+  TX1FtdcExchangeIDType ExchangeID;              // äº¤æ˜“æ‰€ä»£ç 
+  TX1FtdcInstrumentIDType InstrumentID;          // åˆçº¦å·
+  TX1FtdcBuySellTypeType BuySellType;            // ä¹°å–
+  TX1FtdcPriceType OpenAvgPrice;                 // å¼€ä»“å‡ä»·
+  TX1FtdcPriceType PositionAvgPrice;             // æŒä»“å‡ä»·
+  TX1FtdcAmountType PositionAmount;              // æŒä»“é‡
+  TX1FtdcAmountType TotalAvaiAmount;             // æ€»å¯ç”¨
+  TX1FtdcAmountType TodayAvaiAmount;             // ä»Šå¯ç”¨
+  TX1FtdcAmountType LastAvaiAmount;              // æ˜¨å¯ç”¨
+  TX1FtdcAmountType TodayAmount;                 // ä»Šä»“
+  TX1FtdcAmountType LastAmount;                  // æ˜¨ä»“
+  TX1FtdcAmountType TradingAmount;               // å¹³ä»ŠæŒ‚å•é‡
+  TX1FtdcProfitLossType DatePositionProfitLoss;  // ç›¯å¸‚æŒä»“ç›ˆäº
+  TX1FtdcProfitLossType DateCloseProfitLoss;     // ç›¯å¸‚å¹³ä»“ç›ˆäº
+  TX1FtdcProfitLossType Premium;                 // æƒåˆ©é‡‘
+  TX1FtdcProfitLossType ProfitLoss;              // æµ®åŠ¨ç›ˆäº
+  TX1FtdcProfitLossType Margin;                  // å ç”¨ä¿è¯é‡‘
+  TX1FtdcSpeculatorType Speculator;              // æŠ•ä¿ç±»åˆ«
+  TX1FtdcClientIDType ClientID;                  // äº¤æ˜“ç¼–ç 
+  TX1FtdcPriceType PreSettlementPrice;           // æ˜¨ç»“ç®—ä»·
+  TX1FtdcInstrumentTypeType InstrumentType;      // åˆçº¦ç±»å‹
+  TX1FtdcAmountType YesterdayTradingAmount;      // å¹³æ˜¨æŒ‚å•é‡
+  TX1FtdcProfitLossType OptionValue;             // æœŸæƒå¸‚å€¼
 };
 
-///ÓÃ»§ÍË³ö·µ»ØĞÅÏ¢
+///ç”¨æˆ·é€€å‡ºè¿”å›ä¿¡æ¯
 struct APISTRUCT CX1FtdcRspUserLogoutInfoField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕË»§ID
-    TX1FtdcAccountLogoutResultType        LogoutResult;                 // ÍË³ö½á¹û
-    TX1FtdcErrorIDType                    ErrorID;                      // ´íÎóID
-    TX1FtdcErrorMsgInfoType               ErrorMsg;                     // ´íÎóĞÅÏ¢
+  TX1FtdcRequestIDType RequestID;               // è¯·æ±‚ID
+  TX1FtdcAccountIDType AccountID;               // èµ„é‡‘è´¦æˆ·ID
+  TX1FtdcAccountLogoutResultType LogoutResult;  // é€€å‡ºç»“æœ
+  TX1FtdcErrorIDType ErrorID;                   // é”™è¯¯ID
+  TX1FtdcErrorMsgInfoType ErrorMsg;             // é”™è¯¯ä¿¡æ¯
 };
 
-///Ö¸¶¨µÄºÏÔ¼
+///æŒ‡å®šçš„åˆçº¦
 struct APISTRUCT CX1FtdcQrySpecificInstrumentField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕË»§ID
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×ËùID
-    TX1FtdcInstrumentTypeType             InstrumentType;               // ºÏÔ¼ÀàĞÍ
+  TX1FtdcRequestIDType RequestID;            // è¯·æ±‚ID
+  TX1FtdcAccountIDType AccountID;            // èµ„é‡‘è´¦æˆ·ID
+  TX1FtdcInstrumentIDType InstrumentID;      // åˆçº¦ä»£ç 
+  TX1FtdcExchangeIDType ExchangeID;          // äº¤æ˜“æ‰€ID
+  TX1FtdcInstrumentTypeType InstrumentType;  // åˆçº¦ç±»å‹
 };
 
-///½»Ò×ËùºÏÔ¼·µ»ØĞÅÏ¢
+///äº¤æ˜“æ‰€åˆçº¦è¿”å›ä¿¡æ¯
 struct APISTRUCT CX1FtdcRspExchangeInstrumentField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×Ëù±àÂë
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
-    TX1FtdcVarietyNameType                VarietyName;                  // Æ·ÖÖÃû³Æ
-    TX1FtdcInstrumentTypeType             InstrumentType;               // ºÏÔ¼ÀàĞÍ
-    TX1FtdcAmountType                     OrderTopLimit;                // ÏŞ¼ÛÎ¯ÍĞÉÏÏŞ
-    TX1FtdcAmountType                     MktOrderTopLimit;             // ÊĞ¼ÛÎ¯ÍĞÉÏÏŞ
-    TX1FtdcPriceType                      ContractMultiplier;           // ºÏÔ¼³ËÊı
-    TX1FtdcPriceType                      MinPriceFluctuation;          // ×îĞ¡±ä¶¯¼ÛÎ»
-    TX1FtdcInstrumentMaturityType         InstrumentMaturity;           // ºÏÔ¼×îºó½»Ò×ÈÕ
-    TX1FtdcPriceType                      UpperLimitPrice;              // ÕÇÍ£°å¼Û
-    TX1FtdcPriceType                      LowerLimitPrice;              // µøÍ£°å¼Û
-    TX1FtdcPriceType                      PreClosePrice;                // ×òÊÕÅÌ
-    TX1FtdcPriceType                      PreSettlementPrice;           // ×ò½áËã¼Û
-    TX1FtdcPriceType                      SettlementPrice;              // ½áËã¼Û
-    TX1FtdcAmountType                     PreOpenInterest;              // ×ò³Ö²ÖÁ¿
-    TX1FtdcInstrumentPrefixType           InstrumentPrefix;             // ºÏÔ¼Ç°×º
-    TX1FtdcInstrumenExpirationDateType    InstrumentExpiration;         // ºÏÔ¼µ½ÆÚÈÕ
-    TX1FtdcInstrumentIDType               Underlying;                   // ÆÚÈ¨¶ÔÓ¦µÄ±êµÄºÏÔ¼´úÂë
-    TX1FtdcOptionTypeType                 OptionType;                   // ÆÚÈ¨ÀàĞÍ
-    TX1FtdcPriceType                      StrikePrice;                  // Ö´ĞĞ¼Û¸ñ
-    TX1FtdcRiskDegreeType                 ExchangeRiskDegree;           // ½»Ò×ËùÆÚÈ¨×îµÍ±£ÕÏ·çÏÕÏµÊı
-    TX1FtdcPriceType                      MinMargin;                    // µ¥Î»(ÊÖ)ÆÚÈ¨ºÏÔ¼×îĞ¡±£Ö¤½ğ
-    TX1FtdcAmountType                     TradeSize;                    // ÆÚÈ¨¿ª²Öµ¥Î»
+  TX1FtdcRequestIDType RequestID;                    // è¯·æ±‚ID
+  TX1FtdcExchangeIDType ExchangeID;                  // äº¤æ˜“æ‰€ç¼–ç 
+  TX1FtdcInstrumentIDType InstrumentID;              // åˆçº¦ä»£ç 
+  TX1FtdcVarietyNameType VarietyName;                // å“ç§åç§°
+  TX1FtdcInstrumentTypeType InstrumentType;          // åˆçº¦ç±»å‹
+  TX1FtdcAmountType OrderTopLimit;                   // é™ä»·å§”æ‰˜ä¸Šé™
+  TX1FtdcAmountType MktOrderTopLimit;                // å¸‚ä»·å§”æ‰˜ä¸Šé™
+  TX1FtdcPriceType ContractMultiplier;               // åˆçº¦ä¹˜æ•°
+  TX1FtdcPriceType MinPriceFluctuation;              // æœ€å°å˜åŠ¨ä»·ä½
+  TX1FtdcInstrumentMaturityType InstrumentMaturity;  // åˆçº¦æœ€åäº¤æ˜“æ—¥
+  TX1FtdcPriceType UpperLimitPrice;                  // æ¶¨åœæ¿ä»·
+  TX1FtdcPriceType LowerLimitPrice;                  // è·Œåœæ¿ä»·
+  TX1FtdcPriceType PreClosePrice;                    // æ˜¨æ”¶ç›˜
+  TX1FtdcPriceType PreSettlementPrice;               // æ˜¨ç»“ç®—ä»·
+  TX1FtdcPriceType SettlementPrice;                  // ç»“ç®—ä»·
+  TX1FtdcAmountType PreOpenInterest;                 // æ˜¨æŒä»“é‡
+  TX1FtdcInstrumentPrefixType InstrumentPrefix;      // åˆçº¦å‰ç¼€
+  TX1FtdcInstrumenExpirationDateType InstrumentExpiration;  // åˆçº¦åˆ°æœŸæ—¥
+  TX1FtdcInstrumentIDType Underlying;  // æœŸæƒå¯¹åº”çš„æ ‡çš„åˆçº¦ä»£ç 
+  TX1FtdcOptionTypeType OptionType;    // æœŸæƒç±»å‹
+  TX1FtdcPriceType StrikePrice;        // æ‰§è¡Œä»·æ ¼
+  TX1FtdcRiskDegreeType ExchangeRiskDegree;  // äº¤æ˜“æ‰€æœŸæƒæœ€ä½ä¿éšœé£é™©ç³»æ•°
+  TX1FtdcPriceType MinMargin;   // å•ä½(æ‰‹)æœŸæƒåˆçº¦æœ€å°ä¿è¯é‡‘
+  TX1FtdcAmountType TradeSize;  // æœŸæƒå¼€ä»“å•ä½
 };
 
-
-///Î¯ÍĞ²éÑ¯Êı¾İ½á¹¹
+///å§”æ‰˜æŸ¥è¯¢æ•°æ®ç»“æ„
 /**
-* @brief Î¯ÍĞ²éÑ¯Êı¾İ½á¹¹
-* @details ÕâÀïÓĞ·á¸»µÄ²éÑ¯Ìõ¼şÉèÖÃ£¬Èç¹ûÏë²éÑ¯ËùÓĞÎ¯ÍĞ¼ÇÂ¼£¬ÔòÖ»ĞèÒªÊäÈëAccountIDºÍInstrumentType¼´¿É¡£
-*          ²éÑ¯´¦ÓÚÄ³×´Ì¬µÄ±¨µ¥£¬ÔòÖĞĞèÒª½«OrderStatusÉèÖÃÎªÏàÓ¦±¨µ¥×´Ì¬µÄÖµ¼´¿É£¬Èç3±íÊ¾Î´³É½»ÔÚ¶ÓÁĞµÄµ¥×Ó¡£(×¢ÒâOrderStatusºÍOrderType²éÑ¯Ìõ¼ş¸Ã°æ±¾Ôİ²»Ö§³Ö)
-*          ²éÑ¯Ö¸¶¨±¨µ¥ÀàĞÍµÄµ¥×Ó£¬ÈçÏŞ¼Ûµ¥»òÊĞ¼Ûµ¥µÈ¡£
-*          ¸Ã°æ±¾²»Ö§³Ö°´¹ñÌ¨Î¯ÍĞºÅX1OrderID »ò±¾µØÎ¯ÍĞºÅLocalOrderID²éÑ¯¡£
-*          ·Ïµ¥½öÖ§³ÖÏÂµ¥µÄÎ¯ÍĞ²éÑ¯¡£
-*          ·Ïµ¥µÄ¼Û¸ñ¾ùÏÔÊ¾Îª0.
-*/
+ * @brief å§”æ‰˜æŸ¥è¯¢æ•°æ®ç»“æ„
+ * @details
+ * è¿™é‡Œæœ‰ä¸°å¯Œçš„æŸ¥è¯¢æ¡ä»¶è®¾ç½®ï¼Œå¦‚æœæƒ³æŸ¥è¯¢æ‰€æœ‰å§”æ‰˜è®°å½•ï¼Œåˆ™åªéœ€è¦è¾“å…¥AccountIDå’ŒInstrumentTypeå³å¯ã€‚
+ *          æŸ¥è¯¢å¤„äºæŸçŠ¶æ€çš„æŠ¥å•ï¼Œåˆ™ä¸­éœ€è¦å°†OrderStatusè®¾ç½®ä¸ºç›¸åº”æŠ¥å•çŠ¶æ€çš„å€¼å³å¯ï¼Œå¦‚3è¡¨ç¤ºæœªæˆäº¤åœ¨é˜Ÿåˆ—çš„å•å­ã€‚(æ³¨æ„OrderStatuså’ŒOrderTypeæŸ¥è¯¢æ¡ä»¶è¯¥ç‰ˆæœ¬æš‚ä¸æ”¯æŒ)
+ *          æŸ¥è¯¢æŒ‡å®šæŠ¥å•ç±»å‹çš„å•å­ï¼Œå¦‚é™ä»·å•æˆ–å¸‚ä»·å•ç­‰ã€‚
+ *          è¯¥ç‰ˆæœ¬ä¸æ”¯æŒæŒ‰æŸœå°å§”æ‰˜å·X1OrderID æˆ–æœ¬åœ°å§”æ‰˜å·LocalOrderIDæŸ¥è¯¢ã€‚
+ *          åºŸå•ä»…æ”¯æŒä¸‹å•çš„å§”æ‰˜æŸ¥è¯¢ã€‚
+ *          åºŸå•çš„ä»·æ ¼å‡æ˜¾ç¤ºä¸º0.
+ */
 struct APISTRUCT CX1FtdcQryOrderField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕË»§ID
-    TX1FtdcInstrumentTypeType             InstrumentType;               // ºÏÔ¼ÀàĞÍ
-    TX1FtdcCustomCategoryType             CustomCategory;               // ×Ô¶¨ÒåÀà±ğ
-    TX1FtdcOrderAnswerStatusType          OrderStatus;                  // Î¯ÍĞ×´Ì¬
-    TX1FtdcOrderTypeType                  OrderType;                    // ±¨µ¥ÀàĞÍ
-    TX1FtdcX1OrderIDType                  X1OrderID;                    // ¹ñÌ¨Î¯ÍĞºÅ
-    TX1FtdcLocalOrderIDType               LocalOrderID;                 // ±¾µØÎ¯ÍĞºÅ
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
+  TX1FtdcRequestIDType RequestID;            // è¯·æ±‚ID
+  TX1FtdcAccountIDType AccountID;            // èµ„é‡‘è´¦æˆ·ID
+  TX1FtdcInstrumentTypeType InstrumentType;  // åˆçº¦ç±»å‹
+  TX1FtdcCustomCategoryType CustomCategory;  // è‡ªå®šä¹‰ç±»åˆ«
+  TX1FtdcOrderAnswerStatusType OrderStatus;  // å§”æ‰˜çŠ¶æ€
+  TX1FtdcOrderTypeType OrderType;            // æŠ¥å•ç±»å‹
+  TX1FtdcX1OrderIDType X1OrderID;            // æŸœå°å§”æ‰˜å·
+  TX1FtdcLocalOrderIDType LocalOrderID;      // æœ¬åœ°å§”æ‰˜å·
+  TX1FtdcInstrumentIDType InstrumentID;      // åˆçº¦ä»£ç 
 };
 
-
-///³É½»²éÑ¯Êı¾İ½á¹¹
+///æˆäº¤æŸ¥è¯¢æ•°æ®ç»“æ„
 /**
-* @brief ³É½»²éÑ¯Êı¾İ½á¹¹
-* @details ÕâÀïÓĞ·á¸»µÄ²éÑ¯Ìõ¼şÉèÖÃ£¬Èç¹ûÏë²éÑ¯ËùÓĞÎ¯ÍĞ¼ÇÂ¼£¬ÔòÖ»ĞèÒªÊäÈëAccountIDºÍInstrumentType¼´¿É¡££¨×¢ÒâOrderType²éÑ¯Ìõ¼ş¸Ã°æ±¾Ôİ²»Ö§³Ö£©
-*/
+ * @brief æˆäº¤æŸ¥è¯¢æ•°æ®ç»“æ„
+ * @details
+ * è¿™é‡Œæœ‰ä¸°å¯Œçš„æŸ¥è¯¢æ¡ä»¶è®¾ç½®ï¼Œå¦‚æœæƒ³æŸ¥è¯¢æ‰€æœ‰å§”æ‰˜è®°å½•ï¼Œåˆ™åªéœ€è¦è¾“å…¥AccountIDå’ŒInstrumentTypeå³å¯ã€‚ï¼ˆæ³¨æ„OrderTypeæŸ¥è¯¢æ¡ä»¶è¯¥ç‰ˆæœ¬æš‚ä¸æ”¯æŒï¼‰
+ */
 struct APISTRUCT CX1FtdcQryMatchField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕË»§ID
-    TX1FtdcInstrumentTypeType             InstrumentType;               // ºÏÔ¼ÀàĞÍ
-    TX1FtdcCustomCategoryType             CustomCategory;               // ×Ô¶¨ÒåÀà±ğ
-    TX1FtdcOrderTypeType                  OrderType;                    // ±¨µ¥ÀàĞÍ
-    TX1FtdcX1OrderIDType                  X1OrderID;                    // ¹ñÌ¨Î¯ÍĞºÅ
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
+  TX1FtdcRequestIDType RequestID;            // è¯·æ±‚ID
+  TX1FtdcAccountIDType AccountID;            // èµ„é‡‘è´¦æˆ·ID
+  TX1FtdcInstrumentTypeType InstrumentType;  // åˆçº¦ç±»å‹
+  TX1FtdcCustomCategoryType CustomCategory;  // è‡ªå®šä¹‰ç±»åˆ«
+  TX1FtdcOrderTypeType OrderType;            // æŠ¥å•ç±»å‹
+  TX1FtdcX1OrderIDType X1OrderID;            // æŸœå°å§”æ‰˜å·
+  TX1FtdcInstrumentIDType InstrumentID;      // åˆçº¦ä»£ç 
 };
 
-
-///Î¯ÍĞ²éÑ¯ÏìÓ¦Êı¾İ½á¹¹
+///å§”æ‰˜æŸ¥è¯¢å“åº”æ•°æ®ç»“æ„
 struct APISTRUCT CX1FtdcRspOrderField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcX1OrderIDType                  X1OrderID;                    // ¹ñÌ¨Î¯ÍĞºÅ
-    TX1FtdcOrderAnswerStatusType          OrderStatus;                  // Î¯ÍĞ×´Ì¬
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
-    TX1FtdcBuySellTypeType                BuySellType;                  // ÂòÂô
-    TX1FtdcOpenCloseTypeType              OpenClose;                    // ¿ªÆ½±êÖ¾
-    TX1FtdcPriceType                      InsertPrice;                  // Î¯ÍĞ¼Û
-    TX1FtdcAmountType                     OrderAmount;                  // Î¯ÍĞÊıÁ¿
-    TX1FtdcPriceType                      MatchedPrice;                 // ³É½»¼Û¸ñ
-    TX1FtdcAmountType                     MatchedAmount;                // ³É½»ÊıÁ¿
-    TX1FtdcAmountType                     CancelAmount;                 // ³·µ¥ÊıÁ¿
-    TX1FtdcInsertType                     InsertType;                   // ×Ô¶¯µ¥Àà±ğ
-    TX1FtdcSpeculatorType                 Speculator;                   // Í¶±£
-    TX1FtdcDateType                       CommTime;                     // Î¯ÍĞÊ±¼ä
-    TX1FtdcDateType                       SubmitTime;                   // Éê±¨Ê±¼ä
-    TX1FtdcClientIDType                   ClientID;                     // ½»Ò×±àÂë
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×ËùID
-    TX1FtdcFrontAddrType                  OperStation;                  // Î¯ÍĞµØÖ·
-    TX1FtdcAccountIDType                  AccountID;                    // ¿Í»§ºÅ
-    TX1FtdcInstrumentTypeType             InstrumentType;               // ºÏÔ¼ÀàĞÍ
-    TX1FtdcSessionIDType                  SessionId;                    // »á»°ID
-    TX1FtdcReservedType                   ReservedType2;                // Ô¤Áô×Ö¶Î2
-    TX1FtdcOrderSysIDType                 OrderSysID;                   // Ö÷³¡µ¥ºÅ
-    TX1FtdcCustomCategoryType             CustomCategory;               // ×Ô¶¨ÒåÀà±ğ
-    TX1FtdcPriceType                      Margin;                       // ±£Ö¤½ğ
-    TX1FtdcPriceType                      Fee;                          // ÊÖĞø·Ñ
-    TX1FtdcLocalOrderIDType               LocalOrderID;                 // ±¾µØÎ¯ÍĞºÅ ÊÇÏÂµ¥Ê±¸Ãµ¥×ÓµÄ±¾µØÎ¯ÍĞºÅ£¬Èç¹ûÍ¬Ò»ÕËºÅ´Ó¶à¸ö¿Í»§¶ËÏÂµ¥£¬Ôò²éÑ¯·µ»ØµÄLocalOrderID¿ÉÄÜÊÇÖØ¸´µÄ
-    TX1FtdcPriceType                      ProfitLossPrice;              // Ö¹ËğÖ¹Ó¯¼Û
-    TX1FtdcOrderTypeType                  OrderType;                    // ±¨µ¥Àà±ğ
-    TX1FtdcOrderPropertyType              OrderProperty;                // ¶©µ¥ÊôĞÔ
+  TX1FtdcRequestIDType RequestID;            // è¯·æ±‚ID
+  TX1FtdcX1OrderIDType X1OrderID;            // æŸœå°å§”æ‰˜å·
+  TX1FtdcOrderAnswerStatusType OrderStatus;  // å§”æ‰˜çŠ¶æ€
+  TX1FtdcInstrumentIDType InstrumentID;      // åˆçº¦ä»£ç 
+  TX1FtdcBuySellTypeType BuySellType;        // ä¹°å–
+  TX1FtdcOpenCloseTypeType OpenClose;        // å¼€å¹³æ ‡å¿—
+  TX1FtdcPriceType InsertPrice;              // å§”æ‰˜ä»·
+  TX1FtdcAmountType OrderAmount;             // å§”æ‰˜æ•°é‡
+  TX1FtdcPriceType MatchedPrice;             // æˆäº¤ä»·æ ¼
+  TX1FtdcAmountType MatchedAmount;           // æˆäº¤æ•°é‡
+  TX1FtdcAmountType CancelAmount;            // æ’¤å•æ•°é‡
+  TX1FtdcInsertType InsertType;              // è‡ªåŠ¨å•ç±»åˆ«
+  TX1FtdcSpeculatorType Speculator;          // æŠ•ä¿
+  TX1FtdcDateType CommTime;                  // å§”æ‰˜æ—¶é—´
+  TX1FtdcDateType SubmitTime;                // ç”³æŠ¥æ—¶é—´
+  TX1FtdcClientIDType ClientID;              // äº¤æ˜“ç¼–ç 
+  TX1FtdcExchangeIDType ExchangeID;          // äº¤æ˜“æ‰€ID
+  TX1FtdcFrontAddrType OperStation;          // å§”æ‰˜åœ°å€
+  TX1FtdcAccountIDType AccountID;            // å®¢æˆ·å·
+  TX1FtdcInstrumentTypeType InstrumentType;  // åˆçº¦ç±»å‹
+  TX1FtdcSessionIDType SessionId;            // ä¼šè¯ID
+  TX1FtdcReservedType ReservedType2;         // é¢„ç•™å­—æ®µ2
+  TX1FtdcOrderSysIDType OrderSysID;          // ä¸»åœºå•å·
+  TX1FtdcCustomCategoryType CustomCategory;  // è‡ªå®šä¹‰ç±»åˆ«
+  TX1FtdcPriceType Margin;                   // ä¿è¯é‡‘
+  TX1FtdcPriceType Fee;                      // æ‰‹ç»­è´¹
+  TX1FtdcLocalOrderIDType
+      LocalOrderID;  // æœ¬åœ°å§”æ‰˜å·
+                     // æ˜¯ä¸‹å•æ—¶è¯¥å•å­çš„æœ¬åœ°å§”æ‰˜å·ï¼Œå¦‚æœåŒä¸€è´¦å·ä»å¤šä¸ªå®¢æˆ·ç«¯ä¸‹å•ï¼Œåˆ™æŸ¥è¯¢è¿”å›çš„LocalOrderIDå¯èƒ½æ˜¯é‡å¤çš„
+  TX1FtdcPriceType ProfitLossPrice;        // æ­¢æŸæ­¢ç›ˆä»·
+  TX1FtdcOrderTypeType OrderType;          // æŠ¥å•ç±»åˆ«
+  TX1FtdcOrderPropertyType OrderProperty;  // è®¢å•å±æ€§
 };
 
-
-///³É½»²éÑ¯Êı¾İÏìÓ¦
+///æˆäº¤æŸ¥è¯¢æ•°æ®å“åº”
 struct APISTRUCT CX1FtdcRspMatchField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcX1OrderIDType                  X1OrderID;                    // ¹ñÌ¨Î¯ÍĞºÅ
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕËºÅ
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×ËùID
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
-    TX1FtdcBuySellTypeType                BuySellType;                  // ÂòÂô
-    TX1FtdcOpenCloseTypeType              OpenClose;                    // ¿ªÆ½
-    TX1FtdcPriceType                      MatchedPrice;                 // ³É½»¼Û¸ñ
-    TX1FtdcAmountType                     MatchedAmount;                // ³É½»ÊıÁ¿
-    TX1FtdcPriceType                      MatchedMort;                  // ³É½»½ğ¶î
-    TX1FtdcSpeculatorType                 Speculator;                   // Í¶±£Àà±ğ
-    TX1FtdcDateType                       MatchedTime;                  // ³É½»Ê±¼ä
-    TX1FtdcMatchIDType                    MatchedID;                    // ³É½»±àºÅ
-    TX1FtdcLocalOrderIDType               LocalOrderID;                 // ±¾µØÎ¯ÍĞºÅ
-    TX1FtdcClientIDType                   ClientID;                     // ½»Ò×±àÂë
-    TX1FtdcMatchType                      MatchType;                    // ³É½»ÀàĞÍ
-    TX1FtdcInstrumentTypeType             InstrumentType;               // ºÏÔ¼ÀàĞÍ
-    TX1FtdcSessionIDType                  SessionId;                    // »á»°ID
-    TX1FtdcReservedType                   ReservedType2;                // Ô¤Áô×Ö¶Î2
-    TX1FtdcCustomCategoryType             CustomCategory;               // ×Ô¶¨ÒåÀà±ğ
-    TX1FtdcPriceType                      Fee;                          // ÊÖĞø·Ñ
-    TX1FtdcOrderTypeType                  OrderType;                    // ±¨µ¥ÀàĞÍ
-    TX1FtdcOrderSysIDType                 OrderSysID;                   // Ö÷³¡µ¥ºÅ
+  TX1FtdcRequestIDType RequestID;            // è¯·æ±‚ID
+  TX1FtdcX1OrderIDType X1OrderID;            // æŸœå°å§”æ‰˜å·
+  TX1FtdcAccountIDType AccountID;            // èµ„é‡‘è´¦å·
+  TX1FtdcExchangeIDType ExchangeID;          // äº¤æ˜“æ‰€ID
+  TX1FtdcInstrumentIDType InstrumentID;      // åˆçº¦ä»£ç 
+  TX1FtdcBuySellTypeType BuySellType;        // ä¹°å–
+  TX1FtdcOpenCloseTypeType OpenClose;        // å¼€å¹³
+  TX1FtdcPriceType MatchedPrice;             // æˆäº¤ä»·æ ¼
+  TX1FtdcAmountType MatchedAmount;           // æˆäº¤æ•°é‡
+  TX1FtdcPriceType MatchedMort;              // æˆäº¤é‡‘é¢
+  TX1FtdcSpeculatorType Speculator;          // æŠ•ä¿ç±»åˆ«
+  TX1FtdcDateType MatchedTime;               // æˆäº¤æ—¶é—´
+  TX1FtdcMatchIDType MatchedID;              // æˆäº¤ç¼–å·
+  TX1FtdcLocalOrderIDType LocalOrderID;      // æœ¬åœ°å§”æ‰˜å·
+  TX1FtdcClientIDType ClientID;              // äº¤æ˜“ç¼–ç 
+  TX1FtdcMatchType MatchType;                // æˆäº¤ç±»å‹
+  TX1FtdcInstrumentTypeType InstrumentType;  // åˆçº¦ç±»å‹
+  TX1FtdcSessionIDType SessionId;            // ä¼šè¯ID
+  TX1FtdcReservedType ReservedType2;         // é¢„ç•™å­—æ®µ2
+  TX1FtdcCustomCategoryType CustomCategory;  // è‡ªå®šä¹‰ç±»åˆ«
+  TX1FtdcPriceType Fee;                      // æ‰‹ç»­è´¹
+  TX1FtdcOrderTypeType OrderType;            // æŠ¥å•ç±»å‹
+  TX1FtdcOrderSysIDType OrderSysID;          // ä¸»åœºå•å·
 };
 
-
-///·µ»ØºÏÔ¼ĞÅÏ¢Êı¾İ½á¹¹ 
+///è¿”å›åˆçº¦ä¿¡æ¯æ•°æ®ç»“æ„
 struct APISTRUCT CX1FtdcRspSpecificInstrumentField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇó±àºÅ
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
-    TX1FtdcRatioType                      LongMarginRatio;              // ¶àÍ·±£Ö¤½ğÂÊ
-    TX1FtdcRatioType                      ShortMarginRatio;             // ¿ÕÍ·±£Ö¤½ğÂÊ
-    TX1FtdcPriceType                      LongMarginRatioByVolume;      // ¶àÍ·±£Ö¤½ğ·Ñ(¶¨¶î)
-    TX1FtdcPriceType                      ShortMarginRatioByVolume;     // ¿ÕÍ·±£Ö¤½ğ·Ñ(¶¨¶î)
-    TX1FtdcRatioType                      OpenFeeVolRatio;              // ¿ª²ÖÊÖĞø·Ñ °´ÊÖÊı¼ÆËã
-    TX1FtdcRatioType                      CloseFeeVolRatio;             // Æ½²ÖÊÖĞø·Ñ °´ÊÖÊı¼ÆËã
-    TX1FtdcRatioType                      CloseTodayFeeVolRatio;        // Æ½½ñÊÖĞø·Ñ °´ÊÖÊı¼ÆËã
-    TX1FtdcRatioType                      OpenFeeAmtRatio;              // ¿ª²ÖÊÖĞø·ÑÂÊ °´½ğ¶î¼ÆËã
-    TX1FtdcRatioType                      CloseFeeAmtRatio;             // Æ½²ÖÊÖĞø·ÑÂÊ °´½ğ¶î¼ÆËã
-    TX1FtdcRatioType                      CloseTodayFeeAmtRatio;        // Æ½½ñÊÖĞø·ÑÂÊ °´½ğ¶î¼ÆËã
-    TX1FtdcAmountType                     OrderTopLimit;                // ÏŞ¼ÛÎ¯ÍĞÉÏÏŞ
-    TX1FtdcPriceType                      ContractMultiplier;           // ºÏÔ¼³ËÊı
-    TX1FtdcPriceType                      MinimumPriceChange;           // ×îĞ¡±ä¶¯¼ÛÎ»
-    TX1FtdcInstrumentTypeType             InstrumentType;               // ºÏÔ¼ÀàĞÍ
-    TX1FtdcInstrumentMaturityType         InstrumentMaturity;           // ºÏÔ¼×îºó½»Ò×ÈÕ
-    TX1FtdcComputeModeType                ComputeMode;                  // ¼ÆËã·½Ê½             
-    TX1FtdcPriceType                      AtMoneyNorm;                  // Æ½Öµ°´¶¨¶î
-    TX1FtdcPriceType                      UpperLimitPrice;              // ÕÇÍ£°å¼Û
-    TX1FtdcPriceType                      LowerLimitPrice;              // µøÍ£°å¼Û
-    TX1FtdcPriceType                      PreClosePrice;                // ×òÊÕÅÌ
-    TX1FtdcPriceType                      PreSettlementPrice;           // ×ò½áËã¼Û
-    TX1FtdcPriceType                      SettlementPrice;              // ½áËã¼Û
-    TX1FtdcAmountType                     PreOpenInterest;              // ×ò³Ö²ÖÁ¿
-    TX1FtdcRatioType                      OptExecRatio;                 // ÆÚÈ¨£ºĞĞÈ¨°´±ÈÀı ÆÚ»õ£º½»¸î°´±ÈÀı
-    TX1FtdcRatioType                      OptExecRatioPerVol;           // ÆÚÈ¨£ºĞĞÈ¨°´¶¨¶î ÆÚ»õ£º½»¸î°´¶¨¶î
-    TX1FtdcCalculateMode                  CalculateMode;                // ¶³½á×Ê½ğ¼ÆËã·½Ê½
-    TX1FtdcPriceType                      ReferencePrice;               // ²Î¿¼¼Û¸ñ
+  TX1FtdcRequestIDType RequestID;             // è¯·æ±‚ç¼–å·
+  TX1FtdcInstrumentIDType InstrumentID;       // åˆçº¦ä»£ç 
+  TX1FtdcRatioType LongMarginRatio;           // å¤šå¤´ä¿è¯é‡‘ç‡
+  TX1FtdcRatioType ShortMarginRatio;          // ç©ºå¤´ä¿è¯é‡‘ç‡
+  TX1FtdcPriceType LongMarginRatioByVolume;   // å¤šå¤´ä¿è¯é‡‘è´¹(å®šé¢)
+  TX1FtdcPriceType ShortMarginRatioByVolume;  // ç©ºå¤´ä¿è¯é‡‘è´¹(å®šé¢)
+  TX1FtdcRatioType OpenFeeVolRatio;           // å¼€ä»“æ‰‹ç»­è´¹ æŒ‰æ‰‹æ•°è®¡ç®—
+  TX1FtdcRatioType CloseFeeVolRatio;          // å¹³ä»“æ‰‹ç»­è´¹ æŒ‰æ‰‹æ•°è®¡ç®—
+  TX1FtdcRatioType CloseTodayFeeVolRatio;     // å¹³ä»Šæ‰‹ç»­è´¹ æŒ‰æ‰‹æ•°è®¡ç®—
+  TX1FtdcRatioType OpenFeeAmtRatio;        // å¼€ä»“æ‰‹ç»­è´¹ç‡ æŒ‰é‡‘é¢è®¡ç®—
+  TX1FtdcRatioType CloseFeeAmtRatio;       // å¹³ä»“æ‰‹ç»­è´¹ç‡ æŒ‰é‡‘é¢è®¡ç®—
+  TX1FtdcRatioType CloseTodayFeeAmtRatio;  // å¹³ä»Šæ‰‹ç»­è´¹ç‡ æŒ‰é‡‘é¢è®¡ç®—
+  TX1FtdcAmountType OrderTopLimit;         // é™ä»·å§”æ‰˜ä¸Šé™
+  TX1FtdcPriceType ContractMultiplier;     // åˆçº¦ä¹˜æ•°
+  TX1FtdcPriceType MinimumPriceChange;     // æœ€å°å˜åŠ¨ä»·ä½
+  TX1FtdcInstrumentTypeType InstrumentType;          // åˆçº¦ç±»å‹
+  TX1FtdcInstrumentMaturityType InstrumentMaturity;  // åˆçº¦æœ€åäº¤æ˜“æ—¥
+  TX1FtdcComputeModeType ComputeMode;                // è®¡ç®—æ–¹å¼
+  TX1FtdcPriceType AtMoneyNorm;                      // å¹³å€¼æŒ‰å®šé¢
+  TX1FtdcPriceType UpperLimitPrice;                  // æ¶¨åœæ¿ä»·
+  TX1FtdcPriceType LowerLimitPrice;                  // è·Œåœæ¿ä»·
+  TX1FtdcPriceType PreClosePrice;                    // æ˜¨æ”¶ç›˜
+  TX1FtdcPriceType PreSettlementPrice;               // æ˜¨ç»“ç®—ä»·
+  TX1FtdcPriceType SettlementPrice;                  // ç»“ç®—ä»·
+  TX1FtdcAmountType PreOpenInterest;                 // æ˜¨æŒä»“é‡
+  TX1FtdcRatioType OptExecRatio;  // æœŸæƒï¼šè¡ŒæƒæŒ‰æ¯”ä¾‹ æœŸè´§ï¼šäº¤å‰²æŒ‰æ¯”ä¾‹
+  TX1FtdcRatioType OptExecRatioPerVol;  // æœŸæƒï¼šè¡ŒæƒæŒ‰å®šé¢ æœŸè´§ï¼šäº¤å‰²æŒ‰å®šé¢
+  TX1FtdcCalculateMode CalculateMode;  // å†»ç»“èµ„é‡‘è®¡ç®—æ–¹å¼
+  TX1FtdcPriceType ReferencePrice;     // å‚è€ƒä»·æ ¼
 };
 
-///²éÑ¯³Ö²ÖÃ÷Ï¸
+///æŸ¥è¯¢æŒä»“æ˜ç»†
 struct APISTRUCT CX1FtdcQryPositionDetailField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕË»§ID
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
-    TX1FtdcInstrumentTypeType             InstrumentType;               // ºÏÔ¼ÀàĞÍ
+  TX1FtdcRequestIDType RequestID;            // è¯·æ±‚ID
+  TX1FtdcAccountIDType AccountID;            // èµ„é‡‘è´¦æˆ·ID
+  TX1FtdcInstrumentIDType InstrumentID;      // åˆçº¦ä»£ç 
+  TX1FtdcInstrumentTypeType InstrumentType;  // åˆçº¦ç±»å‹
 };
 
-
-///²éÑ¯³Ö²ÖÃ÷Ï¸ÏìÓ¦
+///æŸ¥è¯¢æŒä»“æ˜ç»†å“åº”
 struct APISTRUCT CX1FtdcRspPositionDetailField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕÊºÅID
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×Ëù´úÂë
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼ºÅ
-    TX1FtdcBuySellTypeType                BuySellType;                  // ÂòÂô
-    TX1FtdcPriceType                      OpenPrice;                    // ¿ª²Ö¼Û
-    TX1FtdcAmountType                     Volume;                       // ÊÖÊı
-    TX1FtdcMatchIDType                    MatchID;                      // ³É½»±àºÅ
-    TX1FtdcDateType                       MatchedDate;                  // ³É½»ÈÕÆÚ
-    TX1FtdcProfitLossType                 DatePositionProfitLoss;       // ¶¢ÊĞ³Ö²ÖÓ¯¿÷
-    TX1FtdcProfitLossType                 DateCloseProfitLoss;          // ¶¢ÊĞÆ½²ÖÓ¯¿÷
-    TX1FtdcProfitLossType                 ProfitLoss;                   // ¸¡¶¯Ó¯¿÷
-    TX1FtdcProfitLossType                 Margin;                       // Õ¼ÓÃ±£Ö¤½ğ
-    TX1FtdcSpeculatorType                 Speculator;                   // Í¶±£Àà±ğ
-    TX1FtdcClientIDType                   ClientID;                     // ½»Ò×±àÂë
-    TX1FtdcPriceType                      PreSettlementPrice;           // ×ò½áËã¼Û
-    TX1FtdcInstrumentTypeType             InstrumentType;               // ºÏÔ¼ÀàĞÍ
-    TX1FtdcX1OrderIDType                  X1OrderID;                    // ¹ñÌ¨Î¯ÍĞºÅ
-    TX1FtdcCustomCategoryType             CustomCategory;               // ×Ô¶¨ÒåÀà±ğ
-    TX1FtdcAmountType                     CloseOrderVol;                // Æ½²ÖÎ¯ÍĞÊıÁ¿
-    TX1FtdcAmountType                     CloseMatchVol;                // Æ½²Ö³É½»ÊıÁ¿
-    TX1FtdcPositionDateType               PositionDateType;             // ³Ö²ÖÈÕÆÚÀàĞÍ
+  TX1FtdcRequestIDType RequestID;                // è¯·æ±‚ID
+  TX1FtdcAccountIDType AccountID;                // èµ„é‡‘å¸å·ID
+  TX1FtdcExchangeIDType ExchangeID;              // äº¤æ˜“æ‰€ä»£ç 
+  TX1FtdcInstrumentIDType InstrumentID;          // åˆçº¦å·
+  TX1FtdcBuySellTypeType BuySellType;            // ä¹°å–
+  TX1FtdcPriceType OpenPrice;                    // å¼€ä»“ä»·
+  TX1FtdcAmountType Volume;                      // æ‰‹æ•°
+  TX1FtdcMatchIDType MatchID;                    // æˆäº¤ç¼–å·
+  TX1FtdcDateType MatchedDate;                   // æˆäº¤æ—¥æœŸ
+  TX1FtdcProfitLossType DatePositionProfitLoss;  // ç›¯å¸‚æŒä»“ç›ˆäº
+  TX1FtdcProfitLossType DateCloseProfitLoss;     // ç›¯å¸‚å¹³ä»“ç›ˆäº
+  TX1FtdcProfitLossType ProfitLoss;              // æµ®åŠ¨ç›ˆäº
+  TX1FtdcProfitLossType Margin;                  // å ç”¨ä¿è¯é‡‘
+  TX1FtdcSpeculatorType Speculator;              // æŠ•ä¿ç±»åˆ«
+  TX1FtdcClientIDType ClientID;                  // äº¤æ˜“ç¼–ç 
+  TX1FtdcPriceType PreSettlementPrice;           // æ˜¨ç»“ç®—ä»·
+  TX1FtdcInstrumentTypeType InstrumentType;      // åˆçº¦ç±»å‹
+  TX1FtdcX1OrderIDType X1OrderID;                // æŸœå°å§”æ‰˜å·
+  TX1FtdcCustomCategoryType CustomCategory;      // è‡ªå®šä¹‰ç±»åˆ«
+  TX1FtdcAmountType CloseOrderVol;               // å¹³ä»“å§”æ‰˜æ•°é‡
+  TX1FtdcAmountType CloseMatchVol;               // å¹³ä»“æˆäº¤æ•°é‡
+  TX1FtdcPositionDateType PositionDateType;      // æŒä»“æ—¥æœŸç±»å‹
 };
 
-///½»Ò××´Ì¬²éÑ¯ÇëÇó
+///äº¤æ˜“çŠ¶æ€æŸ¥è¯¢è¯·æ±‚
 struct APISTRUCT CX1FtdcQryExchangeStatusField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×Ëù±àÂë
+  TX1FtdcRequestIDType RequestID;    // è¯·æ±‚ID
+  TX1FtdcExchangeIDType ExchangeID;  // äº¤æ˜“æ‰€ç¼–ç 
 };
 
-///½»Ò×Ëù×´Ì¬²éÑ¯ÏìÓ¦
+///äº¤æ˜“æ‰€çŠ¶æ€æŸ¥è¯¢å“åº”
 struct APISTRUCT CX1FtdcRspExchangeStatusField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcExchangeStatusType             ExchangeStatus;               // ½»Ò×Ëù×´Ì¬
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×Ëù±àÂë
+  TX1FtdcRequestIDType RequestID;            // è¯·æ±‚ID
+  TX1FtdcExchangeStatusType ExchangeStatus;  // äº¤æ˜“æ‰€çŠ¶æ€
+  TX1FtdcExchangeIDType ExchangeID;          // äº¤æ˜“æ‰€ç¼–ç 
 };
 
-///½»Ò×Ëù×´Ì¬Í¨Öª
+///äº¤æ˜“æ‰€çŠ¶æ€é€šçŸ¥
 struct APISTRUCT CX1FtdcExchangeStatusRtnField {
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×Ëù
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
-    TX1FtdcExchangeStatusType             ExchangeStatus;               // ½»Ò×Ëù×´Ì¬
+  TX1FtdcExchangeIDType ExchangeID;          // äº¤æ˜“æ‰€
+  TX1FtdcInstrumentIDType InstrumentID;      // åˆçº¦ä»£ç 
+  TX1FtdcExchangeStatusType ExchangeStatus;  // äº¤æ˜“æ‰€çŠ¶æ€
 };
 
-
-///×öÊĞÉÌ±¨µ¥ÇëÇó
+///åšå¸‚å•†æŠ¥å•è¯·æ±‚
 struct APISTRUCT CX1FtdcQuoteInsertField {
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕËºÅ
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcLocalOrderIDType               LocalOrderID;                 // ±¾µØÎ¯ÍĞºÅ
-    TX1FtdcInsertType                     InsertType;                   // ×Ô¶¯µ¥Àà±ğ
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
-    TX1FtdcQuoteIDType                    QuoteID;                      // Ñ¯¼Û±àºÅ
-    TX1FtdcInstrumentTypeType             InstrumentType;               // ºÏÔ¼ÀàĞÍ 
-    TX1FtdcAmountType                     BuyOrderAmount;               // ±¨µ¥ÊıÁ¿(Âò)
-    TX1FtdcAmountType                     SellOrderAmount;              // ±¨µ¥ÊıÁ¿(Âô)
-    TX1FtdcPriceType                      BuyInsertPrice;               // Î¯ÍĞ¼Û¸ñ(Âò)         
-    TX1FtdcPriceType                      SellInsertPrice;              // Î¯ÍĞ¼Û¸ñ(Âô)          
-    TX1FtdcOpenCloseTypeType              BuyOpenCloseType;             // ¿ªÆ½±êÖ¾(Âò)  
-    TX1FtdcOpenCloseTypeType              SellOpenCloseType;            // ¿ªÆ½±êÖ¾(Âô)
-    TX1FtdcSpeculatorType                 BuySpeculator;                // Í¶×ÊÀà±ğ(Âò)       
-    TX1FtdcSpeculatorType                 SellSpeculator;               // Í¶×ÊÀà±ğ(Âô)          
-    TX1FtdcStayTimeType                   StayTime;                     // Í£ÁôÊ±¼ä£¬½öÖ§³ÖÖ£Öİ¡£ÆäËüÇé¿ö¿ÉÉèÖÃÎª0 
-    TX1FtdcCustomCategoryType             CustomCategory;               // ×Ô¶¨ÒåÀà±ğ
+  TX1FtdcAccountIDType AccountID;              // èµ„é‡‘è´¦å·
+  TX1FtdcRequestIDType RequestID;              // è¯·æ±‚ID
+  TX1FtdcLocalOrderIDType LocalOrderID;        // æœ¬åœ°å§”æ‰˜å·
+  TX1FtdcInsertType InsertType;                // è‡ªåŠ¨å•ç±»åˆ«
+  TX1FtdcInstrumentIDType InstrumentID;        // åˆçº¦ä»£ç 
+  TX1FtdcQuoteIDType QuoteID;                  // è¯¢ä»·ç¼–å·
+  TX1FtdcInstrumentTypeType InstrumentType;    // åˆçº¦ç±»å‹
+  TX1FtdcAmountType BuyOrderAmount;            // æŠ¥å•æ•°é‡(ä¹°)
+  TX1FtdcAmountType SellOrderAmount;           // æŠ¥å•æ•°é‡(å–)
+  TX1FtdcPriceType BuyInsertPrice;             // å§”æ‰˜ä»·æ ¼(ä¹°)
+  TX1FtdcPriceType SellInsertPrice;            // å§”æ‰˜ä»·æ ¼(å–)
+  TX1FtdcOpenCloseTypeType BuyOpenCloseType;   // å¼€å¹³æ ‡å¿—(ä¹°)
+  TX1FtdcOpenCloseTypeType SellOpenCloseType;  // å¼€å¹³æ ‡å¿—(å–)
+  TX1FtdcSpeculatorType BuySpeculator;         // æŠ•èµ„ç±»åˆ«(ä¹°)
+  TX1FtdcSpeculatorType SellSpeculator;        // æŠ•èµ„ç±»åˆ«(å–)
+  TX1FtdcStayTimeType StayTime;  // åœç•™æ—¶é—´ï¼Œä»…æ”¯æŒéƒ‘å·ã€‚å…¶å®ƒæƒ…å†µå¯è®¾ç½®ä¸º0
+  TX1FtdcCustomCategoryType CustomCategory;  // è‡ªå®šä¹‰ç±»åˆ«
 };
 
-///ÅúÁ¿³·µ¥ÇëÇó
+///æ‰¹é‡æ’¤å•è¯·æ±‚
 struct APISTRUCT CX1FtdcCancelAllOrderField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕË»§ID(´Ë°æ±¾²»ÊÊÓÃ)
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×Ëù±àÂë(´Ë°æ±¾²»ÊÊÓÃ)
+  TX1FtdcRequestIDType RequestID;    // è¯·æ±‚ID
+  TX1FtdcAccountIDType AccountID;    // èµ„é‡‘è´¦æˆ·ID(æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
+  TX1FtdcExchangeIDType ExchangeID;  // äº¤æ˜“æ‰€ç¼–ç (æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
 };
 
-///Ñ¯¼ÛÇëÇó
+///è¯¢ä»·è¯·æ±‚
 struct APISTRUCT CX1FtdcForQuoteField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕË»§ID
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
+  TX1FtdcRequestIDType RequestID;        // è¯·æ±‚ID
+  TX1FtdcAccountIDType AccountID;        // èµ„é‡‘è´¦æˆ·ID
+  TX1FtdcInstrumentIDType InstrumentID;  // åˆçº¦ä»£ç 
 };
 
-///×öÊĞÉÌ±¨µ¥ÏìÓ¦
+///åšå¸‚å•†æŠ¥å•å“åº”
 struct APISTRUCT CX1FtdcQuoteRspField {
-    TX1FtdcLocalOrderIDType               LocalOrderID;                 // ±¾µØÎ¯ÍĞºÅ              
-    TX1FtdcX1OrderIDType                  X1OrderID;                    // ¹ñÌ¨Î¯ÍĞºÅ         
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID                    
-    TX1FtdcPriceType                      Fee;                          // ÊÖĞø·Ñ(½ö±¨¼ÛÊ¹ÓÃ)(´Ë°æ±¾²»ÊÊÓÃ)          
-    TX1FtdcPriceType                      Margin;                       // ±£Ö¤½ğ(½ö±¨¼ÛÊ¹ÓÃ)
-    TX1FtdcDateType                       OrderTime;                    // Î¯ÍĞÊ±¼ä(½ö±¨¼ÛÊ¹ÓÃ)(´Ë°æ±¾²»ÊÊÓÃ)  
-    TX1FtdcOrderAnswerStatusType          OrderStatus;                  // Î¯ÍĞ×´Ì¬
-    TX1FtdcCustomCategoryType             CustomCategory;               // ×Ô¶¨ÒåÀà±ğ
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë(´Ë°æ±¾²»ÊÊÓÃ)
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕËºÅ(´Ë°æ±¾²»ÊÊÓÃ)
-    TX1FtdcQuoteIDType                    QuoteID;                      // Ñ¯¼Û±àºÅ
-    TX1FtdcSessionIDType                  SessionID;                    // »á»°ID 
-    TX1FtdcClientIDType                   ClientID;                     // ½»Ò×±àÂë(´Ë°æ±¾²»ÊÊÓÃ)
+  TX1FtdcLocalOrderIDType LocalOrderID;  // æœ¬åœ°å§”æ‰˜å·
+  TX1FtdcX1OrderIDType X1OrderID;        // æŸœå°å§”æ‰˜å·
+  TX1FtdcRequestIDType RequestID;        // è¯·æ±‚ID
+  TX1FtdcPriceType Fee;       // æ‰‹ç»­è´¹(ä»…æŠ¥ä»·ä½¿ç”¨)(æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
+  TX1FtdcPriceType Margin;    // ä¿è¯é‡‘(ä»…æŠ¥ä»·ä½¿ç”¨)
+  TX1FtdcDateType OrderTime;  // å§”æ‰˜æ—¶é—´(ä»…æŠ¥ä»·ä½¿ç”¨)(æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
+  TX1FtdcOrderAnswerStatusType OrderStatus;  // å§”æ‰˜çŠ¶æ€
+  TX1FtdcCustomCategoryType CustomCategory;  // è‡ªå®šä¹‰ç±»åˆ«
+  TX1FtdcInstrumentIDType InstrumentID;      // åˆçº¦ä»£ç (æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
+  TX1FtdcAccountIDType AccountID;            // èµ„é‡‘è´¦å·(æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
+  TX1FtdcQuoteIDType QuoteID;                // è¯¢ä»·ç¼–å·
+  TX1FtdcSessionIDType SessionID;            // ä¼šè¯ID
+  TX1FtdcClientIDType ClientID;              // äº¤æ˜“ç¼–ç (æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
 };
 
-///×öÊĞÉÌ±¨µ¥»Ø±¨
+///åšå¸‚å•†æŠ¥å•å›æŠ¥
 struct APISTRUCT CX1FtdcQuoteRtnField {
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×Ëù                   
-    TX1FtdcClientIDType                   ClientID;                     // ½»Ò×±àÂë  
-    TX1FtdcOrderSysIDType                 OrderSysID;                   // ±¨µ¥±àºÅ
-    TX1FtdcOrderSysIDType                 OrderSysIDTwo;                // Ë«±ßµÚ¶ş±ß
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë                   
-    TX1FtdcLocalOrderIDType               LocalOrderID;                 // ±¾µØÎ¯ÍĞºÅ                
-    TX1FtdcSeatCodeType                   SeatCode;                     // Ï¯Î»´úÂë                  
-    TX1FtdcOpenCloseTypeType              BuyOpenCloseType;             // ¿ªÆ½±êÖ¾(Âò)          
-    TX1FtdcOpenCloseTypeType              SellOpenCloseType;            // ¿ªÆ½±êÖ¾(Âô)             
-    TX1FtdcSpeculatorType                 Speculator;                   // Í¶×ÊÀà±ğ                       
-    TX1FtdcAmountType                     BuyOrderAmount;               // Î¯ÍĞÊıÁ¿(Âò)            
-    TX1FtdcAmountType                     SellOrderAmount;              // Î¯ÍĞÊıÁ¿(Âô)           
-    TX1FtdcPriceType                      BuyInsertPrice;               // Î¯ÍĞ¼Û  (Âò)               
-    TX1FtdcPriceType                      SellInsertPrice;              // Î¯ÍĞ¼Û  (Âô)               
-    TX1FtdcX1OrderIDType                  X1OrderID;                    // ¹ñÌ¨Î¯ÍĞºÅ ·µ»ØµÄ¹ñÌ¨Î¯ÍĞºÅÎªµÚÒ»±ßµÄ¹ñÌ¨Î¯ÍĞºÅ£¬µÚ¶ş±ßµÄ¹ñÌ¨Î¯ÍĞºÅÊµ¼ÊÉÏÊÇµÚÒ»±é¹ñÌ¨Î¯ÍĞºÅ¼Ó1£¬²»ĞèÒªÓÃ»§¹ØĞÄ¡£ºóĞø³·µ¥²Ù×÷Ö¸¶¨Õâ¸ö¹ñÌ¨Î¯ÍĞºÅÀ´½øĞĞË«±ß³·µ¥£¬²»Ö§³ÖÖ»³·ÏúÆäÖĞÒ»±ßµÄ²Ù×÷                             
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕËºÅ(´Ë°æ±¾²»ÊÊÓÃ)                     
-    TX1FtdcInstrumentTypeType             InstrumentType;               // ºÏÔ¼ÀàĞÍ                  
-    TX1FtdcDateType                       SuspendTime;                  // ¹Òµ¥Ê±¼ä(´Ë°æ±¾²»ÊÊÓÃ)                               
-    TX1FtdcEntrusTellerType               EntrusTeller;                 // Î¯ÍĞ¹ñÔ± (´Ë°æ±¾²»ÊÊÓÃ)
-    TX1FtdcOrderAnswerStatusType          OrderStatus;                  // Î¯ÍĞ×´Ì¬ 
-    TX1FtdcSessionIDType                  SessionID;                    // »á»°ID
-    TX1FtdcQuoteIDType                    QuoteID;                      // Ñ¯¼Û±àºÅ
-    TX1FtdcErrorIDType                    ErrorID;                      // ´íÎóID   2ÔÂµ×Ö®Ç°Íê³É
-    TX1FtdcErrorMsgInfoType               StatusMsg;                    // ´íÎóĞÅÏ¢
-    TX1FtdcCustomCategoryType             CustomCategory;               // ×Ô¶¨ÒåÀà±ğ
-    TX1FtdcLocalOrderIDType               PriFlowNo;                    //  Ë½ÓĞÁ÷±àºÅ
+  TX1FtdcExchangeIDType ExchangeID;            // äº¤æ˜“æ‰€
+  TX1FtdcClientIDType ClientID;                // äº¤æ˜“ç¼–ç 
+  TX1FtdcOrderSysIDType OrderSysID;            // æŠ¥å•ç¼–å·
+  TX1FtdcOrderSysIDType OrderSysIDTwo;         // åŒè¾¹ç¬¬äºŒè¾¹
+  TX1FtdcInstrumentIDType InstrumentID;        // åˆçº¦ä»£ç 
+  TX1FtdcLocalOrderIDType LocalOrderID;        // æœ¬åœ°å§”æ‰˜å·
+  TX1FtdcSeatCodeType SeatCode;                // å¸­ä½ä»£ç 
+  TX1FtdcOpenCloseTypeType BuyOpenCloseType;   // å¼€å¹³æ ‡å¿—(ä¹°)
+  TX1FtdcOpenCloseTypeType SellOpenCloseType;  // å¼€å¹³æ ‡å¿—(å–)
+  TX1FtdcSpeculatorType Speculator;            // æŠ•èµ„ç±»åˆ«
+  TX1FtdcAmountType BuyOrderAmount;            // å§”æ‰˜æ•°é‡(ä¹°)
+  TX1FtdcAmountType SellOrderAmount;           // å§”æ‰˜æ•°é‡(å–)
+  TX1FtdcPriceType BuyInsertPrice;             // å§”æ‰˜ä»·  (ä¹°)
+  TX1FtdcPriceType SellInsertPrice;            // å§”æ‰˜ä»·  (å–)
+  TX1FtdcX1OrderIDType
+      X1OrderID;  // æŸœå°å§”æ‰˜å·
+                  // è¿”å›çš„æŸœå°å§”æ‰˜å·ä¸ºç¬¬ä¸€è¾¹çš„æŸœå°å§”æ‰˜å·ï¼Œç¬¬äºŒè¾¹çš„æŸœå°å§”æ‰˜å·å®é™…ä¸Šæ˜¯ç¬¬ä¸€éæŸœå°å§”æ‰˜å·åŠ 1ï¼Œä¸éœ€è¦ç”¨æˆ·å…³å¿ƒã€‚åç»­æ’¤å•æ“ä½œæŒ‡å®šè¿™ä¸ªæŸœå°å§”æ‰˜å·æ¥è¿›è¡ŒåŒè¾¹æ’¤å•ï¼Œä¸æ”¯æŒåªæ’¤é”€å…¶ä¸­ä¸€è¾¹çš„æ“ä½œ
+  TX1FtdcAccountIDType AccountID;            // èµ„é‡‘è´¦å·(æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
+  TX1FtdcInstrumentTypeType InstrumentType;  // åˆçº¦ç±»å‹
+  TX1FtdcDateType SuspendTime;               // æŒ‚å•æ—¶é—´(æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
+  TX1FtdcEntrusTellerType EntrusTeller;  // å§”æ‰˜æŸœå‘˜ (æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
+  TX1FtdcOrderAnswerStatusType OrderStatus;  // å§”æ‰˜çŠ¶æ€
+  TX1FtdcSessionIDType SessionID;            // ä¼šè¯ID
+  TX1FtdcQuoteIDType QuoteID;                // è¯¢ä»·ç¼–å·
+  TX1FtdcErrorIDType ErrorID;                // é”™è¯¯ID   2æœˆåº•ä¹‹å‰å®Œæˆ
+  TX1FtdcErrorMsgInfoType StatusMsg;         // é”™è¯¯ä¿¡æ¯
+  TX1FtdcCustomCategoryType CustomCategory;  // è‡ªå®šä¹‰ç±»åˆ«
+  TX1FtdcLocalOrderIDType PriFlowNo;         //  ç§æœ‰æµç¼–å·
 };
 
-///×öÊĞÉÌ³·µ¥»Ø±¨
+///åšå¸‚å•†æ’¤å•å›æŠ¥
 struct APISTRUCT CX1FtdcQuoteCanceledRtnField {
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×Ëù               
-    TX1FtdcClientIDType                   ClientID;                     // ½»Ò×±àÂë(´Ë°æ±¾²»ÊÊÓÃ)  
-    TX1FtdcOrderSysIDType                 OrderSysID;                   // ±¨µ¥±àºÅ
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
-    TX1FtdcLocalOrderIDType               LocalOrderID;                 // ±¾µØÎ¯ÍĞºÅ                
-    TX1FtdcSeatCodeType                   SeatCode;                     // Ï¯Î»´úÂë                  
-    TX1FtdcOpenCloseTypeType              BuyOpenCloseType;             // ¿ªÆ½±êÖ¾(Âò)      
-    TX1FtdcOpenCloseTypeType              SellOpenCloseType;            // ¿ªÆ½±êÖ¾(Âô)             
-    TX1FtdcSpeculatorType                 Speculator;                   // Í¶×ÊÀà±ğ                       
-    TX1FtdcX1OrderIDType                  X1OrderID;                    // ¹ñÌ¨Î¯ÍĞºÅ                               
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕËºÅ(´Ë°æ±¾²»ÊÊÓÃ)                     
-    TX1FtdcEntrusTellerType               EntrusTeller;                 // Î¯ÍĞ¹ñÔ±(´Ë°æ±¾²»ÊÊÓÃ)       
-    TX1FtdcOrderAnswerStatusType          OrderStatus;                  // Î¯ÍĞ×´Ì¬ 
-    TX1FtdcAmountType                     CancelAmount;                 // ³·µ¥ÊıÁ¿                              
-    TX1FtdcPriceType                      Fee;                          // ½â¶³ÊÖĞø·Ñ(´Ë°æ±¾²»ÊÊÓÃ)                  
-    TX1FtdcPriceType                      Margin;                       // ½â¶³±£Ö¤½ğ(´Ë°æ±¾²»ÊÊÓÃ) 
-    TX1FtdcSessionIDType                  SessionID;                    // »á»°ID
-    TX1FtdcBuySellTypeType                BuySellType;                  // ÂòÂô±êÖ¾
-    TX1FtdcQuoteIDType                    QuoteID;                      // Ñ¯¼Û±àºÅ
-    TX1FtdcDateType                       CanceledTime;                 // ³·µ¥Ê±¼ä
-    TX1FtdcCustomCategoryType             CustomCategory;               // ×Ô¶¨ÒåÀà±ğ
-    TX1FtdcErrorIDType                    ErrorID;                      // ´íÎóID  2ÔÂµ×Ö®Ç°Íê³É
-    TX1FtdcErrorMsgInfoType               StatusMsg;                    // ×´Ì¬ĞÅÏ¢
-    TX1FtdcLocalOrderIDType               PriFlowNo;                    // Ë½ÓĞÁ÷±àºÅ
+  TX1FtdcExchangeIDType ExchangeID;      // äº¤æ˜“æ‰€
+  TX1FtdcClientIDType ClientID;          // äº¤æ˜“ç¼–ç (æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
+  TX1FtdcOrderSysIDType OrderSysID;      // æŠ¥å•ç¼–å·
+  TX1FtdcInstrumentIDType InstrumentID;  // åˆçº¦ä»£ç 
+  TX1FtdcLocalOrderIDType LocalOrderID;  // æœ¬åœ°å§”æ‰˜å·
+  TX1FtdcSeatCodeType SeatCode;          // å¸­ä½ä»£ç 
+  TX1FtdcOpenCloseTypeType BuyOpenCloseType;   // å¼€å¹³æ ‡å¿—(ä¹°)
+  TX1FtdcOpenCloseTypeType SellOpenCloseType;  // å¼€å¹³æ ‡å¿—(å–)
+  TX1FtdcSpeculatorType Speculator;            // æŠ•èµ„ç±»åˆ«
+  TX1FtdcX1OrderIDType X1OrderID;              // æŸœå°å§”æ‰˜å·
+  TX1FtdcAccountIDType AccountID;            // èµ„é‡‘è´¦å·(æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
+  TX1FtdcEntrusTellerType EntrusTeller;      // å§”æ‰˜æŸœå‘˜(æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
+  TX1FtdcOrderAnswerStatusType OrderStatus;  // å§”æ‰˜çŠ¶æ€
+  TX1FtdcAmountType CancelAmount;            // æ’¤å•æ•°é‡
+  TX1FtdcPriceType Fee;                // è§£å†»æ‰‹ç»­è´¹(æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
+  TX1FtdcPriceType Margin;             // è§£å†»ä¿è¯é‡‘(æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
+  TX1FtdcSessionIDType SessionID;      // ä¼šè¯ID
+  TX1FtdcBuySellTypeType BuySellType;  // ä¹°å–æ ‡å¿—
+  TX1FtdcQuoteIDType QuoteID;          // è¯¢ä»·ç¼–å·
+  TX1FtdcDateType CanceledTime;        // æ’¤å•æ—¶é—´
+  TX1FtdcCustomCategoryType CustomCategory;  // è‡ªå®šä¹‰ç±»åˆ«
+  TX1FtdcErrorIDType ErrorID;                // é”™è¯¯ID  2æœˆåº•ä¹‹å‰å®Œæˆ
+  TX1FtdcErrorMsgInfoType StatusMsg;         // çŠ¶æ€ä¿¡æ¯
+  TX1FtdcLocalOrderIDType PriFlowNo;         // ç§æœ‰æµç¼–å·
 };
 
-
-///×öÊĞÉÌ³É½»»Ø±¨
+///åšå¸‚å•†æˆäº¤å›æŠ¥
 struct APISTRUCT CX1FtdcQuoteMatchRtnField {
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×ËùID
-    TX1FtdcClientIDType                   ClientID;                     // ½»Ò×±àÂë(´Ë°æ±¾²»ÊÊÓÃ)
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
-    TX1FtdcSeatCodeType                   SeatCode;                     // Ï¯Î»´úÂë
-    TX1FtdcLocalOrderIDType               LocalOrderID;                 // ±¾µØÎ¯ÍĞºÅ
-    TX1FtdcOpenCloseTypeType              OpenCloseType;                // ¿ªÆ½±êÖ¾
-    TX1FtdcSpeculatorType                 Speculator;                   // Í¶×ÊÀà±ğ  
-    TX1FtdcX1OrderIDType                  X1OrderID;                    // ¹ñÌ¨Î¯ÍĞºÅ  
-    TX1FtdcOrderSysIDType                 OrderSysID;                   // ±¨µ¥±àºÅ
-    TX1FtdcMatchIDType                    MatchID;                      // ³É½»±àºÅ
-    TX1FtdcAmountType                     MatchedAmount;                // ³É½»ÊıÁ¿
-    TX1FtdcPriceType                      MatchedPrice;                 // ³É½»¼Û¸ñ
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕËºÅ(´Ë°æ±¾²»ÊÊÓÃ)
-    TX1FtdcPriceType                      Turnover;                     // ³É½»½ğ¶î(´Ë°æ±¾²»ÊÊÓÃ)
-    TX1FtdcEntrusTellerType               EntrusTeller;                 // Î¯ÍĞ¹ñÔ±(´Ë°æ±¾²»ÊÊÓÃ)
-    TX1FtdcDateType                       MatchedTime;                  // ³É½»Ê±¼ä
-    TX1FtdcFeeType                        Fee;                          // ÊÖĞø·Ñ(´Ë°æ±¾²»ÊÊÓÃ)
-    TX1FtdcPriceType                      InsertPrice;                  // Î¯ÍĞ¼Û¸ñ(´Ë°æ±¾²»ÊÊÓÃ)
-    TX1FtdcAmountType                     OrderAmount;                  // Î¯ÍĞÊıÁ¿
-    TX1FtdcOrderAnswerStatusType          OrderStatus;                  // Éê±¨½á¹û,³É½»³É¹¦12£¬È«²¿³É½»Óë·ñÓÃ»§×ÔĞĞ¼ÆËã
-    TX1FtdcPriceType                      Margin;                       // ¿ª²ÖÎª±£Ö¤½ğ,Æ½²ÖÎª½â¶³±£Ö¤½ğ(´Ë°æ±¾²»ÓÃ)
-    TX1FtdcBuySellTypeType                BuySellType;                  // ÂòÂô
-    TX1FtdcAmountType                     CloseTodayAmount;             // Æ½½ñÊıÁ¿(´Ë°æ±¾²»ÊÊÓÃ)
-    TX1FtdcPriceType                      ClosePrice;                   // Æ½²Ö½ğ¶î(´Ë°æ±¾²»ÊÊÓÃ)
-    TX1FtdcPriceType                      CloseTodayPrice;              // Æ½½ñ½ğ¶î(´Ë°æ±¾²»ÊÊÓÃ)
-    TX1FtdcAdjustmentInfoType             AdjustmentInfo;               // ×éºÏ»ò¶ÔËøµÄ±£Ö¤½ğµ÷ÕûĞÅÏ¢,¸ñÊ½:[ºÏÔ¼´úÂë,ÂòÂô±êÖ¾,Í¶×ÊÀà±ğ,µ÷Õû½ğ¶î;](´Ë°æ±¾²»ÓÃ) 
-    TX1FtdcPriceType                      FrozenCapita;                 // ³É½»½â¶³Î¯ÍĞ¶³½áµÄ×Ê½ğ(´Ë°æ±¾²»ÊÊÓÃ)
-    TX1FtdcProfitLossType                 DateCloseProfitLoss;          // ¶¢ÊĞÆ½²ÖÓ¯¿÷(´Ë°æ±¾²»ÊÊÓÃ)
-    TX1FtdcInstrumentTypeType             InstrumentType;               // ºÏÔ¼ÀàĞÍ
-    TX1FtdcSessionIDType                  SessionID;                    // »á»°±êÊ¶
-    TX1FtdcLargeMarginDirectType          LargeMarginDirect;            // ´ó±ß±£Ö¤½ğ·½Ïò(´Ë°æ±¾²»ÊÊÓÃ)
-    TX1FtdcQuoteIDType                    QuoteID;                      // Ñ¯¼Û±àºÅ
-    TX1FtdcCustomCategoryType             CustomCategory;               // ×Ô¶¨ÒåÀà±ğ
-    TX1FtdcLocalOrderIDType               PriFlowNo;                    // Ë½ÓĞÁ÷±àºÅ
+  TX1FtdcExchangeIDType ExchangeID;        // äº¤æ˜“æ‰€ID
+  TX1FtdcClientIDType ClientID;            // äº¤æ˜“ç¼–ç (æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
+  TX1FtdcInstrumentIDType InstrumentID;    // åˆçº¦ä»£ç 
+  TX1FtdcSeatCodeType SeatCode;            // å¸­ä½ä»£ç 
+  TX1FtdcLocalOrderIDType LocalOrderID;    // æœ¬åœ°å§”æ‰˜å·
+  TX1FtdcOpenCloseTypeType OpenCloseType;  // å¼€å¹³æ ‡å¿—
+  TX1FtdcSpeculatorType Speculator;        // æŠ•èµ„ç±»åˆ«
+  TX1FtdcX1OrderIDType X1OrderID;          // æŸœå°å§”æ‰˜å·
+  TX1FtdcOrderSysIDType OrderSysID;        // æŠ¥å•ç¼–å·
+  TX1FtdcMatchIDType MatchID;              // æˆäº¤ç¼–å·
+  TX1FtdcAmountType MatchedAmount;         // æˆäº¤æ•°é‡
+  TX1FtdcPriceType MatchedPrice;           // æˆäº¤ä»·æ ¼
+  TX1FtdcAccountIDType AccountID;          // èµ„é‡‘è´¦å·(æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
+  TX1FtdcPriceType Turnover;               // æˆäº¤é‡‘é¢(æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
+  TX1FtdcEntrusTellerType EntrusTeller;    // å§”æ‰˜æŸœå‘˜(æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
+  TX1FtdcDateType MatchedTime;             // æˆäº¤æ—¶é—´
+  TX1FtdcFeeType Fee;                      // æ‰‹ç»­è´¹(æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
+  TX1FtdcPriceType InsertPrice;            // å§”æ‰˜ä»·æ ¼(æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
+  TX1FtdcAmountType OrderAmount;           // å§”æ‰˜æ•°é‡
+  TX1FtdcOrderAnswerStatusType
+      OrderStatus;  // ç”³æŠ¥ç»“æœ,æˆäº¤æˆåŠŸ12ï¼Œå…¨éƒ¨æˆäº¤ä¸å¦ç”¨æˆ·è‡ªè¡Œè®¡ç®—
+  TX1FtdcPriceType Margin;  // å¼€ä»“ä¸ºä¿è¯é‡‘,å¹³ä»“ä¸ºè§£å†»ä¿è¯é‡‘(æ­¤ç‰ˆæœ¬ä¸ç”¨)
+  TX1FtdcBuySellTypeType BuySellType;  // ä¹°å–
+  TX1FtdcAmountType CloseTodayAmount;  // å¹³ä»Šæ•°é‡(æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
+  TX1FtdcPriceType ClosePrice;         // å¹³ä»“é‡‘é¢(æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
+  TX1FtdcPriceType CloseTodayPrice;    // å¹³ä»Šé‡‘é¢(æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
+  TX1FtdcAdjustmentInfoType
+      AdjustmentInfo;  // ç»„åˆæˆ–å¯¹é”çš„ä¿è¯é‡‘è°ƒæ•´ä¿¡æ¯,æ ¼å¼:[åˆçº¦ä»£ç ,ä¹°å–æ ‡å¿—,æŠ•èµ„ç±»åˆ«,è°ƒæ•´é‡‘é¢;](æ­¤ç‰ˆæœ¬ä¸ç”¨)
+  TX1FtdcPriceType FrozenCapita;  // æˆäº¤è§£å†»å§”æ‰˜å†»ç»“çš„èµ„é‡‘(æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
+  TX1FtdcProfitLossType DateCloseProfitLoss;  // ç›¯å¸‚å¹³ä»“ç›ˆäº(æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
+  TX1FtdcInstrumentTypeType InstrumentType;  // åˆçº¦ç±»å‹
+  TX1FtdcSessionIDType SessionID;            // ä¼šè¯æ ‡è¯†
+  TX1FtdcLargeMarginDirectType
+      LargeMarginDirect;       // å¤§è¾¹ä¿è¯é‡‘æ–¹å‘(æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
+  TX1FtdcQuoteIDType QuoteID;  // è¯¢ä»·ç¼–å·
+  TX1FtdcCustomCategoryType CustomCategory;  // è‡ªå®šä¹‰ç±»åˆ«
+  TX1FtdcLocalOrderIDType PriFlowNo;         // ç§æœ‰æµç¼–å·
 };
 
-
-///ÅúÁ¿³·µ¥ÏìÓ¦
+///æ‰¹é‡æ’¤å•å“åº”
 struct APISTRUCT CX1FtdcCancelAllOrderRspField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕË»§ID(´Ë°æ±¾²»ÊÊÓÃ)
-    TX1FtdcOrderAnswerStatusType          OrderStatus;                  // Î¯ÍĞ×´Ì¬
+  TX1FtdcRequestIDType RequestID;  // è¯·æ±‚ID
+  TX1FtdcAccountIDType AccountID;  // èµ„é‡‘è´¦æˆ·ID(æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
+  TX1FtdcOrderAnswerStatusType OrderStatus;  // å§”æ‰˜çŠ¶æ€
 };
 
-///Ñ¯¼ÛÇëÇóÏìÓ¦
+///è¯¢ä»·è¯·æ±‚å“åº”
 struct APISTRUCT CX1FtdcForQuoteRspField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcX1OrderIDType                  X1OrderID;                    // ¹ñÌ¨Î¯ÍĞºÅ
-    TX1FtdcDateType                       CommTime;                     // Î¯ÍĞÊ±¼ä(´Ë°æ±¾²»ÊÊÓÃ)
+  TX1FtdcRequestIDType RequestID;  // è¯·æ±‚ID
+  TX1FtdcX1OrderIDType X1OrderID;  // æŸœå°å§”æ‰˜å·
+  TX1FtdcDateType CommTime;        // å§”æ‰˜æ—¶é—´(æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
 };
 
-///Ñ¯¼Û»Ø±¨
+///è¯¢ä»·å›æŠ¥
 struct APISTRUCT CX1FtdcForQuoteRtnField {
-    TX1FtdcX1OrderIDType                  X1OrderID;                    // ¹ñÌ¨Î¯ÍĞºÅ
-    TX1FtdcSessionIDType                  SessionID;                    // »á»°ID
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×Ëù
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕËºÅ(´Ë°æ±¾²»ÊÊÓÃ)
-    TX1FtdcOrderAnswerStatusType          OrderStatus;                  // Î¯ÍĞ×´Ì¬
-    TX1FtdcErrorIDType                    ErrorID;                      // ´íÎóID
-    TX1FtdcLocalOrderIDType               PriFlowNo;                    // Ë½ÓĞÁ÷±àºÅ
+  TX1FtdcX1OrderIDType X1OrderID;            // æŸœå°å§”æ‰˜å·
+  TX1FtdcSessionIDType SessionID;            // ä¼šè¯ID
+  TX1FtdcInstrumentIDType InstrumentID;      // åˆçº¦ä»£ç 
+  TX1FtdcExchangeIDType ExchangeID;          // äº¤æ˜“æ‰€
+  TX1FtdcAccountIDType AccountID;            // èµ„é‡‘è´¦å·(æ­¤ç‰ˆæœ¬ä¸é€‚ç”¨)
+  TX1FtdcOrderAnswerStatusType OrderStatus;  // å§”æ‰˜çŠ¶æ€
+  TX1FtdcErrorIDType ErrorID;                // é”™è¯¯ID
+  TX1FtdcLocalOrderIDType PriFlowNo;         // ç§æœ‰æµç¼–å·
 };
 
-///²éÑ¯Ñ¯¼ÛÇëÇó
+///æŸ¥è¯¢è¯¢ä»·è¯·æ±‚
 struct APISTRUCT CX1FtdcQryForQuoteField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕË»§ID
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×Ëù
+  TX1FtdcRequestIDType RequestID;        // è¯·æ±‚ID
+  TX1FtdcAccountIDType AccountID;        // èµ„é‡‘è´¦æˆ·ID
+  TX1FtdcInstrumentIDType InstrumentID;  // åˆçº¦ä»£ç 
+  TX1FtdcExchangeIDType ExchangeID;      // äº¤æ˜“æ‰€
 };
 
-///×öÊĞÉÌ±¨¼ÛÎ¯ÍĞ²éÑ¯
+///åšå¸‚å•†æŠ¥ä»·å§”æ‰˜æŸ¥è¯¢
 struct APISTRUCT CX1FtdcQuoteOrderField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×Ëù
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕË»§
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
-    TX1FtdcLocalOrderIDType               LocalOrderID;                 // ±¾µØÎ¯ÍĞºÅ
-    TX1FtdcX1OrderIDType                  X1OrderID;                    // ¹ñÌ¨Î¯ÍĞºÅ
-    TX1FtdcOrderAnswerStatusType          OrderStatus;                  // Î¯ÍĞ×´Ì¬
+  TX1FtdcRequestIDType RequestID;            // è¯·æ±‚ID
+  TX1FtdcExchangeIDType ExchangeID;          // äº¤æ˜“æ‰€
+  TX1FtdcAccountIDType AccountID;            // èµ„é‡‘è´¦æˆ·
+  TX1FtdcInstrumentIDType InstrumentID;      // åˆçº¦ä»£ç 
+  TX1FtdcLocalOrderIDType LocalOrderID;      // æœ¬åœ°å§”æ‰˜å·
+  TX1FtdcX1OrderIDType X1OrderID;            // æŸœå°å§”æ‰˜å·
+  TX1FtdcOrderAnswerStatusType OrderStatus;  // å§”æ‰˜çŠ¶æ€
 };
 
-///Ñ¯¼ÛÍ¨Öª²éÑ¯ÇëÇó
+///è¯¢ä»·é€šçŸ¥æŸ¥è¯¢è¯·æ±‚
 struct APISTRUCT CX1FtdcQryQuoteNoticeField {
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕËºÅ
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×Ëù
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
+  TX1FtdcAccountIDType AccountID;        // èµ„é‡‘è´¦å·
+  TX1FtdcRequestIDType RequestID;        // è¯·æ±‚ID
+  TX1FtdcExchangeIDType ExchangeID;      // äº¤æ˜“æ‰€
+  TX1FtdcInstrumentIDType InstrumentID;  // åˆçº¦ä»£ç 
 };
 
-///²éÑ¯Ñ¯¼ÛÏìÓ¦
+///æŸ¥è¯¢è¯¢ä»·å“åº”
 struct APISTRUCT CX1FtdcQryForQuoteRtnField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕËºÅ
-    TX1FtdcX1OrderIDType                  X1OrderID;                    // ¹ñÌ¨Î¯ÍĞºÅ
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×Ëù
-    TX1FtdcDateType                       SuspendTime;                  // ¹ÒÆğÊ±¼ä
-    TX1FtdcOrderAnswerStatusType          OrderStatus;                  // Î¯ÍĞ×´Ì¬
+  TX1FtdcRequestIDType RequestID;            // è¯·æ±‚ID
+  TX1FtdcAccountIDType AccountID;            // èµ„é‡‘è´¦å·
+  TX1FtdcX1OrderIDType X1OrderID;            // æŸœå°å§”æ‰˜å·
+  TX1FtdcInstrumentIDType InstrumentID;      // åˆçº¦ä»£ç 
+  TX1FtdcExchangeIDType ExchangeID;          // äº¤æ˜“æ‰€
+  TX1FtdcDateType SuspendTime;               // æŒ‚èµ·æ—¶é—´
+  TX1FtdcOrderAnswerStatusType OrderStatus;  // å§”æ‰˜çŠ¶æ€
 };
 
-///×öÊĞÉÌ±¨¼Û²éÑ¯ÏìÓ¦
+///åšå¸‚å•†æŠ¥ä»·æŸ¥è¯¢å“åº”
 struct APISTRUCT CX1FtdcQuoteOrderRtnField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcX1OrderIDType                  X1OrderID;                    // ¹ñÌ¨Î¯ÍĞºÅ
-    TX1FtdcOrderAnswerStatusType          OrderStatus;                  // Î¯ÍĞ×´Ì¬
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
-    TX1FtdcPriceType                      Margin;                       // ±£Ö¤½ğ
-    TX1FtdcPriceType                      Fee;                          // ÊÖĞø·Ñ
-    TX1FtdcLocalOrderIDType               LocalOrderID;                 // ±¾µØÎ¯ÍĞºÅ
-    TX1FtdcAccountIDType                  AccountID;                    // ¿Í»§ºÅ
-    TX1FtdcDateType                       CommTime;                     // Î¯ÍĞÊ±¼ä
-    TX1FtdcDateType                       SubmitTime;                   // Éê±¨Ê±¼ä
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×ËùID
-    TX1FtdcAmountType                     BuyOrderAmount;               // Î¯ÍĞÊıÁ¿(Âò)
-    TX1FtdcAmountType                     BuyMatchedAmount;             // ³É½»ÊıÁ¿(Âò)
-    TX1FtdcAmountType                     BuyCancelAmount;              // ³·µ¥ÊıÁ¿(Âò)
-    TX1FtdcPriceType                      BuyInsertPrice;               // Î¯ÍĞ¼Û¸ñ(Âò)
-    TX1FtdcPriceType                      BuyMatchedPrice;              // ³É½»¼Û¸ñ(Âò)
-    TX1FtdcOpenCloseTypeType              BuyOpenCloseType;             // ¿ªÆ½±êÖ¾(Âò)
-    TX1FtdcAmountType                     SellOrderAmount;              // Î¯ÍĞÊıÁ¿(Âô)
-    TX1FtdcAmountType                     SellMatchedAmount;            // ³É½»ÊıÁ¿(Âô)
-    TX1FtdcAmountType                     SellCancelAmount;             // ³·µ¥ÊıÁ¿(Âô)
-    TX1FtdcPriceType                      SellInsertPrice;              // Î¯ÍĞ¼Û¸ñ(Âô)
-    TX1FtdcPriceType                      SellMatchedPrice;             // ³É½»¼Û¸ñ(Âô)
-    TX1FtdcOpenCloseTypeType              SellOpenCloseType;            // ¿ªÆ½±êÖ¾(Âô)
-    TX1FtdcFrontAddrType                  OperStation;                  // ²Ù×÷Õ¾µã
-    TX1FtdcSessionIDType                  SessionID;                    // »á»°ID
-    TX1FtdcQuoteIDType                    QuoteID;                      // Ñ¯¼Û±àºÅ
-    TX1FtdcCustomCategoryType             CustomCategory;               // ×Ô¶¨ÒåÀà±ğ
+  TX1FtdcRequestIDType RequestID;              // è¯·æ±‚ID
+  TX1FtdcX1OrderIDType X1OrderID;              // æŸœå°å§”æ‰˜å·
+  TX1FtdcOrderAnswerStatusType OrderStatus;    // å§”æ‰˜çŠ¶æ€
+  TX1FtdcInstrumentIDType InstrumentID;        // åˆçº¦ä»£ç 
+  TX1FtdcPriceType Margin;                     // ä¿è¯é‡‘
+  TX1FtdcPriceType Fee;                        // æ‰‹ç»­è´¹
+  TX1FtdcLocalOrderIDType LocalOrderID;        // æœ¬åœ°å§”æ‰˜å·
+  TX1FtdcAccountIDType AccountID;              // å®¢æˆ·å·
+  TX1FtdcDateType CommTime;                    // å§”æ‰˜æ—¶é—´
+  TX1FtdcDateType SubmitTime;                  // ç”³æŠ¥æ—¶é—´
+  TX1FtdcExchangeIDType ExchangeID;            // äº¤æ˜“æ‰€ID
+  TX1FtdcAmountType BuyOrderAmount;            // å§”æ‰˜æ•°é‡(ä¹°)
+  TX1FtdcAmountType BuyMatchedAmount;          // æˆäº¤æ•°é‡(ä¹°)
+  TX1FtdcAmountType BuyCancelAmount;           // æ’¤å•æ•°é‡(ä¹°)
+  TX1FtdcPriceType BuyInsertPrice;             // å§”æ‰˜ä»·æ ¼(ä¹°)
+  TX1FtdcPriceType BuyMatchedPrice;            // æˆäº¤ä»·æ ¼(ä¹°)
+  TX1FtdcOpenCloseTypeType BuyOpenCloseType;   // å¼€å¹³æ ‡å¿—(ä¹°)
+  TX1FtdcAmountType SellOrderAmount;           // å§”æ‰˜æ•°é‡(å–)
+  TX1FtdcAmountType SellMatchedAmount;         // æˆäº¤æ•°é‡(å–)
+  TX1FtdcAmountType SellCancelAmount;          // æ’¤å•æ•°é‡(å–)
+  TX1FtdcPriceType SellInsertPrice;            // å§”æ‰˜ä»·æ ¼(å–)
+  TX1FtdcPriceType SellMatchedPrice;           // æˆäº¤ä»·æ ¼(å–)
+  TX1FtdcOpenCloseTypeType SellOpenCloseType;  // å¼€å¹³æ ‡å¿—(å–)
+  TX1FtdcFrontAddrType OperStation;            // æ“ä½œç«™ç‚¹
+  TX1FtdcSessionIDType SessionID;              // ä¼šè¯ID
+  TX1FtdcQuoteIDType QuoteID;                  // è¯¢ä»·ç¼–å·
+  TX1FtdcCustomCategoryType CustomCategory;    // è‡ªå®šä¹‰ç±»åˆ«
 };
 
-///Ñ¯¼ÛÍ¨Öª²éÑ¯ÏìÓ¦
+///è¯¢ä»·é€šçŸ¥æŸ¥è¯¢å“åº”
 struct APISTRUCT CX1FtdcQryQuoteNoticeRtnField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcQuoteIDType                    QuoteID;                      // Ñ¯¼Û±àºÅ
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×Ëù
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
-    TX1FtdcSourceType                     Source;                       // À´Ô´
-    TX1FtdcDateType                       QuoteTime;                    // Ñ¯¼ÛÊ±¼ä
+  TX1FtdcRequestIDType RequestID;        // è¯·æ±‚ID
+  TX1FtdcQuoteIDType QuoteID;            // è¯¢ä»·ç¼–å·
+  TX1FtdcExchangeIDType ExchangeID;      // äº¤æ˜“æ‰€
+  TX1FtdcInstrumentIDType InstrumentID;  // åˆçº¦ä»£ç 
+  TX1FtdcSourceType Source;              // æ¥æº
+  TX1FtdcDateType QuoteTime;             // è¯¢ä»·æ—¶é—´
 };
 
-///Ì×ÀûºÏÔ¼²éÑ¯
+///å¥—åˆ©åˆçº¦æŸ¥è¯¢
 /**
-* @details µ±exchangeIDÎª¿ÕÊ±£¬±íÊ¾²éÑ¯¸÷½»Ò×ËùµÄËùÓĞºÏÔ¼´úÂë£¬Ò²¿ÉÖ¸¶¨²éÑ¯Ä³½»Ò×ËùµÄËùÓĞºÏÔ¼´úÂëĞÅÏ¢¡£
-*/
-struct  APISTRUCT CX1FtdcAbiInstrumentField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕË»§ID
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×Ëù´úÂë
+ * @details
+ * å½“exchangeIDä¸ºç©ºæ—¶ï¼Œè¡¨ç¤ºæŸ¥è¯¢å„äº¤æ˜“æ‰€çš„æ‰€æœ‰åˆçº¦ä»£ç ï¼Œä¹Ÿå¯æŒ‡å®šæŸ¥è¯¢æŸäº¤æ˜“æ‰€çš„æ‰€æœ‰åˆçº¦ä»£ç ä¿¡æ¯ã€‚
+ */
+struct APISTRUCT CX1FtdcAbiInstrumentField {
+  TX1FtdcRequestIDType RequestID;    // è¯·æ±‚ID
+  TX1FtdcAccountIDType AccountID;    // èµ„é‡‘è´¦æˆ·ID
+  TX1FtdcExchangeIDType ExchangeID;  // äº¤æ˜“æ‰€ä»£ç 
 };
 
-///Ì×ÀûºÏÔ¼·µ»ØĞÅÏ¢
+///å¥—åˆ©åˆçº¦è¿”å›ä¿¡æ¯
 struct APISTRUCT CX1FtdcAbiInstrumentRtnField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×Ëù±àÂë
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
-    TX1FtdcInstrumentNameType             InstrumentName;               // ºÏÔ¼Ãû³Æ
-    TX1FtdcPriceType                      UpperLimitPrice;              // ÕÇÍ£°å¼Û
-    TX1FtdcPriceType                      LowerLimitPrice;              // µøÍ£°å¼Û        
-    TX1FtdcPriceType                      PriceTick;                    // ×îĞ¡±ä¶¯¼ÛÎ»
+  TX1FtdcRequestIDType RequestID;            // è¯·æ±‚ID
+  TX1FtdcExchangeIDType ExchangeID;          // äº¤æ˜“æ‰€ç¼–ç 
+  TX1FtdcInstrumentIDType InstrumentID;      // åˆçº¦ä»£ç 
+  TX1FtdcInstrumentNameType InstrumentName;  // åˆçº¦åç§°
+  TX1FtdcPriceType UpperLimitPrice;          // æ¶¨åœæ¿ä»·
+  TX1FtdcPriceType LowerLimitPrice;          // è·Œåœæ¿ä»·
+  TX1FtdcPriceType PriceTick;                // æœ€å°å˜åŠ¨ä»·ä½
 };
 
-///Ñ¯¼ÛÍ¨Öª¶©ÔÄ»Ø±¨
+///è¯¢ä»·é€šçŸ¥è®¢é˜…å›æŠ¥
 struct APISTRUCT CX1FtdcQuoteSubscribeRtnField {
-    TX1FtdcQuoteIDType                    QuoteID;                      // Ñ¯¼Û±àºÅ
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×Ëù
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
-    TX1FtdcSourceType                     Source;                       // À´Ô´
-    TX1FtdcDateType                       QuoteTime;                    // Ñ¯¼ÛÊ±¼ä
+  TX1FtdcQuoteIDType QuoteID;            // è¯¢ä»·ç¼–å·
+  TX1FtdcExchangeIDType ExchangeID;      // äº¤æ˜“æ‰€
+  TX1FtdcInstrumentIDType InstrumentID;  // åˆçº¦ä»£ç 
+  TX1FtdcSourceType Source;              // æ¥æº
+  TX1FtdcDateType QuoteTime;             // è¯¢ä»·æ—¶é—´
 };
 
-///ĞŞ¸Ä¿Í»§ÃÜÂë
+///ä¿®æ”¹å®¢æˆ·å¯†ç 
 struct APISTRUCT CX1FtdcReqResetPasswordField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID [NM]
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕË»§ID [M]
-    TX1FtdcPasswordType                   OldPassword;                  // ÃÜÂë [M]
-    TX1FtdcPasswordType                   NewPassword;                  // ÃÜÂë [M]
+  TX1FtdcRequestIDType RequestID;   // è¯·æ±‚ID [NM]
+  TX1FtdcAccountIDType AccountID;   // èµ„é‡‘è´¦æˆ·ID [M]
+  TX1FtdcPasswordType OldPassword;  // å¯†ç  [M]
+  TX1FtdcPasswordType NewPassword;  // å¯†ç  [M]
 };
 
-///ĞŞ¸Ä¿Í»§ÃÜÂëÏìÓ¦
+///ä¿®æ”¹å®¢æˆ·å¯†ç å“åº”
 struct APISTRUCT CX1FtdcRspResetPasswordField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID[BLK]
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕÊºÅID [M]
-    TX1FtdcResetPasswordType              ResetPasswordResult;          // ĞŞ¸ÄÃÜÂë½á¹û[M] 
+  TX1FtdcRequestIDType RequestID;                // è¯·æ±‚ID[BLK]
+  TX1FtdcAccountIDType AccountID;                // èµ„é‡‘å¸å·ID [M]
+  TX1FtdcResetPasswordType ResetPasswordResult;  // ä¿®æ”¹å¯†ç ç»“æœ[M]
 };
 
-
-///²éÑ¯×éºÏ³Ö²ÖÃ÷Ï¸
+///æŸ¥è¯¢ç»„åˆæŒä»“æ˜ç»†
 struct APISTRUCT CX1FtdcArbitrageCombineDetailField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕË»§ID
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
-    TX1FtdcInstrumentTypeType             InstrumentType;               // ºÏÔ¼ÀàĞÍ
+  TX1FtdcRequestIDType RequestID;            // è¯·æ±‚ID
+  TX1FtdcAccountIDType AccountID;            // èµ„é‡‘è´¦æˆ·ID
+  TX1FtdcInstrumentIDType InstrumentID;      // åˆçº¦ä»£ç 
+  TX1FtdcInstrumentTypeType InstrumentType;  // åˆçº¦ç±»å‹
 };
 
-
-///²éÑ¯×éºÏ³Ö²ÖÏìÓ¦
+///æŸ¥è¯¢ç»„åˆæŒä»“å“åº”
 struct APISTRUCT CX1FtdcArbitrageCombineDetailRtnField {
-    TX1FtdcRequestIDType                  RequestID;                    // ÇëÇóID
-    TX1FtdcAccountIDType                  AccountID;                    // ×Ê½ğÕÊºÅID
-    TX1FtdcExchangeIDType                 ExchangeID;                   // ½»Ò×Ëù´úÂë
-    TX1FtdcInstrumentIDType               InstrumentID;                 // ºÏÔ¼´úÂë
-    TX1FtdcBuySellTypeType                BuySellType;                  // ÂòÂô
-    TX1FtdcPriceType                      OpenPrice;                    // ¿ª²Ö¼Û
-    TX1FtdcInstrumentIDType               ComTradeID;                   // ×éºÏ±àºÅ
-    TX1FtdcDateType                       OpenDate;                     // ¿ª²ÖÈÕÆÚ
-    TX1FtdcMatchIDType                    MatchID;                      // ³É½»±àºÅ/½áËã±àºÅ
-    TX1FtdcAmountType                     Volume;                       // ³Ö²ÖÊıÁ¿
-    TX1FtdcAmountType                     TradingAmount;                // ¹Òµ¥ÊıÁ¿
-    TX1FtdcProfitLossType                 Margin;                       // ±£Ö¤½ğ
-    TX1FtdcSpeculatorType                 Speculator;                   // Í¶±£Àà±ğ
-    TX1FtdcInstrumentTypeType             InstrumentType;               // ºÏÔ¼ÀàĞÍ
-    TX1FtdcX1OrderIDType                  SpdOrderID;                   // ¹ñÌ¨Î¯ÍĞºÅ
-    TX1FtdcCustomCategoryType             CustomCategory;               // ×Ô¶¨ÒåÀà±ğ
-    TX1FtdcClientIDType                   clientID;                     // ½»Ò×±àÂë 
-    TX1FtdcAmountType                     yesterdayVolume;              // ×ò²ÖÊıÁ¿
+  TX1FtdcRequestIDType RequestID;            // è¯·æ±‚ID
+  TX1FtdcAccountIDType AccountID;            // èµ„é‡‘å¸å·ID
+  TX1FtdcExchangeIDType ExchangeID;          // äº¤æ˜“æ‰€ä»£ç 
+  TX1FtdcInstrumentIDType InstrumentID;      // åˆçº¦ä»£ç 
+  TX1FtdcBuySellTypeType BuySellType;        // ä¹°å–
+  TX1FtdcPriceType OpenPrice;                // å¼€ä»“ä»·
+  TX1FtdcInstrumentIDType ComTradeID;        // ç»„åˆç¼–å·
+  TX1FtdcDateType OpenDate;                  // å¼€ä»“æ—¥æœŸ
+  TX1FtdcMatchIDType MatchID;                // æˆäº¤ç¼–å·/ç»“ç®—ç¼–å·
+  TX1FtdcAmountType Volume;                  // æŒä»“æ•°é‡
+  TX1FtdcAmountType TradingAmount;           // æŒ‚å•æ•°é‡
+  TX1FtdcProfitLossType Margin;              // ä¿è¯é‡‘
+  TX1FtdcSpeculatorType Speculator;          // æŠ•ä¿ç±»åˆ«
+  TX1FtdcInstrumentTypeType InstrumentType;  // åˆçº¦ç±»å‹
+  TX1FtdcX1OrderIDType SpdOrderID;           // æŸœå°å§”æ‰˜å·
+  TX1FtdcCustomCategoryType CustomCategory;  // è‡ªå®šä¹‰ç±»åˆ«
+  TX1FtdcClientIDType clientID;              // äº¤æ˜“ç¼–ç 
+  TX1FtdcAmountType yesterdayVolume;         // æ˜¨ä»“æ•°é‡
 };
 
-struct APISTRUCT CX1FtdcExchangeConnectionStatusRtnField {
-};
+struct APISTRUCT CX1FtdcExchangeConnectionStatusRtnField {};
 
-#endif // TX1FtdcAPISTRUCT_H_
+#endif  // TX1FtdcAPISTRUCT_H_

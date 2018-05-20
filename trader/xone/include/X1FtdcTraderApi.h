@@ -1,22 +1,21 @@
 /**
-* Copyright (C) 2015-2017, ´óÁ¬·É´´ĞÅÏ¢¼¼ÊõÓĞÏŞ¹«Ë¾
-* @file <X1FtdcTraderApi.h>
-* @brief <¶¨ÒåX1½»Ò×½Ó¿Ú>
-* @version <1.5.1.2>
-* @author <X1ÏîÄ¿×é>
-* @date <2017Äê8ÔÂ16ÈÕ>
-*/
+ * Copyright (C) 2015-2017, å¤§è¿é£åˆ›ä¿¡æ¯æŠ€æœ¯æœ‰é™å…¬å¸
+ * @file <X1FtdcTraderApi.h>
+ * @brief <å®šä¹‰X1äº¤æ˜“æ¥å£>
+ * @version <1.5.1.2>
+ * @author <X1é¡¹ç›®ç»„>
+ * @date <2017å¹´8æœˆ16æ—¥>
+ */
 
 /**
- * @mainpage X1 UserAPI ÓÃ»§ÎÄµµ
+ * @mainpage X1 UserAPI ç”¨æˆ·æ–‡æ¡£
  *
- *  X1¹ñÌ¨ÓÃ»§API°ïÖúÊÖ²á
- *  Copyright (C) 2015-2017, ´óÁ¬·É´´ĞÅÏ¢¼¼ÊõÓĞÏŞ¹«Ë¾
+ *  X1æŸœå°ç”¨æˆ·APIå¸®åŠ©æ‰‹å†Œ
+ *  Copyright (C) 2015-2017, å¤§è¿é£åˆ›ä¿¡æ¯æŠ€æœ¯æœ‰é™å…¬å¸
  *
  */
 
-
-#ifndef X1FTDCTRADERAPI_H_ 
+#ifndef X1FTDCTRADERAPI_H_
 #define X1FTDCTRADERAPI_H_
 
 #include "X1FtdcApiStruct.h"
@@ -26,675 +25,726 @@
 #define X1FTDCTRADERAPI_API __declspec(dllexport)
 #else
 #define X1FTDCTRADERAPI_API __declspec(dllimport)
-#endif//X1FTDCAPI_EXPORTS
+#endif  // X1FTDCAPI_EXPORTS
 #else
 #define X1FTDCTRADERAPI_API
-#endif//WIN32
+#endif  // WIN32
 
 namespace x1ftdcapi {
-    /**
-    * @brief ÓÃ»§ÏìÓ¦½Ó¿Ú
-    * @details ÊµÏÖÁËÊÂ¼şÍ¨Öª½Ó¿Ú£¬ÓÃ»§ĞèÒªÊµÏÖ´ËÀà½Ó¿Ú£¬±àĞ´ÊÂ¼ş´¦Àí·½·¨À´´¦ÀíÓÃ»§¸ĞĞËÈ¤µÄÊÂ¼ş¡£
-    * @see Init
-    */
-    class CX1FtdcTraderSpi {
-    public:
-        /**
-        * @brief    ÍøÂçÁ¬½ÓÕı³£ÏìÓ¦
-        * @details  µ±¿Í»§¶ËÓë½»Ò×ºóÌ¨Ğè½¨Á¢ÆğÍ¨ĞÅÁ¬½ÓÊ±£¨»¹Î´µÇÂ¼Ç°£©£¬¿Í»§¶ËAPI»á×Ô¶¯¼ì²âÓëÇ°ÖÃ»úÖ®¼äµÄÁ¬½Ó£¬
-        *           µ±ÍøÂç¿ÉÓÃ£¬½«×Ô¶¯½¨Á¢Á¬½Ó£¬²¢µ÷ÓÃ¸Ã·½·¨Í¨Öª¿Í»§¶Ë£¬ ¿Í»§¶Ë¿ÉÒÔÔÚÊµÏÖ¸Ã·½·¨Ê±£¬ÖØĞÂÊ¹ÓÃ×Ê½ğÕËºÅ½øĞĞµÇÂ¼¡£
-        *           £¨¸Ã·½·¨ÊÇÔÚApiºÍÇ°ÖÃ»ú½¨Á¢Á¬½Óºó±»µ÷ÓÃ£¬¸Ãµ÷ÓÃ½ö½öÊÇËµÃ÷tcpÁ¬½ÓÒÑ¾­½¨Á¢³É¹¦¡£ÓÃ»§ĞèÒª×ÔĞĞµÇÂ¼²ÅÄÜ½øĞĞºóĞøµÄÒµÎñ²Ù×÷¡£
-        *           Á¬½ÓÊ§°ÜÔò´Ë·½·¨²»»á±»µ÷ÓÃ¡££©
-        *
-        */
-        virtual void OnFrontConnected() {
-        };
-
-        /**
-        * @brief ÍøÂçÁ¬½Ó²»Õı³£ÏìÓ¦
-        * @details µ±¿Í»§¶ËÓë½»Ò×ºóÌ¨Í¨ĞÅÁ¬½Ó¶Ï¿ªÊ±£¬¸Ã·½·¨±»µ÷ÓÃ¡£µ±·¢ÉúÕâ¸öÇé¿öºó£¬API»á×Ô¶¯ÖØĞÂÁ¬½Ó£¬¿Í»§¶ËĞè±£Ö¤Á¬½Ó³É¹¦ºóÓĞÏàÓ¦µÄµÇÂ¼Âß¼­´¦Àí¡£
-        * @param    nReason ´íÎóÔ­Òò
-        *           <ul>
-        *               <li> 0x1001 ²éÑ¯·şÎñÍøÂç¶ÁÊ§°Ü
-        *               <li> 0x1002 ²éÑ¯·şÎñÍøÂçĞ´Ê§°Ü
-        *               <li> 0x2002 ²éÑ¯·şÎñ·¢ËÍĞÄÌøÊ§°Ü
-        *               <li> 0x2003 ²éÑ¯·şÎñÊÕµ½´íÎó±¨ÎÄ
-        *               <li> 0x3001 ±¨µ¥·şÎñÍøÂç¶ÁÊ§°Ü
-        *               <li> 0x3002 ±¨µ¥·şÎñÍøÂçĞ´Ê§°Ü
-        *               <li> 0x4001 ±¨µ¥·şÎñ½ÓÊÕĞÄÌø³¬Ê±
-        *               <li> 0x4002 ±¨µ¥·şÎñ·¢ËÍĞÄÌøÊ§°Ü
-        *               <li> 0x4003 ±¨µ¥·şÎñÊÕµ½´íÎó±¨ÎÄ
-        *           </ul>
-        *
-        */
-        virtual void OnFrontDisconnected(int nReason) {
-        };
-        /**
-        * @brief   µÇÂ½ÇëÇóÏìÓ¦
-        * @details µ±ÓÃ»§·¢³öµÇÂ¼ÇëÇóºó£¬Ç°ÖÃ»ú·µ»ØÏìÓ¦Ê±´Ë·½·¨»á±»µ÷ÓÃ£¬Í¨ÖªÓÃ»§µÇÂ¼ÊÇ·ñ³É¹¦¡£µ±pUserLoginInfoRtn.loginResultÎª0Ê±±íÊ¾µÇÂ¼³É¹¦£¬ÇÒµÇÂ¼³É¹¦Ê±£¬pErrorInfoÎªNULL£¬·ñÔòpErrorInfoÖĞ½«°üº¬´íÎóIDºÍ´íÎóĞÅÏ¢¡£³É¹¦Ê±£¬ÓÃ»§½«»ñÈ¡Ò»¸ö»á»°ID,µ±SessionIDÎª1µÄÊ±ºò£¬Ä¬ÈÏÎªÓÃ»§µÚÒ»´ÎµÇÂ½.
-        * @param pUserLoginInfoRtn ÓÃ»§µÇÂ¼ĞÅÏ¢½á¹¹µØÖ·¡£
-        * @param pErrorInfo ÈôµÇÂ¼Ê§°Ü£¬·µ»Ø´íÎóĞÅÏ¢µØÖ·£¬¸Ã½á¹¹º¬ÓĞ´íÎóĞÅÏ¢¡£
-        */
-        virtual void OnRspUserLogin(struct CX1FtdcRspUserLoginField* pUserLoginInfoRtn, struct CX1FtdcRspErrorField* pErrorInfo) {
-        };
-
-        /**
-        * @brief   µÇ³öÇëÇóÏìÓ¦:
-        * @details µ±ÓÃ»§·¢³öÍË³öÇëÇóºó£¬Ç°ÖÃ»ú·µ»ØÏìÓ¦´Ë·½·¨»á±»µ÷ÓÃ£¬Í¨ÖªÓÃ»§ÍË³ö×´Ì¬¡£
-        * @param pUserLogoutInfoRtn ·µ»ØÓÃ»§ÍË³öĞÅÏ¢½á¹¹µØÖ·¡£
-        * @param pErrorInfo ÈôµÇ³öÊ§°Ü£¬·µ»Ø´íÎóĞÅÏ¢µØÖ·£¬¸Ã½á¹¹º¬ÓĞ´íÎóĞÅÏ¢¡£
-        * @warning µ±ÓÃ»§µÇÂ¼·µ»Ø´íÎóÂë35,ÓÃ»§Ğèrelease API »ò ÖØÆôAPIºóÖØĞÂµÇÂ¼
-        */
-        virtual void OnRspUserLogout(struct CX1FtdcRspUserLogoutInfoField* pUserLogoutInfoRtn, struct CX1FtdcRspErrorField* pErrorInfo) {
-        };
-
-        /**
-        * @brief   ÆÚ»õÎ¯ÍĞ±¨µ¥ÏìÓ¦
-        * @details µ±±¨µ¥·¢Éú´íÎóÊ±£¬pErrorInfo²»ÎªNULL£¬²¢ÔÚÆäÖĞ°üº¬ÁË´íÎóID¼°´íÎóĞÅÏ¢£¬ºÍÇëÇó±¨µ¥Ê±µÄLocalOrderID£¬ÓÃÓÚ¶ÔÓ¦¿Í»§³ÌĞòµÄ±¨µ¥¡£±¨µ¥³É¹¦Ê±£¬ÊÇ±íÊ¾X1Ì¨ÏµÍ³È·ÈÏÁË¸Ã±Ê±¨µ¥£¬¸Ã±¨µ¥Ò²Í¬Ê±±¨µ½ÁË½»Ò×Ëù£¬µ«½»Ò×Ëù»¹Î´È·ÈÏ¡£
-        * @param pOrderRtn ·µ»ØÓÃ»§ÏÂµ¥ĞÅÏ¢½á¹¹µØÖ·¡£
-        * @param pErrorInfo Èô±¨µ¥Ê§°Ü£¬·µ»Ø´íÎóĞÅÏ¢µØÖ·£¬¸Ã½á¹¹º¬ÓĞ´íÎóĞÅÏ¢¡£
-        */
-        virtual void OnRspInsertOrder(struct CX1FtdcRspOperOrderField* pOrderRtn, struct CX1FtdcRspErrorField* pErrorInfo) {
-        };
-
-        /**
-        * @brief   ÆÚ»õÎ¯ÍĞ³·µ¥ÏìÓ¦
-        * @details µ±ÓÃ»§³·µ¥ºó£¬Ç°ÖÃ·µ»ØÏìÓ¦ÊÇ¸Ã·½·¨»á±»µ÷ÓÃ¡£
-        * @param pOrderCanceledRtn ·µ»Ø³·µ¥ÏìÓ¦ĞÅÏ¢½á¹¹µØÖ·¡£
-        * @param pErrorInfo Èô³·µ¥Ê§°Ü£¬·µ»Ø´íÎóĞÅÏ¢µØÖ·£¬¸Ã½á¹¹º¬ÓĞ´íÎóĞÅÏ¢¡£
-        * @warning ³·µ¥·¢Éú´íÎóÊ±£¬ĞèÒª¼ì²épErrorInfoÊÇ·ñÎªNULL¡£ÇÒ¿Í»§¶ËÊÕµ½¸ÃÏìÓ¦Ê±£¬Ö»±íÊ¾¹ñÌ¨È·ÈÏÁËÕâ±Ê³·µ¥ÇëÇó¡£
-        */
-        virtual void OnRspCancelOrder(struct CX1FtdcRspOperOrderField* pOrderCanceledRtn, struct CX1FtdcRspErrorField* pErrorInfo) {
-        };
-
-        /**
-        * @brief   ´íÎó»Ø±¨
-        * @details APIÄÚ²¿»òÕß¹ñÌ¨ÄÚ²¿·¢ÉúÒì³£´íÎó£¬Í¨¹ı´Ë·½·¨Í¨ÖªÓÃ»§¡£
-        *           APIÄÚ²¿´íÎó£º°üº¬APIÄÚ´æÊı¾İÒì³£¡¢ÏµÍ³×ÊÔ´ÉêÇëÒì³£µÈ¡£
-        *           ¹ñÌ¨ÄÚ´æ´íÎó£º°üº¬½»Ò×ËùAPIÄÚ²¿Å×³öÒì³££¬¹ñÌ¨ÄÚ²¿Êı¾İÒì³££¬ÏµÍ³×ÊÔ´ÉêÇëÒì³£µÈ¡£
-        * @param pErrorInfo ´íÎóĞÅÏ¢µÄ½á¹¹µØÖ·¡£
-        */
-        virtual void OnRtnErrorMsg(struct CX1FtdcRspErrorField* pErrorInfo) {
-        };
-
-        /**
-        * @brief   ³É½»»Ø±¨
-        * @details µ±Î¯ÍĞ³É¹¦½»Ò×ºó´Î·½·¨»á±»µ÷ÓÃ¡£
-        * @param pRtnMatchData Ö¸Ïò³É½»»Ø±¨µÄ½á¹¹µÄÖ¸Õë¡£
-        */
-        virtual void OnRtnMatchedInfo(struct CX1FtdcRspPriMatchInfoField* pRtnMatchData) {
-        };
-
-        /**
-        * @brief   Î¯ÍĞ»Ø±¨
-        * @details µ±½»Ò×ËùÊÕµ½Î¯ÍĞÇëÇó²¢·µ»Ø»Ø±¨Ê±£¬¸Ã·½·¨»á±»µ÷ÓÃ
-        * @param pRtnOrderData Ö¸ÏòÎ¯ÍĞ»Ø±¨µØÖ·µÄÖ¸Õë¡£
-        */
-        virtual void OnRtnOrder(struct CX1FtdcRspPriOrderField* pRtnOrderData) {
-        };
-
-        /**
-        * @brief  ³·µ¥»Ø±¨
-        * @details µ±³·µ¥³É¹¦ºó¸Ã·½·¨»á±»µ÷ÓÃ¡£
-        * @param pCancelOrderData Ö¸Ïò³·µ¥»Ø±¨½á¹¹µÄµØÖ·£¬¸Ã½á¹¹Ìå°üº¬±»³·µ¥ºÏÔ¼µÄÏà¹ØĞÅÏ¢¡£
-        */
-        virtual void OnRtnCancelOrder(struct CX1FtdcRspPriCancelOrderField* pCancelOrderData) {
-        };
-
-        /**
-        * @brief  ²éÑ¯µ±ÈÕÎ¯ÍĞÏìÓ¦
-        * @details µ±ÓÃ»§·¢³öÎ¯ÍĞ²éÑ¯ºó£¬¸Ã·½·¨»á±»µ÷ÓÃ¡£
-        * @param pRtnOrderData Ö¸ÏòÎ¯ÍĞ»Ø±¨½á¹¹µÄµØÖ·¡£
-        * @param pErrorInfo Èô²éÑ¯Ê§°Ü£¬·µ»Ø´íÎóĞÅÏ¢µØÖ·£¬¸Ã½á¹¹º¬ÓĞ´íÎóĞÅÏ¢¡£
-        * @param bIsLast    ±íÃ÷ÊÇ·ñÊÇ×îºóÒ»ÌõÏìÓ¦ĞÅÏ¢
-        *                   <ul>
-        *                       <li> 0 - ·ñ
-        *                       <li> 1 - ÊÇ
-        *                   </ul>
-        */
-        virtual void OnRspQryOrderInfo(struct CX1FtdcRspOrderField* pRtnOrderData, struct CX1FtdcRspErrorField* pErrorInfo, bool bIsLast) {
-        };
-
-        /**
-        * @brief  ²éÑ¯µ±ÈÕ³É½»ÏìÓ¦
-        * @details µ±ÓÃ»§·¢³ö³É½»²éÑ¯ºó¸Ã·½·¨»á±»µ÷ÓÃ¡£
-        * @param pRtnMatchData Ö¸Ïò³É½»»Ø±¨½á¹¹µÄµØÖ·¡£
-        * @param pErrorInfo Èô²éÑ¯Ê§°Ü£¬·µ»Ø´íÎóĞÅÏ¢µØÖ·£¬¸Ã½á¹¹º¬ÓĞ´íÎóĞÅÏ¢¡£
-        * @param bIsLast ±íÃ÷ÊÇ·ñÊÇ×îºóÒ»ÌõÏìÓ¦ĞÅÏ¢
-        *                   <ul>
-        *                       <li> 0 - ·ñ
-        *                       <li> 1 - ÊÇ
-        *                   </ul>
-        */
-        virtual void OnRspQryMatchInfo(struct CX1FtdcRspMatchField* pRtnMatchData, struct CX1FtdcRspErrorField* pErrorInfo, bool bIsLast) {
-        };
-
-        /**
-        * @brief  ³Ö²Ö²éÑ¯ÏìÓ¦
-        * @details µ±ÓÃ»§·¢³ö³Ö²Ö²éÑ¯Ö¸Áîºó£¬Ç°ÖÃ·µ»ØÏìÓ¦Ê±¸Ã·½·¨»á±»µ÷ÓÃ¡£
-        * @param pPositionInfoRtn ·µ»Ø³Ö²ÖĞÅÏ¢½á¹¹µÄµØÖ·¡£
-        * @param pErrorInfo Èô²éÑ¯Ê§°Ü£¬·µ»Ø´íÎóĞÅÏ¢µØÖ·£¬¸Ã½á¹¹º¬ÓĞ´íÎóĞÅÏ¢¡£
-        * @param bIsLast ±íÃ÷ÊÇ·ñÊÇ×îºóÒ»ÌõÏìÓ¦ĞÅÏ¢
-        *                   <ul>
-        *                       <li> 0 - ·ñ
-        *                       <li> 1 - ÊÇ
-        *                   </ul>
-        */
-        virtual void OnRspQryPosition(struct CX1FtdcRspPositionField* pPositionInfoRtn, struct CX1FtdcRspErrorField* pErrorInfo, bool bIsLast) {
-        };
-
-        /**
-        * @brief  ¿Í»§×Ê½ğ²éÑ¯ÏìÓ¦
-        * @details µ±ÓÃ»§·¢³ö×Ê½ğ²éÑ¯Ö¸Áîºó£¬Ç°ÖÃ·µ»ØÏìÓ¦Ê±¸Ã·½·¨»á±»µ÷ÓÃ¡£
-        * @param pCapitalInfoRtn ·µ»Ø×Ê½ğĞÅÏ¢½á¹¹µÄµØÖ·¡£
-        * @param pErrorInfo Èô²éÑ¯Ê§°Ü£¬·µ»Ø´íÎóĞÅÏ¢µØÖ·£¬¸Ã½á¹¹º¬ÓĞ´íÎóĞÅÏ¢¡£
-        * @param bIsLast ±íÃ÷ÊÇ·ñÊÇ×îºóÒ»ÌõÏìÓ¦ĞÅÏ¢
-        *                   <ul>
-        *                       <li> 0 - ·ñ
-        *                       <li> 1 - ÊÇ
-        *                   </ul>
-        */
-        virtual void OnRspCustomerCapital(struct CX1FtdcRspCapitalField* pCapitalInfoRtn, struct CX1FtdcRspErrorField* pErrorInfo, bool bIsLast) {
-        };
-
-        /**
-        * @brief  ½»Ò×ËùºÏÔ¼²éÑ¯ÏìÓ¦
-        * @details µ±ÓÃ»§·¢³öºÏÔ¼²éÑ¯Ö¸Áîºó£¬Ç°ÖÃ·µ»ØÏìÓ¦Ê±¸Ã·½·¨»á±»µ÷ÓÃ¡£
-        * @param pInstrumentData ·µ»ØºÏÔ¼ĞÅÏ¢½á¹¹µÄµØÖ·¡£
-        * @param pErrorInfo ´íÎóĞÅÏ¢½á¹¹£¬Èç¹û²éÑ¯·¢Éú´íÎó£¬Ôò·µ»Ø´íÎóĞÅÏ¢¡£
-        * @param bIsLast ±íÃ÷ÊÇ·ñÊÇ×îºóÒ»ÌõÏìÓ¦ĞÅÏ¢
-        *                   <ul>
-        *                       <li> 0 - ·ñ
-        *                       <li> 1 - ÊÇ
-        *                   </ul>
-        */
-        virtual void OnRspQryExchangeInstrument(struct CX1FtdcRspExchangeInstrumentField* pInstrumentData, struct CX1FtdcRspErrorField* pErrorInfo, bool bIsLast) {
-        };
-
-        /**
-        * @brief  ²éÑ¯Ö¸¶¨ºÏÔ¼ÏìÓ¦
-        * @details µ±ÓÃ»§·¢³öÖ¸¶¨ºÏÔ¼²éÑ¯Ö¸Áîºó£¬Ç°ÖÃ·µ»ØÏìÓ¦Ê±¸Ã·½·¨»á±»µ÷ÓÃ¡£
-        * @param pInstrument ·µ»ØÖ¸¶¨ºÏÔ¼ĞÅÏ¢½á¹¹µÄµØÖ·¡£
-        * @param pErrorInfo Èô²éÑ¯Ê§°Ü£¬·µ»Ø´íÎóĞÅÏ¢µØÖ·£¬¸Ã½á¹¹º¬ÓĞ´íÎóĞÅÏ¢¡£
-        * @param bIsLast ±íÃ÷ÊÇ·ñÊÇ×îºóÒ»ÌõÏìÓ¦ĞÅÏ¢
-        *                   <ul>
-        *                       <li> 0 - ·ñ
-        *                       <li> 1 - ÊÇ
-        *                   </ul>
-        */
-        virtual void OnRspQrySpecifyInstrument(struct CX1FtdcRspSpecificInstrumentField* pInstrument, struct CX1FtdcRspErrorField* pErrorInfo, bool bIsLast) {
-        };
-
-        /**
-        * @brief  ²éÑ¯³Ö²ÖÃ÷Ï¸ÏìÓ¦
-        * @details µ±ÓÃ»§·¢³ö²éÑ¯³Ö²ÖÃ÷Ï¸ºó£¬Ç°ÖÃ·µ»ØÏìÓ¦Ê±¸Ã·½·¨»á±»µ÷ÓÃ¡£
-        * @param pPositionDetailRtn ·µ»Ø³Ö²ÖÃ÷Ï¸½á¹¹µÄµØÖ·¡£
-        * @param pErrorInfo Èô²éÑ¯Ê§°Ü£¬·µ»Ø´íÎóĞÅÏ¢µØÖ·£¬¸Ã½á¹¹º¬ÓĞ´íÎóĞÅÏ¢¡£
-        * @param bIsLast ±íÃ÷ÊÇ·ñÊÇ×îºóÒ»ÌõÏìÓ¦ĞÅÏ¢
-        *                   <ul>
-        *                       <li> 0 - ·ñ
-        *                       <li> 1 - ÊÇ
-        *                   </ul>
-        */
-        virtual void OnRspQryPositionDetail(struct CX1FtdcRspPositionDetailField* pPositionDetailRtn, struct CX1FtdcRspErrorField* pErrorInfo, bool bIsLast) {
-        };
-
-        /**
-        * @brief ½»Ò×Ëù×´Ì¬²éÑ¯ÏìÓ¦
-        * @param pRspExchangeStatusData:Ö¸Ïò½»Ò×Ëù×´Ì¬²éÑ¯ÏìÓ¦µØÖ·µÄÖ¸Õë¡£
-        * @warning ÈôÊÕ²»µ½¿ª±ÕÊĞĞÅºÅ£¬¿ÉÏÈ×ÉÑ¯ÆÚ»õ¹«Ë¾ÔËÎ¬Í¬ÊÂ£¬ÊÇ·ñÔÚ±¨ÅÌµÄÅäÖÃÖĞ£¬´ò¿ªÁË<PushJYZT Value=¡±YES¡±/>µÄÑ¡Ïî
-        */
-        virtual void OnRspQryExchangeStatus(struct CX1FtdcRspExchangeStatusField * pRspExchangeStatusData) {
-        };
-        /**
-          * @brief ½»Ò×Ëù×´Ì¬Í¨Öª
-          * @details Ö§³Ö½»Ò×Ëù×´Ì¬Í¨ÖªºÍÆ·ÖÖ×´Ì¬Í¨Öª£¬ÔÚx1¹ñÌ¨¿ÉÅä
-          * @param pRtnExchangeStatusData Ö¸Ïò½»Ò×Ëù×´Ì¬Í¨ÖªµØÖ·µÄÖ¸Õë¡£
-          */
-        virtual void OnRtnExchangeStatus(struct CX1FtdcExchangeStatusRtnField * pRtnExchangeStatusData) {
-        };
-
-        /**
-        * @brief ×öÊĞÉÌ±¨µ¥ÏìÓ¦
-        * @param pRspQuoteData:Ö¸Ïò×öÊĞÉÌ±¨µ¥ÏìÓ¦µØÖ·µÄÖ¸Õë¡£
-        * @param pErrorInfo:Èô±¨¼ÛÊ§°Ü£¬·µ»Ø´íÎóĞÅÏ¢µØÖ·£¬¸Ã½á¹¹º¬ÓĞ´íÎóĞÅÏ¢¡£
-        */
-        virtual void OnRspQuoteInsert(struct CX1FtdcQuoteRspField * pRspQuoteData, struct CX1FtdcRspErrorField * pErrorInfo) {
-        };
-
-        /**
-        * @brief ×öÊĞÉÌ±¨µ¥»Ø±¨
-        * @param pRtnQuoteData:Ö¸Ïò×öÊĞÉÌ±¨µ¥»Ø±¨µØÖ·µÄÖ¸Õë¡£
-        */
-        virtual void OnRtnQuoteInsert(struct CX1FtdcQuoteRtnField * pRtnQuoteData) {
-        };
-
-        /**
-        * @brief ×öÊĞÉÌ³·µ¥ÏìÓ¦
-        * @param pRspQuoteCanceledData:Ö¸Ïò×öÊĞÉÌ³·µ¥ÏìÓ¦µØÖ·µÄÖ¸Õë¡£
-        * @param pErrorInfo:Èô³·µ¥Ê§°Ü£¬·µ»Ø´íÎóĞÅÏ¢µØÖ·£¬¸Ã½á¹¹º¬ÓĞ´íÎóĞÅÏ¢¡£
-        */
-        virtual void OnRspQuoteCancel(struct CX1FtdcQuoteRspField * pRspQuoteCanceledData, struct CX1FtdcRspErrorField * pErrorInfo) {
-        };
-
-        /**
-        * @brief ×öÊĞÉÌ³·µ¥»Ø±¨
-        * @param pRtnQuoteCanceledData:Ö¸Ïò×öÊĞÉÌ³·µ¥»Ø±¨µØÖ·µÄÖ¸Õë¡£
-        */
-        virtual void OnRtnQuoteCancel(struct CX1FtdcQuoteCanceledRtnField * pRtnQuoteCanceledData) {
-        };
-
-        /**
-        * @brief ×öÊĞÉÌ³É½»»Ø±¨
-        * @param pRtnQuoteMatchedData:Ö¸Ïò×öÊĞÉÌ³É½»»Ø±¨µØÖ·µÄÖ¸Õë¡£
-        */
-        virtual void OnRtnQuoteMatchedInfo(struct CX1FtdcQuoteMatchRtnField * pRtnQuoteMatchedData) {
-        };
-
-        /**
-        * @brief ÅúÁ¿³·µ¥ÏìÓ¦
-        * @param pRspStripCancelOrderData:Ö¸ÏòÅúÁ¿³·µ¥ÏìÓ¦µØÖ·µÄÖ¸Õë¡£
-        * @param pErrorInfo:ÈôÅúÁ¿³·µ¥Ê§°Ü£¬·µ»Ø´íÎóĞÅÏ¢µØÖ·£¬¸Ã½á¹¹º¬ÓĞ´íÎóĞÅÏ¢¡£
-        */
-        virtual void OnRspCancelAllOrder(struct CX1FtdcCancelAllOrderRspField *pRspCancelAllOrderData, struct CX1FtdcRspErrorField * pErrorInfo) {
-        };
-
-
-        /**
-        * @brief Ñ¯¼ÛÏìÓ¦
-        * @param pRspForQuoteData:Ñ¯¼ÛÇëÇóÏìÓ¦½á¹¹µØÖ·¡£
-        * @param pErrorInfo:Èô²éÑ¯Ê§°Ü£¬·µ»Ø´íÎóĞÅÏ¢µØÖ·£¬¸Ã½á¹¹º¬ÓĞ´íÎóĞÅÏ¢¡£
-        */
-        virtual void OnRspForQuote(struct CX1FtdcForQuoteRspField * pRspForQuoteData, struct CX1FtdcRspErrorField * pErrorInfo) {
-        };
-
-        /**
-        * @brief Ñ¯¼Û»Ø±¨
-        * @param pRtnForQuoteData:Ñ¯¼Û»Ø±¨½á¹¹µØÖ·¡£
-        */
-        virtual void OnRtnForQuote(struct CX1FtdcForQuoteRtnField * pRtnForQuoteData) {
-        };
-
-
-        /**
-        * @brief Ñ¯¼ÛÎ¯ÍĞ²éÑ¯ÏìÓ¦
-        * @param pRtnQryForQuoteData:Ö¸ÏòÑ¯¼ÛÎ¯ÍĞ²éÑ¯ÏìÓ¦µØÖ·µÄÖ¸Õë¡£
-        * @param pErrorInfo:Èô²éÑ¯Ê§°Ü£¬·µ»Ø´íÎóĞÅÏ¢µØÖ·£¬¸Ã½á¹¹º¬ÓĞ´íÎóĞÅÏ¢¡£
-        * @param bIsLast:±íÃ÷ÊÇ·ñÊÇ×îºóÒ»ÌõÏìÓ¦ĞÅÏ¢£¨0 -·ñ   1 -ÊÇ£©¡£
-        */
-        virtual void OnRspQryForQuote(struct CX1FtdcQryForQuoteRtnField * pRtnQryForQuoteData, struct CX1FtdcRspErrorField * pErrorInfo, bool bIsLast) {
-        };
-
-        /**
-        * @brief ²éÑ¯µ±ÈÕ±¨¼ÛÎ¯ÍĞÏìÓ¦
-        * @param pRtnQuoteOrderData:Ö¸Ïò±¨¼Û²éÑ¯»Ø±¨½á¹¹µÄµØÖ·¡£
-        * @param pErrorInfo:Èô²éÑ¯Ê§°Ü£¬·µ»Ø´íÎóĞÅÏ¢µØÖ·£¬¸Ã½á¹¹º¬ÓĞ´íÎóĞÅÏ¢¡£
-        * @param bIsLast:±íÃ÷ÊÇ·ñÊÇ×îºóÒ»ÌõÏìÓ¦ĞÅÏ¢£¨0 -·ñ   1 -ÊÇ£©¡£
-        */
-        virtual void OnRspQryQuoteOrderInfo(struct CX1FtdcQuoteOrderRtnField * pRtnQuoteOrderData, struct CX1FtdcRspErrorField * pErrorInfo, bool bIsLast) {
-        };
-
-        /**
-        * @brief Ñ¯¼ÛÍ¨Öª²éÑ¯ÏìÓ¦
-        * @param pRtnQryQuoteNoticeData:²éÑ¯Ñ¯¼ÛÍ¨Öª»Ø±¨½á¹¹µØÖ·¡£
-        * @param pErrorInfo:Èô²éÑ¯Ê§°Ü£¬·µ»Ø´íÎóĞÅÏ¢µØÖ·£¬¸Ã½á¹¹º¬ÓĞ´íÎóĞÅÏ¢¡£
-        * @param bIsLast:±íÃ÷ÊÇ·ñÊÇ×îºóÒ»ÌõÏìÓ¦ĞÅÏ¢£¨0 -·ñ   1 -ÊÇ£©¡£
-        */
-        virtual void OnRspQryQuoteNotice(struct CX1FtdcQryQuoteNoticeRtnField * pRtnQryQuoteNoticeData, struct CX1FtdcRspErrorField * pErrorInfo, bool bIsLast) {
-        };
-
-
-        /**
-        * @brief Ì×ÀûºÏÔ¼²éÑ¯ÏìÓ¦:µ±ÓÃ»§·¢³öÌ×ÀûºÏÔ¼²éÑ¯Ö¸Áîºó£¬Ç°ÖÃ·µ»ØÏìÓ¦Ê±¸Ã·½·¨»á±»µ÷ÓÃ¡£
-        * @param pAbiInstrumentData:·µ»ØÌ×ÀûºÏÔ¼ĞÅÏ¢½á¹¹µÄµØÖ·¡£
-        * @param pErrorInfo:Èô²éÑ¯Ê§°Ü£¬·µ»Ø´íÎóĞÅÏ¢µØÖ·£¬¸Ã½á¹¹º¬ÓĞ´íÎóĞÅÏ¢¡£
-        * @param bIsLast:±íÃ÷ÊÇ·ñÊÇ×îºóÒ»ÌõÏìÓ¦ĞÅÏ¢£¨0 -·ñ   1 -ÊÇ£©¡£
-        */
-        virtual void OnRspArbitrageInstrument(struct CX1FtdcAbiInstrumentRtnField * pAbiInstrumentData, struct CX1FtdcRspErrorField * pErrorInfo, bool bIsLast) {
-        };
-
-
-        /**
-        * @brief ×öÊĞÉÌÑ¯¼ÛÍ¨Öª£¬ÎŞĞè¶©ÔÄ£¬×öÊĞÉÌ¿Í»§×Ô¶¯ÊÕµ½Ñ¯¼ÛÍ¨Öª
-        * @param pForQuoteRspData:Ö¸ÏòÑ¯¼ÛÍ¨Öª»Ø±¨µØÖ·µÄÖ¸Õë¡£
-        */
-        virtual void OnRtnForQuoteRsp(struct CX1FtdcQuoteSubscribeRtnField * pForQuoteRspData) {
-        };
-
-        virtual void OnNtyExchangeConnectionStatus(CX1FtdcExchangeConnectionStatusRtnField *pExchangeConnectionStatusData) {
-        };
-
-        virtual void OnRspResetPassword(struct CX1FtdcRspResetPasswordField * pResetPasswordData, struct CX1FtdcRspErrorField* pErrorInfo) {
-        };
-
-        /**
-        * ²éÑ¯×éºÏ³Ö²ÖÃ÷Ï¸ÏìÓ¦:µ±ÓÃ»§·¢³ö²éÑ¯³Ö²ÖÃ÷Ï¸ºó£¬Ç°ÖÃ·µ»ØÏìÓ¦Ê±¸Ã·½·¨»á±»µ÷ÓÃ¡£
-        * @param pPositionDetailRtn:·µ»Ø³Ö²ÖÃ÷Ï¸½á¹¹µÄµØÖ·¡£
-        * @param pErrorInfo:Èô²éÑ¯Ê§°Ü£¬·µ»Ø´íÎóĞÅÏ¢µØÖ·£¬¸Ã½á¹¹º¬ÓĞ´íÎóĞÅÏ¢¡£
-        * @param bIsLast:±íÃ÷ÊÇ·ñÊÇ×îºóÒ»ÌõÏìÓ¦ĞÅÏ¢£¨0 -·ñ   1 -ÊÇ£©¡£
-        */
-        virtual void OnRspQryArbitrageCombineDetail(struct CX1FtdcArbitrageCombineDetailRtnField * pPositionDetail, struct CX1FtdcRspErrorField * pErrorInfo, bool bIsLast) {
-        };
-
-    };//end of CX1FtdcTraderSpi
-
-    /**
-    * @brief ÓÃ»§ÇëÇó½Ó¿Ú
-    * @details ÊµÏÖÁËÓÃ»§ÇëÇó½Ó¿Ú£¬ÓÃ»§ÊµÀı»¯¶ÔÏóºó£¬¿ÉÒÔÖ±½Óµ÷ÓÃ½Ó¿Ú½øĞĞµÇÂ¼¡¢±¨µ¥¡¢³·µ¥¡¢²éÑ¯µÈ²Ù×÷
-    * @warning
-    *         <ul>
-    *           <li> ÓÃ»§µ÷ÓÃ½Ó¿ÚÇ°£¬ĞèÒª½øĞĞmemsetÇå¿Õ½á¹¹ÌåÄÚÈİ£¬ÔÙÌîĞ´ĞèÒªµÄ×Ö¶ÎĞÅÏ¢
-    *           <li> ½Ó¿ÚÏß³Ì°²È«
-    *           <li> ÂòÂô£¬¿ªÆ½¡¢Í¶±£¡¢¶©µ¥ÀàĞÍ¡¢¶©µ¥ÊôĞÔÕâĞ©×Ö¶ÎÒòÎªÊ¹ÓÃÁËÎ»Óò´¦Àí£¬ÔÚAPI¶Ë²»×öÊıÖµÓĞĞ§ĞÔ¼ì²éÅĞ¶Ï£¬°´ÕÕÍ·ÎÄ¼şÖ¸¶¨ÊıÖµÊäÈë£¬ÊäÈëÆäËûÖµÒ²»á±»×ª»»Îª²»È·¶¨ÊıÖµ
-    *           <li> ±¾½ÚËùÊ¾½Ó¿ÚµÄÎ¯ÍĞÏìÓ¦¾ùÓĞ¿ÉÄÜÍíÓÚÎ¯ÍĞ»Ø±¨·µ»Ø
-    *         </ul>
-    * @see Init
-    */
-    class X1FTDCTRADERAPI_API CX1FtdcTraderApi {
-    public:
-        CX1FtdcTraderApi();
-        virtual ~CX1FtdcTraderApi();
-    public:
-        /**
-        * @brief ¾²Ì¬º¯Êı£¬²úÉúÒ»¸öapiÊµÀı
-        * @return ·µ»ØÒ»¸öÖ¸ÏòCX1FtdcTraderApiÊµÀıµÄÖ¸Õë
-        * @see Init
-        */
-        static CX1FtdcTraderApi * CreateCX1FtdcTraderApi(void);
-
-        /**
-        * @brief ÊÍ·ÅAPIÊµÀı
-        * @warning µ÷ÓÃCreateCX1FtdcTraderApi³É¹¦Éú³ÉÒ»¸öAPIÊµÀı,init³É¹¦ºó£¬ÓÃ»§³ÌĞòÍË³öÊ±±ØĞëµ÷ÓÃRelease½Ó¿Ú£¬·ñÔò¿ÉÄÜ»ácoredump
-        */
-        virtual void Release(void) = 0;
-
-        /**
-        * @brief ³õÊ¼»¯½Ó¿Ú
-        * @details ºÍ·şÎñÆ÷½¨Á¢socketÁ¬½Ó£¬²¢Æô¶¯Ò»¸ö½ÓÊÕÏß³Ì£¬ Í¬Ê±¸Ã·½·¨×¢²áÒ»¸ö»Øµ÷º¯Êı¼¯
-        * @param pszFrontAddr ½»Ò×Ç°ÖÃÍøÂçµØÖ·¡£
-        *                     ÍøÂçµØÖ·µÄ¸ñÊ½Îª:"protocol://ipaddress:port",Èç"tcp://172.21.200.103:10910"
-        *                     ÆäÖĞprotocolµÄÖµÎªtcp¸ñÊ½¡£
-        *                     ipaddress±íÊ¾½»Ò×Ç°ÖÃµÄIP,port±íÊ¾½»Ò×Ç°ÖÃµÄ¶Ë¿Ú
-        * @param pSpi Ö¸ÏòCX1FtdcTraderSpi×ÓÀà¶ÔÏó(»Øµ÷º¯Êı¼¯)µÄÖ¸Õë
-        * @param output_core Êä³öÏß³Ì°ó¶¨µÄcpu core id. -1±íÊ¾²»°ó¶¨
-        * @param input_core ÊäÈëÏß³Ì°ó¶¨µÄcpu core id. -1±íÊ¾²»°ó¶¨.input_core output_core²»Ö§³Ö½öÓĞÒ»¸ö²ÎÊıÎª-1µÄÇéĞÎ
-        * @return ³õÊ¼»¯½á¹û
-        *         <ul>
-        *           <li> 0 - ³õÊ¼»¯³É¹¦
-        *           <li> 1 - ³õÊ¼»¯Ê§°Ü ´ËÊ±¿ÉÄÜĞèÒª¼ì²éOnRtnErrorMsg¸ø³öµÄ´íÎóĞÅÏ¢
-        *         </ul>
-        *         InitÊ§°ÜÔ­Òò¿ÉÄÜ£º
-        *               ÌîĞ´µÄaddr¸ñÊ½²»ÕıÈ·»òÕßaddrÖĞµÄipµØÖ·¼°¶Ë¿Ú²»ÕıÈ·£¬ÈçÊ¹ÓÃ½»Ò×APIÁ¬½Óµ½ÁËĞĞÇéÇ°ÖÃµÄ¶Ë¿Ú
-        *               ÍøÂçÎÊÌâ£¬¿ÉtelnetÁ¬½Óip¼°port£¬¼ì²éÊÇ·ñ³©Í¨
-        * @code Usage:
-        *   x1ftdcapi::CX1FtdcTraderApi* pApi = x1ftdcapi::CX1FtdcTraderApi::CreateCX1FtdcTraderApi();
-        *   MyTradeSpi spi(pApi);   // MyTradeSpiÊÇ¼Ì³ĞCX1FtdcTraderSpiµÄ×ÓÀà¶ÔÏó£¬ÊµÏÖÁËÓÃ»§ÏìÓ¦½Ó¿Ú
-        *   int iret = pApi->Init("tcp://127.0.0.1:10700", &spi, 2, 4);
-        *   if (iret != 0) {
-        *       printf("init failed! error:%d\n", iret);
-        *       return -1;
-        *   }
-        *
-        *   //do something
-        *
-        *   pApi->Release();
-        * @endcode
-        */
-        virtual int Init(char * pszFrontAddr, CX1FtdcTraderSpi * pSpi, int output_core = -1, int input_core = -1) = 0;
-
-        /**
-        * @brief µÈ´ı½Ó¿ÚÏß³Ì½áÊøÔËĞĞ¡£
-        * @return Ïß³ÌÍË³ö´úÂë¡£
-        *         <ul>
-        *           <li> 0  - Ïß³ÌÍË³ö³É¹¦
-        *           <li> -1 - Ïß³ÌÍË³öÊ§°Ü
-        *         </ul>
-        */
-        virtual int Join(void) = 0;
-
-        /**
-        * @brief ¶©ÔÄË½ÓĞÁ÷
-        * @details ÔÚInit ·½·¨µ÷ÓÃÖ®ºó£¬ReqUserLogin ·½·¨µ÷ÓÃÖ®Ç°µ÷ÓÃ¡£Èô²»µ÷ÓÃ¸Ã½Ó¿Ú£¬ÔòÊÕ²»µ½Ë½ÓĞÁ÷
-        * @param priflow_req_flag Ë½ÓĞÁ÷¶©ÔÄ·½Ê½
-        *         <ul>
-        *           <li> 0 - Ö»´«ËÍµÇÂ¼ºóË½ÓĞÁ÷µÄÄÚÈİ
-        *           <li> 1 - ´Ó±¾½»Ò×ÈÕ¿ªÊ¼ÖØ´«
-        *           <li> 2 - ´ÓÉÏ´ÎÊÕµ½µÄĞø´«
-        *           <li> 3 - ´ÓÖ¸¶¨±àºÅ¿ªÊ¼Ğø´«
-        *         </ul>
-        * @param pri_no Ö¸¶¨Ë½ÓĞÁ÷±àºÅ(´ÓÖ¸¶¨±àºÅ´¦¶©ÔÄË½ÓĞÁ÷) µ±priflow_req_flagÈ¡Öµ3Ê±£¬¸Ã²ÎÊı²ÅÓĞĞ§£¬ÆäËûÇé¿ö£¬´«Èë0Öµ¼´¿É¡£×¢Òâ: ÓÃ»§ÊÕµ½µÄË½ÓĞÁ÷±àºÅ¿ÉÄÜ²»Á¬Ğø
-        */
-        virtual void SubscribePrivateTopic(int priflow_req_flag, unsigned int pri_no) = 0;
-
-        virtual void SetMatchInfoAdvanced(bool matchinfo_advanced) = 0;
-
-        /**
-        * @brief ÓÃ»§·¢³öµÇÂ¼ÇëÇó
-        * @param pUserLoginData Ö¸ÏòÓÃ»§µÇÂ¼ÇëÇó½á¹¹µÄµØÖ·¡£
-        * @return ·µ»ØÖµ
-        *         <ul>
-        *           <li> 0      -  ÇëÇó·¢ËÍ³É¹¦
-        *           <li> ·ÇÁã   -  ´íÎóÂë
-        *         </ul>
-        */
-        virtual int ReqUserLogin(struct CX1FtdcReqUserLoginField * pUserLoginData) = 0;
-
-        /**
-        * @brief ÓÃ»§·¢³öµÇ³öÇëÇó
-        * @param pUserLogoutData Ö¸ÏòÓÃ»§µÇÂ¼Çë³ö½á¹¹µÄµØÖ·¡£
-        * @return ·µ»ØÖµ
-        *         <ul>
-        *           <li> 0      -  ÇëÇó·¢ËÍ³É¹¦
-        *           <li> ·ÇÁã   -  ´íÎóÂë
-        *         </ul>
-        */
-        virtual int ReqUserLogout(struct CX1FtdcReqUserLogoutField * pUserLogoutData) = 0;
-
-        /**
-        * @brief ÓÃ»§·¢³öÖØÖÃÃÜÂëÇëÇó
-        * @param pResetPasswordData Ö¸ÏòÓÃ»§ÖØÖÃÃÜÂëÇëÇó½á¹¹µÄµØÖ·¡£
-        * @return ·µ»ØÖµ
-        *         <ul>
-        *           <li> 0      -  ÇëÇó·¢ËÍ³É¹¦
-        *           <li> ·ÇÁã   -  ´íÎóÂë
-        *         </ul>
-        */
-        virtual int ReqResetPassword(struct CX1FtdcReqResetPasswordField * pResetPasswordData) = 0;
-
-        /**
-        * @brief ÆÚ»õÎ¯ÍĞ±¨µ¥ÇëÇó¡£
-        * @param pInsertOrderData ÓÃ»§ÇëÇó±¨µ¥ĞÅÏ¢½á¹¹µØÖ·¡£
-        * @return ·µ»ØÖµ
-        *         <ul>
-        *           <li> 0      -  ÇëÇó·¢ËÍ³É¹¦
-        *           <li> ·ÇÁã   -  ´íÎóÂë
-        *         </ul>
-        */
-        virtual int ReqInsertOrder(struct CX1FtdcInsertOrderField * pInsertOrderData) = 0;
-
-        /**
-        * @brief ÆÚ»õ³·µ¥ÇëÇó¡£
-        * @details Èç¹ûÌá¹©¹ñÌ¨Î¯ÍĞºÅ(¹ñÌ¨Î¯ÍĞºÅ´óÓÚ-1)£¬ÔòÖ»Ê¹ÓÃ¹ñÌ¨Î¯ÍĞºÅ´¦Àí£»Ö»ÓĞµ±¹ñÌ¨Î¯ÍĞºÅĞ¡ÓÚ0Ê±£¬²ÅÊ¹ÓÃ±¾µØÎ¯ÍĞºÅ½øĞĞ³·µ¥
-        * @param pCancelOrderData ÓÃ»§ÇëÇó³·µ¥ĞÅÏ¢½á¹¹µØÖ·¡£
-        * @return ·µ»ØÖµ
-        *         <ul>
-        *           <li> 0      -  ÇëÇó·¢ËÍ³É¹¦
-        *           <li> ·ÇÁã   -  ´íÎóÂë
-        *         </ul>
-        */
-        virtual int ReqCancelOrder(struct CX1FtdcCancelOrderField * pCancelOrderData) = 0;
-
-        /**
-        * @brief ³Ö²Ö²éÑ¯ÇëÇó¡£
-        * @details Èç¹ûÃ»ÓĞÌá¹©ºÏÔ¼´úÂë£¬Ôò²éÑ¯È«²¿³Ö²ÖĞÅÏ¢¡£
-        * @param pPositionData ÓÃ»§ÇëÇó³Ö²ÖĞÅÏ¢½á¹¹µØÖ·¡£
-        * @return ·µ»ØÖµ
-        *         <ul>
-        *           <li> 0      -  ÇëÇó·¢ËÍ³É¹¦
-        *           <li> -1     -  ÇëÇó·¢ËÍÊ§°Ü
-        *           <li> -2     -  ¼ì²âÒì³£
-        *         </ul>
-        */
-        virtual int ReqQryPosition(struct CX1FtdcQryPositionField * pPositionData) = 0;
-
-        /**
-        * @brief ¿Í»§×Ê½ğ²éÑ¯ÇëÇó¡£
-        * @details ÓÃ»§ĞèÒªÌî³ä¸Ã½á¹¹µÄ¸÷¸ö×Ö¶Î
-        * @param pCapitalData ÇëÇó×Ê½ğ²éÑ¯½á¹¹µØÖ·¡£
-        * @return ·µ»ØÖµ
-        *         <ul>
-        *           <li> 0      -  ÇëÇó·¢ËÍ³É¹¦
-        *           <li> ·ÇÁã   -  ´íÎóÂë
-        *         </ul>
-        */
-        virtual int ReqQryCustomerCapital(struct CX1FtdcQryCapitalField * pCapitalData) = 0;
-
-        /**
-        * @brief ²éÑ¯½»Ò×ËùºÏÔ¼ÁĞ±í£¨·ÇÌ×Àû£©¡£
-        * @details µ±ExchangeIDÎª¿ÕÊ±£¬±íÊ¾²éÑ¯¸÷½»Ò×ËùµÄËùÓĞºÏÔ¼´úÂë£¬Ò²¿ÉÖ¸¶¨²éÑ¯Ä³½»Ò×ËùµÄËùÓĞºÏÔ¼´úÂëĞÅÏ¢£¬µ«¸Ã½Ó¿Ú²»ÄÜ²éÑ¯µ½Ì×ÀûºÏÔ¼´úÂë
-        * @param pExchangeInstrumentData ½»Ò×ËùºÏÔ¼²éÑ¯½á¹¹µØÖ·¡£
-        * @return ·µ»ØÖµ
-        *         <ul>
-        *           <li> 0      -  ÇëÇó·¢ËÍ³É¹¦
-        *           <li> ·ÇÁã   -  ´íÎóÂë
-        *         </ul>
-        */
-        virtual int ReqQryExchangeInstrument(struct CX1FtdcQryExchangeInstrumentField * pExchangeInstrumentData) = 0;
-
-        /**
-        * @brief µ±ÈÕÎ¯ÍĞ²éÑ¯ÇëÇó¡£
-        * @param pOrderData µ±ÈÕÎ¯ÍĞ²éÑ¯½á¹¹µØÖ·¡£
-        * @return ·µ»ØÖµ
-        *         <ul>
-        *           <li> 0      -  ÇëÇó·¢ËÍ³É¹¦
-        *           <li> -1     -  ÇëÇó·¢ËÍÊ§°Ü
-        *           <li> -2     -  ¼ì²âÒì³£
-        *         </ul>
-        */
-        virtual int ReqQryOrderInfo(struct CX1FtdcQryOrderField * pOrderData) = 0;
-
-        /**
-        * @brief µ±ÈÕ³É½»²éÑ¯ÇëÇó¡£
-        * @param pMatchData µ±ÈÕ³É½»²éÑ¯½á¹¹µØÖ·¡£
-        * @return ·µ»ØÖµ
-        *         <ul>
-        *           <li> 0      -  ÇëÇó·¢ËÍ³É¹¦
-        *           <li> ·ÇÁã   -  ´íÎóÂë
-        *         </ul>
-        */
-        virtual int ReqQryMatchInfo(struct CX1FtdcQryMatchField * pMatchData) = 0;
-
-        /**
-        * @brief Ö¸¶¨ºÏÔ¼ĞÅÏ¢²éÑ¯ÇëÇó¡£
-        * @details ExchangeID²¢·Ç±ØĞëÊäÈëÑ¡Ïî£¬ÒòÎªÄ¿Ç°ÆÚ»õÊĞ³¡ÉÏ£¬Ò»¸öºÏÔ¼´úÂëÔÚ¸÷½»Ò×ËùÊÇÎ¨Ò»´æÔÚµÄ¡£
-        * @param pInstrument Ö¸¶¨ºÏÔ¼²éÑ¯½á¹¹µØÖ·¡£
-        * @return ·µ»ØÖµ
-        *         <ul>
-        *           <li> 0      -  ÇëÇó·¢ËÍ³É¹¦
-        *           <li> ·ÇÁã   -  ´íÎóÂë
-        *         </ul>
-        */
-        virtual int ReqQrySpecifyInstrument(struct CX1FtdcQrySpecificInstrumentField * pInstrument) = 0;
-
-        /**
-        * @brief ³Ö²ÖÃ÷Ï¸²éÑ¯ÇëÇó¡£
-        * @param pPositionDetailData:³Ö²ÖÃ÷Ï¸²éÑ¯½á¹¹µØÖ·¡£
-        * @return ·µ»ØÖµ
-        *         <ul>
-        *           <li> 0      -  ÇëÇó·¢ËÍ³É¹¦
-        *           <li> ·ÇÁã   -  ´íÎóÂë
-        *         </ul>
-        */
-        virtual int ReqQryPositionDetail(struct CX1FtdcQryPositionDetailField * pPositionDetailData) = 0;
-
-        /**
-        * @brief ½»Ò×Ëù×´Ì¬²éÑ¯
-        * @param pQryExchangeStatusData:½»Ò×Ëù×´Ì¬²éÑ¯ÇëÇó½á¹¹µØÖ·¡£
-        * @return ·µ»ØÖµ
-        *         <ul>
-        *           <li> 0      -  ÇëÇó·¢ËÍ³É¹¦
-        *           <li> ·ÇÁã   -  ´íÎóÂë
-        *         </ul>
-        */
-        virtual int ReqQryExchangeStatus(struct CX1FtdcQryExchangeStatusField *pQryExchangeStatusData) = 0;
-
-
-        /**
-        * @brief ²éÑ¯½»Ò×ËùÌ×ÀûºÏÔ¼ÁĞ±í¡£
-        * @param pAbtriInstrumentData:½»Ò×ËùÌ×ÀûºÏÔ¼²éÑ¯½á¹¹µØÖ·¡£
-        * @return 0 - ÇëÇó·¢ËÍ³É¹¦ -1 - ÇëÇó·¢ËÍÊ§°Ü  -ÆäËü -¼ì²âÒì³£¡£
-        */
-        virtual int ReqQryArbitrageInstrument(struct CX1FtdcAbiInstrumentField * pAbtriInstrumentData) = 0;
-
-
-        ///////ÒÔÏÂ×öÊĞÉÌÏà¹Ø
-        /**
-        * @brief ×öÊĞÉÌ±¨µ¥ÇëÇó
-        * @param pQuoteInsertOrderData:×öÊĞÉÌ±¨µ¥ÇëÇó½á¹¹µØÖ·¡£
-        * @return 0 - ÇëÇó·¢ËÍ³É¹¦ -1 - ÇëÇó·¢ËÍÊ§°Ü  -ÆäËü -¼ì²âÒì³£¡£
-        */
-        virtual int ReqQuoteInsert(struct CX1FtdcQuoteInsertField * pQuoteInsertOrderData) = 0;
-
-        /**
-        * @brief ×öÊĞÉÌ³·µ¥ÇëÇó
-        * @details ¶ÔÓÚË«±ßÓ¦¼Û£¬±¾½Ó¿ÚÖ»Ö§³Ö³·Ë«±ß£¬²»Ö§³ÖÖ»³·ÏúÒ»±ßµÄ²Ù×÷
-        * @param pQuoteCancelOrderData:×öÊĞÉÌ³·µ¥ÇëÇó½á¹¹µØÖ·¡£
-        * @return 0 - ÇëÇó·¢ËÍ³É¹¦ -1 - ÇëÇó·¢ËÍÊ§°Ü  -ÆäËü -¼ì²âÒì³£¡£
-        */
-        virtual int ReqQuoteCancel(struct CX1FtdcCancelOrderField * pQuoteCancelOrderData) = 0;
-
-        /**
-        * @brief ÅúÁ¿³·µ¥
-        * @details ¸ÃÖ¸ÁîÄ¿Ç°Ö»Ö§³Ö´óÉÌËùµÄ×öÊĞÉÌ±¨¼Û¶©µ¥£¬ÆäËü½»Ò×ËùÔİ²»Ö§³Ö£¬ÆÕÍ¨ÆÚ»õÆÚÈ¨¶©µ¥Ò²²»Ö§³Ö
-        * @param pCancelAllOrderData:ÅúÁ¿³·µ¥ÇëÇó½á¹¹µØÖ·¡£
-        * @return 0 - ÇëÇó·¢ËÍ³É¹¦ -1 - ÇëÇó·¢ËÍÊ§°Ü  -ÆäËü -¼ì²âÒì³£¡£
-        */
-        virtual int ReqCancelAllOrder(struct CX1FtdcCancelAllOrderField * pCancelAllOrderData) = 0;
-
-        /**
-        * @brief Ñ¯¼ÛÇëÇó
-        * @param pForQuoteData:Ñ¯¼ÛÇëÇó½á¹¹µØÖ·¡£
-        * @return 0 - ÇëÇó·¢ËÍ³É¹¦ -1 - ÇëÇó·¢ËÍÊ§°Ü  -ÆäËü -¼ì²âÒì³£¡£
-        */
-        virtual int ReqForQuote(struct CX1FtdcForQuoteField * pForQuoteData) = 0;
-
-        /**
-        * @brief Ñ¯¼ÛÎ¯ÍĞ²éÑ¯ÇëÇó
-        * @param pQryForQuoteData:Ñ¯¼ÛÎ¯ÍĞ²éÑ¯ÇëÇó½á¹¹µØÖ·¡£
-        * @return 0 - ÇëÇó·¢ËÍ³É¹¦ -1 - ÇëÇó·¢ËÍÊ§°Ü  -ÆäËü -¼ì²âÒì³£¡£
-        */
-        virtual int ReqQryForQuote(struct CX1FtdcQryForQuoteField * pQryForQuoteData) = 0;
-
-        /**
-        * @brief ×öÊĞÉÌ±¨¼ÛÎ¯ÍĞ²éÑ¯
-        * @param pQuoteOrderData:×öÊĞÉÌ±¨¼ÛÎ¯ÍĞ²éÑ¯½á¹¹µØÖ·¡£
-        * @return 0 - ÇëÇó·¢ËÍ³É¹¦ -1 - ÇëÇó·¢ËÍÊ§°Ü  -ÆäËü -¼ì²âÒì³£¡£
-        */
-        virtual int ReqQryQuoteOrderInfo(struct CX1FtdcQuoteOrderField * pQuoteOrderData) = 0;
-
-        /**
-        * @brief Ñ¯¼ÛÍ¨Öª²éÑ¯ÇëÇó
-        * @param pQryQuoteNoticeData:²éÑ¯Ñ¯¼ÛÍ¨ÖªÇëÇó½á¹¹µØÖ·¡£
-        * @return 0 - ÇëÇó·¢ËÍ³É¹¦ -1 - ÇëÇó·¢ËÍÊ§°Ü  -ÆäËü -¼ì²âÒì³£¡£
-        */
-        virtual int ReqQryQuoteNotice(struct CX1FtdcQryQuoteNoticeField * pQryQuoteNoticeData) = 0;
-        ///////ÒÔÉÏ×öÊĞÉÌÏà¹Ø
-
-        /**
-        * ×éºÏ³Ö²ÖÃ÷Ï¸²éÑ¯ÇëÇó
-        * @param pQryArbitrageCombineDetailData:²éÑ¯×éºÏ³Ö²ÖÇëÇó½á¹¹µØÖ·¡£
-        * @return 0 - ÇëÇó·¢ËÍ³É¹¦ -1 - ÇëÇó·¢ËÍÊ§°Ü  -ÆäËü -¼ì²âÒì³£¡£
-        */
-        virtual int ReqQryArbitrageCombineDetail(struct CX1FtdcArbitrageCombineDetailField *pQryArbitrageCombineDetailData) = 0;
-        /**
-        * @brief »ñÈ¡°æ±¾ºÅ
-        * @return °æ±¾ºÅ×Ö·û´®
-        */
-        virtual const char * GetVersion() = 0;
-    };//end of CX1FtdcTraderApi
-}
-//end of namespace
-
-
-#endif//X1FTDCTRADERAPI_H_
-
+/**
+ * @brief ç”¨æˆ·å“åº”æ¥å£
+ * @details
+ * å®ç°äº†äº‹ä»¶é€šçŸ¥æ¥å£ï¼Œç”¨æˆ·éœ€è¦å®ç°æ­¤ç±»æ¥å£ï¼Œç¼–å†™äº‹ä»¶å¤„ç†æ–¹æ³•æ¥å¤„ç†ç”¨æˆ·æ„Ÿå…´è¶£çš„äº‹ä»¶ã€‚
+ * @see Init
+ */
+class CX1FtdcTraderSpi {
+ public:
+  /**
+   * @brief    ç½‘ç»œè¿æ¥æ­£å¸¸å“åº”
+   * @details
+   * å½“å®¢æˆ·ç«¯ä¸äº¤æ˜“åå°éœ€å»ºç«‹èµ·é€šä¿¡è¿æ¥æ—¶ï¼ˆè¿˜æœªç™»å½•å‰ï¼‰ï¼Œå®¢æˆ·ç«¯APIä¼šè‡ªåŠ¨æ£€æµ‹ä¸å‰ç½®æœºä¹‹é—´çš„è¿æ¥ï¼Œ
+   *           å½“ç½‘ç»œå¯ç”¨ï¼Œå°†è‡ªåŠ¨å»ºç«‹è¿æ¥ï¼Œå¹¶è°ƒç”¨è¯¥æ–¹æ³•é€šçŸ¥å®¢æˆ·ç«¯ï¼Œ
+   * å®¢æˆ·ç«¯å¯ä»¥åœ¨å®ç°è¯¥æ–¹æ³•æ—¶ï¼Œé‡æ–°ä½¿ç”¨èµ„é‡‘è´¦å·è¿›è¡Œç™»å½•ã€‚
+   *           ï¼ˆè¯¥æ–¹æ³•æ˜¯åœ¨Apiå’Œå‰ç½®æœºå»ºç«‹è¿æ¥åè¢«è°ƒç”¨ï¼Œè¯¥è°ƒç”¨ä»…ä»…æ˜¯è¯´æ˜tcpè¿æ¥å·²ç»å»ºç«‹æˆåŠŸã€‚ç”¨æˆ·éœ€è¦è‡ªè¡Œç™»å½•æ‰èƒ½è¿›è¡Œåç»­çš„ä¸šåŠ¡æ“ä½œã€‚
+   *           è¿æ¥å¤±è´¥åˆ™æ­¤æ–¹æ³•ä¸ä¼šè¢«è°ƒç”¨ã€‚ï¼‰
+   *
+   */
+  virtual void OnFrontConnected(){};
+
+  /**
+   * @brief ç½‘ç»œè¿æ¥ä¸æ­£å¸¸å“åº”
+   * @details
+   * å½“å®¢æˆ·ç«¯ä¸äº¤æ˜“åå°é€šä¿¡è¿æ¥æ–­å¼€æ—¶ï¼Œè¯¥æ–¹æ³•è¢«è°ƒç”¨ã€‚å½“å‘ç”Ÿè¿™ä¸ªæƒ…å†µåï¼ŒAPIä¼šè‡ªåŠ¨é‡æ–°è¿æ¥ï¼Œå®¢æˆ·ç«¯éœ€ä¿è¯è¿æ¥æˆåŠŸåæœ‰ç›¸åº”çš„ç™»å½•é€»è¾‘å¤„ç†ã€‚
+   * @param    nReason é”™è¯¯åŸå› 
+   *           <ul>
+   *               <li> 0x1001 æŸ¥è¯¢æœåŠ¡ç½‘ç»œè¯»å¤±è´¥
+   *               <li> 0x1002 æŸ¥è¯¢æœåŠ¡ç½‘ç»œå†™å¤±è´¥
+   *               <li> 0x2002 æŸ¥è¯¢æœåŠ¡å‘é€å¿ƒè·³å¤±è´¥
+   *               <li> 0x2003 æŸ¥è¯¢æœåŠ¡æ”¶åˆ°é”™è¯¯æŠ¥æ–‡
+   *               <li> 0x3001 æŠ¥å•æœåŠ¡ç½‘ç»œè¯»å¤±è´¥
+   *               <li> 0x3002 æŠ¥å•æœåŠ¡ç½‘ç»œå†™å¤±è´¥
+   *               <li> 0x4001 æŠ¥å•æœåŠ¡æ¥æ”¶å¿ƒè·³è¶…æ—¶
+   *               <li> 0x4002 æŠ¥å•æœåŠ¡å‘é€å¿ƒè·³å¤±è´¥
+   *               <li> 0x4003 æŠ¥å•æœåŠ¡æ”¶åˆ°é”™è¯¯æŠ¥æ–‡
+   *           </ul>
+   *
+   */
+  virtual void OnFrontDisconnected(int nReason){};
+  /**
+   * @brief   ç™»é™†è¯·æ±‚å“åº”
+   * @details
+   * å½“ç”¨æˆ·å‘å‡ºç™»å½•è¯·æ±‚åï¼Œå‰ç½®æœºè¿”å›å“åº”æ—¶æ­¤æ–¹æ³•ä¼šè¢«è°ƒç”¨ï¼Œé€šçŸ¥ç”¨æˆ·ç™»å½•æ˜¯å¦æˆåŠŸã€‚å½“pUserLoginInfoRtn.loginResultä¸º0æ—¶è¡¨ç¤ºç™»å½•æˆåŠŸï¼Œä¸”ç™»å½•æˆåŠŸæ—¶ï¼ŒpErrorInfoä¸ºNULLï¼Œå¦åˆ™pErrorInfoä¸­å°†åŒ…å«é”™è¯¯IDå’Œé”™è¯¯ä¿¡æ¯ã€‚æˆåŠŸæ—¶ï¼Œç”¨æˆ·å°†è·å–ä¸€ä¸ªä¼šè¯ID,å½“SessionIDä¸º1çš„æ—¶å€™ï¼Œé»˜è®¤ä¸ºç”¨æˆ·ç¬¬ä¸€æ¬¡ç™»é™†.
+   * @param pUserLoginInfoRtn ç”¨æˆ·ç™»å½•ä¿¡æ¯ç»“æ„åœ°å€ã€‚
+   * @param pErrorInfo è‹¥ç™»å½•å¤±è´¥ï¼Œè¿”å›é”™è¯¯ä¿¡æ¯åœ°å€ï¼Œè¯¥ç»“æ„å«æœ‰é”™è¯¯ä¿¡æ¯ã€‚
+   */
+  virtual void OnRspUserLogin(
+      struct CX1FtdcRspUserLoginField* pUserLoginInfoRtn,
+      struct CX1FtdcRspErrorField* pErrorInfo){};
+
+  /**
+   * @brief   ç™»å‡ºè¯·æ±‚å“åº”:
+   * @details
+   * å½“ç”¨æˆ·å‘å‡ºé€€å‡ºè¯·æ±‚åï¼Œå‰ç½®æœºè¿”å›å“åº”æ­¤æ–¹æ³•ä¼šè¢«è°ƒç”¨ï¼Œé€šçŸ¥ç”¨æˆ·é€€å‡ºçŠ¶æ€ã€‚
+   * @param pUserLogoutInfoRtn è¿”å›ç”¨æˆ·é€€å‡ºä¿¡æ¯ç»“æ„åœ°å€ã€‚
+   * @param pErrorInfo è‹¥ç™»å‡ºå¤±è´¥ï¼Œè¿”å›é”™è¯¯ä¿¡æ¯åœ°å€ï¼Œè¯¥ç»“æ„å«æœ‰é”™è¯¯ä¿¡æ¯ã€‚
+   * @warning å½“ç”¨æˆ·ç™»å½•è¿”å›é”™è¯¯ç 35,ç”¨æˆ·éœ€release API æˆ– é‡å¯APIåé‡æ–°ç™»å½•
+   */
+  virtual void OnRspUserLogout(
+      struct CX1FtdcRspUserLogoutInfoField* pUserLogoutInfoRtn,
+      struct CX1FtdcRspErrorField* pErrorInfo){};
+
+  /**
+   * @brief   æœŸè´§å§”æ‰˜æŠ¥å•å“åº”
+   * @details
+   * å½“æŠ¥å•å‘ç”Ÿé”™è¯¯æ—¶ï¼ŒpErrorInfoä¸ä¸ºNULLï¼Œå¹¶åœ¨å…¶ä¸­åŒ…å«äº†é”™è¯¯IDåŠé”™è¯¯ä¿¡æ¯ï¼Œå’Œè¯·æ±‚æŠ¥å•æ—¶çš„LocalOrderIDï¼Œç”¨äºå¯¹åº”å®¢æˆ·ç¨‹åºçš„æŠ¥å•ã€‚æŠ¥å•æˆåŠŸæ—¶ï¼Œæ˜¯è¡¨ç¤ºX1å°ç³»ç»Ÿç¡®è®¤äº†è¯¥ç¬”æŠ¥å•ï¼Œè¯¥æŠ¥å•ä¹ŸåŒæ—¶æŠ¥åˆ°äº†äº¤æ˜“æ‰€ï¼Œä½†äº¤æ˜“æ‰€è¿˜æœªç¡®è®¤ã€‚
+   * @param pOrderRtn è¿”å›ç”¨æˆ·ä¸‹å•ä¿¡æ¯ç»“æ„åœ°å€ã€‚
+   * @param pErrorInfo è‹¥æŠ¥å•å¤±è´¥ï¼Œè¿”å›é”™è¯¯ä¿¡æ¯åœ°å€ï¼Œè¯¥ç»“æ„å«æœ‰é”™è¯¯ä¿¡æ¯ã€‚
+   */
+  virtual void OnRspInsertOrder(struct CX1FtdcRspOperOrderField* pOrderRtn,
+                                struct CX1FtdcRspErrorField* pErrorInfo){};
+
+  /**
+   * @brief   æœŸè´§å§”æ‰˜æ’¤å•å“åº”
+   * @details å½“ç”¨æˆ·æ’¤å•åï¼Œå‰ç½®è¿”å›å“åº”æ˜¯è¯¥æ–¹æ³•ä¼šè¢«è°ƒç”¨ã€‚
+   * @param pOrderCanceledRtn è¿”å›æ’¤å•å“åº”ä¿¡æ¯ç»“æ„åœ°å€ã€‚
+   * @param pErrorInfo è‹¥æ’¤å•å¤±è´¥ï¼Œè¿”å›é”™è¯¯ä¿¡æ¯åœ°å€ï¼Œè¯¥ç»“æ„å«æœ‰é”™è¯¯ä¿¡æ¯ã€‚
+   * @warning
+   * æ’¤å•å‘ç”Ÿé”™è¯¯æ—¶ï¼Œéœ€è¦æ£€æŸ¥pErrorInfoæ˜¯å¦ä¸ºNULLã€‚ä¸”å®¢æˆ·ç«¯æ”¶åˆ°è¯¥å“åº”æ—¶ï¼Œåªè¡¨ç¤ºæŸœå°ç¡®è®¤äº†è¿™ç¬”æ’¤å•è¯·æ±‚ã€‚
+   */
+  virtual void OnRspCancelOrder(
+      struct CX1FtdcRspOperOrderField* pOrderCanceledRtn,
+      struct CX1FtdcRspErrorField* pErrorInfo){};
+
+  /**
+   * @brief   é”™è¯¯å›æŠ¥
+   * @details APIå†…éƒ¨æˆ–è€…æŸœå°å†…éƒ¨å‘ç”Ÿå¼‚å¸¸é”™è¯¯ï¼Œé€šè¿‡æ­¤æ–¹æ³•é€šçŸ¥ç”¨æˆ·ã€‚
+   *           APIå†…éƒ¨é”™è¯¯ï¼šåŒ…å«APIå†…å­˜æ•°æ®å¼‚å¸¸ã€ç³»ç»Ÿèµ„æºç”³è¯·å¼‚å¸¸ç­‰ã€‚
+   *           æŸœå°å†…å­˜é”™è¯¯ï¼šåŒ…å«äº¤æ˜“æ‰€APIå†…éƒ¨æŠ›å‡ºå¼‚å¸¸ï¼ŒæŸœå°å†…éƒ¨æ•°æ®å¼‚å¸¸ï¼Œç³»ç»Ÿèµ„æºç”³è¯·å¼‚å¸¸ç­‰ã€‚
+   * @param pErrorInfo é”™è¯¯ä¿¡æ¯çš„ç»“æ„åœ°å€ã€‚
+   */
+  virtual void OnRtnErrorMsg(struct CX1FtdcRspErrorField* pErrorInfo){};
+
+  /**
+   * @brief   æˆäº¤å›æŠ¥
+   * @details å½“å§”æ‰˜æˆåŠŸäº¤æ˜“åæ¬¡æ–¹æ³•ä¼šè¢«è°ƒç”¨ã€‚
+   * @param pRtnMatchData æŒ‡å‘æˆäº¤å›æŠ¥çš„ç»“æ„çš„æŒ‡é’ˆã€‚
+   */
+  virtual void OnRtnMatchedInfo(
+      struct CX1FtdcRspPriMatchInfoField* pRtnMatchData){};
+
+  /**
+   * @brief   å§”æ‰˜å›æŠ¥
+   * @details å½“äº¤æ˜“æ‰€æ”¶åˆ°å§”æ‰˜è¯·æ±‚å¹¶è¿”å›å›æŠ¥æ—¶ï¼Œè¯¥æ–¹æ³•ä¼šè¢«è°ƒç”¨
+   * @param pRtnOrderData æŒ‡å‘å§”æ‰˜å›æŠ¥åœ°å€çš„æŒ‡é’ˆã€‚
+   */
+  virtual void OnRtnOrder(struct CX1FtdcRspPriOrderField* pRtnOrderData){};
+
+  /**
+   * @brief  æ’¤å•å›æŠ¥
+   * @details å½“æ’¤å•æˆåŠŸåè¯¥æ–¹æ³•ä¼šè¢«è°ƒç”¨ã€‚
+   * @param pCancelOrderData
+   * æŒ‡å‘æ’¤å•å›æŠ¥ç»“æ„çš„åœ°å€ï¼Œè¯¥ç»“æ„ä½“åŒ…å«è¢«æ’¤å•åˆçº¦çš„ç›¸å…³ä¿¡æ¯ã€‚
+   */
+  virtual void OnRtnCancelOrder(
+      struct CX1FtdcRspPriCancelOrderField* pCancelOrderData){};
+
+  /**
+   * @brief  æŸ¥è¯¢å½“æ—¥å§”æ‰˜å“åº”
+   * @details å½“ç”¨æˆ·å‘å‡ºå§”æ‰˜æŸ¥è¯¢åï¼Œè¯¥æ–¹æ³•ä¼šè¢«è°ƒç”¨ã€‚
+   * @param pRtnOrderData æŒ‡å‘å§”æ‰˜å›æŠ¥ç»“æ„çš„åœ°å€ã€‚
+   * @param pErrorInfo è‹¥æŸ¥è¯¢å¤±è´¥ï¼Œè¿”å›é”™è¯¯ä¿¡æ¯åœ°å€ï¼Œè¯¥ç»“æ„å«æœ‰é”™è¯¯ä¿¡æ¯ã€‚
+   * @param bIsLast    è¡¨æ˜æ˜¯å¦æ˜¯æœ€åä¸€æ¡å“åº”ä¿¡æ¯
+   *                   <ul>
+   *                       <li> 0 - å¦
+   *                       <li> 1 - æ˜¯
+   *                   </ul>
+   */
+  virtual void OnRspQryOrderInfo(struct CX1FtdcRspOrderField* pRtnOrderData,
+                                 struct CX1FtdcRspErrorField* pErrorInfo,
+                                 bool bIsLast){};
+
+  /**
+   * @brief  æŸ¥è¯¢å½“æ—¥æˆäº¤å“åº”
+   * @details å½“ç”¨æˆ·å‘å‡ºæˆäº¤æŸ¥è¯¢åè¯¥æ–¹æ³•ä¼šè¢«è°ƒç”¨ã€‚
+   * @param pRtnMatchData æŒ‡å‘æˆäº¤å›æŠ¥ç»“æ„çš„åœ°å€ã€‚
+   * @param pErrorInfo è‹¥æŸ¥è¯¢å¤±è´¥ï¼Œè¿”å›é”™è¯¯ä¿¡æ¯åœ°å€ï¼Œè¯¥ç»“æ„å«æœ‰é”™è¯¯ä¿¡æ¯ã€‚
+   * @param bIsLast è¡¨æ˜æ˜¯å¦æ˜¯æœ€åä¸€æ¡å“åº”ä¿¡æ¯
+   *                   <ul>
+   *                       <li> 0 - å¦
+   *                       <li> 1 - æ˜¯
+   *                   </ul>
+   */
+  virtual void OnRspQryMatchInfo(struct CX1FtdcRspMatchField* pRtnMatchData,
+                                 struct CX1FtdcRspErrorField* pErrorInfo,
+                                 bool bIsLast){};
+
+  /**
+   * @brief  æŒä»“æŸ¥è¯¢å“åº”
+   * @details å½“ç”¨æˆ·å‘å‡ºæŒä»“æŸ¥è¯¢æŒ‡ä»¤åï¼Œå‰ç½®è¿”å›å“åº”æ—¶è¯¥æ–¹æ³•ä¼šè¢«è°ƒç”¨ã€‚
+   * @param pPositionInfoRtn è¿”å›æŒä»“ä¿¡æ¯ç»“æ„çš„åœ°å€ã€‚
+   * @param pErrorInfo è‹¥æŸ¥è¯¢å¤±è´¥ï¼Œè¿”å›é”™è¯¯ä¿¡æ¯åœ°å€ï¼Œè¯¥ç»“æ„å«æœ‰é”™è¯¯ä¿¡æ¯ã€‚
+   * @param bIsLast è¡¨æ˜æ˜¯å¦æ˜¯æœ€åä¸€æ¡å“åº”ä¿¡æ¯
+   *                   <ul>
+   *                       <li> 0 - å¦
+   *                       <li> 1 - æ˜¯
+   *                   </ul>
+   */
+  virtual void OnRspQryPosition(
+      struct CX1FtdcRspPositionField* pPositionInfoRtn,
+      struct CX1FtdcRspErrorField* pErrorInfo, bool bIsLast){};
+
+  /**
+   * @brief  å®¢æˆ·èµ„é‡‘æŸ¥è¯¢å“åº”
+   * @details å½“ç”¨æˆ·å‘å‡ºèµ„é‡‘æŸ¥è¯¢æŒ‡ä»¤åï¼Œå‰ç½®è¿”å›å“åº”æ—¶è¯¥æ–¹æ³•ä¼šè¢«è°ƒç”¨ã€‚
+   * @param pCapitalInfoRtn è¿”å›èµ„é‡‘ä¿¡æ¯ç»“æ„çš„åœ°å€ã€‚
+   * @param pErrorInfo è‹¥æŸ¥è¯¢å¤±è´¥ï¼Œè¿”å›é”™è¯¯ä¿¡æ¯åœ°å€ï¼Œè¯¥ç»“æ„å«æœ‰é”™è¯¯ä¿¡æ¯ã€‚
+   * @param bIsLast è¡¨æ˜æ˜¯å¦æ˜¯æœ€åä¸€æ¡å“åº”ä¿¡æ¯
+   *                   <ul>
+   *                       <li> 0 - å¦
+   *                       <li> 1 - æ˜¯
+   *                   </ul>
+   */
+  virtual void OnRspCustomerCapital(
+      struct CX1FtdcRspCapitalField* pCapitalInfoRtn,
+      struct CX1FtdcRspErrorField* pErrorInfo, bool bIsLast){};
+
+  /**
+   * @brief  äº¤æ˜“æ‰€åˆçº¦æŸ¥è¯¢å“åº”
+   * @details å½“ç”¨æˆ·å‘å‡ºåˆçº¦æŸ¥è¯¢æŒ‡ä»¤åï¼Œå‰ç½®è¿”å›å“åº”æ—¶è¯¥æ–¹æ³•ä¼šè¢«è°ƒç”¨ã€‚
+   * @param pInstrumentData è¿”å›åˆçº¦ä¿¡æ¯ç»“æ„çš„åœ°å€ã€‚
+   * @param pErrorInfo é”™è¯¯ä¿¡æ¯ç»“æ„ï¼Œå¦‚æœæŸ¥è¯¢å‘ç”Ÿé”™è¯¯ï¼Œåˆ™è¿”å›é”™è¯¯ä¿¡æ¯ã€‚
+   * @param bIsLast è¡¨æ˜æ˜¯å¦æ˜¯æœ€åä¸€æ¡å“åº”ä¿¡æ¯
+   *                   <ul>
+   *                       <li> 0 - å¦
+   *                       <li> 1 - æ˜¯
+   *                   </ul>
+   */
+  virtual void OnRspQryExchangeInstrument(
+      struct CX1FtdcRspExchangeInstrumentField* pInstrumentData,
+      struct CX1FtdcRspErrorField* pErrorInfo, bool bIsLast){};
+
+  /**
+   * @brief  æŸ¥è¯¢æŒ‡å®šåˆçº¦å“åº”
+   * @details å½“ç”¨æˆ·å‘å‡ºæŒ‡å®šåˆçº¦æŸ¥è¯¢æŒ‡ä»¤åï¼Œå‰ç½®è¿”å›å“åº”æ—¶è¯¥æ–¹æ³•ä¼šè¢«è°ƒç”¨ã€‚
+   * @param pInstrument è¿”å›æŒ‡å®šåˆçº¦ä¿¡æ¯ç»“æ„çš„åœ°å€ã€‚
+   * @param pErrorInfo è‹¥æŸ¥è¯¢å¤±è´¥ï¼Œè¿”å›é”™è¯¯ä¿¡æ¯åœ°å€ï¼Œè¯¥ç»“æ„å«æœ‰é”™è¯¯ä¿¡æ¯ã€‚
+   * @param bIsLast è¡¨æ˜æ˜¯å¦æ˜¯æœ€åä¸€æ¡å“åº”ä¿¡æ¯
+   *                   <ul>
+   *                       <li> 0 - å¦
+   *                       <li> 1 - æ˜¯
+   *                   </ul>
+   */
+  virtual void OnRspQrySpecifyInstrument(
+      struct CX1FtdcRspSpecificInstrumentField* pInstrument,
+      struct CX1FtdcRspErrorField* pErrorInfo, bool bIsLast){};
+
+  /**
+   * @brief  æŸ¥è¯¢æŒä»“æ˜ç»†å“åº”
+   * @details å½“ç”¨æˆ·å‘å‡ºæŸ¥è¯¢æŒä»“æ˜ç»†åï¼Œå‰ç½®è¿”å›å“åº”æ—¶è¯¥æ–¹æ³•ä¼šè¢«è°ƒç”¨ã€‚
+   * @param pPositionDetailRtn è¿”å›æŒä»“æ˜ç»†ç»“æ„çš„åœ°å€ã€‚
+   * @param pErrorInfo è‹¥æŸ¥è¯¢å¤±è´¥ï¼Œè¿”å›é”™è¯¯ä¿¡æ¯åœ°å€ï¼Œè¯¥ç»“æ„å«æœ‰é”™è¯¯ä¿¡æ¯ã€‚
+   * @param bIsLast è¡¨æ˜æ˜¯å¦æ˜¯æœ€åä¸€æ¡å“åº”ä¿¡æ¯
+   *                   <ul>
+   *                       <li> 0 - å¦
+   *                       <li> 1 - æ˜¯
+   *                   </ul>
+   */
+  virtual void OnRspQryPositionDetail(
+      struct CX1FtdcRspPositionDetailField* pPositionDetailRtn,
+      struct CX1FtdcRspErrorField* pErrorInfo, bool bIsLast){};
+
+  /**
+   * @brief äº¤æ˜“æ‰€çŠ¶æ€æŸ¥è¯¢å“åº”
+   * @param pRspExchangeStatusData:æŒ‡å‘äº¤æ˜“æ‰€çŠ¶æ€æŸ¥è¯¢å“åº”åœ°å€çš„æŒ‡é’ˆã€‚
+   * @warning
+   * è‹¥æ”¶ä¸åˆ°å¼€é—­å¸‚ä¿¡å·ï¼Œå¯å…ˆå’¨è¯¢æœŸè´§å…¬å¸è¿ç»´åŒäº‹ï¼Œæ˜¯å¦åœ¨æŠ¥ç›˜çš„é…ç½®ä¸­ï¼Œæ‰“å¼€äº†<PushJYZT
+   * Value=â€YESâ€/>çš„é€‰é¡¹
+   */
+  virtual void OnRspQryExchangeStatus(
+      struct CX1FtdcRspExchangeStatusField* pRspExchangeStatusData){};
+  /**
+   * @brief äº¤æ˜“æ‰€çŠ¶æ€é€šçŸ¥
+   * @details æ”¯æŒäº¤æ˜“æ‰€çŠ¶æ€é€šçŸ¥å’Œå“ç§çŠ¶æ€é€šçŸ¥ï¼Œåœ¨x1æŸœå°å¯é…
+   * @param pRtnExchangeStatusData æŒ‡å‘äº¤æ˜“æ‰€çŠ¶æ€é€šçŸ¥åœ°å€çš„æŒ‡é’ˆã€‚
+   */
+  virtual void OnRtnExchangeStatus(
+      struct CX1FtdcExchangeStatusRtnField* pRtnExchangeStatusData){};
+
+  /**
+   * @brief åšå¸‚å•†æŠ¥å•å“åº”
+   * @param pRspQuoteData:æŒ‡å‘åšå¸‚å•†æŠ¥å•å“åº”åœ°å€çš„æŒ‡é’ˆã€‚
+   * @param pErrorInfo:è‹¥æŠ¥ä»·å¤±è´¥ï¼Œè¿”å›é”™è¯¯ä¿¡æ¯åœ°å€ï¼Œè¯¥ç»“æ„å«æœ‰é”™è¯¯ä¿¡æ¯ã€‚
+   */
+  virtual void OnRspQuoteInsert(struct CX1FtdcQuoteRspField* pRspQuoteData,
+                                struct CX1FtdcRspErrorField* pErrorInfo){};
+
+  /**
+   * @brief åšå¸‚å•†æŠ¥å•å›æŠ¥
+   * @param pRtnQuoteData:æŒ‡å‘åšå¸‚å•†æŠ¥å•å›æŠ¥åœ°å€çš„æŒ‡é’ˆã€‚
+   */
+  virtual void OnRtnQuoteInsert(struct CX1FtdcQuoteRtnField* pRtnQuoteData){};
+
+  /**
+   * @brief åšå¸‚å•†æ’¤å•å“åº”
+   * @param pRspQuoteCanceledData:æŒ‡å‘åšå¸‚å•†æ’¤å•å“åº”åœ°å€çš„æŒ‡é’ˆã€‚
+   * @param pErrorInfo:è‹¥æ’¤å•å¤±è´¥ï¼Œè¿”å›é”™è¯¯ä¿¡æ¯åœ°å€ï¼Œè¯¥ç»“æ„å«æœ‰é”™è¯¯ä¿¡æ¯ã€‚
+   */
+  virtual void OnRspQuoteCancel(
+      struct CX1FtdcQuoteRspField* pRspQuoteCanceledData,
+      struct CX1FtdcRspErrorField* pErrorInfo){};
+
+  /**
+   * @brief åšå¸‚å•†æ’¤å•å›æŠ¥
+   * @param pRtnQuoteCanceledData:æŒ‡å‘åšå¸‚å•†æ’¤å•å›æŠ¥åœ°å€çš„æŒ‡é’ˆã€‚
+   */
+  virtual void OnRtnQuoteCancel(
+      struct CX1FtdcQuoteCanceledRtnField* pRtnQuoteCanceledData){};
+
+  /**
+   * @brief åšå¸‚å•†æˆäº¤å›æŠ¥
+   * @param pRtnQuoteMatchedData:æŒ‡å‘åšå¸‚å•†æˆäº¤å›æŠ¥åœ°å€çš„æŒ‡é’ˆã€‚
+   */
+  virtual void OnRtnQuoteMatchedInfo(
+      struct CX1FtdcQuoteMatchRtnField* pRtnQuoteMatchedData){};
+
+  /**
+   * @brief æ‰¹é‡æ’¤å•å“åº”
+   * @param pRspStripCancelOrderData:æŒ‡å‘æ‰¹é‡æ’¤å•å“åº”åœ°å€çš„æŒ‡é’ˆã€‚
+   * @param pErrorInfo:è‹¥æ‰¹é‡æ’¤å•å¤±è´¥ï¼Œè¿”å›é”™è¯¯ä¿¡æ¯åœ°å€ï¼Œè¯¥ç»“æ„å«æœ‰é”™è¯¯ä¿¡æ¯ã€‚
+   */
+  virtual void OnRspCancelAllOrder(
+      struct CX1FtdcCancelAllOrderRspField* pRspCancelAllOrderData,
+      struct CX1FtdcRspErrorField* pErrorInfo){};
+
+  /**
+   * @brief è¯¢ä»·å“åº”
+   * @param pRspForQuoteData:è¯¢ä»·è¯·æ±‚å“åº”ç»“æ„åœ°å€ã€‚
+   * @param pErrorInfo:è‹¥æŸ¥è¯¢å¤±è´¥ï¼Œè¿”å›é”™è¯¯ä¿¡æ¯åœ°å€ï¼Œè¯¥ç»“æ„å«æœ‰é”™è¯¯ä¿¡æ¯ã€‚
+   */
+  virtual void OnRspForQuote(struct CX1FtdcForQuoteRspField* pRspForQuoteData,
+                             struct CX1FtdcRspErrorField* pErrorInfo){};
+
+  /**
+   * @brief è¯¢ä»·å›æŠ¥
+   * @param pRtnForQuoteData:è¯¢ä»·å›æŠ¥ç»“æ„åœ°å€ã€‚
+   */
+  virtual void OnRtnForQuote(
+      struct CX1FtdcForQuoteRtnField* pRtnForQuoteData){};
+
+  /**
+   * @brief è¯¢ä»·å§”æ‰˜æŸ¥è¯¢å“åº”
+   * @param pRtnQryForQuoteData:æŒ‡å‘è¯¢ä»·å§”æ‰˜æŸ¥è¯¢å“åº”åœ°å€çš„æŒ‡é’ˆã€‚
+   * @param pErrorInfo:è‹¥æŸ¥è¯¢å¤±è´¥ï¼Œè¿”å›é”™è¯¯ä¿¡æ¯åœ°å€ï¼Œè¯¥ç»“æ„å«æœ‰é”™è¯¯ä¿¡æ¯ã€‚
+   * @param bIsLast:è¡¨æ˜æ˜¯å¦æ˜¯æœ€åä¸€æ¡å“åº”ä¿¡æ¯ï¼ˆ0 -å¦   1 -æ˜¯ï¼‰ã€‚
+   */
+  virtual void OnRspQryForQuote(
+      struct CX1FtdcQryForQuoteRtnField* pRtnQryForQuoteData,
+      struct CX1FtdcRspErrorField* pErrorInfo, bool bIsLast){};
+
+  /**
+   * @brief æŸ¥è¯¢å½“æ—¥æŠ¥ä»·å§”æ‰˜å“åº”
+   * @param pRtnQuoteOrderData:æŒ‡å‘æŠ¥ä»·æŸ¥è¯¢å›æŠ¥ç»“æ„çš„åœ°å€ã€‚
+   * @param pErrorInfo:è‹¥æŸ¥è¯¢å¤±è´¥ï¼Œè¿”å›é”™è¯¯ä¿¡æ¯åœ°å€ï¼Œè¯¥ç»“æ„å«æœ‰é”™è¯¯ä¿¡æ¯ã€‚
+   * @param bIsLast:è¡¨æ˜æ˜¯å¦æ˜¯æœ€åä¸€æ¡å“åº”ä¿¡æ¯ï¼ˆ0 -å¦   1 -æ˜¯ï¼‰ã€‚
+   */
+  virtual void OnRspQryQuoteOrderInfo(
+      struct CX1FtdcQuoteOrderRtnField* pRtnQuoteOrderData,
+      struct CX1FtdcRspErrorField* pErrorInfo, bool bIsLast){};
+
+  /**
+   * @brief è¯¢ä»·é€šçŸ¥æŸ¥è¯¢å“åº”
+   * @param pRtnQryQuoteNoticeData:æŸ¥è¯¢è¯¢ä»·é€šçŸ¥å›æŠ¥ç»“æ„åœ°å€ã€‚
+   * @param pErrorInfo:è‹¥æŸ¥è¯¢å¤±è´¥ï¼Œè¿”å›é”™è¯¯ä¿¡æ¯åœ°å€ï¼Œè¯¥ç»“æ„å«æœ‰é”™è¯¯ä¿¡æ¯ã€‚
+   * @param bIsLast:è¡¨æ˜æ˜¯å¦æ˜¯æœ€åä¸€æ¡å“åº”ä¿¡æ¯ï¼ˆ0 -å¦   1 -æ˜¯ï¼‰ã€‚
+   */
+  virtual void OnRspQryQuoteNotice(
+      struct CX1FtdcQryQuoteNoticeRtnField* pRtnQryQuoteNoticeData,
+      struct CX1FtdcRspErrorField* pErrorInfo, bool bIsLast){};
+
+  /**
+   * @brief
+   * å¥—åˆ©åˆçº¦æŸ¥è¯¢å“åº”:å½“ç”¨æˆ·å‘å‡ºå¥—åˆ©åˆçº¦æŸ¥è¯¢æŒ‡ä»¤åï¼Œå‰ç½®è¿”å›å“åº”æ—¶è¯¥æ–¹æ³•ä¼šè¢«è°ƒç”¨ã€‚
+   * @param pAbiInstrumentData:è¿”å›å¥—åˆ©åˆçº¦ä¿¡æ¯ç»“æ„çš„åœ°å€ã€‚
+   * @param pErrorInfo:è‹¥æŸ¥è¯¢å¤±è´¥ï¼Œè¿”å›é”™è¯¯ä¿¡æ¯åœ°å€ï¼Œè¯¥ç»“æ„å«æœ‰é”™è¯¯ä¿¡æ¯ã€‚
+   * @param bIsLast:è¡¨æ˜æ˜¯å¦æ˜¯æœ€åä¸€æ¡å“åº”ä¿¡æ¯ï¼ˆ0 -å¦   1 -æ˜¯ï¼‰ã€‚
+   */
+  virtual void OnRspArbitrageInstrument(
+      struct CX1FtdcAbiInstrumentRtnField* pAbiInstrumentData,
+      struct CX1FtdcRspErrorField* pErrorInfo, bool bIsLast){};
+
+  /**
+   * @brief åšå¸‚å•†è¯¢ä»·é€šçŸ¥ï¼Œæ— éœ€è®¢é˜…ï¼Œåšå¸‚å•†å®¢æˆ·è‡ªåŠ¨æ”¶åˆ°è¯¢ä»·é€šçŸ¥
+   * @param pForQuoteRspData:æŒ‡å‘è¯¢ä»·é€šçŸ¥å›æŠ¥åœ°å€çš„æŒ‡é’ˆã€‚
+   */
+  virtual void OnRtnForQuoteRsp(
+      struct CX1FtdcQuoteSubscribeRtnField* pForQuoteRspData){};
+
+  virtual void OnNtyExchangeConnectionStatus(
+      CX1FtdcExchangeConnectionStatusRtnField* pExchangeConnectionStatusData){};
+
+  virtual void OnRspResetPassword(
+      struct CX1FtdcRspResetPasswordField* pResetPasswordData,
+      struct CX1FtdcRspErrorField* pErrorInfo){};
+
+  /**
+   * æŸ¥è¯¢ç»„åˆæŒä»“æ˜ç»†å“åº”:å½“ç”¨æˆ·å‘å‡ºæŸ¥è¯¢æŒä»“æ˜ç»†åï¼Œå‰ç½®è¿”å›å“åº”æ—¶è¯¥æ–¹æ³•ä¼šè¢«è°ƒç”¨ã€‚
+   * @param pPositionDetailRtn:è¿”å›æŒä»“æ˜ç»†ç»“æ„çš„åœ°å€ã€‚
+   * @param pErrorInfo:è‹¥æŸ¥è¯¢å¤±è´¥ï¼Œè¿”å›é”™è¯¯ä¿¡æ¯åœ°å€ï¼Œè¯¥ç»“æ„å«æœ‰é”™è¯¯ä¿¡æ¯ã€‚
+   * @param bIsLast:è¡¨æ˜æ˜¯å¦æ˜¯æœ€åä¸€æ¡å“åº”ä¿¡æ¯ï¼ˆ0 -å¦   1 -æ˜¯ï¼‰ã€‚
+   */
+  virtual void OnRspQryArbitrageCombineDetail(
+      struct CX1FtdcArbitrageCombineDetailRtnField* pPositionDetail,
+      struct CX1FtdcRspErrorField* pErrorInfo, bool bIsLast){};
+
+};  // end of CX1FtdcTraderSpi
+
+/**
+ * @brief ç”¨æˆ·è¯·æ±‚æ¥å£
+ * @details
+ * å®ç°äº†ç”¨æˆ·è¯·æ±‚æ¥å£ï¼Œç”¨æˆ·å®ä¾‹åŒ–å¯¹è±¡åï¼Œå¯ä»¥ç›´æ¥è°ƒç”¨æ¥å£è¿›è¡Œç™»å½•ã€æŠ¥å•ã€æ’¤å•ã€æŸ¥è¯¢ç­‰æ“ä½œ
+ * @warning
+ *         <ul>
+ *           <li>
+ * ç”¨æˆ·è°ƒç”¨æ¥å£å‰ï¼Œéœ€è¦è¿›è¡Œmemsetæ¸…ç©ºç»“æ„ä½“å†…å®¹ï¼Œå†å¡«å†™éœ€è¦çš„å­—æ®µä¿¡æ¯ <li>
+ * æ¥å£çº¿ç¨‹å®‰å…¨ <li>
+ * ä¹°å–ï¼Œå¼€å¹³ã€æŠ•ä¿ã€è®¢å•ç±»å‹ã€è®¢å•å±æ€§è¿™äº›å­—æ®µå› ä¸ºä½¿ç”¨äº†ä½åŸŸå¤„ç†ï¼Œåœ¨APIç«¯ä¸åšæ•°å€¼æœ‰æ•ˆæ€§æ£€æŸ¥åˆ¤æ–­ï¼ŒæŒ‰ç…§å¤´æ–‡ä»¶æŒ‡å®šæ•°å€¼è¾“å…¥ï¼Œè¾“å…¥å…¶ä»–å€¼ä¹Ÿä¼šè¢«è½¬æ¢ä¸ºä¸ç¡®å®šæ•°å€¼
+ *           <li> æœ¬èŠ‚æ‰€ç¤ºæ¥å£çš„å§”æ‰˜å“åº”å‡æœ‰å¯èƒ½æ™šäºå§”æ‰˜å›æŠ¥è¿”å›
+ *         </ul>
+ * @see Init
+ */
+class X1FTDCTRADERAPI_API CX1FtdcTraderApi {
+ public:
+  CX1FtdcTraderApi();
+  virtual ~CX1FtdcTraderApi();
+
+ public:
+  /**
+   * @brief é™æ€å‡½æ•°ï¼Œäº§ç”Ÿä¸€ä¸ªapiå®ä¾‹
+   * @return è¿”å›ä¸€ä¸ªæŒ‡å‘CX1FtdcTraderApiå®ä¾‹çš„æŒ‡é’ˆ
+   * @see Init
+   */
+  static CX1FtdcTraderApi* CreateCX1FtdcTraderApi(void);
+
+  /**
+   * @brief é‡Šæ”¾APIå®ä¾‹
+   * @warning
+   * è°ƒç”¨CreateCX1FtdcTraderApiæˆåŠŸç”Ÿæˆä¸€ä¸ªAPIå®ä¾‹,initæˆåŠŸåï¼Œç”¨æˆ·ç¨‹åºé€€å‡ºæ—¶å¿…é¡»è°ƒç”¨Releaseæ¥å£ï¼Œå¦åˆ™å¯èƒ½ä¼šcoredump
+   */
+  virtual void Release(void) = 0;
+
+  /**
+   * @brief åˆå§‹åŒ–æ¥å£
+   * @details å’ŒæœåŠ¡å™¨å»ºç«‹socketè¿æ¥ï¼Œå¹¶å¯åŠ¨ä¸€ä¸ªæ¥æ”¶çº¿ç¨‹ï¼Œ
+   * åŒæ—¶è¯¥æ–¹æ³•æ³¨å†Œä¸€ä¸ªå›è°ƒå‡½æ•°é›†
+   * @param pszFrontAddr äº¤æ˜“å‰ç½®ç½‘ç»œåœ°å€ã€‚
+   *                     ç½‘ç»œåœ°å€çš„æ ¼å¼ä¸º:"protocol://ipaddress:port",å¦‚"tcp://172.21.200.103:10910"
+   *                     å…¶ä¸­protocolçš„å€¼ä¸ºtcpæ ¼å¼ã€‚
+   *                     ipaddressè¡¨ç¤ºäº¤æ˜“å‰ç½®çš„IP,portè¡¨ç¤ºäº¤æ˜“å‰ç½®çš„ç«¯å£
+   * @param pSpi æŒ‡å‘CX1FtdcTraderSpiå­ç±»å¯¹è±¡(å›è°ƒå‡½æ•°é›†)çš„æŒ‡é’ˆ
+   * @param output_core è¾“å‡ºçº¿ç¨‹ç»‘å®šçš„cpu core id. -1è¡¨ç¤ºä¸ç»‘å®š
+   * @param input_core è¾“å…¥çº¿ç¨‹ç»‘å®šçš„cpu core id. -1è¡¨ç¤ºä¸ç»‘å®š.input_core
+   * output_coreä¸æ”¯æŒä»…æœ‰ä¸€ä¸ªå‚æ•°ä¸º-1çš„æƒ…å½¢
+   * @return åˆå§‹åŒ–ç»“æœ
+   *         <ul>
+   *           <li> 0 - åˆå§‹åŒ–æˆåŠŸ
+   *           <li> 1 - åˆå§‹åŒ–å¤±è´¥ æ­¤æ—¶å¯èƒ½éœ€è¦æ£€æŸ¥OnRtnErrorMsgç»™å‡ºçš„é”™è¯¯ä¿¡æ¯
+   *         </ul>
+   *         Initå¤±è´¥åŸå› å¯èƒ½ï¼š
+   *               å¡«å†™çš„addræ ¼å¼ä¸æ­£ç¡®æˆ–è€…addrä¸­çš„ipåœ°å€åŠç«¯å£ä¸æ­£ç¡®ï¼Œå¦‚ä½¿ç”¨äº¤æ˜“APIè¿æ¥åˆ°äº†è¡Œæƒ…å‰ç½®çš„ç«¯å£
+   *               ç½‘ç»œé—®é¢˜ï¼Œå¯telnetè¿æ¥ipåŠportï¼Œæ£€æŸ¥æ˜¯å¦ç•…é€š
+   * @code Usage:
+   *   x1ftdcapi::CX1FtdcTraderApi* pApi =
+   * x1ftdcapi::CX1FtdcTraderApi::CreateCX1FtdcTraderApi(); MyTradeSpi
+   * spi(pApi);   //
+   * MyTradeSpiæ˜¯ç»§æ‰¿CX1FtdcTraderSpiçš„å­ç±»å¯¹è±¡ï¼Œå®ç°äº†ç”¨æˆ·å“åº”æ¥å£ int iret =
+   * pApi->Init("tcp://127.0.0.1:10700", &spi, 2, 4); if (iret != 0) {
+   *       printf("init failed! error:%d\n", iret);
+   *       return -1;
+   *   }
+   *
+   *   //do something
+   *
+   *   pApi->Release();
+   * @endcode
+   */
+  virtual int Init(char* pszFrontAddr, CX1FtdcTraderSpi* pSpi,
+                   int output_core = -1, int input_core = -1) = 0;
+
+  /**
+   * @brief ç­‰å¾…æ¥å£çº¿ç¨‹ç»“æŸè¿è¡Œã€‚
+   * @return çº¿ç¨‹é€€å‡ºä»£ç ã€‚
+   *         <ul>
+   *           <li> 0  - çº¿ç¨‹é€€å‡ºæˆåŠŸ
+   *           <li> -1 - çº¿ç¨‹é€€å‡ºå¤±è´¥
+   *         </ul>
+   */
+  virtual int Join(void) = 0;
+
+  /**
+   * @brief è®¢é˜…ç§æœ‰æµ
+   * @details åœ¨Init æ–¹æ³•è°ƒç”¨ä¹‹åï¼ŒReqUserLogin
+   * æ–¹æ³•è°ƒç”¨ä¹‹å‰è°ƒç”¨ã€‚è‹¥ä¸è°ƒç”¨è¯¥æ¥å£ï¼Œåˆ™æ”¶ä¸åˆ°ç§æœ‰æµ
+   * @param priflow_req_flag ç§æœ‰æµè®¢é˜…æ–¹å¼
+   *         <ul>
+   *           <li> 0 - åªä¼ é€ç™»å½•åç§æœ‰æµçš„å†…å®¹
+   *           <li> 1 - ä»æœ¬äº¤æ˜“æ—¥å¼€å§‹é‡ä¼ 
+   *           <li> 2 - ä»ä¸Šæ¬¡æ”¶åˆ°çš„ç»­ä¼ 
+   *           <li> 3 - ä»æŒ‡å®šç¼–å·å¼€å§‹ç»­ä¼ 
+   *         </ul>
+   * @param pri_no æŒ‡å®šç§æœ‰æµç¼–å·(ä»æŒ‡å®šç¼–å·å¤„è®¢é˜…ç§æœ‰æµ)
+   * å½“priflow_req_flagå–å€¼3æ—¶ï¼Œè¯¥å‚æ•°æ‰æœ‰æ•ˆï¼Œå…¶ä»–æƒ…å†µï¼Œä¼ å…¥0å€¼å³å¯ã€‚æ³¨æ„:
+   * ç”¨æˆ·æ”¶åˆ°çš„ç§æœ‰æµç¼–å·å¯èƒ½ä¸è¿ç»­
+   */
+  virtual void SubscribePrivateTopic(int priflow_req_flag,
+                                     unsigned int pri_no) = 0;
+
+  virtual void SetMatchInfoAdvanced(bool matchinfo_advanced) = 0;
+
+  /**
+   * @brief ç”¨æˆ·å‘å‡ºç™»å½•è¯·æ±‚
+   * @param pUserLoginData æŒ‡å‘ç”¨æˆ·ç™»å½•è¯·æ±‚ç»“æ„çš„åœ°å€ã€‚
+   * @return è¿”å›å€¼
+   *         <ul>
+   *           <li> 0      -  è¯·æ±‚å‘é€æˆåŠŸ
+   *           <li> éé›¶   -  é”™è¯¯ç 
+   *         </ul>
+   */
+  virtual int ReqUserLogin(struct CX1FtdcReqUserLoginField* pUserLoginData) = 0;
+
+  /**
+   * @brief ç”¨æˆ·å‘å‡ºç™»å‡ºè¯·æ±‚
+   * @param pUserLogoutData æŒ‡å‘ç”¨æˆ·ç™»å½•è¯·å‡ºç»“æ„çš„åœ°å€ã€‚
+   * @return è¿”å›å€¼
+   *         <ul>
+   *           <li> 0      -  è¯·æ±‚å‘é€æˆåŠŸ
+   *           <li> éé›¶   -  é”™è¯¯ç 
+   *         </ul>
+   */
+  virtual int ReqUserLogout(
+      struct CX1FtdcReqUserLogoutField* pUserLogoutData) = 0;
+
+  /**
+   * @brief ç”¨æˆ·å‘å‡ºé‡ç½®å¯†ç è¯·æ±‚
+   * @param pResetPasswordData æŒ‡å‘ç”¨æˆ·é‡ç½®å¯†ç è¯·æ±‚ç»“æ„çš„åœ°å€ã€‚
+   * @return è¿”å›å€¼
+   *         <ul>
+   *           <li> 0      -  è¯·æ±‚å‘é€æˆåŠŸ
+   *           <li> éé›¶   -  é”™è¯¯ç 
+   *         </ul>
+   */
+  virtual int ReqResetPassword(
+      struct CX1FtdcReqResetPasswordField* pResetPasswordData) = 0;
+
+  /**
+   * @brief æœŸè´§å§”æ‰˜æŠ¥å•è¯·æ±‚ã€‚
+   * @param pInsertOrderData ç”¨æˆ·è¯·æ±‚æŠ¥å•ä¿¡æ¯ç»“æ„åœ°å€ã€‚
+   * @return è¿”å›å€¼
+   *         <ul>
+   *           <li> 0      -  è¯·æ±‚å‘é€æˆåŠŸ
+   *           <li> éé›¶   -  é”™è¯¯ç 
+   *         </ul>
+   */
+  virtual int ReqInsertOrder(
+      struct CX1FtdcInsertOrderField* pInsertOrderData) = 0;
+
+  /**
+   * @brief æœŸè´§æ’¤å•è¯·æ±‚ã€‚
+   * @details
+   * å¦‚æœæä¾›æŸœå°å§”æ‰˜å·(æŸœå°å§”æ‰˜å·å¤§äº-1)ï¼Œåˆ™åªä½¿ç”¨æŸœå°å§”æ‰˜å·å¤„ç†ï¼›åªæœ‰å½“æŸœå°å§”æ‰˜å·å°äº0æ—¶ï¼Œæ‰ä½¿ç”¨æœ¬åœ°å§”æ‰˜å·è¿›è¡Œæ’¤å•
+   * @param pCancelOrderData ç”¨æˆ·è¯·æ±‚æ’¤å•ä¿¡æ¯ç»“æ„åœ°å€ã€‚
+   * @return è¿”å›å€¼
+   *         <ul>
+   *           <li> 0      -  è¯·æ±‚å‘é€æˆåŠŸ
+   *           <li> éé›¶   -  é”™è¯¯ç 
+   *         </ul>
+   */
+  virtual int ReqCancelOrder(
+      struct CX1FtdcCancelOrderField* pCancelOrderData) = 0;
+
+  /**
+   * @brief æŒä»“æŸ¥è¯¢è¯·æ±‚ã€‚
+   * @details å¦‚æœæ²¡æœ‰æä¾›åˆçº¦ä»£ç ï¼Œåˆ™æŸ¥è¯¢å…¨éƒ¨æŒä»“ä¿¡æ¯ã€‚
+   * @param pPositionData ç”¨æˆ·è¯·æ±‚æŒä»“ä¿¡æ¯ç»“æ„åœ°å€ã€‚
+   * @return è¿”å›å€¼
+   *         <ul>
+   *           <li> 0      -  è¯·æ±‚å‘é€æˆåŠŸ
+   *           <li> -1     -  è¯·æ±‚å‘é€å¤±è´¥
+   *           <li> -2     -  æ£€æµ‹å¼‚å¸¸
+   *         </ul>
+   */
+  virtual int ReqQryPosition(struct CX1FtdcQryPositionField* pPositionData) = 0;
+
+  /**
+   * @brief å®¢æˆ·èµ„é‡‘æŸ¥è¯¢è¯·æ±‚ã€‚
+   * @details ç”¨æˆ·éœ€è¦å¡«å……è¯¥ç»“æ„çš„å„ä¸ªå­—æ®µ
+   * @param pCapitalData è¯·æ±‚èµ„é‡‘æŸ¥è¯¢ç»“æ„åœ°å€ã€‚
+   * @return è¿”å›å€¼
+   *         <ul>
+   *           <li> 0      -  è¯·æ±‚å‘é€æˆåŠŸ
+   *           <li> éé›¶   -  é”™è¯¯ç 
+   *         </ul>
+   */
+  virtual int ReqQryCustomerCapital(
+      struct CX1FtdcQryCapitalField* pCapitalData) = 0;
+
+  /**
+   * @brief æŸ¥è¯¢äº¤æ˜“æ‰€åˆçº¦åˆ—è¡¨ï¼ˆéå¥—åˆ©ï¼‰ã€‚
+   * @details
+   * å½“ExchangeIDä¸ºç©ºæ—¶ï¼Œè¡¨ç¤ºæŸ¥è¯¢å„äº¤æ˜“æ‰€çš„æ‰€æœ‰åˆçº¦ä»£ç ï¼Œä¹Ÿå¯æŒ‡å®šæŸ¥è¯¢æŸäº¤æ˜“æ‰€çš„æ‰€æœ‰åˆçº¦ä»£ç ä¿¡æ¯ï¼Œä½†è¯¥æ¥å£ä¸èƒ½æŸ¥è¯¢åˆ°å¥—åˆ©åˆçº¦ä»£ç 
+   * @param pExchangeInstrumentData äº¤æ˜“æ‰€åˆçº¦æŸ¥è¯¢ç»“æ„åœ°å€ã€‚
+   * @return è¿”å›å€¼
+   *         <ul>
+   *           <li> 0      -  è¯·æ±‚å‘é€æˆåŠŸ
+   *           <li> éé›¶   -  é”™è¯¯ç 
+   *         </ul>
+   */
+  virtual int ReqQryExchangeInstrument(
+      struct CX1FtdcQryExchangeInstrumentField* pExchangeInstrumentData) = 0;
+
+  /**
+   * @brief å½“æ—¥å§”æ‰˜æŸ¥è¯¢è¯·æ±‚ã€‚
+   * @param pOrderData å½“æ—¥å§”æ‰˜æŸ¥è¯¢ç»“æ„åœ°å€ã€‚
+   * @return è¿”å›å€¼
+   *         <ul>
+   *           <li> 0      -  è¯·æ±‚å‘é€æˆåŠŸ
+   *           <li> -1     -  è¯·æ±‚å‘é€å¤±è´¥
+   *           <li> -2     -  æ£€æµ‹å¼‚å¸¸
+   *         </ul>
+   */
+  virtual int ReqQryOrderInfo(struct CX1FtdcQryOrderField* pOrderData) = 0;
+
+  /**
+   * @brief å½“æ—¥æˆäº¤æŸ¥è¯¢è¯·æ±‚ã€‚
+   * @param pMatchData å½“æ—¥æˆäº¤æŸ¥è¯¢ç»“æ„åœ°å€ã€‚
+   * @return è¿”å›å€¼
+   *         <ul>
+   *           <li> 0      -  è¯·æ±‚å‘é€æˆåŠŸ
+   *           <li> éé›¶   -  é”™è¯¯ç 
+   *         </ul>
+   */
+  virtual int ReqQryMatchInfo(struct CX1FtdcQryMatchField* pMatchData) = 0;
+
+  /**
+   * @brief æŒ‡å®šåˆçº¦ä¿¡æ¯æŸ¥è¯¢è¯·æ±‚ã€‚
+   * @details
+   * ExchangeIDå¹¶éå¿…é¡»è¾“å…¥é€‰é¡¹ï¼Œå› ä¸ºç›®å‰æœŸè´§å¸‚åœºä¸Šï¼Œä¸€ä¸ªåˆçº¦ä»£ç åœ¨å„äº¤æ˜“æ‰€æ˜¯å”¯ä¸€å­˜åœ¨çš„ã€‚
+   * @param pInstrument æŒ‡å®šåˆçº¦æŸ¥è¯¢ç»“æ„åœ°å€ã€‚
+   * @return è¿”å›å€¼
+   *         <ul>
+   *           <li> 0      -  è¯·æ±‚å‘é€æˆåŠŸ
+   *           <li> éé›¶   -  é”™è¯¯ç 
+   *         </ul>
+   */
+  virtual int ReqQrySpecifyInstrument(
+      struct CX1FtdcQrySpecificInstrumentField* pInstrument) = 0;
+
+  /**
+   * @brief æŒä»“æ˜ç»†æŸ¥è¯¢è¯·æ±‚ã€‚
+   * @param pPositionDetailData:æŒä»“æ˜ç»†æŸ¥è¯¢ç»“æ„åœ°å€ã€‚
+   * @return è¿”å›å€¼
+   *         <ul>
+   *           <li> 0      -  è¯·æ±‚å‘é€æˆåŠŸ
+   *           <li> éé›¶   -  é”™è¯¯ç 
+   *         </ul>
+   */
+  virtual int ReqQryPositionDetail(
+      struct CX1FtdcQryPositionDetailField* pPositionDetailData) = 0;
+
+  /**
+   * @brief äº¤æ˜“æ‰€çŠ¶æ€æŸ¥è¯¢
+   * @param pQryExchangeStatusData:äº¤æ˜“æ‰€çŠ¶æ€æŸ¥è¯¢è¯·æ±‚ç»“æ„åœ°å€ã€‚
+   * @return è¿”å›å€¼
+   *         <ul>
+   *           <li> 0      -  è¯·æ±‚å‘é€æˆåŠŸ
+   *           <li> éé›¶   -  é”™è¯¯ç 
+   *         </ul>
+   */
+  virtual int ReqQryExchangeStatus(
+      struct CX1FtdcQryExchangeStatusField* pQryExchangeStatusData) = 0;
+
+  /**
+   * @brief æŸ¥è¯¢äº¤æ˜“æ‰€å¥—åˆ©åˆçº¦åˆ—è¡¨ã€‚
+   * @param pAbtriInstrumentData:äº¤æ˜“æ‰€å¥—åˆ©åˆçº¦æŸ¥è¯¢ç»“æ„åœ°å€ã€‚
+   * @return 0 - è¯·æ±‚å‘é€æˆåŠŸ -1 - è¯·æ±‚å‘é€å¤±è´¥  -å…¶å®ƒ -æ£€æµ‹å¼‚å¸¸ã€‚
+   */
+  virtual int ReqQryArbitrageInstrument(
+      struct CX1FtdcAbiInstrumentField* pAbtriInstrumentData) = 0;
+
+  ///////ä»¥ä¸‹åšå¸‚å•†ç›¸å…³
+  /**
+   * @brief åšå¸‚å•†æŠ¥å•è¯·æ±‚
+   * @param pQuoteInsertOrderData:åšå¸‚å•†æŠ¥å•è¯·æ±‚ç»“æ„åœ°å€ã€‚
+   * @return 0 - è¯·æ±‚å‘é€æˆåŠŸ -1 - è¯·æ±‚å‘é€å¤±è´¥  -å…¶å®ƒ -æ£€æµ‹å¼‚å¸¸ã€‚
+   */
+  virtual int ReqQuoteInsert(
+      struct CX1FtdcQuoteInsertField* pQuoteInsertOrderData) = 0;
+
+  /**
+   * @brief åšå¸‚å•†æ’¤å•è¯·æ±‚
+   * @details å¯¹äºåŒè¾¹åº”ä»·ï¼Œæœ¬æ¥å£åªæ”¯æŒæ’¤åŒè¾¹ï¼Œä¸æ”¯æŒåªæ’¤é”€ä¸€è¾¹çš„æ“ä½œ
+   * @param pQuoteCancelOrderData:åšå¸‚å•†æ’¤å•è¯·æ±‚ç»“æ„åœ°å€ã€‚
+   * @return 0 - è¯·æ±‚å‘é€æˆåŠŸ -1 - è¯·æ±‚å‘é€å¤±è´¥  -å…¶å®ƒ -æ£€æµ‹å¼‚å¸¸ã€‚
+   */
+  virtual int ReqQuoteCancel(
+      struct CX1FtdcCancelOrderField* pQuoteCancelOrderData) = 0;
+
+  /**
+   * @brief æ‰¹é‡æ’¤å•
+   * @details
+   * è¯¥æŒ‡ä»¤ç›®å‰åªæ”¯æŒå¤§å•†æ‰€çš„åšå¸‚å•†æŠ¥ä»·è®¢å•ï¼Œå…¶å®ƒäº¤æ˜“æ‰€æš‚ä¸æ”¯æŒï¼Œæ™®é€šæœŸè´§æœŸæƒè®¢å•ä¹Ÿä¸æ”¯æŒ
+   * @param pCancelAllOrderData:æ‰¹é‡æ’¤å•è¯·æ±‚ç»“æ„åœ°å€ã€‚
+   * @return 0 - è¯·æ±‚å‘é€æˆåŠŸ -1 - è¯·æ±‚å‘é€å¤±è´¥  -å…¶å®ƒ -æ£€æµ‹å¼‚å¸¸ã€‚
+   */
+  virtual int ReqCancelAllOrder(
+      struct CX1FtdcCancelAllOrderField* pCancelAllOrderData) = 0;
+
+  /**
+   * @brief è¯¢ä»·è¯·æ±‚
+   * @param pForQuoteData:è¯¢ä»·è¯·æ±‚ç»“æ„åœ°å€ã€‚
+   * @return 0 - è¯·æ±‚å‘é€æˆåŠŸ -1 - è¯·æ±‚å‘é€å¤±è´¥  -å…¶å®ƒ -æ£€æµ‹å¼‚å¸¸ã€‚
+   */
+  virtual int ReqForQuote(struct CX1FtdcForQuoteField* pForQuoteData) = 0;
+
+  /**
+   * @brief è¯¢ä»·å§”æ‰˜æŸ¥è¯¢è¯·æ±‚
+   * @param pQryForQuoteData:è¯¢ä»·å§”æ‰˜æŸ¥è¯¢è¯·æ±‚ç»“æ„åœ°å€ã€‚
+   * @return 0 - è¯·æ±‚å‘é€æˆåŠŸ -1 - è¯·æ±‚å‘é€å¤±è´¥  -å…¶å®ƒ -æ£€æµ‹å¼‚å¸¸ã€‚
+   */
+  virtual int ReqQryForQuote(
+      struct CX1FtdcQryForQuoteField* pQryForQuoteData) = 0;
+
+  /**
+   * @brief åšå¸‚å•†æŠ¥ä»·å§”æ‰˜æŸ¥è¯¢
+   * @param pQuoteOrderData:åšå¸‚å•†æŠ¥ä»·å§”æ‰˜æŸ¥è¯¢ç»“æ„åœ°å€ã€‚
+   * @return 0 - è¯·æ±‚å‘é€æˆåŠŸ -1 - è¯·æ±‚å‘é€å¤±è´¥  -å…¶å®ƒ -æ£€æµ‹å¼‚å¸¸ã€‚
+   */
+  virtual int ReqQryQuoteOrderInfo(
+      struct CX1FtdcQuoteOrderField* pQuoteOrderData) = 0;
+
+  /**
+   * @brief è¯¢ä»·é€šçŸ¥æŸ¥è¯¢è¯·æ±‚
+   * @param pQryQuoteNoticeData:æŸ¥è¯¢è¯¢ä»·é€šçŸ¥è¯·æ±‚ç»“æ„åœ°å€ã€‚
+   * @return 0 - è¯·æ±‚å‘é€æˆåŠŸ -1 - è¯·æ±‚å‘é€å¤±è´¥  -å…¶å®ƒ -æ£€æµ‹å¼‚å¸¸ã€‚
+   */
+  virtual int ReqQryQuoteNotice(
+      struct CX1FtdcQryQuoteNoticeField* pQryQuoteNoticeData) = 0;
+  ///////ä»¥ä¸Šåšå¸‚å•†ç›¸å…³
+
+  /**
+   * ç»„åˆæŒä»“æ˜ç»†æŸ¥è¯¢è¯·æ±‚
+   * @param pQryArbitrageCombineDetailData:æŸ¥è¯¢ç»„åˆæŒä»“è¯·æ±‚ç»“æ„åœ°å€ã€‚
+   * @return 0 - è¯·æ±‚å‘é€æˆåŠŸ -1 - è¯·æ±‚å‘é€å¤±è´¥  -å…¶å®ƒ -æ£€æµ‹å¼‚å¸¸ã€‚
+   */
+  virtual int ReqQryArbitrageCombineDetail(
+      struct CX1FtdcArbitrageCombineDetailField*
+          pQryArbitrageCombineDetailData) = 0;
+  /**
+   * @brief è·å–ç‰ˆæœ¬å·
+   * @return ç‰ˆæœ¬å·å­—ç¬¦ä¸²
+   */
+  virtual const char* GetVersion() = 0;
+};  // end of CX1FtdcTraderApi
+}  // namespace x1ftdcapi
+// end of namespace
+
+#endif  // X1FTDCTRADERAPI_H_
