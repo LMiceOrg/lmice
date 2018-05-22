@@ -1,10 +1,14 @@
 #ifndef TRADER_XONE_SPI_H
 #define TRADER_XONE_SPI_H
-#include <signal.h>
-#include <sys/types.h>
 
+#include <sys/types.h>
+#include <unistd.h>
+
+#include <signal.h>
 #include <stdio.h>
 #include <string.h>
+
+#include "include/trader_data.h"
 
 #include "include/trader_xone_data.h"
 #include "xone/include/X1FtdcTraderApi.h"
@@ -20,14 +24,41 @@ class ft_trader_xone_spi : public x1ftdcapi::CX1FtdcTraderSpi {
   bool is_error_occur(CX1FtdcRspErrorField* err_info,
                       const char* func_name = "");
 
-  inline void ReqUserLogin(void) {
-    snprintf(m_api_data->m_req_user_login.AccountID,
-             sizeof(m_api_data->m_req_user_login.AccountID), "hehao");
-    *m_board_signal = Type_CX1FtdcReqUserLoginField;
-    kill(*m_board_pid, SIGUSR1);
+ public:
+  inline int wait_connected() {
+    int ret = SPI_TIMEOUT;
+    const int& spi_status = m_spi_data->m_status;
+    for (int i = 0; i < SPI_WAIT_COUNT; ++i) {
+      if (spi_status == lmice::SPI_CONNECT) {
+        ret = spi_status;
+        break;
+      } else if (spi_status == lmice::SPI_DISCONNECT) {
+        ret = spi_status;
+        break;
+      }
+      usleep(2000);
+    }
+
+    return ret;
+  }
+  inline int wait_logined() {
+    int ret = SPI_TIMEOUT;
+
+    for (int i = 0; i < SPI_WAIT_COUNT; ++i) {
+      const int& spi_status = m_spi_data->m_status;
+      if (spi_status == lmice::SPI_LOGIN) {
+        ret = spi_status;
+        break;
+      } else if (spi_status == lmice::SPI_LOGIN_FAIL) {
+        ret = spi_status;
+        break;
+      }
+      usleep(2000);
+    }
+
+    return ret;
   }
 
- public:
   inline void set_spi_data(ft_trader_xone_spi_data* spi_data,
                            ft_trader_xone_api_data* api_data, pid_t* board_pid,
                            int* board_signal) {
@@ -35,6 +66,7 @@ class ft_trader_xone_spi : public x1ftdcapi::CX1FtdcTraderSpi {
     m_api_data = api_data;
     m_board_pid = board_pid;
     m_board_signal = board_signal;
+    printf("spi spi_data %p\n", (void*)m_spi_data);
   }
   virtual ~ft_trader_xone_spi();
   /**

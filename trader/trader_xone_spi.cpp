@@ -1,4 +1,7 @@
-#include "eal/lmice_trace.h"
+/** eal */
+
+/** service */
+#include "include/service_logging.h"
 
 #include "include/trader_xone_spi.h"
 
@@ -31,25 +34,20 @@ bool ft_trader_xone_spi::is_error_occur(CX1FtdcRspErrorField *err_info,
 ft_trader_xone_spi::~ft_trader_xone_spi() {}
 
 void ft_trader_xone_spi::OnFrontConnected() {
-  m_spi_data->m_status = SPI_CONNECTED;
   lmice_info_print("Xone front connected, do ReqUserLogin\n");
-
-  // the api side should do user login then
-  ReqUserLogin();
+  m_spi_data->m_status = SPI_CONNECT;
 }
 
 void ft_trader_xone_spi::OnFrontDisconnected(int nReason) {
-  m_spi_data->m_status = SPI_STANDBY;
+  m_spi_data->m_status = SPI_DISCONNECT;
   lmice_critical_print("Xone front disconnected[%d]\n", nReason);
 }
 
 void ft_trader_xone_spi::OnRspUserLogin(
     CX1FtdcRspUserLoginField *pUserLoginInfoRtn,
     CX1FtdcRspErrorField *pErrorInfo) {
-  lmice_info_print("in OnRspUserLogin\n");
   if (is_error_occur(pErrorInfo, __FUNCTION__)) {
-    m_spi_data->m_status = SPI_LOGIN_FAILED;
-
+    m_spi_data->m_status = SPI_LOGIN_FAIL;
   } else {
     m_spi_data->m_status = SPI_LOGIN;
     m_spi_data->m_session_id = pUserLoginInfoRtn->SessionID;
@@ -57,10 +55,9 @@ void ft_trader_xone_spi::OnRspUserLogin(
         "[OnRspUserLogin]交易登录响应:[请求ID]:[%ld],[资金帐号ID]:[%s],["
         "登录结果]"
         ":[%d],[初始本地委托号]:[%ld],[会话ID]:[%ld],[错误ID]:[%d],[错误信息]:["
-        "%"
-        "s],[大商所时间]:[%s],[上期所时间]:[%s],[中金所时间]:[%s],[郑商所时间]:"
-        "[%"
-        "s],[上能所时间]:[%s]\n",
+        "%s],[大商所时间]:[%s],[上期所时间]:[%s],[中金所时间]:[%s],[郑商所时间]"
+        ":"
+        "[%s],[上能所时间]:[%s]\n",
         pUserLoginInfoRtn->RequestID,         //请求ID
         pUserLoginInfoRtn->AccountID,         //资金帐号ID
         pUserLoginInfoRtn->LoginResult,       //登录结果

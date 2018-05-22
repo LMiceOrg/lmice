@@ -1,0 +1,18 @@
+#ifndef INCLUDE_TRADEr_DATA_H_
+#define INCLUDE_TRADEr_DATA_H_
+namespace lmice {
+
+enum {
+  SPI_STANDBY = 0,
+  SPI_CONNECT,
+  SPI_DISCONNECT,
+  SPI_LOGIN,
+  SPI_LOGIN_FAIL,
+  SPI_RELEASE_API,
+
+  SPI_TIMEOUT,
+  SPI_WAIT_COUNT = 100
+};
+}
+
+#endif  // INCLUDE_TRADEr_DATA_H_

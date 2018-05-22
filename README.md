@@ -37,23 +37,24 @@ cmake -G "CodeBlocks - Ninja" -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM=/u
 
     1. 清除上一次运行的状态
     1. 初始化执行环境
-		1. 创建共享存储区域             -- shm_board
-        1. 创建强实时模型：主进程
+        1. 创建共享存储区域             -- worker_board
+        1. 创建强实时进程
+            1. 初始化交易接口           -- trader_api
             1. 初始化投资组合模型        -- portfolio
             1. 初始化开仓模型           -- open_feature
-        1. 创建弱实时模型进程        --
-			1. 平仓信号模型
-			1. 市场模型
-			1. 风险模型
-			1. 投资组合模型
+            1. 初始化行情接收           -- quote
+        1. 创建弱实时进程
+            1. 平仓信号模型             -- close_feature
+            1. 市场模型                 -- market_trend
+            1. 风险模型                 -- risk
+            1. 投资组合模型             --portfolio
+            1. 交易反馈处理             -- trader_spi
 			1. 开始循环
-		1. 创建日志进程
-			1. 创建日志队列
+        1. 非实时进程:主进程
+            1. 创建日志服务             -- service_logging
+            1. 创建终端服务             -- service_console
 			1. 开始循环
-    1. 连接交易柜台
-        1. 初始化交易接口
-        1. 绑定交易线程-CPU亲缘性
-    1. 初始化行情接收
+
 
 2.  准备交易
 

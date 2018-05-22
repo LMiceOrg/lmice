@@ -15,6 +15,8 @@ INCLUDE_DIRECTORIES(/Users/hehao/work/lib)
 
 # CMake settings
 set(CMAKE_VERBOSE_MAKEFILE on)
+set(EXECUTABLE_OUTPUT_PATH  "${CMAKE_BINARY_DIR}")
+set(LIBRARY_OUTPUT_PATH  "${CMAKE_BINARY_DIR}")
 
 file(GLOB_RECURSE doc_files /Users/hehao/Downloads/doc/tech/pydocs-pdf/*.pdf)
 list(APPEND doc_files LICENSE README.md .gitignore)
@@ -56,6 +58,8 @@ add_subdirectory(ide)
 add_subdirectory(futuremodel)
 
 add_subdirectory(test)
+
+add_subdirectory(service)
 
 
 list(APPEND libforecaster_src

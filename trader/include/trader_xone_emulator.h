@@ -1,18 +1,23 @@
+#ifndef INCLUDE_TRADER_XONE_EMULATOR_H_
+#define INCLUDE_TRADER_XONE_EMULATOR_H_
+
 #include "eal/lmice_eal_shm.h"
 
 #include "xone/include/X1FtdcTraderApi.h"
 
-#include "include/trader_shm_worker.h"
+#include "include/worker_board.h"
 
 #include "include/trader_xone_data.h"
 #include "include/trader_xone_spi.h"
+
+extern lmice::lm_worker_board *g_board;
 
 namespace lmice {
 
 class ft_trader_xone_emulator : public x1ftdcapi::CX1FtdcTraderApi {
  private:
   enum { LM_WORKER_STOPPED = 0, LM_SPI_WORKER = 0 };
-  typedef ft_worker_board<1> board_type;
+  typedef lm_worker_board board_type;
   board_type *m_board;
 
   void create_worker(int);
@@ -35,7 +40,11 @@ class ft_trader_xone_emulator : public x1ftdcapi::CX1FtdcTraderApi {
  public:
   inline void set_spi_data(ft_trader_xone_spi_data *data) { m_spi_data = data; }
   inline void set_api_data(ft_trader_xone_api_data *data) { m_api_data = data; }
-  inline void set_board(board_type *board) { m_board = board; }
+  inline void set_board(board_type *board) {
+    m_board = board;
+    g_board = board;
+    printf("api gboard %p %p\n", (void *)&g_board, (void *)g_board);
+  }
   ft_trader_xone_emulator();
   virtual ~ft_trader_xone_emulator();
 
@@ -357,3 +366,5 @@ class ft_trader_xone_emulator : public x1ftdcapi::CX1FtdcTraderApi {
 };
 
 }  // namespace lmice
+
+#endif  // INCLUDE_TRADER_XONE_EMULATOR_H_

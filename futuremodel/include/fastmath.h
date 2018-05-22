@@ -4,8 +4,11 @@
 #define FUTUREMODEL_INCLUDE_FASTMATH_H_
 
 #include <immintrin.h>
+
 #include <math.h>
 #include <stdint.h>
+#include <stdio.h>
+#include <time.h>
 
 #include "eal/lmice_eal_atomic.h"
 #include "eal/lmice_eal_common.h"
@@ -94,6 +97,16 @@ forceinline float noexport fast_exp_ss(float x) {
   fast_v4sf px = _mm_load1_ps(&x);
   fast_v4sf py = fast_exp_ps(px);
   return py[0];
+}
+
+forceinline void fast_datetime(char* dt, int size) {
+  struct tm tmnow;
+  time_t tnow;
+  time(&tnow);
+  localtime_r(&tnow, &tmnow);
+  snprintf(dt, size, "%04d-%02d-%02d %02d:%02d:%02d.%03d", tmnow.tm_year + 1900,
+           tmnow.tm_mon + 1, tmnow.tm_mday, tmnow.tm_hour, tmnow.tm_min,
+           tmnow.tm_sec, 0);
 }
 
 forceinline int64_t noexport fast_totime(const char* stime) {

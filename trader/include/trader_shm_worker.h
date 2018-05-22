@@ -30,9 +30,9 @@ enum ft_shm_worker_e {
 };
 
 struct ft_worker_status {
-  int32_t m_status; /* start, working stop */
-  lmice_rwlock_t m_lock;
-  pid_t m_pid;
+  int32_t m_status; /*< worker status start, working stop */
+  pid_t m_pid;      /*< worker process pid */
+  char name[16];    /*< worker name */
 };
 
 template <int worker_size>
@@ -40,7 +40,7 @@ struct ft_worker_board {
   int m_pid;
   int m_signal;
   int m_status;      /*< running status of board */
-  int m_worker_size; /* worker size */
+  int m_worker_size; /*< worker size */
   int m_quote_size;
   int m_quote_depth;
   int m_contract_size;
@@ -50,8 +50,8 @@ struct ft_worker_board {
 
   ft_trader_xone_spi_data m_spi_data;
   ft_trader_xone_api_data m_api_data;
-  ft_trader_xone_spi m_pri_spi;
-  ft_trader_xone_spi* m_spi;
+  ft_trader_xone_spi m_spi;
+  // ft_trader_xone_spi* m_spi;
 
   char m_remain_data[8];
 
@@ -96,10 +96,13 @@ struct ft_worker_board {
     memset(shm_addr, 0, shm_size);
 
     ft_worker_board* pb = reinterpret_cast<ft_worker_board*>(shm_addr);
+    // assign pid
     pb->m_pid = getpid();
-    pb->m_spi = new (&pb->m_pri_spi) ft_trader_xone_spi;
-    pb->m_spi->set_spi_data(&pb->m_spi_data, &pb->m_api_data, &pb->m_pid,
-                            &pb->m_signal);
+    // construct spi
+    new (&pb->m_spi) ft_trader_xone_spi;
+    // init spi data
+    pb->m_spi.set_spi_data(&pb->m_spi_data, &pb->m_api_data, &pb->m_pid,
+                           &pb->m_signal);
 
     shm->addr = shm_addr;
     shm->size = shm_size;

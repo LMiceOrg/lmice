@@ -74,27 +74,27 @@ int main(int argc, char* argv[]) {
 
   // 创建共享存储区域
   size_t shm_size = 2 * 1024 * 1024;
-  void* shm_addr =
-      mmap(NULL, shm_size, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE,
+  void* shm_addr = mmap(NULL, shm_size, PROT_READ | PROT_WRITE,
+                        MAP_ANON | MAP_PRIVATE |
 #if defined(__MACH__)
-           VM_FLAGS_SUPERPAGE_SIZE_2MB,
+                            VM_FLAGS_SUPERPAGE_SIZE_2MB,
 #elif defined(__linux__)
-           MAP_HUGETLB,
+                            MAP_HUGETLB,
 #endif
-           0);
+                        -1, 0);
   if (shm_addr == MAP_FAILED) {
     lmice_error_print(
         "Create memory bulk by host super page size[%luMB] "
         "failed[%p]\n",
         shm_size / (1024 * 1024), shm_addr);
-    shm_addr =
-        mmap(NULL, shm_size, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE,
+    shm_addr = mmap(NULL, shm_size, PROT_READ | PROT_WRITE,
+                    MAP_ANON | MAP_PRIVATE |
 #if defined(__MACH__)
-             SUPERPAGE_NONE,
+                        SUPERPAGE_NONE,
 #elif defined(__linux__)
-             MAP_HUGETLB,
+                        MAP_HUGETLB,
 #endif
-             0);
+                    -1, 0);
     if (shm_addr == MAP_FAILED) {
       lmice_error_print("Create memory bulk by host size[%luMB] failed[%p]\n",
                         shm_size / (1024 * 1024), shm_addr);

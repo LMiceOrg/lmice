@@ -2,9 +2,14 @@
 #define TRADER_INCLUDE_TRADER_XONE_DATA_H_
 
 #include <stdint.h>
+#include <stdio.h>
 
 #include "xone/include/X1FtdcApiDataType.h"
 #include "xone/include/X1FtdcApiStruct.h"
+
+#define lm_snprintf(x, ...) snprintf(x, sizeof(x), ##__VA_ARGS__)
+#define lm_ssprintf(a, b) snprintf(a, sizeof(a), "%s", b)
+
 namespace lmice {
 enum {
   Type_CX1FtdcReqUserLoginField = (1 << 0),
@@ -32,6 +37,7 @@ enum {
 };
 struct ft_trader_xone_api_data {
   uint64_t m_type;
+  int64_t m_request_id;
   CX1FtdcReqUserLoginField m_req_user_login;
   CX1FtdcReqUserLogoutField m_req_user_logout;
   CX1FtdcReqResetPasswordField m_req_reset_password;
@@ -53,14 +59,6 @@ struct ft_trader_xone_api_data {
   CX1FtdcQuoteOrderField m_quote_order;
   CX1FtdcQryQuoteNoticeField m_qry_quote_notice;
   CX1FtdcArbitrageCombineDetailField m_arbitrage_combine;
-};
-
-enum {
-  SPI_STANDBY,
-  SPI_CONNECTED,
-  SPI_LOGIN,
-  SPI_LOGIN_FAILED,
-  SPI_RELEASE_API
 };
 
 struct ft_trader_xone_spi_data {

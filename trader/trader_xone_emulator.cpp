@@ -6,11 +6,20 @@
 #include <signal.h>
 #include <unistd.h>
 
+/** eal */
 #include "eal/lmice_eal_thread.h"
-#include "eal/lmice_trace.h"
 
+/** service */
+#include "include/service_logging.h"
+
+/** futuremodel */
+#include "include/fastmath.h"
+
+/** trader */
 #include "include/trader_xone_emulator.h"
 #include "include/trader_xone_spi.h"
+
+extern lmice::lm_worker_board *g_board;
 
 namespace x1ftdcapi {
 CX1FtdcTraderApi::CX1FtdcTraderApi() {}
@@ -27,23 +36,27 @@ void ft_trader_xone_emulator::create_worker(int fd) {
   pid_t pid = fork();
   if (pid == 0) {
     pthread_setname(NULL, "xone_spi");
-    lmice_info_print("[create_worker] running %d \n", fd);
+    lmice_info_print("[XoneSPI] running %d %p\n", fd, (void *)m_spi);
     /** set worker process priority */
     //      int pri = getpriority(PRIO_PROCESS, getpid());
     //      int ret = setpriority(PRIO_PROCESS, getpid(), 1);
 
     m_board->m_workers[fd].m_pid = getpid();
+    // m_spi = (ft_trader_xone_spi *)m_board->get_bulk(0);
+    // m_spi->OnFrontConnected();
+    // m_spi = &m_board->m_spi;
 
     for (;;) {
       /** process work */
-      barrier();
+      // barrier();
       if (m_board->m_status == LM_BOARD_QUIT) {
-        lmice_info_print("[create_worker] stop %d\n", fd);
+        lmice_info_print("[XoneSPI] stop %d\n", fd);
+        usleep(100000);
         exit(0);
       }
       proc_work();
-      // cpu_relax();
-      usleep(1000);
+      cpu_relax();
+      //      usleep(100000);
     }
   }  // end-child
   else if (pid < 0) {
@@ -55,36 +68,79 @@ void ft_trader_xone_emulator::create_worker(int fd) {
 }
 
 void ft_trader_xone_emulator::proc_work(void) {
-  // proc work
-  //  printf("proc work\n");
-  ft_worker_status &worker = m_board->m_workers[0];
-  if (worker.m_status == LM_WORKER_START) {
-    uint64_t type = m_api_data->m_type;
+  uint64_t type;
+  int status;
+  CX1FtdcRspErrorField &err = m_spi_data->m_rsp_error;
+  lm_worker_status &worker = m_board->m_workers[0];
+
+  if (eal_rwlock_wtrylock(&worker.m_lock) == 0) {
+    type = m_api_data->m_type;
+    status = worker.m_status;
+
+    // reset status
+    m_api_data->m_type ^= type;
+    worker.m_status = LM_WORKER_STOP;
+
+    //    printf("w try lock %d %llu %llu \n", status, type,
+    //    m_api_data->m_type);
+
+    eal_rwlock_wunlock(&worker.m_lock);
+  } else {
+    printf("lock failed\n");
+    return;
+  }
+  //  printf("worker status %d\n", worker.m_status);
+
+  if (status == LM_WORKER_START) {
+    // no error msg
+    err.ErrorID = 0;
 
     lmice_info_print("type %llu\n", type);
 
+    /** Front connect */
     if (type & Type_OnFrontConnected) {
+      lmice_info_print("on front connected, %d\n", m_spi_data->m_status);
       m_spi->OnFrontConnected();
     }
 
+    /** User login */
     if (type & Type_CX1FtdcReqUserLoginField) {
-      m_spi_data->m_rsp_error.ErrorID = 0;
-      memcpy(m_spi_data->m_rsp_user_login.AccountID,
-             m_api_data->m_req_user_login.AccountID,
-             sizeof(m_spi_data->m_rsp_user_login.AccountID));
-      m_board->m_spi->OnRspUserLogin(&m_spi_data->m_rsp_user_login,
-                                     &m_spi_data->m_rsp_error);
+      CX1FtdcRspUserLoginField &rsp = m_spi_data->m_rsp_user_login;
+      CX1FtdcReqUserLoginField &req = m_api_data->m_req_user_login;
+
+      // get datetime
+      char datetime_now[32] = {0};
+      fast_datetime(datetime_now, 32);
+
+      // generate response
+      memset(&rsp, 0, sizeof(rsp));
+      rsp.RequestID = req.RequestID;
+      lm_ssprintf(rsp.AccountID, req.AccountID);
+      rsp.LoginResult = X1_FTDC_LOGIN_SUCCESS;
+      rsp.ErrorID = 0;
+      lm_ssprintf(rsp.DCEtime, datetime_now);
+      lm_ssprintf(rsp.SHFETime, datetime_now);
+      lm_ssprintf(rsp.CFFEXTime, datetime_now);
+      lm_ssprintf(rsp.CZCETime, datetime_now);
+      lm_ssprintf(rsp.INETime, datetime_now);
+
+      printf("call OnRspUserLogin\n");
+      m_spi->OnRspUserLogin(&rsp, &err);
     }
 
+    /** User logout */
     if (type & Type_CX1FtdcReqUserLogoutField) {
-      m_spi_data->m_rsp_error.ErrorID = 0;
-      m_spi->OnRspUserLogout(&m_spi_data->m_rsp_user_logout_info,
-                             &m_spi_data->m_rsp_error);
+      CX1FtdcRspUserLogoutInfoField &rsp = m_spi_data->m_rsp_user_logout_info;
+      CX1FtdcReqUserLogoutField &req = m_api_data->m_req_user_logout;
+
+      // generate response
+      rsp.RequestID = req.RequestID;
+      lm_ssprintf(rsp.AccountID, req.AccountID);
+      rsp.LogoutResult = X1_FTDC_LOGOUT_SUCCESS;
+      rsp.ErrorID = 0;
+
+      m_spi->OnRspUserLogout(&rsp, &err);
     }
-
-    m_api_data->m_type ^= type;
-
-    worker.m_status = LM_WORKER_STOP;
   }
 }
 int ft_trader_xone_emulator::stop_worker(int fd) {
@@ -100,15 +156,19 @@ int ft_trader_xone_emulator::stop_worker(int fd) {
   return ret;
 }
 int ft_trader_xone_emulator::start_worker(int fd, int mask) {
-  ft_worker_status &worker = m_board->m_workers[fd];
-
+  lm_worker_status &worker = m_board->m_workers[fd];
+  eal_rwlock_wlock(&worker.m_lock);
   if (m_api_data->m_type & mask) {
-    lmice_error_print("Too fast to start work\n");
+    lmice_error_print("Too fast to start work %d, %d\n", m_api_data->m_type,
+                      mask);
+    eal_rwlock_wunlock(&worker.m_lock);
     return 1;
   }
   m_api_data->m_type |= mask;
-  worker.m_status = LM_WORKER_START;
+  m_board->m_workers[fd].m_status = LM_WORKER_START;
+  eal_rwlock_wunlock(&worker.m_lock);
 
+  printf("send worker %d\n", mask);
   return 0;
 }
 
@@ -203,16 +263,26 @@ void ft_trader_xone_emulator::SetMatchInfoAdvanced(bool matchinfo_advanced) {}
 
 int ft_trader_xone_emulator::ReqUserLogin(
     struct CX1FtdcReqUserLoginField *pUserLoginData) {
-  memcpy(&m_api_data->m_req_user_login, pUserLoginData,
-         sizeof(CX1FtdcReqUserLoginField));
+  auto &req = m_api_data->m_req_user_login;
+  // prepare data
+  memcpy(&req, pUserLoginData, sizeof(req));
+  // apply request id
+  req.RequestID = m_api_data->m_request_id++;
+  // start spi worker
   start_worker(LM_SPI_WORKER, Type_CX1FtdcReqUserLoginField);
   return 0;
 }
 
 int ft_trader_xone_emulator::ReqUserLogout(
     struct CX1FtdcReqUserLogoutField *pUserLogoutData) {
-  memcpy(&m_api_data->m_req_user_logout, pUserLogoutData,
-         sizeof(CX1FtdcReqUserLogoutField));
+  auto &req = m_api_data->m_req_user_logout;
+  // prepare data
+  memcpy(&req, pUserLogoutData, sizeof(req));
+  // apply request id
+  req.RequestID = m_api_data->m_request_id++;
+
+  lmice_info_print("ReqUserLogout\n");
+
   start_worker(LM_SPI_WORKER, Type_CX1FtdcReqUserLogoutField);
   return 0;
 }

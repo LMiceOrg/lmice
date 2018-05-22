@@ -335,7 +335,7 @@ struct fm_portfolio_handler {
     float_type forecast = 0;
 
     for (int i = feature_begin; i < (feature_end + 7) / 8; ++i) {
-      // IACA_START
+      //      IACA_START
 
       __m256d xy = _mm256_mul_pd(*(__m256d*)&signals[i * 8 + 0],
                                  *(__m256d*)&weight[i * 8 + 0]);
@@ -348,7 +348,7 @@ struct fm_portfolio_handler {
 
       forecast += r1[0] + r1[1];
     }
-    // IACA_END
+    //    IACA_END
 
     cur_contract->m_forecast = forecast;
     //    static int test_pos = 0;

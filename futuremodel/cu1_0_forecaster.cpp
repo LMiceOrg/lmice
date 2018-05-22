@@ -112,8 +112,8 @@ bool g_ema_inited = false;
 void handle_self_msg_st(pf_type* g_portfolio) {
   using namespace lmice;
 
-  // for (int i = 0; i < 100; ++i) {
-  // IACA_START
+  //  for (int i = 0; i < 100; ++i) {
+  //    IACA_START
   handle_self_msg<sbi_type>(&(g_portfolio->get_feature(0)));
   handle_self_msg<sti2_type>(&(g_portfolio->get_feature(1)));
   handle_self_msg<sdr_type>(&(g_portfolio->get_feature(2)));
@@ -159,8 +159,8 @@ void handle_self_msg_st(pf_type* g_portfolio) {
   handle_self_msg<odr_type>(&(g_portfolio->get_feature(27)));
   handle_self_msg<odr_type>(&(g_portfolio->get_feature(28)));
   handle_self_msg<oti_type>(&(g_portfolio->get_feature(29)));
-  //}
-  // IACA_END
+  //  }
+  //  IACA_END
 }
 
 void handle_other_msg_ni01(pf_type* g_portfolio) {
