@@ -1,3 +1,5 @@
+/** Copyright 2018 He Hao<hehaoslj@sina.com> */
+
 #ifndef INCLUDE_TRADER_FEMAS2_SPI_H_
 #define INCLUDE_TRADER_FEMAS2_SPI_H_
 #include "femas2/include/USTPFtdcTraderApi.h"
@@ -20,8 +22,9 @@ class ft_trader_femas2_spi : public CUstpFtdcTraderSpi {
   ///当客户端与交易后台建立起通信连接时（还未登录前），该方法被调用。
   virtual void OnFrontConnected();
 
-  ///当客户端与交易后台通信连接断开时，该方法被调用。当发生这个情况后，API会自动重新连接，客户端可不做处理。
-  ///@param nReason 错误原因
+  /// 当客户端与交易后台通信连接断开时，该方法被调用。当发生这个情况后，API
+  /// 会自动重新连接，客户端可不做处理。
+  /// @param nReason 错误原因
   ///        0x1001 网络读失败
   ///        0x1002 网络写失败
   ///        0x2001 接收心跳超时

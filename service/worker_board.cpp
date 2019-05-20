@@ -78,8 +78,8 @@ void lm_worker_board::destroy(lmice_shm_t* shm) {
   munmap(shm->addr, shm->size);
 }
 
-int lm_worker_board::create_bulk(int size) {
-  int ret = this->m_bulks.size();
+fd_t lm_worker_board::create_bulk(int size) {
+  fd_t ret = LM_BULK_END;
   int refined_size =
       ((size + LM_BULK_PADDING - 1) / LM_BULK_PADDING) * LM_BULK_PADDING;
 
@@ -95,9 +95,9 @@ int lm_worker_board::create_bulk(int size) {
   return ret;
 }
 
-void* lm_worker_board::get_bulk(int pos) {
-  if (pos < this->m_bulks.size())
-    return this->remain_data + this->m_bulks[pos].m_pos;
+void* lm_worker_board::get_bulk(fd_t fd) {
+  if (fd < LM_BULK_END && fd >= 0)
+    return this->remain_data + this->m_bulks[fd].m_pos;
   else
     return nullptr;
 }

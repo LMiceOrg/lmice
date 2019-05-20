@@ -53,7 +53,7 @@ struct ft_trader_femas2_api_data {
   CUstpFtdcQryInvestorMarginField m_qry_investor_margin;
 };
 
-enum {};
+// enum {};
 
 struct ft_trader_femas2_spi_data {
   int m_status;

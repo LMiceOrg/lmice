@@ -1,3 +1,5 @@
+/** Copyright 2018 He Hao<hehaoslj@sina.com> */
+
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -36,7 +38,8 @@ void ft_trader_xone_emulator::create_worker(int fd) {
   pid_t pid = fork();
   if (pid == 0) {
     pthread_setname(NULL, "xone_spi");
-    lmice_info_print("[XoneSPI] running %d %p\n", fd, (void *)m_spi);
+    lmice_info_print("[XoneSPI] running %d %p\n", fd,
+      reinterpret_cast<void *>(m_spi) );
     /** set worker process priority */
     //      int pri = getpriority(PRIO_PROCESS, getpid());
     //      int ret = setpriority(PRIO_PROCESS, getpid(), 1);

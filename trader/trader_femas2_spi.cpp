@@ -1,3 +1,7 @@
+/** Copyright 2018 He Hao<hehaoslj@sina.com> */
+
+#include <stdlib.h>
+
 /** service */
 #include "include/service_logging.h"
 #include "include/worker_board_data.h"
@@ -12,9 +16,9 @@ bool ft_trader_femas2_spi::is_error_occur(CUstpFtdcRspInfoField *err_info,
       lmice_error_print(
           "FemasV2 SPI[%s]交易错误应答:[请求ID]:%d,[错误ID]:%d,[错误信息]:%s\n",
           func_name,
-          nRequestID,         //请求ID
-          err_info->ErrorID,  //错误ID
-          err_info->ErrorMsg  //错误信息
+          nRequestID,         // 请求ID
+          err_info->ErrorID,  // 错误ID
+          err_info->ErrorMsg  // 错误信息
       );
       return true;
     }
@@ -32,8 +36,9 @@ void ft_trader_femas2_spi::OnFrontConnected() {
   lmice_info_print("Femas2SPI[%s]\n", __FUNCTION__);
 }
 
-///当客户端与交易后台通信连接断开时，该方法被调用。当发生这个情况后，API会自动重新连接，客户端可不做处理。
-///@param nReason 错误原因
+/// 当客户端与交易后台通信连接断开时，该方法被调用。当发生这个情况后，API会
+/// 自动重新连接，客户端可不做处理。
+/// @param nReason 错误原因
 ///        0x1001 网络读失败
 ///        0x1002 网络写失败
 ///        0x2001 接收心跳超时
@@ -45,32 +50,34 @@ void ft_trader_femas2_spi::OnFrontDisconnected(int nReason) {
 }
 
 /*不需要*/
-///心跳超时警告。当长时间未收到报文时，该方法被调用。
-///@param nTimeLapse 距离上次接收报文的时间
+/// 心跳超时警告。当长时间未收到报文时，该方法被调用。
+/// @param nTimeLapse 距离上次接收报文的时间
 void ft_trader_femas2_spi::OnHeartBeatWarning(int nTimeLapse) {
   (void)nTimeLapse;
 }
 
 /*不需要*/
-///报文回调开始通知。当API收到一个报文后，首先调用本方法，然后是各数据域的回调，最后是报文回调结束通知。
-///@param nTopicID 主题代码（如私有流、公共流、行情流等）
-///@param nSequenceNo 报文序号
+/// 报文回调开始通知。当API收到一个报文后，首先调用本方法，然后是各数据域
+/// 的回调，最后是报文回调结束通知。
+/// @param nTopicID 主题代码（如私有流、公共流、行情流等）
+/// @param nSequenceNo 报文序号
 void ft_trader_femas2_spi::OnPackageStart(int nTopicID, int nSequenceNo) {
   (void)nTopicID;
   (void)nSequenceNo;
 }
 
 /*不需要*/
-///报文回调结束通知。当API收到一个报文后，首先调用报文回调开始通知，然后是各数据域的回调，最后调用本方法。
-///@param nTopicID 主题代码（如私有流、公共流、行情流等）
-///@param nSequenceNo 报文序号
+/// 报文回调结束通知。当API收到一个报文后，首先调用报文回调开始通知，然后
+/// 是各数据域的回调，最后调用本方法。
+/// @param nTopicID 主题代码（如私有流、公共流、行情流等）
+/// @param nSequenceNo 报文序号
 void ft_trader_femas2_spi::OnPackageEnd(int nTopicID, int nSequenceNo) {
   (void)nTopicID;
   (void)nSequenceNo;
 }
 
 /* 其他类型错误 */
-///错误应答
+/// 错误应答
 void ft_trader_femas2_spi::OnRspError(CUstpFtdcRspInfoField *pRspInfo,
 
                                       int nRequestID, bool bIsLast) {
@@ -159,7 +166,7 @@ void ft_trader_femas2_spi::OnRtnTrade(CUstpFtdcTradeField *pTrade) {
   if (pTrade->OffsetFlag == USTP_FTDC_OF_Open &&
       pTrade->Direction == USTP_FTDC_D_Buy) {
     // buy position
-    //_trade_status.m_pos.m_buy_pos += pTrade->TradeVolume;
+    // trade_status.m_pos.m_buy_pos += pTrade->TradeVolume;
     // left cash
     // m_trade_status.m_acc.m_left_cash -= pTrade->TradeVolume *
     // m_trade_status.m_md.m_multiple * pTrade->TradePrice * ( 1 +
